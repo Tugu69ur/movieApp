@@ -1,11 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Animated,
+  Dimensions,
+  Easing,
+  Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+
+// Screen dimensions available for future use
+const { width: screenWidth } = Dimensions.get("window");
 
 type Card = { rank: string; suit: string; value: number };
 
@@ -26,12 +34,12 @@ const RANKS: { r: string; v: number }[] = [
   { r: "K", v: 10 },
 ];
 
+// make shuffled deck
 function makeDeck(): Card[] {
   const deck: Card[] = [];
   for (const s of SUITS) {
     for (const { r, v } of RANKS) deck.push({ rank: r, suit: s, value: v });
   }
-  // Fisher–Yates
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -44,38 +52,111 @@ function handValue(hand: Card[]): number {
   let aces = 0;
   for (const c of hand) {
     total += c.value;
-    if (c.rank === "A") aces += 1;
+    if (c.rank === "A") aces++;
   }
-  // Upgrade Aces from 1 to 11 where possible
   while (aces > 0 && total + 10 <= 21) {
     total += 10;
-    aces -= 1;
+    aces--;
   }
   return total;
 }
 
 function cardStr(c: Card) {
   const isRed = c.suit === "♥" || c.suit === "♦";
-  return { text: `${c.rank}${c.suit}`, isRed };
+  return { text: c.rank, suit: c.suit, isRed };
 }
 
-const Profile = () => {
+const Blackjack = () => {
   const [deck, setDeck] = useState<Card[]>([]);
   const [player, setPlayer] = useState<Card[]>([]);
   const [dealer, setDealer] = useState<Card[]>([]);
   const [phase, setPhase] = useState<"ready" | "player" | "dealer" | "done">(
     "ready"
   );
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState("");
+  const [balance, setBalance] = useState(1000);
+  const [betAmount, setBetAmount] = useState(100);
+  const [showBetSlider, setShowBetSlider] = useState(false);
+
+  // Animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(-50)).current;
+  const cardFlipAnim = useRef(new Animated.Value(0)).current;
+  const balanceAnim = useRef(new Animated.Value(1)).current;
+  const messageAnim = useRef(new Animated.Value(0)).current;
+  const dealerCardAnim = useRef(new Animated.Value(0)).current;
 
   const playerTotal = useMemo(() => handValue(player), [player]);
   const dealerTotal = useMemo(() => handValue(dealer), [dealer]);
 
-  const [balance, setBalance] = useState(1000);
   useEffect(() => {
-    // initial shoe
+    // Initial animations
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 800,
+        easing: Easing.out(Easing.back(1.2)),
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [fadeAnim, slideAnim]);
+
+  useEffect(() => {
     setDeck(makeDeck());
   }, []);
+
+  const animateBalance = (newBalance: number) => {
+    Animated.sequence([
+      Animated.timing(balanceAnim, {
+        toValue: 1.2,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(balanceAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const animateMessage = (msg: string) => {
+    setMessage(msg);
+    Animated.sequence([
+      Animated.timing(messageAnim, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(messageAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const animateCardDeal = (cardIndex: number, isDealer: boolean = false) => {
+    const delay = cardIndex * 200;
+    const animValue = new Animated.Value(0);
+
+    setTimeout(() => {
+      Animated.timing(animValue, {
+        toValue: 1,
+        duration: 400,
+        easing: Easing.out(Easing.back(1.5)),
+        useNativeDriver: true,
+      }).start();
+    }, delay);
+
+    return animValue;
+  };
 
   function draw(n = 1, from?: Card[]) {
     let d = from ?? deck.slice();
@@ -89,28 +170,33 @@ const Profile = () => {
   }
 
   function deal() {
-     if (balance <= 0) {
-      setMessage("Mungugue gcimine");
+    if (balance < betAmount) {
+      animateMessage("You don't have enough money to play!");
       return;
     }
+
+    setBalance((prev) => prev - betAmount);
+    animateBalance(balance - betAmount);
+
     const fresh = deck.length < 10 ? makeDeck() : deck.slice();
     const { drawn: p2, nextDeck: d1 } = draw(2, fresh);
     const { drawn: d2, nextDeck: d2Deck } = draw(2, d1);
+
     setDeck(d2Deck);
     setPlayer(p2);
     setDealer(d2);
     setPhase("player");
     setMessage("");
 
-    const pt = handValue(p2);
-    const dt = handValue(d2);
-    if (pt === 21 && dt === 21) {
-      setPhase("done");
-      setMessage("Push: double Blackjack!");
-    } else if (pt === 21) {
-      setPhase("done");
-      setMessage("Blackjack! You win 🎉");
-    }
+    // Animate dealer's second card reveal
+    setTimeout(() => {
+      Animated.timing(dealerCardAnim, {
+        toValue: 1,
+        duration: 600,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+    }, 1000);
   }
 
   function hit() {
@@ -118,39 +204,44 @@ const Profile = () => {
     const { drawn } = draw(1);
     const newHand = [...player, ...drawn];
     setPlayer(newHand);
-    const total = handValue(newHand);
-    if (total > 21) {
+
+    if (handValue(newHand) > 21) {
       setPhase("done");
-      setMessage("Bust! Dealer wins.");
-      setBalance((prev) => prev - 100);
+      animateMessage("Bust! Dealer wins.");
     }
   }
 
   function stand() {
     if (phase !== "player") return;
     setPhase("dealer");
-    // Dealer draws to 17+
+
     let dHand = dealer.slice();
-    while (handValue(dHand) < 17) {
-      const { drawn } = draw(1);
-      dHand = [...dHand, ...drawn];
-    }
-    setDealer(dHand);
-    const p = handValue(player);
-    const d = handValue(dHand);
-    if (d > 21) {
-      setMessage("Dealer busts. You win 🎉");
-      setBalance((prev) => prev + 100); // win
-    } else if (p > d) {
-      setMessage("You win 🎉");
-      setBalance((prev) => prev + 100);
-    } else if (p < d) {
-      setMessage("Dealer wins.");
-      setBalance((prev) => prev - 100); // lose
-    } else {
-      setMessage("Push.");
-    }
-    setPhase("done");
+
+    const dealerHitInterval = setInterval(() => {
+      if (handValue(dHand) >= 17) {
+        clearInterval(dealerHitInterval);
+
+        setDealer(dHand);
+        const p = handValue(player);
+        const d = handValue(dHand);
+
+        if (d > 21 || p > d) {
+          animateMessage("You win 🎉");
+          setBalance((prev) => prev + betAmount * 2);
+          animateBalance(balance + betAmount);
+        } else if (p < d) {
+          animateMessage("Dealer wins.");
+        } else {
+          animateMessage("Push.");
+          setBalance((prev) => prev + betAmount);
+          animateBalance(balance);
+        }
+        setPhase("done");
+      } else {
+        const { drawn } = draw(1);
+        dHand = [...dHand, ...drawn];
+      }
+    }, 800);
   }
 
   function reset() {
@@ -158,113 +249,291 @@ const Profile = () => {
     setDealer([]);
     setMessage("");
     setPhase("ready");
+    setBetAmount(100);
+    setShowBetSlider(false);
+
+    // Reset animations
+    dealerCardAnim.setValue(0);
+    cardFlipAnim.setValue(0);
   }
 
   const hiddenDealerHand = useMemo(() => {
     if (phase === "player") {
-      // show first card only
       return dealer.length > 0 ? [dealer[0]] : [];
     }
     return dealer;
   }, [dealer, phase]);
 
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Blackjack</Text>
-      <Text style={styles.balance}>Balance: ${balance}</Text>
-
-      <View style={styles.row}>
-        <Text style={styles.heading}>Dealer</Text>
-        <Text style={styles.total}>
-          {phase === "player" ? "?" : dealerTotal}
-        </Text>
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.hand}
+    <ImageBackground
+      source={require("../../assets/bj/bg.png")}
+      style={styles.bg}
+      resizeMode="cover"
+    >
+      <Animated.View
+        style={[
+          styles.container,
+          { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
+        ]}
       >
-        {hiddenDealerHand.map((c, i) => (
-          <CardPill
-            key={`${c.rank}${c.suit}-${i}`}
-            card={c}
-            hidden={phase === "player" && i === 1}
-          />
-        ))}
-        {phase === "player" && dealer.length >= 2 && <HiddenCard />}
-      </ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.title}>Blackjack</Text>
+          <Animated.Text
+            style={[styles.balance, { transform: [{ scale: balanceAnim }] }]}
+          >
+            Balance: ${balance}
+          </Animated.Text>
+        </View>
 
-      <View style={styles.divider} />
+        {phase === "ready" && (
+          <View style={styles.betSection}>
+            <TouchableOpacity
+              style={styles.betButton}
+              onPress={() => setShowBetSlider(!showBetSlider)}
+            >
+              <Text style={styles.betButtonText}>Bet: ${betAmount}</Text>
+            </TouchableOpacity>
 
-      <View style={styles.row}>
-        <Text style={styles.heading}>You</Text>
-        <Text style={styles.total}>{playerTotal}</Text>
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.hand}
-      >
-        {player.map((c, i) => (
-          <CardPill key={`${c.rank}${c.suit}-${i}`} card={c} />
-        ))}
-      </ScrollView>
-
-      <Text style={styles.message}>{message}</Text>
-
-      <View style={styles.buttons}>
-        {phase === "ready" && <PrimaryButton label="Deal" onPress={deal} />}
-        {phase === "player" && (
-          <>
-            <PrimaryButton label="Hit" onPress={hit} />
-            <PrimaryButton label="Stand" onPress={stand} />
-          </>
+            {showBetSlider && (
+              <View style={styles.betSliderContainer}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {[50, 100, 200, 500, 1000].map((amount) => (
+                    <TouchableOpacity
+                      key={amount}
+                      style={[
+                        styles.betOption,
+                        betAmount === amount && styles.betOptionSelected,
+                      ]}
+                      onPress={() => {
+                        setBetAmount(amount);
+                        setShowBetSlider(false);
+                      }}
+                    >
+                      <Text
+                        style={[
+                          styles.betOptionText,
+                          betAmount === amount && styles.betOptionTextSelected,
+                        ]}
+                      >
+                        ${amount}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            )}
+          </View>
         )}
-        {phase === "done" && (
-          <>
-            <PrimaryButton label="New Round" onPress={deal} />
-            <SecondaryButton label="Reset Shoe" onPress={reset} />
-          </>
-        )}
-      </View>
-    </View>
+
+        <View style={styles.gameArea}>
+          <View style={styles.playerSection}>
+            <View style={styles.row}>
+              <Text style={styles.heading}>Dealer</Text>
+              <Text style={styles.total}>
+                {phase === "player" ? "?" : dealerTotal}
+              </Text>
+            </View>
+            <ScrollView
+              horizontal
+              style={styles.hand}
+              showsHorizontalScrollIndicator={false}
+            >
+              {hiddenDealerHand.map((c, i) => (
+                <AnimatedCardImage
+                  key={i}
+                  card={c}
+                  hidden={phase === "player" && i === 1}
+                  animationValue={animateCardDeal(i, true)}
+                  isDealer={true}
+                  dealerCardAnim={dealerCardAnim}
+                />
+              ))}
+              {phase === "player" && dealer.length >= 2 && (
+                <AnimatedCardImage
+                  hidden
+                  animationValue={animateCardDeal(1, true)}
+                  isDealer={true}
+                  dealerCardAnim={dealerCardAnim}
+                />
+              )}
+            </ScrollView>
+          </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.playerSection}>
+            <View style={styles.row}>
+              <Text style={styles.heading}>You</Text>
+              <Text style={styles.total}>{playerTotal}</Text>
+            </View>
+            <ScrollView
+              horizontal
+              style={styles.hand}
+              showsHorizontalScrollIndicator={false}
+            >
+              {player.map((c, i) => (
+                <AnimatedCardImage
+                  key={i}
+                  card={c}
+                  animationValue={animateCardDeal(i, false)}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+
+        <Animated.Text style={[styles.message, { opacity: messageAnim }]}>
+          {message}
+        </Animated.Text>
+
+        <View style={styles.buttons}>
+          {phase === "ready" && (
+            <PrimaryButton
+              label="Deal"
+              onPress={deal}
+              disabled={balance < betAmount}
+            />
+          )}
+          {phase === "player" && (
+            <>
+              <PrimaryButton label="Hit" onPress={hit} />
+              <PrimaryButton label="Stand" onPress={stand} />
+            </>
+          )}
+          {phase === "done" && (
+            <>
+              <PrimaryButton label="New Round" onPress={deal} />
+              <SecondaryButton label="Reset" onPress={reset} />
+            </>
+          )}
+        </View>
+      </Animated.View>
+    </ImageBackground>
   );
 };
 
-const CardPill = ({
+const AnimatedCardImage = ({
   card,
-  hidden = false,
+  hidden,
+  animationValue,
+  isDealer = false,
+  dealerCardAnim,
 }: {
-  card: Card;
+  card?: Card;
   hidden?: boolean;
+  animationValue?: Animated.Value;
+  isDealer?: boolean;
+  dealerCardAnim?: Animated.Value;
 }) => {
-  if (hidden) return <HiddenCard />;
-  const { text, isRed } = cardStr(card);
+  const scaleAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (animationValue) {
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 400,
+        easing: Easing.out(Easing.back(1.5)),
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [animationValue, scaleAnim]);
+
+  if (hidden) {
+    return (
+      <Animated.View
+        style={[styles.cardContainer, { transform: [{ scale: scaleAnim }] }]}
+      >
+        <Image
+          source={require("../../assets/bj/back.png")}
+          style={styles.card}
+          resizeMode="contain"
+        />
+      </Animated.View>
+    );
+  }
+
+  if (!card) return null;
+
+  const { text, suit, isRed } = cardStr(card);
+
   return (
-    <View style={styles.card}>
-      <Text style={[styles.cardText, isRed && { color: "#d11" }]}>{text}</Text>
-    </View>
+    <Animated.View
+      style={[
+        styles.cardContainer,
+        {
+          transform: [
+            { scale: scaleAnim },
+            ...(isDealer && dealerCardAnim
+              ? [
+                  {
+                    rotateY: dealerCardAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ["0deg", "180deg"],
+                    }),
+                  },
+                ]
+              : []),
+          ],
+        },
+      ]}
+    >
+      <ImageBackground
+        source={require("../../assets/bj/cardfront.png")}
+        style={styles.card}
+        resizeMode="contain"
+      >
+        <Text style={[styles.cardText, isRed && { color: "red" }]}>{text}</Text>
+        <Text style={[styles.cardSuit, isRed && { color: "red" }]}>{suit}</Text>
+      </ImageBackground>
+    </Animated.View>
   );
 };
-
-const HiddenCard = () => (
-  <View style={[styles.card, styles.hiddenCard]}>
-    <Text style={styles.cardBack}>◆◆</Text>
-  </View>
-);
 
 const PrimaryButton = ({
   label,
   onPress,
+  disabled = false,
 }: {
   label: string;
   onPress: () => void;
-}) => (
-  <TouchableOpacity onPress={onPress} style={styles.primaryBtn}>
-    <Text style={styles.primaryBtnText}>{label}</Text>
-  </TouchableOpacity>
-);
+  disabled?: boolean;
+}) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 0.95,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={disabled}
+      style={[styles.primaryBtn, disabled && styles.disabledBtn]}
+    >
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <Text
+          style={[styles.primaryBtnText, disabled && styles.disabledBtnText]}
+        >
+          {label}
+        </Text>
+      </Animated.View>
+    </TouchableOpacity>
+  );
+};
 
 const SecondaryButton = ({
   label,
@@ -272,84 +541,276 @@ const SecondaryButton = ({
 }: {
   label: string;
   onPress: () => void;
-}) => (
-  <TouchableOpacity onPress={onPress} style={styles.secondaryBtn}>
-    <Text style={styles.secondaryBtnText}>{label}</Text>
-  </TouchableOpacity>
-);
+}) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
 
-export default Profile;
+  const handlePressIn = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 0.95,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      style={styles.secondaryBtn}
+    >
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <Text style={styles.secondaryBtnText}>{label}</Text>
+      </Animated.View>
+    </TouchableOpacity>
+  );
+};
+
+export default Blackjack;
 
 const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    height: "100%",
+    width: "100%",
+  },
   container: {
     flex: 1,
     paddingTop: 60,
     paddingHorizontal: 16,
-    backgroundColor: "#0b0b0f",
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: "800",
     color: "white",
     textAlign: "center",
-    marginBottom: 12,
+    marginBottom: 8,
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
   },
-  heading: { fontSize: 20, fontWeight: "700", color: "white" },
-  total: { fontSize: 20, fontWeight: "700", color: "#9ae6b4" },
+  balance: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#facc15",
+    textAlign: "center",
+    marginBottom: 12,
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+  },
+  betSection: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  betButton: {
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.3)",
+  },
+  betButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  betSliderContainer: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+  },
+  betOption: {
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 16,
+    marginHorizontal: 4,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)",
+  },
+  betOptionSelected: {
+    backgroundColor: "#2563eb",
+    borderColor: "#2563eb",
+  },
+  betOptionText: {
+    color: "white",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  betOptionTextSelected: {
+    color: "white",
+    fontWeight: "700",
+  },
+  gameArea: {
+    flex: 1,
+    marginBottom: 140,
+  },
+  playerSection: {
+    marginBottom: 20,
+  },
   row: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 8,
   },
-  hand: { marginTop: 8, marginBottom: 16 },
-  card: {
-    borderWidth: 1,
-    borderColor: "#333",
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    borderRadius: 12,
+  heading: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "white",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+  },
+  total: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#9ae6b4",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+  },
+  hand: {
+    marginVertical: 12,
+    paddingHorizontal: 4,
+  },
+  cardContainer: {
     marginRight: 8,
-    backgroundColor: "#16161d",
   },
-  cardText: { fontSize: 18, fontWeight: "700", color: "white" },
-  hiddenCard: { backgroundColor: "#243", borderColor: "#2f4f4f" },
-  cardBack: { color: "white", fontWeight: "800" },
-  divider: { height: 1, backgroundColor: "#23232b", marginVertical: 12 },
+  card: {
+    width: 80,
+    height: 120,
+    borderRadius: 8,
+    overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  cardText: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "black",
+    textShadowColor: "rgba(255, 255, 255, 0.8)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
+  },
+  cardSuit: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginTop: 4,
+    color: "black",
+    textShadowColor: "rgba(255, 255, 255, 0.8)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
+  },
+  divider: {
+    height: 2,
+    backgroundColor: "rgba(255,255,255,0.3)",
+    marginVertical: 20,
+    borderRadius: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   message: {
     textAlign: "center",
     color: "white",
-    minHeight: 28,
-    fontSize: 16,
+    fontSize: 18,
+    minHeight: 30,
     marginTop: 8,
+    marginBottom: 20,
+    fontWeight: "600",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   buttons: {
     flexDirection: "row",
-    gap: 12,
-    justifyContent: "center",
     flexWrap: "wrap",
-    marginTop: 16,
-    marginBottom: 100,
+    justifyContent: "center",
+    gap: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    position: "absolute",
+    bottom: 120,
+    left: 0,
+    right: 0,
   },
   primaryBtn: {
     backgroundColor: "#2563eb",
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 16,
+    margin: 4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
-  balance: { 
-  fontSize: 18, 
-  fontWeight: "700", 
-  color: "#facc15", 
-  textAlign: "center", 
-  marginBottom: 8 
-},
-  primaryBtnText: { color: "white", fontWeight: "700", fontSize: 16 },
+  primaryBtnText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+    textAlign: "center",
+  },
   secondaryBtn: {
-    borderWidth: 1,
-    borderColor: "#555",
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "rgba(255,255,255,0.6)",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 16,
+    margin: 4,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  secondaryBtnText: { color: "#ddd", fontWeight: "700", fontSize: 16 },
+  secondaryBtnText: {
+    color: "rgba(255,255,255,0.9)",
+    fontWeight: "700",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  disabledBtn: {
+    backgroundColor: "rgba(37, 99, 235, 0.5)",
+    opacity: 0.6,
+  },
+  disabledBtnText: {
+    color: "rgba(255, 255, 255, 0.7)",
+  },
 });
