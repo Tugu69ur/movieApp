@@ -1,16 +1,14 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { images } from "@/constants/images";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { images } from "@/constants/images";
-import { Background } from "@react-navigation/elements";
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
 
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 
@@ -40,7 +38,7 @@ const saved = () => {
 
             <TouchableOpacity
             onPress={()=> toggleSearch(!showSearch)}
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" 0p}}
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.3)"}}
               className="rounded-full p-3 m-1"
             />
             <MagnifyingGlassIcon size="25" color="white" />
