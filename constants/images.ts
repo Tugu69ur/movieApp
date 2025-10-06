@@ -1,4 +1,5 @@
 import bg from "@/assets/images/bg.png";
+import eguu from "@/assets/images/eguu.png";
 import highlight from "@/assets/images/highlight.png";
 import logo from "@/assets/images/logo.jpg";
 import rankingGradient from "@/assets/images/rankingGradient.png";
@@ -10,4 +11,5 @@ export const images = {
   rankingGradient,
   weather,
   logo,
+  eguu,
 };

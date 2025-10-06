@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  assets: ["./assets/fonts/"], // 👈 add this line
   content: [
     "./components/**/*.{js,jsx,ts,tsx}",
     "./app/**/*.{js,jsx,ts,tsx}", // 👈 important for Expo Router

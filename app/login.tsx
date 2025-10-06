@@ -135,7 +135,6 @@ export default function PhotoPredictScreen() {
       setLoading(false);
     }
   };
-
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={pickImage}>
