@@ -9,7 +9,9 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select images for prediction."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +34,12 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/SpaceMono-Regular.ttf"]
         }
       ]
     ],

@@ -21,6 +21,9 @@ module.exports = {
           200: "#0f0d23",
         },
       },
+      fontFamily: {
+        "space-mono": ["SpaceMono", "monospace"],
+      },
     },
   },
   plugins: [],

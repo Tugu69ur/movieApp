@@ -39,10 +39,13 @@ const saved = () => {
             ) : null}
 
             <TouchableOpacity
-            onPress={()=> toggleSearch(!showSearch)}
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" 0p}}
+              onPress={() => toggleSearch(!showSearch)}
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
               className="rounded-full p-3 m-1"
-            />
+            >
+              <MagnifyingGlassIcon size={25} color="white" />
+            </TouchableOpacity>
+
             <MagnifyingGlassIcon size="25" color="white" />
           </View>
         </View>
