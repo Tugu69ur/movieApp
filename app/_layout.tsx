@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    SpaceMono: require("../assets/fonts/IMFellFrenchCanonSC-Regular.ttf"),
+    SpaceMono: require("../assets/fonts/Montserrat-VariableFont_wght.ttf"),
   });
 
   useEffect(() => {
@@ -29,7 +29,6 @@ export default function RootLayout() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="login" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="movies/[id]" options={{ headerShown: false }} />
         </Stack>
