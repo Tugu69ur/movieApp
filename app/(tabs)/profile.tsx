@@ -2,7 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import * as tf from "@tensorflow/tfjs";
 import { bundleResourceIO, decodeJpeg } from "@tensorflow/tfjs-react-native";
 import * as ImagePicker from "expo-image-picker";
-import React, { useEffect, useState, useRef } from "react";
+import _ from "lodash"; // npm install lodash
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -12,7 +13,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import _ from "lodash"; // npm install lodash
 
 export default function PhotoPredictScreen() {
   const [imageUri, setImageUri] = useState<string | null>(null);
@@ -24,6 +24,7 @@ export default function PhotoPredictScreen() {
   const [toLang, setToLang] = useState("Монгол бичиг");
   const [inputText, setInputText] = useState("");
   const [convertedText, setConvertedText] = useState("");
+  const [ocrText, setOcrText] = useState("");
 
   const CLASS_NAMES = [
     "Үгийн адагт ордог А",
@@ -228,36 +229,34 @@ export default function PhotoPredictScreen() {
     }
   };
 
-
   const recognizeMongolImage = async (uri: string) => {
-  setLoading(true);
-  try {
-    const formData = new FormData();
-    formData.append("file", {
-      uri,
-      name: "image.png",
-      type: "image/png",
-    } as any);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", {
+        uri,
+        name: "image.png",
+        type: "image/png",
+      } as any);
 
-    const response = await fetch("http://localhost:5000/ocr", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+      const response = await fetch("http://192.168.1.19:8000/ocr", {
+        method: "POST",
+        body: formData,
+        // ⚠️ Битгий Content-Type зааж өг
+        // headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    const data = await response.json();
-    console.log("OCR Result:", data.result);
-    return data.result;
-  } catch (err) {
-    console.error("OCR error:", err);
-    return "";
-  } finally {
-    setLoading(false);
-  }
-};
+      const data = await response.json(); // server JSON буцааж байгаа тул json() ашиглах
+      console.log("OCR Response:", data);
 
+      return data.result || "";
+    } catch (err) {
+      console.error("OCR error:", err);
+      return "";
+    } finally {
+      setLoading(false);
+    }
+  };
 
 const pickImage1 = async () => {
   const result = await ImagePicker.launchImageLibraryAsync({
@@ -271,10 +270,13 @@ const pickImage1 = async () => {
     const uri = result.assets[0].uri;
     setImageUri(uri);
 
-    // Call OCR API
+    // OCR дуудаж текст авна
     const text = await recognizeMongolImage(uri);
-    setInputText(text); // automatically fills input
-    debouncedConvert(text); // converts to Cyrillic if needed
+    setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
+
+    // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
+    const converted = await convertText(text, "Монгол бичиг", "Крилл");
+    setConvertedText(converted);
   }
 };
 
@@ -313,11 +315,11 @@ const pickImage1 = async () => {
 
       {/* Language Switch */}
       <View style={styles.langRow}>
-        <Text style={styles.lang}>{fromLang}</Text>
+        <Text style={styles.lang}>{toLang}</Text>
         <TouchableOpacity onPress={swapLanguages}>
           <Ionicons name="swap-horizontal" size={28} color="#4a90e2" />
         </TouchableOpacity>
-        <Text style={styles.lang}>{toLang}</Text>
+        <Text style={styles.lang}>{fromLang}</Text>
       </View>
 
       {/* Image Upload */}
@@ -328,12 +330,12 @@ const pickImage1 = async () => {
           gap: 50,
         }}
       >
-        <TouchableOpacity style={styles.uploadButton} onPress={pickImage1}>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
           <Ionicons name="image-outline" size={30} color="#4a90e2" />
           <Text style={styles.uploadText}>Гар бичмэл оруулах</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickImage1}>
           <Ionicons name="image-outline" size={30} color="#4a90e2" />
           <Text style={styles.uploadText}>Бичмэл оруулах</Text>
         </TouchableOpacity>
@@ -343,7 +345,9 @@ const pickImage1 = async () => {
       {imageUri && (
         <Image
           source={{ uri: imageUri }}
-          style={{ width: 180, height: 180, borderRadius: 10, marginTop: 20 }}
+          style={{ width: 280, height: 320, borderRadius: 10, marginTop: 20,transform: [{ rotate: '90deg' }], }}
+          resizeMode="contain" // эсвэл "cover"
+
         />
       )}
 
