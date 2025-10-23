@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import "./global.css";
 
 // Keep the splash screen visible while we fetch resources
@@ -25,14 +26,16 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="movies/[id]" options={{ headerShown: false }} />
-        </Stack>
-      </GestureHandlerRootView>
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="movies/[id]" />
+          </Stack>
+        </GestureHandlerRootView>
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }

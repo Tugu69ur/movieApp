@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Redirect } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, AppState, View } from "react-native";
 
 export default function Index() {
   const { isAuthenticated } = useAuth();
@@ -13,7 +13,20 @@ export default function Index() {
       setIsReady(true);
     }, 100);
 
-    return () => clearTimeout(timer);
+    // Handle app state changes
+    const handleAppStateChange = (nextAppState: string) => {
+      if (nextAppState === 'active') {
+        // App came to foreground, ensure we're ready
+        setIsReady(true);
+      }
+    };
+
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+
+    return () => {
+      clearTimeout(timer);
+      subscription?.remove();
+    };
   }, []);
 
   if (!isReady) {

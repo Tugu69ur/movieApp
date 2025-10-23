@@ -4,50 +4,52 @@ import React, { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
-const flashcards = [
-  {
-    id: 1,
-    title: "Ишиг /ᠢᠰᠢᢉᠡ/",
-    image: require("../../assets/images/goat.jpg"),
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    title: "Чулуу /ᠴᠢᠯᠠᠭᠤ/",
-    image: require("../../assets/images/rock.jpg"),
-    rating: 4.5,
-  },
-  {
-    id: 3,
-    title: "Зурагт /ᠵᠢᠷᠤᠭᠲᠤ/",
-    image: require("../../assets/images/tv.jpg"),
-    rating: 4.7,
-  },
-];
-const flashcards2 = [
-  {
-    id: 1,
-    title: "Шувуу /ᠰᠢᠪᠠᠭ/",
-    image: require("../../assets/images/shuvuu.jpg"),
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    title: "Нулимс /ᠨᠢᠯᠪᠤᠰᠤ/",
-    image: require("../../assets/images/nulims.jpg"),
-    rating: 4.6,
-  },
-  {
-    id: 3,
-    title: "Судар /ᠰᠤᠳᠤᠷ/",
-    image: require("../../assets/images/sudar.jpg"),
-    rating: 4.8,
-  },
-];
+
 export default function FlashcardsHome() {
   const router = useRouter();
   const [selected, setSelected] = useState("Most Viewed");
   const tabs = ["Most Viewed", "New", "Favorite"];
+
+  const flashcards = [
+    {
+      id: 1,
+      title: "Ишиг /ᠢᠰᠢᢉᠡ/",
+      image: require("../../assets/images/goat.jpg"),
+      rating: 4.8,
+    },
+    {
+      id: 2,
+      title: "Чулуу /ᠴᠢᠯᠠᠭᠤ/",
+      image: require("../../assets/images/rock.jpg"),
+      rating: 4.5,
+    },
+    {
+      id: 3,
+      title: "Зурагт /ᠵᠢᠷᠤᠭᠲᠤ/",
+      image: require("../../assets/images/tv.jpg"),
+      rating: 4.7,
+    },
+  ];
+  const flashcards2 = [
+    {
+      id: 1,
+      title: "Шувуу /ᠰᠢᠪᠠᠭ/",
+      image: require("../../assets/images/shuvuu.jpg"),
+      rating: 4.9,
+    },
+    {
+      id: 2,
+      title: "Нулимс /ᠨᠢᠯᠪᠤᠰᠤ/",
+      image: require("../../assets/images/nulims.jpg"),
+      rating: 4.6,
+    },
+    {
+      id: 3,
+      title: "Судар /ᠰᠤᠳᠤᠷ/",
+      image: require("../../assets/images/sudar.jpg"),
+      rating: 4.8,
+    },
+  ];
 
   return (
     <View className="flex-1 bg-white px-6 pt-12">
@@ -118,7 +120,7 @@ export default function FlashcardsHome() {
             className="mr-4 h-52"
           >
             <TouchableOpacity
-              onPress={() => router.push("/search")}
+              onPress={() => router.push(`/movies/${card.id}`)}
               className="w-56 bg-white rounded-3xl shadow-lg overflow-hidden h-52"
             >
               <Image

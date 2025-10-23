@@ -14,20 +14,18 @@ import {
 export default function SearchScreen() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [favorites, setFavorites] = useState<number[]>([]); // track liked flashcards
+  const [favorites, setFavorites] = useState<number[]>([]);
 
   const flashcards = [
     { id: 1, title: "Ишиг", image: "https://picsum.photos/200/300?random=1" },
     { id: 2, title: "Чулуу", image: "https://picsum.photos/200/300?random=2" },
     { id: 3, title: "Зурагт", image: "https://picsum.photos/200/300?random=3" },
   ];
-
   const flashcards2 = [
     { id: 7, title: "Тэмээ", image: "https://picsum.photos/200/300?random=7" },
     { id: 8, title: "Мод", image: "https://picsum.photos/200/300?random=8" },
     { id: 9, title: "Гэр", image: "https://picsum.photos/200/300?random=9" },
   ];
-
   const flashcards3 = [
     {
       id: 10,
@@ -45,6 +43,7 @@ export default function SearchScreen() {
       image: "https://picsum.photos/200/300?random=12",
     },
   ];
+
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((fid) => fid !== id) : [...prev, id]
@@ -52,16 +51,16 @@ export default function SearchScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View className="flex-row justify-between items-center mb-2">
-        <View>
-          <Text className="text-black font-semibold text-2xl">Хайлт</Text>
-        </View>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Хайлт</Text>
         <Image
           source={{ uri: "https://i.pravatar.cc/60" }}
-          className="w-10 h-10 rounded-full"
+          style={styles.profileImage}
         />
       </View>
+
       {/* Search Bar */}
       <TouchableOpacity
         style={styles.searchBar}
@@ -75,12 +74,12 @@ export default function SearchScreen() {
           onChangeText={setSearchQuery}
           style={styles.input}
           placeholderTextColor="#999"
-          editable={false} // acts as a button to navigate
+          editable={false}
         />
         <SlidersHorizontal color="#999" size={20} />
       </TouchableOpacity>
 
-      {/* Flashcards */}
+      {/* Section 1 */}
       <Text style={styles.sectionTitle}>Өдөр тутмын үгс</Text>
       <ScrollView
         horizontal
@@ -93,11 +92,7 @@ export default function SearchScreen() {
             style={styles.card}
             onPress={() => console.log("Pressed:", card.title)}
           >
-            <Image
-              source={{ uri: card.image }}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
+            <Image source={{ uri: card.image }} style={styles.cardImage} />
             <TouchableOpacity
               style={styles.heartIcon}
               onPress={() => toggleFavorite(card.id)}
@@ -111,6 +106,8 @@ export default function SearchScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/* Section 2 */}
       <Text style={styles.sectionTitle}>Өвөрмөц бичлэгтэй үгс</Text>
       <ScrollView
         horizontal
@@ -118,16 +115,8 @@ export default function SearchScreen() {
         contentContainerStyle={{ paddingHorizontal: 10 }}
       >
         {flashcards2.map((card) => (
-          <TouchableOpacity
-            key={card.id}
-            style={styles.card}
-            onPress={() => console.log("Pressed:", card.title)}
-          >
-            <Image
-              source={{ uri: card.image }}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
+          <TouchableOpacity key={card.id} style={styles.card}>
+            <Image source={{ uri: card.image }} style={styles.cardImage} />
             <TouchableOpacity
               style={styles.heartIcon}
               onPress={() => toggleFavorite(card.id)}
@@ -141,6 +130,8 @@ export default function SearchScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/* Section 3 */}
       <Text style={styles.sectionTitle}>Гадаад үгс</Text>
       <ScrollView
         horizontal
@@ -148,16 +139,8 @@ export default function SearchScreen() {
         contentContainerStyle={{ paddingHorizontal: 10 }}
       >
         {flashcards3.map((card) => (
-          <TouchableOpacity
-            key={card.id}
-            style={styles.card}
-            onPress={() => console.log("Pressed:", card.title)}
-          >
-            <Image
-              source={{ uri: card.image }}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
+          <TouchableOpacity key={card.id} style={styles.card}>
+            <Image source={{ uri: card.image }} style={styles.cardImage} />
             <TouchableOpacity
               style={styles.heartIcon}
               onPress={() => toggleFavorite(card.id)}
@@ -171,7 +154,10 @@ export default function SearchScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+
+      {/* Bottom Space */}
+      <View style={{ height: 100 }} />
+    </ScrollView>
   );
 }
 
@@ -181,6 +167,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 20,
     paddingTop: 48,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#000",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   searchBar: {
     flexDirection: "row",
