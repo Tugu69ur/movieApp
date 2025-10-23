@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "NOT BLACKJACK!!!",
+    "name": "Tugu Translate",
     "slug": "movieApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,27 +10,30 @@
     "newArchEnabled": true,
     "ios": {
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select images for prediction."
-      }
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select images for prediction.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.anonymous.movieApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/eguu.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.movieApp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/eguu.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/eguu.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -39,12 +42,20 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/SpaceMono-Regular.ttf"]
+          "fonts": [
+            "./assets/fonts/Montserrat-VariableFont_wght.ttf"
+          ]
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ebf67d10-0ead-497d-95d1-c8e9d8469b0e"
+      }
     }
   }
 }
