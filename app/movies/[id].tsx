@@ -1,5 +1,11 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ArrowLeft, Pause, Play, SkipBack, SkipForward } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+} from "lucide-react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
@@ -11,23 +17,29 @@ import {
   View,
 } from "react-native";
 
+import { DarkTheme, LightTheme } from "@/constants/theme";
+import { useTheme } from "@/contexts/Theme";
+
 const SCREEN_W = Dimensions.get("window").width;
 
 export default function MovieDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
+  const { theme } = useTheme();
+  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
+
   // example data (код доторх зурагнууд assets/steps/<id>/step-1..n.png байх ёстой)
   const data: Record<string, any> = {
     "1": {
-      title: "Ишиг /ᠢᠰᠢᢉᠡ/",
-      image: require("../../assets/images/goat.jpg"),
+      title: "Ишиг /ᠢᠰᠢᠭ/",
+      image: require("../../assets/images/goat.jpg"), // үгийн зураг
       desc: "Энэ бол ишигний тухай үг. Доор бичгийн зурах дарааллыг харна.",
-      // хэрвээ 1-р картын алхмууд дараах байдлаар assets-д хадгалагдсан гэж үзнэ:
       steps: [
-        require("../../assets/images/eguu.png"),
-        require("../../assets/images/eguu.png"),
-        require("../../assets/images/eguu.png"),
+        require("../../assets/images/flashcards/i.png"), // 'ᠢ'
+        require("../../assets/images/flashcards/sh.png"), // 'ᠰ'
+        require("../../assets/images/flashcards/ii.png"), // 'ᠢ'
+        require("../../assets/images/flashcards/g.png"), // 'ᠭ'
       ],
     },
     "2": {
@@ -64,7 +76,7 @@ export default function MovieDetails() {
   useEffect(() => {
     if (playing) {
       // start autoplay every 900ms (чамд тохируул)
-      intervalRef.current = (setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setCurrent((prev) => {
           const next = prev + 1;
           if (next >= stepCount) {
@@ -75,7 +87,7 @@ export default function MovieDetails() {
           }
           return next;
         });
-      }, 900) as unknown) as number;
+      }, 900) as unknown as number;
     } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current as any);
@@ -104,7 +116,9 @@ export default function MovieDetails() {
   const onPlayToggle = () => setPlaying((p) => !p);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: currentTheme.background }]}
+    >
       {/* Header / back */}
       <View style={styles.headerRow}>
         <TouchableOpacity onPress={() => router.back()}>
@@ -113,23 +127,42 @@ export default function MovieDetails() {
       </View>
 
       <Image source={card.image} style={styles.image} />
-      <Text style={styles.title}>{card.title}</Text>
-      <Text style={styles.desc}>{card.desc}</Text>
+      <Text style={[styles.title, { color: currentTheme.text }]}>
+        {card.title}
+      </Text>
+      <Text style={[styles.desc, { color: currentTheme.secondaryText }]}>
+        {card.desc}
+      </Text>
 
       {/* Divider */}
-      <View style={styles.divider} />
+      <View
+        style={[styles.divider, { backgroundColor: currentTheme.background }]}
+      />
 
       {/* Step-by-step title */}
       <View style={styles.stepHeader}>
         <Text style={styles.stepTitle}>Бичгийн зурах алхмууд</Text>
         <View style={styles.controls}>
-          <TouchableOpacity onPress={() => { setPlaying(false); setCurrent(0); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setPlaying(false);
+              setCurrent(0);
+            }}
+          >
             <SkipBack size={18} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={onPlayToggle} style={{ marginHorizontal: 12 }}>
+          <TouchableOpacity
+            onPress={onPlayToggle}
+            style={{ marginHorizontal: 12 }}
+          >
             {playing ? <Pause size={20} /> : <Play size={20} />}
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setPlaying(false); setCurrent(stepCount - 1); }}>
+          <TouchableOpacity
+            onPress={() => {
+              setPlaying(false);
+              setCurrent(stepCount - 1);
+            }}
+          >
             <SkipForward size={18} />
           </TouchableOpacity>
         </View>
@@ -138,7 +171,11 @@ export default function MovieDetails() {
       {/* Large step preview */}
       <View style={styles.previewWrapper}>
         {stepCount > 0 ? (
-          <Image source={card.steps[current]} style={styles.previewImage} resizeMode="contain" />
+          <Image
+            source={card.steps[current]}
+            style={styles.previewImage}
+            resizeMode="contain"
+          />
         ) : (
           <View style={styles.noSteps}>
             <Text>Алхамын зураг байхгүй</Text>
@@ -155,7 +192,10 @@ export default function MovieDetails() {
         contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 10 }}
         renderItem={({ item, index }) => (
           <TouchableOpacity
-            onPress={() => { setPlaying(false); setCurrent(index); }}
+            onPress={() => {
+              setPlaying(false);
+              setCurrent(index);
+            }}
             style={[
               styles.thumbWrap,
               current === index && { borderColor: "#007aff", borderWidth: 2 },
@@ -176,14 +216,32 @@ export default function MovieDetails() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff", padding: 16 },
   headerRow: { height: 44, justifyContent: "center" },
-  image: { width: "100%", height: 200, borderRadius: 12, marginBottom: 12 },
+  image: {
+    width: "100%",
+    height: 200,
+    borderRadius: 12,
+    marginBottom: 12,
+    marginTop: 30,
+  },
   title: { fontSize: 22, fontWeight: "700", marginBottom: 6 },
   desc: { color: "#444", fontSize: 16, lineHeight: 22, marginBottom: 12 },
   divider: { height: 1, backgroundColor: "#eee", marginVertical: 8 },
-  stepHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  stepHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   stepTitle: { fontSize: 18, fontWeight: "600" },
   controls: { flexDirection: "row", alignItems: "center" },
-  previewWrapper: { width: "100%", height: 220, borderRadius: 12, backgroundColor: "#fafafa", justifyContent: "center", alignItems: "center", marginTop: 10 },
+  previewWrapper: {
+    width: "100%",
+    height: 220,
+    borderRadius: 12,
+    backgroundColor: "#fafafa",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
   previewImage: { width: "92%", height: "92%" },
   noSteps: { justifyContent: "center", alignItems: "center" },
   thumbWrap: { marginRight: 12, alignItems: "center" },

@@ -1,0 +1,74 @@
+{
+  "common": {
+    "search": "Search flashcards",
+    "loading": "Loading...",
+    "done": "Done",
+    "clear": "Clear",
+    "save": "Save",
+    "predict": "Predict",
+    "camera": "Camera",
+    "image": "Image",
+    "handwriting": "Handwriting",
+    "text": "Text",
+    "translation": "Translation"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back!",
+    "signInToContinue": "Sign in to continue your learning journey",
+    "createAccount": "Create Account",
+    "joinUsToday": "Join us today and start learning Mongolian",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signInWithGoogle": "Sign in with Google",
+    "signUpWithGoogle": "Sign up with Google",
+    "or": "OR",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "agreeToTerms": "By signing up, you agree to our",
+    "termsAndConditions": "Terms and Conditions"
+  },
+  "home": {
+    "greeting": "Hi, JavaGod69killer👋",
+    "subtitle": "Explore flashcards",
+    "savedCards": "Your Saved Cards",
+    "todaysWords": "Today's Words"
+  },
+  "search": {
+    "title": "Search",
+    "dailyWords": "Daily Words",
+    "uniqueWords": "Unique Handwritten Words",
+    "foreignWords": "Foreign Words"
+  },
+  "profile": {
+    "title": "Translation",
+    "inputPlaceholder": "Enter text...",
+    "fromLanguage": "From",
+    "toLanguage": "To",
+    "camera": "Camera",
+    "handwriting": "Handwriting",
+    "text": "Text",
+    "modelLoading": "Model is loading..."
+  },
+  "predict": {
+    "title": "Prediction",
+    "modelLoading": "Model is loading...",
+    "prediction": "Prediction"
+  },
+  "navigation": {
+    "home": "Home",
+    "search": "Search",
+    "translator": "Translator",
+    "predict": "Predict"
+  },
+  "languages": {
+    "english": "English",
+    "mongolian": "Mongolian",
+    "cyrillic": "Cyrillic",
+    "mongolianScript": "Mongolian Script"
+  }
+}

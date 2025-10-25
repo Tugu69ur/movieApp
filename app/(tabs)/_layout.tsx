@@ -1,15 +1,21 @@
 import { icons } from "@/constants/icons";
+import { DarkTheme, LightTheme } from "@/constants/theme";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/Theme";
 import { useFonts } from "expo-font";
 import { Tabs } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 const TabIcon = ({ focused, icon, title }: any) => {
+  const { theme } = useTheme();
+  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
+
   return (
     <View
       className="flex justify-center items-center mt-2"
       style={{
-        backgroundColor: focused ? "#A8B5DB" : "transparent",
+        backgroundColor: focused ? currentTheme.accent : "transparent",
         padding: 8,
         width: 60,
         borderRadius: 50,
@@ -17,17 +23,23 @@ const TabIcon = ({ focused, icon, title }: any) => {
     >
       <Image
         source={icon}
-        style={{ width: 24, height: 24, tintColor: focused ? "#fff" : "#A8B5DB" }}
+        style={{
+          width: 24,
+          height: 24,
+          tintColor: focused ? "#fff" : currentTheme.accent,
+        }}
       />
       {focused && title ? (
-        <Text style={{ color: "#fff", fontSize: 12, marginTop: 2 }}>{title}</Text>
+        <Text style={{ color: "#fff", fontSize: 12 }}>{title}</Text>
       ) : null}
     </View>
   );
 };
 
-
 export default function Layout() {
+  const { theme } = useTheme();
+  const { t } = useLanguage();
+  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
   const [fontsLoaded] = useFonts({
     MongolianBaiti: require("../../assets/fonts/mnglwhiteotf.ttf"),
   });
@@ -40,20 +52,23 @@ export default function Layout() {
         tabBarShowLabel: false,
         tabBarItemStyle: { width: "100%", height: "100%" },
         tabBarStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: currentTheme.card,
           borderRadius: 50,
           marginHorizontal: 20,
           marginBottom: 36,
           height: 52,
           position: "absolute",
           overflow: "hidden",
+
+          borderWidth: 2,
+          borderColor: currentTheme.background, 
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Нүүр",
+          title: t("navigation.home"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.home} title="" />
@@ -63,7 +78,7 @@ export default function Layout() {
       <Tabs.Screen
         name="search"
         options={{
-          title: "Search",
+          title: t("navigation.search"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.search} title="" />
@@ -73,20 +88,20 @@ export default function Layout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Translator",
+          title: t("navigation.translator"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.translator} title="" />
           ),
         }}
       />
-            <Tabs.Screen
+      <Tabs.Screen
         name="predict"
         options={{
-          title: "Predict",
+          title: t("navigation.predict"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.play} title="" />
+            <TabIcon focused={focused} icon={icons.star} title="" />
           ),
         }}
       />
