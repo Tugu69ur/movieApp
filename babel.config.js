@@ -4,7 +4,10 @@ module.exports = function (api) {
     presets: [
       ["babel-preset-expo", { jsxImportSource: "nativewind" }]
     ],
-    // Note: plugins must be inside presets if using babel-preset-expo
-    // Do NOT use top-level "plugins" here for NativeWind
+    plugins: [
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "react-native-reanimated/plugin", // 🔥 Reanimated plugin
+    ],
   };
 };

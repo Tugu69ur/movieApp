@@ -11,7 +11,8 @@
     "ios": {
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select images for prediction.",
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "This app needs camera access to take photos."
       },
       "bundleIdentifier": "com.anonymous.movieApp"
     },

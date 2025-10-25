@@ -1,12 +1,16 @@
-import { Ionicons } from "@expo/vector-icons";
+//import HandwritingCanvas from "@/components/handWriting";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as tf from "@tensorflow/tfjs";
 import { bundleResourceIO, decodeJpeg } from "@tensorflow/tfjs-react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
 import _ from "lodash"; // npm install lodash
 import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -15,6 +19,7 @@ import {
 } from "react-native";
 
 export default function PhotoPredictScreen() {
+  const router = useRouter();
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [loading, setLoading] = useState(false);
@@ -24,7 +29,6 @@ export default function PhotoPredictScreen() {
   const [toLang, setToLang] = useState("Монгол бичиг");
   const [inputText, setInputText] = useState("");
   const [convertedText, setConvertedText] = useState("");
-  const [ocrText, setOcrText] = useState("");
 
   const CLASS_NAMES = [
     "Үгийн адагт ордог А",
@@ -239,7 +243,7 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch("http://192.168.1.19:8000/ocr", {
+      const response = await fetch("http://172.20.10.2:8000/ocr", {
         method: "POST",
         body: formData,
         // ⚠️ Битгий Content-Type зааж өг
@@ -258,28 +262,71 @@ export default function PhotoPredictScreen() {
     }
   };
 
-const pickImage1 = async () => {
-  const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    allowsEditing: true,
-    aspect: [1, 1],
-    quality: 1,
-  });
+  const pickImage1 = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
 
-  if (!result.canceled && result.assets?.length) {
-    const uri = result.assets[0].uri;
-    setImageUri(uri);
+    if (!result.canceled && result.assets?.length) {
+      const uri = result.assets[0].uri;
+      setImageUri(uri);
 
-    // OCR дуудаж текст авна
-    const text = await recognizeMongolImage(uri);
-    setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
+      // OCR дуудаж текст авна
+      const text = await recognizeMongolImage(uri);
+      setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
 
-    // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
-    const converted = await convertText(text, "Монгол бичиг", "Крилл");
-    setConvertedText(converted);
-  }
-};
+      // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
+      const converted = await convertText(text, "Монгол бичиг", "Крилл");
+      setConvertedText(converted);
+    }
+  };
+  const requestCameraPermission = async () => {
+    if (Platform.OS !== "web") {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "Camera access required",
+          "Please allow camera permissions to use this feature."
+        );
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+  const takePhoto = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (!hasPermission) return;
 
+    try {
+      // 1️⃣ Камер нээж, crop ratio-тай зураг авах
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [1, 0.25], // width:height = 1:0.25
+        quality: 1,
+      });
+
+      if (result.canceled || !result.assets?.length) return;
+
+      const uri = result.assets[0].uri;
+      setImageUri(uri); // preview-д харуулах
+
+      setLoading(true);
+
+      // 2️⃣ TensorFlow prediction хийх
+      const text = await recognizeMongolImage(uri);
+      setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
+
+      // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
+      const converted = await convertText(text, "Монгол бичиг", "Крилл");
+      setConvertedText(converted);
+      } catch (err) {
+      console.error("Camera error:", err);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -330,14 +377,23 @@ const pickImage1 = async () => {
           gap: 50,
         }}
       >
+        <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
+          <MaterialCommunityIcons
+            name="camera-enhance-outline"
+            size={30}
+            color="#4a90e2"
+          />
+          <Text style={styles.uploadText}>Camera</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
           <Ionicons name="image-outline" size={30} color="#4a90e2" />
-          <Text style={styles.uploadText}>Гар бичмэл оруулах</Text>
+          <Text style={styles.uploadText}>Гар бичмэл</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.uploadButton} onPress={pickImage1}>
           <Ionicons name="image-outline" size={30} color="#4a90e2" />
-          <Text style={styles.uploadText}>Бичмэл оруулах</Text>
+          <Text style={styles.uploadText}>Бичмэл</Text>
         </TouchableOpacity>
       </View>
 
@@ -345,9 +401,14 @@ const pickImage1 = async () => {
       {imageUri && (
         <Image
           source={{ uri: imageUri }}
-          style={{ width: 280, height: 320, borderRadius: 10, marginTop: 20,transform: [{ rotate: '90deg' }], }}
+          style={{
+            width: 280,
+            height: 320,
+            borderRadius: 10,
+            marginTop: 20,
+            transform: [{ rotate: "90deg" }],
+          }}
           resizeMode="contain" // эсвэл "cover"
-
         />
       )}
 
