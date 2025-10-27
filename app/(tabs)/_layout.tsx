@@ -1,45 +1,45 @@
 import { icons } from "@/constants/icons";
-import { DarkTheme, LightTheme } from "@/constants/theme";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/Theme";
 import { useFonts } from "expo-font";
 import { Tabs } from "expo-router";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Platform, StyleSheet, Text, View } from "react-native";
 
 const TabIcon = ({ focused, icon, title }: any) => {
-  const { theme } = useTheme();
-  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
-
   return (
-    <View
-      className="flex justify-center items-center mt-2"
-      style={{
-        backgroundColor: focused ? currentTheme.accent : "transparent",
-        padding: 8,
-        width: 60,
-        borderRadius: 50,
-      }}
-    >
-      <Image
-        source={icon}
-        style={{
-          width: 24,
-          height: 24,
-          tintColor: focused ? "#fff" : currentTheme.accent,
-        }}
-      />
-      {focused && title ? (
-        <Text style={{ color: "#fff", fontSize: 12 }}>{title}</Text>
-      ) : null}
+    <View style={styles.tabIconContainer}>
+      {focused ? (
+        <View style={styles.activeTabBackground}>
+          <View style={styles.iconWrapper}>
+            <View style={styles.iconCircle}>
+              <Image
+                source={icon}
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: "#fff",
+                }}
+              />
+            </View>
+          </View>
+          <Text style={styles.activeTabLabel}>{title}</Text>
+        </View>
+      ) : (
+        <View style={styles.inactiveTab}>
+          <Image
+            source={icon}
+            style={{
+              width: 24,
+              height: 24,
+              tintColor: "#94a3b8",
+            }}
+          />
+        </View>
+      )}
     </View>
   );
 };
 
 export default function Layout() {
-  const { theme } = useTheme();
-  const { t } = useLanguage();
-  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
   const [fontsLoaded] = useFonts({
     MongolianBaiti: require("../../assets/fonts/mnglwhiteotf.ttf"),
   });
@@ -50,58 +50,69 @@ export default function Layout() {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarItemStyle: { width: "100%", height: "100%" },
         tabBarStyle: {
-          backgroundColor: currentTheme.card,
-          borderRadius: 50,
-          marginHorizontal: 20,
-          marginBottom: 36,
-          height: 52,
+          backgroundColor: "#fff",
+          height: 70,
+          paddingBottom: 8,
+          paddingTop: 8,
+          borderTopWidth: 0,
           position: "absolute",
-          overflow: "hidden",
-
-          borderWidth: 2,
-          borderColor: currentTheme.background, 
+          ...Platform.select({
+            ios: {
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: -2 },
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+            },
+            android: {
+              elevation: 8,
+            },
+          }),
         },
+        tabBarBackground: () => (
+          <View style={styles.tabBarBackground}>
+            <View style={styles.tabBarContent} />
+          </View>
+        ),
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: t("navigation.home"),
+          title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="" />
+            <TabIcon focused={focused} icon={icons.home} title="Нүүр" />
           ),
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
-          title: t("navigation.search"),
+          title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.search} title="" />
+            <TabIcon focused={focused} icon={icons.search} title="Хайлт" />
           ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: t("navigation.translator"),
+          title: "Translator",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.translator} title="" />
+            <TabIcon focused={focused} icon={icons.translator} title="Орчуулга" />
           ),
         }}
       />
       <Tabs.Screen
         name="predict"
         options={{
-          title: t("navigation.predict"),
+          title: "Predict",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.star} title="" />
+            <TabIcon focused={focused} icon={icons.play} title="Бичлэг" />
           ),
         }}
       />
@@ -109,4 +120,60 @@ export default function Layout() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabIconContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeTabBackground: {
+    backgroundColor: "#6366f1",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    shadowColor: "#6366f1",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  iconWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconImage: {
+    width: 20,
+    height: 20,
+  },
+  activeTabLabel: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  inactiveTab: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 4,
+  },
+  tabBarBackground: {
+    flex: 1,
+    overflow: "hidden",
+  },
+  tabBarContent: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+});

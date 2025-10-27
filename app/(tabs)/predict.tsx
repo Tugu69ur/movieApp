@@ -1,12 +1,15 @@
-import { DarkTheme, LightTheme } from "@/constants/theme";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/Theme";
-import { useEffect, useRef, useState } from "react";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import * as tf from "@tensorflow/tfjs";
+import { bundleResourceIO, decodeJpeg } from "@tensorflow/tfjs-react-native";
+
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   Image,
   PanResponder,
+  Platform,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,16 +19,13 @@ import Svg, { Path, Rect } from "react-native-svg";
 import ViewShot, { captureRef } from "react-native-view-shot";
 
 export default function DrawScreen() {
-  const { theme } = useTheme();
-  const { t } = useLanguage();
   const [paths, setPaths] = useState<string[]>([]);
   const [currentPath, setCurrentPath] = useState<string>("");
   const [savedBase64, setSavedBase64] = useState<string | null>(null);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const viewShotRef = useRef<any>(null);
-  
-  const currentTheme = theme === 'dark' ? DarkTheme : LightTheme;
+  const modelRef = useRef<tf.LayersModel | null>(null);
 
     const CLASS_NAMES = [
     "Үгийн адагт ордог А",
@@ -101,8 +101,26 @@ export default function DrawScreen() {
 
 
   useEffect(() => {
-    // Model loading removed - TensorFlow.js was causing crashes
-    console.log("Drawing screen ready");
+    const loadModel = async () => {
+      setLoading(true);
+      try {
+        await tf.ready();
+        const modelJson = require("../../assets/model/model.json");
+        const modelWeights = [
+          require("../../assets/model/group1-shard1of2.bin"),
+          require("../../assets/model/group1-shard2of2.bin"),
+        ];
+        modelRef.current = await tf.loadLayersModel(
+          bundleResourceIO(modelJson, modelWeights)
+        );
+        console.log("✅ Model Loaded!");
+      } catch (err) {
+        console.error("Model load failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadModel();
   }, []);
 
   const panResponder = useRef(
@@ -141,29 +159,28 @@ export default function DrawScreen() {
     setSavedBase64(`data:image/jpeg;base64,${base64Data}`);
   };
 
+  // Convert base64 JPEG → Tensor
+  const base64ToTensor = (base64: string) => {
+    const raw = tf.util.encodeString(base64.split(",")[1], "base64").buffer;
+    const u8 = new Uint8Array(raw);
+    return decodeJpeg(u8, 3) // ✅ Decode JPEG
+      .resizeBilinear([64, 64])
+      .div(tf.scalar(255))
+      .expandDims(0);
+  };
+
   const predict = async () => {
-    if (!savedBase64) {
-      Alert.alert('Error', 'Please draw something first');
-      return;
-    }
-    
-    setLoading(true);
+    if (!savedBase64 || !modelRef.current) return;
     try {
-      // Mock prediction - TensorFlow.js was causing crashes
-      const mockPredictions = [
-        "Үгийн эхэнд ордог А",
-        "Үгийн дунд ордог Б", 
-        "Үгийн адагт ордог Ч"
-      ];
-      const randomPrediction = mockPredictions[Math.floor(Math.random() * mockPredictions.length)];
-      const confidence = (Math.random() * 50 + 50).toFixed(1); // 50-100% confidence
-      
-      setPrediction(`${randomPrediction} (${confidence}%)`);
+      const tensor = await base64ToTensor(savedBase64);
+      const output = modelRef.current.predict(tensor) as tf.Tensor;
+      const probs = Array.from(tf.softmax(output).dataSync());
+      const topIndex = probs.indexOf(Math.max(...probs));
+      setPrediction(
+        `${CLASS_NAMES[topIndex]} (${(probs[topIndex] * 2500).toFixed(2)}%)`
+      );
     } catch (err) {
       console.error("Prediction failed:", err);
-      Alert.alert('Error', 'Prediction failed. Please try again.');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -175,59 +192,120 @@ export default function DrawScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: currentTheme.background }]}>
-      <ViewShot ref={viewShotRef} style={[styles.canvasWrapper, { backgroundColor: currentTheme.card, borderColor: currentTheme.secondaryText }]}>
-        <Svg width={300} height={300}>
-          <Rect x={0} y={0} width={300} height={300} fill={currentTheme.card} />
-          {paths.map((p, i) => (
-            <Path key={i} d={p} stroke={currentTheme.text} strokeWidth={12} fill="none" />
-          ))}
-          {currentPath.length > 0 && (
-            <Path d={currentPath} stroke={currentTheme.text} strokeWidth={12} fill="none" />
-          )}
-        </Svg>
-        <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />
-      </ViewShot>
-
-      <View style={styles.buttonsRow}>
-        <TouchableOpacity style={[styles.btn, { backgroundColor: currentTheme.accent }]} onPress={addPath}>
-          <Text style={styles.btnText}>{t("common.done")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, { backgroundColor: currentTheme.accent }]} onPress={clearCanvas}>
-          <Text style={styles.btnText}>{t("common.clear")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, { backgroundColor: currentTheme.accent }]} onPress={saveAsJPEG}>
-          <Text style={styles.btnText}>{t("common.save")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, { backgroundColor: currentTheme.accent }]} onPress={predict}>
-          <Text style={styles.btnText}>{t("common.predict")}</Text>
-        </TouchableOpacity>
-      </View>
-
-      {loading && (
-        <View style={{ marginTop: 20, alignItems: "center" }}>
-          <ActivityIndicator size="large" color={currentTheme.accent} />
-          <Text style={{ color: currentTheme.text }}>{t("profile.modelLoading")}</Text>
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.headerTitle}>Гар бичмэл таних</Text>
+            <Text style={styles.headerSubtitle}>Монгол бичиг зурах</Text>
+          </View>
+          <View style={styles.statusContainer}>
+            {modelRef.current ? (
+              <View style={styles.statusBadge}>
+                <View style={styles.statusDot} />
+                <Text style={styles.statusText}>Ready</Text>
+              </View>
+            ) : (
+              <Text style={styles.statusTextLoading}>Loading...</Text>
+            )}
+          </View>
         </View>
-      )}
 
-      {savedBase64 && (
-        <Image
-          source={{ uri: savedBase64 }}
-          style={{
-            width: 64,
-            height: 64,
-            borderWidth: 1,
-            borderColor: currentTheme.secondaryText,
-            marginTop: 15,
-          }}
-        />
-      )}
-      {prediction && (
-        <Text style={{ marginTop: 15, fontSize: 18, fontWeight: "600", color: currentTheme.text }}>
-          {t("predict.prediction")}: {prediction}
-        </Text>
-      )}
+        {/* Canvas */}
+        <View style={styles.canvasSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Зурах хэсэг</Text>
+            <TouchableOpacity onPress={clearCanvas} style={styles.clearButton}>
+              <Ionicons name="trash-outline" size={20} color="#ef4444" />
+              <Text style={styles.clearText}>Цэвэрлэх</Text>
+            </TouchableOpacity>
+          </View>
+          
+          <ViewShot ref={viewShotRef} style={styles.canvasWrapper}>
+            <Svg width={350} height={350}>
+              <Rect x={0} y={0} width={350} height={350} fill="#fff" />
+              {paths.map((p, i) => (
+                <Path key={i} d={p} stroke="#1a1a1a" strokeWidth={16} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              ))}
+              {currentPath.length > 0 && (
+                <Path d={currentPath} stroke="#1a1a1a" strokeWidth={16} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              )}
+            </Svg>
+            <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />
+          </ViewShot>
+
+          <TouchableOpacity 
+            style={styles.finishButton} 
+            onPress={addPath}
+            activeOpacity={0.8}
+          >
+            <MaterialIcons name="gesture" size={20} color="#fff" />
+            <Text style={styles.finishButtonText}>Дуусгах</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Action Buttons */}
+        <View style={styles.actionButtonsContainer}>
+          <TouchableOpacity 
+            style={[styles.actionButton, styles.primaryButton]} 
+            onPress={saveAsJPEG}
+            disabled={!paths.length && !currentPath}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="save-outline" size={22} color="#fff" />
+            <Text style={styles.actionButtonText}>Дарах</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.actionButton, styles.predictButton]} 
+            onPress={predict}
+            disabled={!savedBase64 || loading}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="analytics-outline" size={22} color="#fff" />
+            <Text style={styles.actionButtonText}>Таамаглах</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Loading */}
+        {loading && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#6366f1" />
+            <Text style={styles.loadingText}>Processing...</Text>
+          </View>
+        )}
+
+        {/* Preview */}
+        {savedBase64 && (
+          <View style={styles.previewContainer}>
+            <View style={styles.previewHeader}>
+              <Text style={styles.previewTitle}>Captured Image</Text>
+              <TouchableOpacity onPress={() => setSavedBase64(null)}>
+                <Ionicons name="close-circle-outline" size={24} color="#64748b" />
+              </TouchableOpacity>
+            </View>
+            <Image
+              source={{ uri: savedBase64 }}
+              style={styles.previewImage}
+            />
+          </View>
+        )}
+
+        {/* Prediction Result */}
+        {prediction && !loading && (
+          <View style={styles.resultContainer}>
+            <View style={styles.resultHeader}>
+              <Ionicons name="checkmark-circle" size={28} color="#10b981" />
+              <Text style={styles.resultTitle}>Prediction Result</Text>
+            </View>
+            <Text style={styles.resultText}>{prediction}</Text>
+          </View>
+        )}
+
+        <View style={{ height: 40 }} />
+      </ScrollView>
     </View>
   );
 }
@@ -235,26 +313,262 @@ export default function DrawScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "#f8f9fa",
+  },
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  header: {
+    backgroundColor: "#fff",
+    paddingTop: Platform.OS === "ios" ? 60 : 20,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 50,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#1a1a1a",
+    marginBottom: 4,
+  },
+  headerSubtitle: {
+    fontSize: 15,
+    color: "#64748b",
+    fontWeight: "500",
+  },
+  statusContainer: {
+    marginTop: 8,
+  },
+  statusBadge: {
+    backgroundColor: "#f1f5f9",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  statusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#10b981",
+  },
+  statusText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#10b981",
+  },
+  statusTextLoading: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#f59e0b",
+  },
+  canvasSection: {
+    marginHorizontal: 24,
+    marginBottom: 24,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1a1a1a",
+  },
+  clearButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: "#fef2f2",
+    borderRadius: 12,
+  },
+  clearText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#ef4444",
   },
   canvasWrapper: {
-    width: 300,
-    height: 300,
-    borderWidth: 1,
+    width: 350,
+    height: 350,
+    borderWidth: 2,
+    borderColor: "#e2e8f0",
+    borderRadius: 20,
+    backgroundColor: "#fff",
+    marginBottom: 16,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 12,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
-  buttonsRow: {
+  finishButton: {
+    backgroundColor: "#6366f1",
+    borderRadius: 16,
+    padding: 14,
     flexDirection: "row",
-    marginTop: 20,
-    flexWrap: "wrap",
+    alignItems: "center",
     justifyContent: "center",
+    gap: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#6366f1",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 6,
+      },
+    }),
+  },
+  finishButtonText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#fff",
+  },
+  actionButtonsContainer: {
+    flexDirection: "row",
+    marginHorizontal: 24,
+    marginBottom: 24,
+    gap: 12,
+  },
+  actionButton: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 16,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  primaryButton: {
+    backgroundColor: "#6366f1",
+    borderColor: "#6366f1",
+  },
+  predictButton: {
+    backgroundColor: "#10b981",
+    borderColor: "#10b981",
+  },
+  actionButtonText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#fff",
+  },
+  loadingContainer: {
+    alignItems: "center",
+    marginVertical: 24,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#64748b",
+  },
+  previewContainer: {
+    marginHorizontal: 24,
+    marginBottom: 24,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+  },
+  previewHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  previewTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1a1a1a",
+  },
+  previewImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "#e2e8f0",
+  },
+  resultContainer: {
+    marginHorizontal: 24,
+    marginBottom: 24,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#10b981",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#10b981",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  resultHeader: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: 10,
+    marginBottom: 12,
   },
-  btn: {
-    padding: 10,
-    borderRadius: 8,
-    marginHorizontal: 5,
+  resultTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1a1a1a",
   },
-  btnText: { color: "white", fontWeight: "600" },
+  resultText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#334155",
+  },
 });

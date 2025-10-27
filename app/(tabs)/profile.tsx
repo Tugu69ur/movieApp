@@ -1,17 +1,17 @@
-//import HandwritingCanvas from "@/components/handWriting";
-import { DarkTheme, LightTheme } from "@/constants/theme";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/Theme";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as tf from "@tensorflow/tfjs";
+import { bundleResourceIO, decodeJpeg } from "@tensorflow/tfjs-react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useRouter } from "expo-router";
-import _ from "lodash"; // npm install lodash
-import { useEffect, useRef, useState } from "react";
+import _ from "lodash";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   Image,
+  KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -20,11 +20,8 @@ import {
 } from "react-native";
 
 export default function PhotoPredictScreen() {
-  const router = useRouter();
-  const { theme } = useTheme();
-  const { t } = useLanguage();
   const [imageUri, setImageUri] = useState<string | null>(null);
-  const [model, setModel] = useState<any | null>(null);
+  const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [prob, setProb] = useState<number | null>(null);
@@ -32,8 +29,6 @@ export default function PhotoPredictScreen() {
   const [toLang, setToLang] = useState("Монгол бичиг");
   const [inputText, setInputText] = useState("");
   const [convertedText, setConvertedText] = useState("");
-
-  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
 
   const CLASS_NAMES = [
     "Үгийн адагт ордог А",
@@ -107,16 +102,41 @@ export default function PhotoPredictScreen() {
     "Үгийн дунд ордог З",
   ];
 
+  // ================= Load TF Model =================
   useEffect(() => {
-    // Model loading removed - TensorFlow.js was causing crashes
-    console.log("Translation screen ready");
+    const loadModel = async () => {
+      setLoading(true);
+      try {
+        await tf.ready();
+        console.log("✅ TensorFlow Ready!");
+        const modelJson = require("../../assets/model/model.json");
+        const modelWeights = [
+          require("../../assets/model/group1-shard1of2.bin"),
+          require("../../assets/model/group1-shard2of2.bin"),
+        ];
+        const loadedModel = await tf.loadLayersModel(
+          bundleResourceIO(modelJson, modelWeights)
+        );
+        setModel(loadedModel);
+        console.log("✅ Model Loaded!");
+      } catch (err) {
+        console.error("❌ Model load failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadModel();
   }, []);
 
-  // ================= Mock Image Processing =================
-  const processImage = async (uri: string) => {
-    // Mock image processing - TensorFlow.js was causing crashes
-    console.log("Processing image:", uri);
-    return "Mock processed image data";
+  // ================= Image -> Tensor =================
+  const imageToTensor = async (uri: string) => {
+    const response = await fetch(uri);
+    const arrayBuffer = await response.arrayBuffer();
+    const uInt8Array = new Uint8Array(arrayBuffer);
+    const imageTensor = decodeJpeg(uInt8Array) as tf.Tensor3D;
+    const resized = tf.image.resizeBilinear(imageTensor, [64, 64]);
+    const normalized = resized.div(tf.scalar(255));
+    return normalized.expandDims(0);
   };
 
   // ================= Pick Image =================
@@ -135,22 +155,21 @@ export default function PhotoPredictScreen() {
     }
   };
 
-  // ================= Mock Predict =================
+  // ================= Predict =================
   const predict = async (uri: string) => {
+    if (!model) return;
     setLoading(true);
     try {
-      // Mock prediction - TensorFlow.js was causing crashes
-      const mockPredictions = [
-        "Үгийн эхэнд ордог А",
-        "Үгийн дунд ордог Б", 
-        "Үгийн адагт ордог Ч"
-      ];
-      const randomPrediction = mockPredictions[Math.floor(Math.random() * mockPredictions.length)];
-      const topProb = (Math.random() * 50 + 50).toFixed(2); // 50-100% confidence
-      
-      setPrediction(randomPrediction);
-      setProb(parseFloat(topProb));
-      console.log("✅ Mock Prediction:", randomPrediction, topProb + "%");
+      const tensor = await imageToTensor(uri);
+      const output = model.predict(tensor) as tf.Tensor;
+      const raw = output.dataSync();
+      const probs = Array.from(tf.softmax(tf.tensor1d(raw)).dataSync());
+      const topIndex = probs.indexOf(Math.max(...probs));
+      const topClass = CLASS_NAMES[topIndex];
+      const topProb = probs[topIndex] * 2500;
+      setPrediction(topClass);
+      setProb(topProb);
+      console.log("✅ Prediction:", topClass, topProb.toFixed(2) + "%");
     } catch (err) {
       console.error("Prediction error:", err);
       setPrediction("Prediction failed");
@@ -224,7 +243,7 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch("http://172.20.10.2:8000/ocr", {
+      const response = await fetch("http://192.168.1.19:8000/ocr", {
         method: "POST",
         body: formData,
         // ⚠️ Битгий Content-Type зааж өг
@@ -304,168 +323,180 @@ export default function PhotoPredictScreen() {
       // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
       const converted = await convertText(text, "Монгол бичиг", "Крилл");
       setConvertedText(converted);
-    } catch (err) {
+      } catch (err) {
       console.error("Camera error:", err);
     }
   };
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: currentTheme.background }]}
-    >
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: currentTheme.text }]}>
-          {t("profile.title")}
-        </Text>
-      </View>
-
-      {/* Input Text */}
-      <TextInput
-        style={[
-          styles.textInput,
-          {
-            backgroundColor: currentTheme.card,
-            color: currentTheme.text,
-            borderColor: currentTheme.secondaryText,
-          },
-        ]}
-        placeholder={t("profile.inputPlaceholder")}
-        placeholderTextColor={currentTheme.secondaryText}
-        value={inputText}
-        onChangeText={(text) => {
-          setInputText(text);
-          if (text.trim() === "") {
-            setConvertedText(""); // хоосон бол convertedText-ийг ч хоослоно
-          } else {
-            debouncedConvert(text);
-          }
-        }}
-      />
-
-      {/* Converted Text (Editable) */}
-      {convertedText !== "" && (
-        <TextInput
-          style={[
-            styles.textInput,
-            {
-              marginTop: 10,
-              backgroundColor: currentTheme.card,
-              color: currentTheme.text,
-              borderColor: currentTheme.secondaryText,
-            },
-          ]}
-          value={convertedText}
-          editable={true} // copy/edit allowed
-        />
-      )}
-
-      {/* Language Switch */}
-      <View style={styles.langRow}>
-        <Text style={[styles.lang, { color: currentTheme.secondaryText }]}>
-          {toLang}
-        </Text>
-        <TouchableOpacity onPress={swapLanguages}>
-          <MaterialCommunityIcons
-            name="swap-horizontal"
-            size={28}
-            color={currentTheme.accent}
-          />
-        </TouchableOpacity>
-        <Text style={[styles.lang, { color: currentTheme.secondaryText }]}>
-          {fromLang}
-        </Text>
-      </View>
-
-      {/* Image Upload */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          gap: 50,
-        }}
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
       >
-        <TouchableOpacity style={styles.uploadButton} onPress={takePhoto}>
-          <MaterialCommunityIcons
-            name="camera-enhance-outline"
-            size={30}
-            color={currentTheme.accent}
-          />
-          <Text style={[styles.uploadText, { color: currentTheme.accent }]}>
-            {t("common.camera")}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
-          <MaterialCommunityIcons
-            name="image"
-            size={30}
-            color={currentTheme.accent}
-          />
-          <Text style={[styles.uploadText, { color: currentTheme.accent }]}>
-            {t("common.handwriting")}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.uploadButton} onPress={pickImage1}>
-          <MaterialCommunityIcons
-            name="image"
-            size={30}
-            color={currentTheme.accent}
-          />
-          <Text style={[styles.uploadText, { color: currentTheme.accent }]}>
-            {t("common.text")}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Image Preview */}
-      {imageUri && (
-        <Image
-          source={{ uri: imageUri }}
-          style={{
-            width: 280,
-            height: 320,
-            borderRadius: 10,
-            marginTop: 20,
-            transform: [{ rotate: "90deg" }],
-          }}
-          resizeMode="contain" // эсвэл "cover"
-        />
-      )}
-
-      {/* Loading */}
-      {loading && (
-        <ActivityIndicator
-          size="large"
-          color={currentTheme.accent}
-          style={{ marginTop: 20 }}
-        />
-      )}
-
-      {/* Prediction Result */}
-      {prediction && !loading && (
-        <View
-          style={[styles.resultBox, { backgroundColor: currentTheme.card }]}
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <Text style={[styles.resultText, { color: currentTheme.text }]}>
-            {prediction}
-          </Text>
-          {prob !== null && (
-            <View style={styles.probContainer}>
-              <View
-                style={[
-                  styles.probBar,
-                  { width: `${prob}%`, backgroundColor: currentTheme.accent },
-                ]}
+          {/* Header */}
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.headerTitle}>Орчуулга</Text>
+              <Text style={styles.headerSubtitle}>Монгол бичиг ↔ Крилл</Text>
+            </View>
+            <View style={styles.statusBadge}>
+              {model ? (
+                <View style={styles.statusIndicator}>
+                  <View style={styles.statusDot} />
+                  <Text style={styles.statusText}>Model Ready</Text>
+                </View>
+              ) : (
+                <Text style={styles.statusTextLoading}>Loading...</Text>
+              )}
+            </View>
+          </View>
+
+          {/* Language Switch */}
+          <View style={styles.langSwitchContainer}>
+            <View style={styles.langBox}>
+              <Text style={styles.langLabel}>FROM</Text>
+              <Text style={styles.langText}>{fromLang}</Text>
+            </View>
+            <TouchableOpacity 
+              onPress={swapLanguages}
+              style={styles.swapButton}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="swap-horizontal" size={32} color="#fff" />
+            </TouchableOpacity>
+            <View style={styles.langBox}>
+              <Text style={styles.langLabel}>TO</Text>
+              <Text style={styles.langText}>{toLang}</Text>
+            </View>
+          </View>
+
+          {/* Input Text */}
+          <View style={styles.inputContainer}>
+            <View style={styles.inputHeader}>
+              <Text style={styles.inputLabel}>Input Text</Text>
+              <Text style={styles.inputHint}>Найраглаж бичээд үгүйг хувиргах</Text>
+            </View>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter text here..."
+              placeholderTextColor="#94a3b8"
+              value={inputText}
+              onChangeText={(text) => {
+                setInputText(text);
+                if (text.trim() === "") {
+                  setConvertedText("");
+                } else {
+                  debouncedConvert(text);
+                }
+              }}
+              multiline
+              textAlignVertical="top"
+            />
+          </View>
+
+          {/* Converted Text */}
+          {convertedText !== "" && (
+            <View style={styles.inputContainer}>
+              <View style={styles.inputHeader}>
+                <Text style={styles.inputLabel}>Converted Text</Text>
+                <Text style={styles.inputHint}>Editable result</Text>
+              </View>
+              <TextInput
+                style={[styles.textInput, styles.outputInput]}
+                value={convertedText}
+                editable={true}
+                multiline
+                textAlignVertical="top"
               />
-              <Text style={[styles.probText, { color: currentTheme.accent }]}>
-                {prob.toFixed(2)}%
-              </Text>
             </View>
           )}
-        </View>
-      )}
+
+          {/* Action Buttons */}
+          <View style={styles.actionButtons}>
+            <TouchableOpacity 
+              style={[styles.actionButton, styles.primaryButton]} 
+              onPress={takePhoto}
+              activeOpacity={0.8}
+            >
+              <MaterialCommunityIcons name="camera-outline" size={24} color="#fff" />
+              <Text style={styles.buttonText}>Camera</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.actionButton} 
+              onPress={pickImage}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="image-outline" size={24} color="#6366f1" />
+              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>Handwritten</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.actionButton} 
+              onPress={pickImage1}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="scan-outline" size={24} color="#6366f1" />
+              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>OCR Scan</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Image Preview */}
+          {imageUri && (
+            <View style={styles.imagePreviewContainer}>
+              <View style={styles.imagePreviewHeader}>
+                <Text style={styles.imagePreviewTitle}>Preview</Text>
+                <TouchableOpacity onPress={() => setImageUri(null)}>
+                  <Ionicons name="close-circle-outline" size={24} color="#64748b" />
+                </TouchableOpacity>
+              </View>
+              <Image
+                source={{ uri: imageUri }}
+                style={styles.imagePreview}
+                resizeMode="contain"
+              />
+            </View>
+          )}
+
+          {/* Loading */}
+          {loading && (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#6366f1" />
+              <Text style={styles.loadingText}>Processing...</Text>
+            </View>
+          )}
+
+          {/* Prediction Result */}
+          {prediction && !loading && (
+            <View style={styles.resultContainer}>
+              <View style={styles.resultHeader}>
+                <Ionicons name="checkmark-circle" size={28} color="#10b981" />
+                <Text style={styles.resultTitle}>Prediction Result</Text>
+              </View>
+              <Text style={styles.resultText}>{prediction}</Text>
+              {prob !== null && (
+                <View style={styles.probContainer}>
+                  <View style={styles.probHeader}>
+                    <Text style={styles.probLabel}>Confidence</Text>
+                    <Text style={styles.probValue}>{prob.toFixed(2)}%</Text>
+                  </View>
+                  <View style={styles.probBarContainer}>
+                    <View style={[styles.probBar, { width: `${Math.min(prob, 100)}%` }]} />
+                  </View>
+                </View>
+              )}
+            </View>
+          )}
+
+          <View style={{ height: 40 }} />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }
@@ -474,59 +505,319 @@ export default function PhotoPredictScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    paddingTop: 60,
+    backgroundColor: "#f8f9fa",
   },
-  header: { width: "90%", alignItems: "center", marginBottom: 20 },
-  title: { fontSize: 28, fontWeight: "600" },
-  textInput: {
-    width: "90%",
-    height: 100,
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 15,
-    fontSize: 16,
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  header: {
+    backgroundColor: "#fff",
+    paddingTop: Platform.OS === "ios" ? 60 : 20,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
     marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
-  langRow: {
+  headerTitle: {
+    fontSize: 32,
+    fontWeight: "700",
+    color: "#1a1a1a",
+    marginBottom: 4,
+  },
+  headerSubtitle: {
+    fontSize: 15,
+    color: "#64748b",
+    fontWeight: "500",
+  },
+  statusBadge: {
+    backgroundColor: "#f1f5f9",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+  },
+  statusIndicator: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  statusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#10b981",
+  },
+  statusText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#10b981",
+  },
+  statusTextLoading: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#f59e0b",
+  },
+  langSwitchContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
-    gap: 10,
+    marginHorizontal: 24,
+    marginBottom: 24,
+    gap: 16,
   },
-  lang: { fontSize: 16, fontWeight: "500" },
-  uploadButton: {
+  langBox: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
     alignItems: "center",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  langLabel: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: "#94a3b8",
+    letterSpacing: 1,
+    marginBottom: 4,
+  },
+  langText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1a1a1a",
+  },
+  swapButton: {
+    backgroundColor: "#6366f1",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     justifyContent: "center",
-    marginTop: 10,
-  },
-  uploadText: { fontSize: 16, marginTop: 5 },
-  resultBox: {
-    marginTop: 25,
-    borderRadius: 10,
-    padding: 15,
-    width: "90%",
     alignItems: "center",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#6366f1",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 6,
+      },
+    }),
+  },
+  inputContainer: {
+    marginHorizontal: 24,
+    marginBottom: 20,
+  },
+  inputHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  inputLabel: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1a1a1a",
+  },
+  inputHint: {
+    fontSize: 12,
+    color: "#94a3b8",
+    fontWeight: "500",
+  },
+  textInput: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+    padding: 16,
+    fontSize: 16,
+    color: "#1a1a1a",
+    minHeight: 120,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 1,
+      },
+    }),
+  },
+  outputInput: {
+    backgroundColor: "#f0f9ff",
+    borderColor: "#bae6fd",
+  },
+  actionButtons: {
+    flexDirection: "row",
+    marginHorizontal: 24,
+    marginBottom: 24,
+    gap: 12,
+  },
+  actionButton: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 16,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  primaryButton: {
+    backgroundColor: "#6366f1",
+    borderColor: "#6366f1",
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#fff",
+    marginTop: 6,
+  },
+  buttonTextSecondary: {
+    color: "#6366f1",
+  },
+  imagePreviewContainer: {
+    marginHorizontal: 24,
+    marginBottom: 24,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+  },
+  imagePreviewHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  imagePreviewTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1a1a1a",
+  },
+  imagePreview: {
+    width: "100%",
+    height: 200,
+    borderRadius: 12,
+  },
+  loadingContainer: {
+    alignItems: "center",
+    marginVertical: 24,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#64748b",
+  },
+  resultContainer: {
+    marginHorizontal: 24,
+    marginBottom: 24,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#10b981",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#10b981",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  resultHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 12,
+  },
+  resultTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1a1a1a",
   },
   resultText: {
-    fontSize: 17,
-    textAlign: "center",
+    fontSize: 16,
     fontWeight: "600",
+    color: "#334155",
+    marginBottom: 16,
   },
   probContainer: {
-    marginTop: 10,
-    height: 10,
-    backgroundColor: "#ddd",
-    borderRadius: 5,
-    width: "100%",
-    overflow: "hidden",
-    position: "relative",
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: "#e2e8f0",
   },
-  probBar: { height: "100%", borderRadius: 5 },
-  probText: {
-    marginTop: 8,
-    fontSize: 14,
-    textAlign: "center",
+  probHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  probLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#64748b",
+  },
+  probValue: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#6366f1",
+  },
+  probBarContainer: {
+    height: 8,
+    backgroundColor: "#e2e8f0",
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  probBar: {
+    height: "100%",
+    backgroundColor: "#6366f1",
+    borderRadius: 4,
   },
 });

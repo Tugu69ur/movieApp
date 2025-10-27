@@ -1,10 +1,10 @@
-import { useAuth } from "@/contexts/AuthContext";
+
 import { Redirect } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, AppState, View } from "react-native";
 
 export default function Index() {
-  const { isAuthenticated } = useAuth();
+  // const { user, loading } = useAuth();
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ export default function Index() {
     // Handle app state changes
     const handleAppStateChange = (nextAppState: string) => {
       if (nextAppState === 'active') {
-        // App came to foreground, ensure we're ready
         setIsReady(true);
       }
     };
@@ -29,17 +28,17 @@ export default function Index() {
     };
   }, []);
 
-  if (!isReady) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0f0d23' }}>
-        <ActivityIndicator size="large" color="#ffffff" />
-      </View>
-    );
-  }
+  // if (!isReady || loading) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0f0d23' }}>
+  //       <ActivityIndicator size="large" color="#ffffff" />
+  //     </View>
+  //   );
+  // }
 
-  if (isAuthenticated) {
-    return <Redirect href="/(tabs)" />;
-  }
+  // if (user) {
+  //   return <Redirect href="/(tabs)" />;
+  // }
 
   return <Redirect href="/(tabs)" />;
 }
