@@ -1,10 +1,11 @@
 import { icons } from "@/constants/icons";
+import { useTheme } from "@/contexts/Theme";
 import { useFonts } from "expo-font";
 import { Tabs } from "expo-router";
 import React from "react";
 import { Image, Platform, StyleSheet, Text, View } from "react-native";
 
-const TabIcon = ({ focused, icon, title }: any) => {
+const TabIcon = ({ focused, icon, title, isDark }: any) => {
   return (
     <View style={styles.tabIconContainer}>
       {focused ? (
@@ -30,7 +31,7 @@ const TabIcon = ({ focused, icon, title }: any) => {
             style={{
               width: 24,
               height: 24,
-              tintColor: "#94a3b8",
+              tintColor: isDark ? "#6b7280" : "#94a3b8",
             }}
           />
         </View>
@@ -40,6 +41,7 @@ const TabIcon = ({ focused, icon, title }: any) => {
 };
 
 export default function Layout() {
+  const { isDark } = useTheme();
   const [fontsLoaded] = useFonts({
     MongolianBaiti: require("../../assets/fonts/mnglwhiteotf.ttf"),
   });
@@ -51,7 +53,7 @@ export default function Layout() {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: isDark ? "#1e293b" : "#fff",
           height: 70,
           paddingBottom: 8,
           paddingTop: 8,
@@ -61,7 +63,7 @@ export default function Layout() {
             ios: {
               shadowColor: "#000",
               shadowOffset: { width: 0, height: -2 },
-              shadowOpacity: 0.05,
+              shadowOpacity: isDark ? 0.3 : 0.05,
               shadowRadius: 8,
             },
             android: {
@@ -71,7 +73,7 @@ export default function Layout() {
         },
         tabBarBackground: () => (
           <View style={styles.tabBarBackground}>
-            <View style={styles.tabBarContent} />
+            <View style={[styles.tabBarContent, { backgroundColor: isDark ? "#1e293b" : "#fff" }]} />
           </View>
         ),
       }}
@@ -82,7 +84,7 @@ export default function Layout() {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="Нүүр" />
+            <TabIcon focused={focused} icon={icons.home} title="Нүүр" isDark={isDark} />
           ),
         }}
       />
@@ -92,7 +94,7 @@ export default function Layout() {
           title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.search} title="Хайлт" />
+            <TabIcon focused={focused} icon={icons.search} title="Хайлт" isDark={isDark} />
           ),
         }}
       />
@@ -102,7 +104,7 @@ export default function Layout() {
           title: "Translator",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.translator} title="Орчуулга" />
+            <TabIcon focused={focused} icon={icons.translator} title="Орчуулга" isDark={isDark} />
           ),
         }}
       />
@@ -112,7 +114,7 @@ export default function Layout() {
           title: "Predict",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.play} title="Бичлэг" />
+            <TabIcon focused={focused} icon={icons.play} title="Бичлэг" isDark={isDark} />
           ),
         }}
       />
@@ -172,7 +174,6 @@ const styles = StyleSheet.create({
   },
   tabBarContent: {
     flex: 1,
-    backgroundColor: "#fff",
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },

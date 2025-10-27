@@ -18,8 +18,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { useTheme } from "../../contexts/Theme";
 
 export default function PhotoPredictScreen() {
+  const { language, changeLanguage, t } = useLanguage();
+  const { isDark } = useTheme();
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [loading, setLoading] = useState(false);
@@ -329,8 +333,8 @@ export default function PhotoPredictScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+    <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
       <KeyboardAvoidingView 
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -340,28 +344,57 @@ export default function PhotoPredictScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* Header */}
-          <View style={styles.header}>
+          <View style={{
+            backgroundColor: isDark ? "#1e293b" : "#fff",
+            paddingTop: Platform.OS === "ios" ? 60 : 20,
+            paddingHorizontal: 24,
+            paddingBottom: 24,
+            borderBottomLeftRadius: 24,
+            borderBottomRightRadius: 24,
+            marginBottom: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            ...Platform.select({
+              ios: {
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: isDark ? 0.3 : 0.05,
+                shadowRadius: 8,
+              },
+              android: {
+                elevation: 3,
+              },
+            }),
+          }}>
             <View>
-              <Text style={styles.headerTitle}>Орчуулга</Text>
-              <Text style={styles.headerSubtitle}>Монгол бичиг ↔ Крилл</Text>
+              <Text style={{ fontSize: 32, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a", marginBottom: 4 }}>{t('translation')}</Text>
+              <Text style={{ fontSize: 15, color: isDark ? "#94a3b8" : "#64748b", fontWeight: "500" }}>Монгол бичиг ↔ Крилл</Text>
             </View>
-            <View style={styles.statusBadge}>
+            <View style={{
+              backgroundColor: isDark ? "#374151" : "#f1f5f9",
+              paddingHorizontal: 12,
+              paddingVertical: 6,
+              borderRadius: 12,
+              borderWidth: 1,
+              borderColor: isDark ? "#4b5563" : "#e2e8f0",
+            }}>
               {model ? (
-                <View style={styles.statusIndicator}>
-                  <View style={styles.statusDot} />
-                  <Text style={styles.statusText}>Model Ready</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: "#10b981" }} />
+                  <Text style={{ fontSize: 12, fontWeight: "600", color: "#10b981" }}>{t('model_ready')}</Text>
                 </View>
               ) : (
-                <Text style={styles.statusTextLoading}>Loading...</Text>
+                <Text style={{ fontSize: 12, fontWeight: "600", color: "#f59e0b" }}>{t('model_loading')}</Text>
               )}
             </View>
           </View>
 
           {/* Language Switch */}
           <View style={styles.langSwitchContainer}>
-            <View style={styles.langBox}>
-              <Text style={styles.langLabel}>FROM</Text>
-              <Text style={styles.langText}>{fromLang}</Text>
+            <View style={[styles.langBox, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}>
+              <Text style={[styles.langLabel, { color: isDark ? "#6b7280" : "#94a3b8" }]}>FROM</Text>
+              <Text style={[styles.langText, { color: isDark ? "#f8fafc" : "#1a1a1a" }]}>{fromLang}</Text>
             </View>
             <TouchableOpacity 
               onPress={swapLanguages}
@@ -370,22 +403,42 @@ export default function PhotoPredictScreen() {
             >
               <Ionicons name="swap-horizontal" size={32} color="#fff" />
             </TouchableOpacity>
-            <View style={styles.langBox}>
-              <Text style={styles.langLabel}>TO</Text>
-              <Text style={styles.langText}>{toLang}</Text>
+            <View style={[styles.langBox, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}>
+              <Text style={[styles.langLabel, { color: isDark ? "#6b7280" : "#94a3b8" }]}>TO</Text>
+              <Text style={[styles.langText, { color: isDark ? "#f8fafc" : "#1a1a1a" }]}>{toLang}</Text>
             </View>
           </View>
 
           {/* Input Text */}
           <View style={styles.inputContainer}>
             <View style={styles.inputHeader}>
-              <Text style={styles.inputLabel}>Input Text</Text>
-              <Text style={styles.inputHint}>Найраглаж бичээд үгүйг хувиргах</Text>
+              <Text style={{ fontSize: 16, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>{t('input_text')}</Text>
+              <Text style={{ fontSize: 12, color: isDark ? "#9ca3af" : "#94a3b8", fontWeight: "500" }}>Найраглаж бичээд үгүйг хувиргах</Text>
             </View>
             <TextInput
-              style={styles.textInput}
+              style={{
+                backgroundColor: isDark ? "#1e293b" : "#fff",
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: isDark ? "#374151" : "#e2e8f0",
+                padding: 16,
+                fontSize: 16,
+                color: isDark ? "#f8fafc" : "#1a1a1a",
+                minHeight: 120,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: isDark ? 0.3 : 0.05,
+                    shadowRadius: 4,
+                  },
+                  android: {
+                    elevation: 1,
+                  },
+                }),
+              }}
               placeholder="Enter text here..."
-              placeholderTextColor="#94a3b8"
+              placeholderTextColor={isDark ? "#6b7280" : "#94a3b8"}
               value={inputText}
               onChangeText={(text) => {
                 setInputText(text);
@@ -404,11 +457,31 @@ export default function PhotoPredictScreen() {
           {convertedText !== "" && (
             <View style={styles.inputContainer}>
               <View style={styles.inputHeader}>
-                <Text style={styles.inputLabel}>Converted Text</Text>
-                <Text style={styles.inputHint}>Editable result</Text>
+                <Text style={{ fontSize: 16, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>{t('output_text')}</Text>
+                <Text style={{ fontSize: 12, color: isDark ? "#9ca3af" : "#94a3b8", fontWeight: "500" }}>Editable result</Text>
               </View>
               <TextInput
-                style={[styles.textInput, styles.outputInput]}
+                style={{
+                  backgroundColor: isDark ? "#0f4c75" : "#f0f9ff",
+                  borderRadius: 16,
+                  borderWidth: 1,
+                  borderColor: isDark ? "#1e40af" : "#bae6fd",
+                  padding: 16,
+                  fontSize: 16,
+                  color: isDark ? "#f8fafc" : "#1a1a1a",
+                  minHeight: 120,
+                  ...Platform.select({
+                    ios: {
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: isDark ? 0.3 : 0.05,
+                      shadowRadius: 4,
+                    },
+                    android: {
+                      elevation: 1,
+                    },
+                  }),
+                }}
                 value={convertedText}
                 editable={true}
                 multiline
@@ -429,7 +502,7 @@ export default function PhotoPredictScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              style={styles.actionButton} 
+              style={[styles.actionButton, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]} 
               onPress={pickImage}
               activeOpacity={0.8}
             >
@@ -438,7 +511,7 @@ export default function PhotoPredictScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              style={styles.actionButton} 
+              style={[styles.actionButton, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]} 
               onPress={pickImage1}
               activeOpacity={0.8}
             >
@@ -708,7 +781,7 @@ const styles = StyleSheet.create({
     borderColor: "#6366f1",
   },
   buttonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "600",
     color: "#fff",
     marginTop: 6,

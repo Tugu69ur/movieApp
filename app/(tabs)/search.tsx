@@ -1,4 +1,11 @@
-import { BookOpen, Filter, Heart, Search, Sparkles, X } from "lucide-react-native";
+import {
+  BookOpen,
+  Filter,
+  Heart,
+  Search,
+  Sparkles,
+  X,
+} from "lucide-react-native";
 import React, { useState } from "react";
 import {
   Image,
@@ -11,25 +18,83 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { useTheme } from "../../contexts/Theme";
 
 export default function SearchScreen() {
+  const { t } = useLanguage();
+  const { isDark } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState<number[]>([]);
 
   const flashcards = [
-    { id: 1, title: "Ишиг", subtitle: "Goat", image: "https://picsum.photos/200/300?random=1", category: "Animals" },
-    { id: 2, title: "Чулуу", subtitle: "Stone", image: "https://picsum.photos/200/300?random=2", category: "Nature" },
-    { id: 3, title: "Зурагт", subtitle: "TV", image: "https://picsum.photos/200/300?random=3", category: "Technology" },
+    {
+      id: 1,
+      title: "Ишиг",
+      subtitle: "Goat",
+      image: "https://picsum.photos/200/300?random=1",
+      category: "Animals",
+    },
+    {
+      id: 2,
+      title: "Чулуу",
+      subtitle: "Stone",
+      image: "https://picsum.photos/200/300?random=2",
+      category: "Nature",
+    },
+    {
+      id: 3,
+      title: "Зурагт",
+      subtitle: "TV",
+      image: "https://picsum.photos/200/300?random=3",
+      category: "Technology",
+    },
   ];
   const flashcards2 = [
-    { id: 7, title: "Тэмээ", subtitle: "Camel", image: "https://picsum.photos/200/300?random=7", category: "Animals" },
-    { id: 8, title: "Мод", subtitle: "Tree", image: "https://picsum.photos/200/300?random=8", category: "Nature" },
-    { id: 9, title: "Гэр", subtitle: "Home", image: "https://picsum.photos/200/300?random=9", category: "Places" },
+    {
+      id: 7,
+      title: "Тэмээ",
+      subtitle: "Camel",
+      image: "https://picsum.photos/200/300?random=7",
+      category: "Animals",
+    },
+    {
+      id: 8,
+      title: "Мод",
+      subtitle: "Tree",
+      image: "https://picsum.photos/200/300?random=8",
+      category: "Nature",
+    },
+    {
+      id: 9,
+      title: "Гэр",
+      subtitle: "Home",
+      image: "https://picsum.photos/200/300?random=9",
+      category: "Places",
+    },
   ];
   const flashcards3 = [
-    { id: 10, title: "Computer", subtitle: "Компьютер", image: "https://picsum.photos/200/300?random=10", category: "Technology" },
-    { id: 11, title: "Phone", subtitle: "Утас", image: "https://picsum.photos/200/300?random=11", category: "Technology" },
-    { id: 12, title: "Table", subtitle: "Ширээ", image: "https://picsum.photos/200/300?random=12", category: "Furniture" },
+    {
+      id: 10,
+      title: "Computer",
+      subtitle: "Компьютер",
+      image: "https://picsum.photos/200/300?random=10",
+      category: "Technology",
+    },
+    {
+      id: 11,
+      title: "Phone",
+      subtitle: "Утас",
+      image: "https://picsum.photos/200/300?random=11",
+      category: "Technology",
+    },
+    {
+      id: 12,
+      title: "Table",
+      subtitle: "Ширээ",
+      image: "https://picsum.photos/200/300?random=12",
+      category: "Furniture",
+    },
   ];
 
   const toggleFavorite = (id: number) => {
@@ -38,29 +103,83 @@ export default function SearchScreen() {
     );
   };
 
-  const SectionHeader = ({ icon: Icon, iconColor, title, bgColor }: { 
-    icon: React.ElementType; 
-    iconColor: string; 
-    title: string; 
+  const SectionHeader = ({
+    icon: Icon,
+    iconColor,
+    title,
+    bgColor,
+  }: {
+    icon: React.ElementType;
+    iconColor: string;
+    title: string;
     bgColor: string;
   }) => (
     <View style={styles.sectionHeader}>
       <View style={[styles.sectionIcon, { backgroundColor: bgColor }]}>
         <Icon color={iconColor} size={22} />
       </View>
-      <Text style={styles.sectionTitle}>{title}</Text>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: "700",
+          color: isDark ? "#f8fafc" : "#1a1a1a",
+        }}
+      >
+        {title}
+      </Text>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      
+    <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+
       {/* Header */}
-      <View style={styles.header}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingTop: Platform.OS === "ios" ? 60 : 20,
+          paddingHorizontal: 24,
+          paddingBottom: 20,
+          backgroundColor: isDark ? "#1e293b" : "#fff",
+          borderBottomLeftRadius: 24,
+          borderBottomRightRadius: 24,
+          marginBottom: 20,
+          ...Platform.select({
+            ios: {
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: isDark ? 0.3 : 0.05,
+              shadowRadius: 8,
+            },
+            android: {
+              elevation: 3,
+            },
+          }),
+        }}
+      >
         <View>
-          <Text style={styles.headerTitle}>Хайлт</Text>
-          <Text style={styles.headerSubtitle}>Discover new words</Text>
+          <Text
+            style={{
+              fontSize: 28,
+              fontWeight: "700",
+              color: isDark ? "#f8fafc" : "#1a1a1a",
+              marginBottom: 4,
+            }}
+          >
+            {t("search")}
+          </Text>
+          <Text
+            style={{
+              fontSize: 15,
+              color: isDark ? "#94a3b8" : "#666",
+              fontWeight: "500",
+            }}
+          >
+            Discover new words
+          </Text>
         </View>
         <View style={styles.profileContainer}>
           <View style={styles.profileBadge}>
@@ -71,55 +190,83 @@ export default function SearchScreen() {
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <Search color="#64748b" size={22} />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: isDark ? "#374151" : "#f1f5f9",
+            borderRadius: 16,
+            paddingVertical: 14,
+            paddingHorizontal: 18,
+            borderWidth: 1,
+            borderColor: isDark ? "#4b5563" : "#e2e8f0",
+            height: 48,
+          }}
+        >
+          <Search color={isDark ? "#9ca3af" : "#64748b"} size={22} />
           <TextInput
-            placeholder="Search flashcards..."
+            placeholder={t("search_hint")}
             value={searchQuery}
             onChangeText={setSearchQuery}
-            style={styles.searchInput}
-            placeholderTextColor="#94a3b8"
+            style={{
+              flex: 1,
+              marginLeft: 12,
+              color: isDark ? "#f8fafc" : "#1a1a1a",
+              fontSize: 15,
+              fontWeight: "500",
+            }}
+            placeholderTextColor={isDark ? "#9ca3af" : "#94a3b8"}
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={() => setSearchQuery("")}>
               <View style={styles.closeButton}>
-                <X color="#94a3b8" size={16} />
+                <X color={isDark ? "#9ca3af" : "#94a3b8"} size={16} />
               </View>
             </TouchableOpacity>
           )}
           <TouchableOpacity>
-            <View style={styles.filterButton}>
+            <View
+              style={{
+                backgroundColor: isDark ? "#1e293b" : "#fff",
+                padding: 8,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: isDark ? "#4b5563" : "#e2e8f0",
+              }}
+            >
               <Filter color="#6366f1" size={18} />
             </View>
           </TouchableOpacity>
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
       >
         {/* Category Pills */}
         <View style={styles.categoryContainer}>
           <View style={[styles.categoryPill, styles.categoryPillActive]}>
-            <Text style={[styles.categoryText, styles.categoryTextActive]}>All</Text>
+            <Text style={[styles.categoryText, styles.categoryTextActive]}>
+              {t("all")}
+            </Text>
           </View>
           <View style={styles.categoryPill}>
-            <Text style={styles.categoryText}>Animals</Text>
+            <Text style={styles.categoryText}>{t("animals")}</Text>
           </View>
           <View style={styles.categoryPill}>
-            <Text style={styles.categoryText}>Nature</Text>
+            <Text style={styles.categoryText}>{t("nature")}</Text>
           </View>
           <View style={styles.categoryPill}>
-            <Text style={styles.categoryText}>Tech</Text>
+            <Text style={styles.categoryText}>{t("tech")}</Text>
           </View>
         </View>
 
         {/* Section 1 */}
-        <SectionHeader 
-          icon={BookOpen} 
-          iconColor="#3b82f6" 
-          title="Өдөр тутмын үгс" 
+        <SectionHeader
+          icon={BookOpen}
+          iconColor="#3b82f6"
+          title="Өдөр тутмын үгс"
           bgColor="#dbeafe"
         />
         <ScrollView
@@ -130,7 +277,28 @@ export default function SearchScreen() {
           {flashcards.map((card) => (
             <TouchableOpacity
               key={card.id}
-              style={styles.card}
+              style={{
+                width: 160,
+                height: 200,
+                borderRadius: 20,
+                backgroundColor: isDark ? "#1e293b" : "#fff",
+                marginRight: 16,
+                overflow: "hidden",
+                borderWidth: 1,
+                borderColor: isDark ? "#374151" : "#e2e8f0",
+                position: "relative",
+                ...Platform.select({
+                  ios: {
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.1,
+                    shadowRadius: 12,
+                  },
+                  android: {
+                    elevation: 4,
+                  },
+                }),
+              }}
               onPress={() => console.log("Pressed:", card.title)}
               activeOpacity={0.9}
             >
@@ -139,7 +307,7 @@ export default function SearchScreen() {
               <TouchableOpacity
                 style={[
                   styles.heartIcon,
-                  favorites.includes(card.id) && styles.heartIconActive
+                  favorites.includes(card.id) && styles.heartIconActive,
                 ]}
                 onPress={() => toggleFavorite(card.id)}
               >
@@ -150,7 +318,14 @@ export default function SearchScreen() {
                 />
               </TouchableOpacity>
               <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>{card.title}</Text>
+                <Text
+                  style={[
+                    styles.cardTitle,
+                    { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                  ]}
+                >
+                  {card.title}
+                </Text>
                 <Text style={styles.cardSubtitle}>{card.subtitle}</Text>
               </View>
             </TouchableOpacity>
@@ -158,10 +333,10 @@ export default function SearchScreen() {
         </ScrollView>
 
         {/* Section 2 */}
-        <SectionHeader 
-          icon={Sparkles} 
-          iconColor="#a855f7" 
-          title="Өвөрмөц бичлэгтэй үгс" 
+        <SectionHeader
+          icon={Sparkles}
+          iconColor="#a855f7"
+          title="Өвөрмөц бичлэгтэй үгс"
           bgColor="#f3e8ff"
         />
         <ScrollView
@@ -172,7 +347,13 @@ export default function SearchScreen() {
           {flashcards2.map((card) => (
             <TouchableOpacity
               key={card.id}
-              style={styles.card}
+              style={[
+                styles.card,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
               activeOpacity={0.9}
             >
               <Image source={{ uri: card.image }} style={styles.cardImage} />
@@ -180,7 +361,7 @@ export default function SearchScreen() {
               <TouchableOpacity
                 style={[
                   styles.heartIcon,
-                  favorites.includes(card.id) && styles.heartIconActive
+                  favorites.includes(card.id) && styles.heartIconActive,
                 ]}
                 onPress={() => toggleFavorite(card.id)}
               >
@@ -191,7 +372,14 @@ export default function SearchScreen() {
                 />
               </TouchableOpacity>
               <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>{card.title}</Text>
+                <Text
+                  style={[
+                    styles.cardTitle,
+                    { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                  ]}
+                >
+                  {card.title}
+                </Text>
                 <Text style={styles.cardSubtitle}>{card.subtitle}</Text>
               </View>
             </TouchableOpacity>
@@ -199,10 +387,10 @@ export default function SearchScreen() {
         </ScrollView>
 
         {/* Section 3 */}
-        <SectionHeader 
-          icon={BookOpen} 
-          iconColor="#f59e0b" 
-          title="Гадаад үгс" 
+        <SectionHeader
+          icon={BookOpen}
+          iconColor="#f59e0b"
+          title="Гадаад үгс"
           bgColor="#fef3c7"
         />
         <ScrollView
@@ -213,7 +401,13 @@ export default function SearchScreen() {
           {flashcards3.map((card) => (
             <TouchableOpacity
               key={card.id}
-              style={styles.card}
+              style={[
+                styles.card,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
               activeOpacity={0.9}
             >
               <Image source={{ uri: card.image }} style={styles.cardImage} />
@@ -221,7 +415,7 @@ export default function SearchScreen() {
               <TouchableOpacity
                 style={[
                   styles.heartIcon,
-                  favorites.includes(card.id) && styles.heartIconActive
+                  favorites.includes(card.id) && styles.heartIconActive,
                 ]}
                 onPress={() => toggleFavorite(card.id)}
               >
@@ -232,7 +426,14 @@ export default function SearchScreen() {
                 />
               </TouchableOpacity>
               <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>{card.title}</Text>
+                <Text
+                  style={[
+                    styles.cardTitle,
+                    { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                  ]}
+                >
+                  {card.title}
+                </Text>
                 <Text style={styles.cardSubtitle}>{card.subtitle}</Text>
               </View>
             </TouchableOpacity>
@@ -312,7 +513,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderWidth: 1,
     borderColor: "#e2e8f0",
-    height: 48
+    height: 48,
   },
   searchInput: {
     flex: 1,

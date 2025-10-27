@@ -17,8 +17,12 @@ import {
 } from 'react-native';
 import Svg, { Path, Rect } from "react-native-svg";
 import ViewShot, { captureRef } from "react-native-view-shot";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { useTheme } from "../../contexts/Theme";
 
 export default function DrawScreen() {
+  const { t } = useLanguage();
+  const { isDark } = useTheme();
   const [paths, setPaths] = useState<string[]>([]);
   const [currentPath, setCurrentPath] = useState<string>("");
   const [savedBase64, setSavedBase64] = useState<string | null>(null);
@@ -192,23 +196,55 @@ export default function DrawScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+    <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={styles.header}>
+        <View style={{
+          backgroundColor: isDark ? "#1e293b" : "#fff",
+          paddingTop: Platform.OS === "ios" ? 60 : 20,
+          paddingHorizontal: 24,
+          paddingBottom: 24,
+          borderBottomLeftRadius: 24,
+          borderBottomRightRadius: 24,
+          marginBottom: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          ...Platform.select({
+            ios: {
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: isDark ? 0.3 : 0.05,
+              shadowRadius: 8,
+            },
+            android: {
+              elevation: 3,
+            },
+          }),
+        }}>
           <View>
-            <Text style={styles.headerTitle}>Гар бичмэл таних</Text>
-            <Text style={styles.headerSubtitle}>Монгол бичиг зурах</Text>
+            <Text style={{ fontSize: 28, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a", marginBottom: 4 }}>{t('handwritten')}</Text>
+            <Text style={{ fontSize: 15, color: isDark ? "#94a3b8" : "#64748b", fontWeight: "500" }}>Монгол бичиг зурах</Text>
           </View>
           <View style={styles.statusContainer}>
             {modelRef.current ? (
-              <View style={styles.statusBadge}>
+              <View style={{
+                backgroundColor: isDark ? "#374151" : "#f1f5f9",
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                borderRadius: 12,
+                borderWidth: 1,
+                borderColor: isDark ? "#4b5563" : "#e2e8f0",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 6,
+              }}>
                 <View style={styles.statusDot} />
-                <Text style={styles.statusText}>Ready</Text>
+                <Text style={styles.statusText}>{t('model_ready')}</Text>
               </View>
             ) : (
-              <Text style={styles.statusTextLoading}>Loading...</Text>
+              <Text style={styles.statusTextLoading}>{t('model_loading')}</Text>
             )}
           </View>
         </View>
@@ -216,10 +252,10 @@ export default function DrawScreen() {
         {/* Canvas */}
         <View style={styles.canvasSection}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Зурах хэсэг</Text>
+            <Text style={{ fontSize: 18, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>{t('drawing_canvas')}</Text>
             <TouchableOpacity onPress={clearCanvas} style={styles.clearButton}>
               <Ionicons name="trash-outline" size={20} color="#ef4444" />
-              <Text style={styles.clearText}>Цэвэрлэх</Text>
+              <Text style={styles.clearText}>{t('clear')}</Text>
             </TouchableOpacity>
           </View>
           
@@ -242,7 +278,7 @@ export default function DrawScreen() {
             activeOpacity={0.8}
           >
             <MaterialIcons name="gesture" size={20} color="#fff" />
-            <Text style={styles.finishButtonText}>Дуусгах</Text>
+            <Text style={styles.finishButtonText}>{t('finish_stroke')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -279,9 +315,17 @@ export default function DrawScreen() {
 
         {/* Preview */}
         {savedBase64 && (
-          <View style={styles.previewContainer}>
+          <View style={{
+            marginHorizontal: 24,
+            marginBottom: 24,
+            backgroundColor: isDark ? "#1e293b" : "#fff",
+            borderRadius: 16,
+            padding: 16,
+            borderWidth: 1,
+            borderColor: isDark ? "#374151" : "#e2e8f0",
+          }}>
             <View style={styles.previewHeader}>
-              <Text style={styles.previewTitle}>Captured Image</Text>
+              <Text style={{ fontSize: 16, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>Captured Image</Text>
               <TouchableOpacity onPress={() => setSavedBase64(null)}>
                 <Ionicons name="close-circle-outline" size={24} color="#64748b" />
               </TouchableOpacity>
@@ -295,12 +339,31 @@ export default function DrawScreen() {
 
         {/* Prediction Result */}
         {prediction && !loading && (
-          <View style={styles.resultContainer}>
+          <View style={{
+            marginHorizontal: 24,
+            marginBottom: 24,
+            backgroundColor: isDark ? "#1e293b" : "#fff",
+            borderRadius: 16,
+            padding: 20,
+            borderWidth: 1,
+            borderColor: "#10b981",
+            ...Platform.select({
+              ios: {
+                shadowColor: "#10b981",
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: isDark ? 0.3 : 0.1,
+                shadowRadius: 8,
+              },
+              android: {
+                elevation: 4,
+              },
+            }),
+          }}>
             <View style={styles.resultHeader}>
               <Ionicons name="checkmark-circle" size={28} color="#10b981" />
-              <Text style={styles.resultTitle}>Prediction Result</Text>
+              <Text style={{ fontSize: 18, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>Prediction Result</Text>
             </View>
-            <Text style={styles.resultText}>{prediction}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "600", color: isDark ? "#cbd5e1" : "#334155" }}>{prediction}</Text>
           </View>
         )}
 
