@@ -247,7 +247,8 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch("http://192.168.1.19:8000/ocr", {
+    //  const response = await fetch("http://192.168.1.7:8000/ocr", {
+        const response = await fetch("http://192.168.1.19:8000/ocr", {
         method: "POST",
         body: formData,
         // ⚠️ Битгий Content-Type зааж өг
