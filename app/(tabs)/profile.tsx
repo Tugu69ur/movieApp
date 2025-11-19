@@ -247,8 +247,8 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-    //  const response = await fetch("http://192.168.1.7:8000/ocr", {
-        const response = await fetch("http://192.168.1.19:8000/ocr", {
+      const response = await fetch("http://172.20.10.2:8000/ocr", {
+        //    const response = await fetch("http://192.168.1.19:8000/ocr", {
         method: "POST",
         body: formData,
         // ⚠️ Битгий Content-Type зааж өг
@@ -328,7 +328,7 @@ export default function PhotoPredictScreen() {
       // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
       const converted = await convertText(text, "Монгол бичиг", "Крилл");
       setConvertedText(converted);
-      } catch (err) {
+    } catch (err) {
       console.error("Camera error:", err);
     }
   };
@@ -336,85 +336,187 @@ export default function PhotoPredictScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
           {/* Header */}
-          <View style={{
-            backgroundColor: isDark ? "#1e293b" : "#fff",
-            paddingTop: Platform.OS === "ios" ? 60 : 20,
-            paddingHorizontal: 24,
-            paddingBottom: 24,
-            borderBottomLeftRadius: 24,
-            borderBottomRightRadius: 24,
-            marginBottom: 20,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            ...Platform.select({
-              ios: {
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: isDark ? 0.3 : 0.05,
-                shadowRadius: 8,
-              },
-              android: {
-                elevation: 3,
-              },
-            }),
-          }}>
+          <View
+            style={{
+              backgroundColor: isDark ? "#1e293b" : "#fff",
+              paddingTop: Platform.OS === "ios" ? 60 : 20,
+              paddingHorizontal: 24,
+              paddingBottom: 24,
+              borderBottomLeftRadius: 24,
+              borderBottomRightRadius: 24,
+              marginBottom: 20,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              ...Platform.select({
+                ios: {
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: isDark ? 0.3 : 0.05,
+                  shadowRadius: 8,
+                },
+                android: {
+                  elevation: 3,
+                },
+              }),
+            }}
+          >
             <View>
-              <Text style={{ fontSize: 32, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a", marginBottom: 4 }}>{t('translation')}</Text>
-              <Text style={{ fontSize: 15, color: isDark ? "#94a3b8" : "#64748b", fontWeight: "500" }}>Монгол бичиг ↔ Крилл</Text>
+              <Text
+                style={{
+                  fontSize: 32,
+                  fontWeight: "700",
+                  color: isDark ? "#f8fafc" : "#1a1a1a",
+                  marginBottom: 4,
+                }}
+              >
+                {t("translation")}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: isDark ? "#94a3b8" : "#64748b",
+                  fontWeight: "500",
+                }}
+              >
+                Монгол бичиг ↔ Крилл
+              </Text>
             </View>
-            <View style={{
-              backgroundColor: isDark ? "#374151" : "#f1f5f9",
-              paddingHorizontal: 12,
-              paddingVertical: 6,
-              borderRadius: 12,
-              borderWidth: 1,
-              borderColor: isDark ? "#4b5563" : "#e2e8f0",
-            }}>
+            <View
+              style={{
+                backgroundColor: isDark ? "#374151" : "#f1f5f9",
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                borderRadius: 12,
+                borderWidth: 1,
+                borderColor: isDark ? "#4b5563" : "#e2e8f0",
+              }}
+            >
               {model ? (
-                <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: "#10b981" }} />
-                  <Text style={{ fontSize: 12, fontWeight: "600", color: "#10b981" }}>{t('model_ready')}</Text>
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
+                >
+                  <View
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      backgroundColor: "#10b981",
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: "600",
+                      color: "#10b981",
+                    }}
+                  >
+                    {t("model_ready")}
+                  </Text>
                 </View>
               ) : (
-                <Text style={{ fontSize: 12, fontWeight: "600", color: "#f59e0b" }}>{t('model_loading')}</Text>
+                <Text
+                  style={{ fontSize: 12, fontWeight: "600", color: "#f59e0b" }}
+                >
+                  {t("model_loading")}
+                </Text>
               )}
             </View>
           </View>
 
           {/* Language Switch */}
           <View style={styles.langSwitchContainer}>
-            <View style={[styles.langBox, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}>
-              <Text style={[styles.langLabel, { color: isDark ? "#6b7280" : "#94a3b8" }]}>FROM</Text>
-              <Text style={[styles.langText, { color: isDark ? "#f8fafc" : "#1a1a1a" }]}>{fromLang}</Text>
+            <View
+              style={[
+                styles.langBox,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.langLabel,
+                  { color: isDark ? "#6b7280" : "#94a3b8" },
+                ]}
+              >
+                FROM
+              </Text>
+              <Text
+                style={[
+                  styles.langText,
+                  { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                ]}
+              >
+                {fromLang}
+              </Text>
             </View>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={swapLanguages}
               style={styles.swapButton}
               activeOpacity={0.7}
             >
               <Ionicons name="swap-horizontal" size={32} color="#fff" />
             </TouchableOpacity>
-            <View style={[styles.langBox, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}>
-              <Text style={[styles.langLabel, { color: isDark ? "#6b7280" : "#94a3b8" }]}>TO</Text>
-              <Text style={[styles.langText, { color: isDark ? "#f8fafc" : "#1a1a1a" }]}>{toLang}</Text>
+            <View
+              style={[
+                styles.langBox,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.langLabel,
+                  { color: isDark ? "#6b7280" : "#94a3b8" },
+                ]}
+              >
+                TO
+              </Text>
+              <Text
+                style={[
+                  styles.langText,
+                  { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                ]}
+              >
+                {toLang}
+              </Text>
             </View>
           </View>
 
           {/* Input Text */}
           <View style={styles.inputContainer}>
             <View style={styles.inputHeader}>
-              <Text style={{ fontSize: 16, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>{t('input_text')}</Text>
-              <Text style={{ fontSize: 12, color: isDark ? "#9ca3af" : "#94a3b8", fontWeight: "500" }}>Найраглаж бичээд үгүйг хувиргах</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "700",
+                  color: isDark ? "#f8fafc" : "#1a1a1a",
+                }}
+              >
+                {t("input_text")}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: isDark ? "#9ca3af" : "#94a3b8",
+                  fontWeight: "500",
+                }}
+              >
+                Найраглаж бичээд үгүйг хувиргах
+              </Text>
             </View>
             <TextInput
               style={{
@@ -458,8 +560,24 @@ export default function PhotoPredictScreen() {
           {convertedText !== "" && (
             <View style={styles.inputContainer}>
               <View style={styles.inputHeader}>
-                <Text style={{ fontSize: 16, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a" }}>{t('output_text')}</Text>
-                <Text style={{ fontSize: 12, color: isDark ? "#9ca3af" : "#94a3b8", fontWeight: "500" }}>Editable result</Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "700",
+                    color: isDark ? "#f8fafc" : "#1a1a1a",
+                  }}
+                >
+                  {t("output_text")}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: isDark ? "#9ca3af" : "#94a3b8",
+                    fontWeight: "500",
+                  }}
+                >
+                  Editable result
+                </Text>
               </View>
               <TextInput
                 style={{
@@ -493,31 +611,51 @@ export default function PhotoPredictScreen() {
 
           {/* Action Buttons */}
           <View style={styles.actionButtons}>
-            <TouchableOpacity 
-              style={[styles.actionButton, styles.primaryButton]} 
+            <TouchableOpacity
+              style={[styles.actionButton, styles.primaryButton]}
               onPress={takePhoto}
               activeOpacity={0.8}
             >
-              <MaterialCommunityIcons name="camera-outline" size={24} color="#fff" />
+              <MaterialCommunityIcons
+                name="camera-outline"
+                size={24}
+                color="#fff"
+              />
               <Text style={styles.buttonText}>Camera</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={[styles.actionButton, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]} 
+            <TouchableOpacity
+              style={[
+                styles.actionButton,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
               onPress={pickImage}
               activeOpacity={0.8}
             >
               <Ionicons name="image-outline" size={24} color="#6366f1" />
-              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>Handwritten</Text>
+              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>
+                Handwritten
+              </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={[styles.actionButton, { backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]} 
+            <TouchableOpacity
+              style={[
+                styles.actionButton,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#fff",
+                  borderColor: isDark ? "#374151" : "#e2e8f0",
+                },
+              ]}
               onPress={pickImage1}
               activeOpacity={0.8}
             >
               <Ionicons name="scan-outline" size={24} color="#6366f1" />
-              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>OCR Scan</Text>
+              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>
+                OCR Scan
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -527,7 +665,11 @@ export default function PhotoPredictScreen() {
               <View style={styles.imagePreviewHeader}>
                 <Text style={styles.imagePreviewTitle}>Preview</Text>
                 <TouchableOpacity onPress={() => setImageUri(null)}>
-                  <Ionicons name="close-circle-outline" size={24} color="#64748b" />
+                  <Ionicons
+                    name="close-circle-outline"
+                    size={24}
+                    color="#64748b"
+                  />
                 </TouchableOpacity>
               </View>
               <Image
@@ -561,7 +703,12 @@ export default function PhotoPredictScreen() {
                     <Text style={styles.probValue}>{prob.toFixed(2)}%</Text>
                   </View>
                   <View style={styles.probBarContainer}>
-                    <View style={[styles.probBar, { width: `${Math.min(prob, 100)}%` }]} />
+                    <View
+                      style={[
+                        styles.probBar,
+                        { width: `${Math.min(prob, 100)}%` },
+                      ]}
+                    />
                   </View>
                 </View>
               )}

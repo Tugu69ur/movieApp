@@ -198,7 +198,7 @@ export default function DrawScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={true}>
         {/* Header */}
         <View style={{
           backgroundColor: isDark ? "#1e293b" : "#fff",
