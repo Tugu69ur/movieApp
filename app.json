@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Tugu Translate",
-    "slug": "movieApp",
+    "slug": "Eguu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/eguu.png",
@@ -31,6 +31,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-notifications",
       [
         "expo-splash-screen",
         {

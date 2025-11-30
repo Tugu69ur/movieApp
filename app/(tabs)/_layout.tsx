@@ -73,7 +73,12 @@ export default function Layout() {
         },
         tabBarBackground: () => (
           <View style={styles.tabBarBackground}>
-            <View style={[styles.tabBarContent, { backgroundColor: isDark ? "#1e293b" : "#fff" }]} />
+            <View
+              style={[
+                styles.tabBarContent,
+                { backgroundColor: isDark ? "#1e293b" : "#fff" },
+              ]}
+            />
           </View>
         ),
       }}
@@ -84,7 +89,12 @@ export default function Layout() {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="Нүүр" isDark={isDark} />
+            <TabIcon
+              focused={focused}
+              icon={icons.home}
+              title="Нүүр"
+              isDark={isDark}
+            />
           ),
         }}
       />
@@ -94,17 +104,27 @@ export default function Layout() {
           title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.search} title="Хайлт" isDark={isDark} />
+            <TabIcon
+              focused={focused}
+              icon={icons.search}
+              title="Хайлт"
+              isDark={isDark}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="prediction"
         options={{
-          title: "Translator",
+          title: "Prediction",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.translator} title="Орчуулга" isDark={isDark} />
+            <TabIcon
+              focused={focused}
+              icon={icons.translator}
+              title="Орчуулга"
+              isDark={isDark}
+            />
           ),
         }}
       />
@@ -114,7 +134,27 @@ export default function Layout() {
           title: "Predict",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.play} title="Бичлэг" isDark={isDark} />
+            <TabIcon
+              focused={focused}
+              icon={icons.play}
+              title="Бичлэг"
+              isDark={isDark}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Translator",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon
+              focused={focused}
+              icon={icons.person}
+              title="Орчуулга"
+              isDark={isDark}
+            />
           ),
         }}
       />
