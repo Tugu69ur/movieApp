@@ -77,7 +77,7 @@ export default function SecurityPrivacyScreen() {
                                 className="flex-row items-center p-4 border-b border-neutral-100 dark:border-neutral-700"
                             >
                                 <View className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-full items-center justify-center mr-4">
-                                    <Key size={20} className="text-orange-600 dark:text-orange-400" color={isDark ? "#fff" : "#ea580c"} />
+                                    <Key size={20} className="text-orange-600 dark:text-orange-400" color={isDark ? "#fb923c" : "#ea580c"} />
                                 </View>
                                 <View className="flex-1">
                                     <Text className="text-base font-semibold text-neutral-800 dark:text-white">
@@ -87,13 +87,13 @@ export default function SecurityPrivacyScreen() {
                                         Update your password regularly
                                     </Text>
                                 </View>
-                                <ChevronRight size={20} className="text-neutral-400" />
+                                <ChevronRight size={20} className="text-neutral-400" color={isDark ? "#a3a3a3" : "#a3a3a3"} />
                             </TouchableOpacity>
 
                             {/* Biometric Login */}
                             <View className="flex-row items-center p-4">
                                 <View className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full items-center justify-center mr-4">
-                                    <Smartphone size={20} className="text-purple-600 dark:text-purple-400" color={isDark ? "#fff" : "#ea580c"} />
+                                    <Smartphone size={20} className="text-purple-600 dark:text-purple-400" color={isDark ? "#a855f7" : "#9333ea"} />
                                 </View>
                                 <View className="flex-1">
                                     <Text className="text-base font-semibold text-neutral-800 dark:text-white">
@@ -124,7 +124,7 @@ export default function SecurityPrivacyScreen() {
                             {/* Privacy Policy */}
                             <TouchableOpacity className="flex-row items-center p-4 border-b border-neutral-100 dark:border-neutral-700">
                                 <View className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full items-center justify-center mr-4">
-                                    <Shield size={20} className="text-blue-600 dark:text-blue-400" color={isDark ? "#fff" : "#ea580c"} />
+                                    <Shield size={20} className="text-blue-600 dark:text-blue-400" color={isDark ? "#60a5fa" : "#2563eb"} />
                                 </View>
                                 <View className="flex-1">
                                     <Text className="text-base font-semibold text-neutral-800 dark:text-white">
@@ -134,13 +134,13 @@ export default function SecurityPrivacyScreen() {
                                         Read our terms and conditions
                                     </Text>
                                 </View>
-                                <ChevronRight size={20} className="text-neutral-400" color={isDark ? "#fff" : "#ea580c"} />
+                                <ChevronRight size={20} className="text-neutral-400" color={isDark ? "#a3a3a3" : "#a3a3a3"} />
                             </TouchableOpacity>
 
                             {/* Data Usage */}
                             <TouchableOpacity className="flex-row items-center p-4">
                                 <View className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-full items-center justify-center mr-4">
-                                    <Lock size={20} className="text-emerald-600 dark:text-emerald-400" color={isDark ? "#fff" : "#ea580c"} />
+                                    <Lock size={20} className="text-emerald-600 dark:text-emerald-400" color={isDark ? "#34d399" : "#059669"} />
                                 </View>
                                 <View className="flex-1">
                                     <Text className="text-base font-semibold text-neutral-800 dark:text-white">
@@ -150,7 +150,7 @@ export default function SecurityPrivacyScreen() {
                                         Manage how your data is used
                                     </Text>
                                 </View>
-                                <ChevronRight size={20} className="text-neutral-400" color={isDark ? "#fff" : "#ea580c"} />
+                                <ChevronRight size={20} className="text-neutral-400" color={isDark ? "#a3a3a3" : "#a3a3a3"} />
                             </TouchableOpacity>
                         </View>
                     </View>

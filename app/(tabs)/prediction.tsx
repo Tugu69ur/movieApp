@@ -247,7 +247,7 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch("http://172.20.10.4:8000/ocr", {
+      const response = await fetch("http://192.168.1.5:8000/ocr", {
         //    const response = await fetch("http://192.168.1.19:8000/ocr", {
         method: "POST",
         body: formData,

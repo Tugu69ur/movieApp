@@ -1,4 +1,5 @@
 import {
+    addDoc,
     arrayRemove,
     arrayUnion,
     collection,
@@ -12,6 +13,7 @@ import {
     where
 } from 'firebase/firestore';
 import { db } from '../FirebaseConfig';
+
 
 export interface Category {
     id: string;
@@ -191,6 +193,28 @@ export const FlashcardService = {
             console.error("Error updating streak:", err);
         }
     },
+    async addFlashcard(card: Omit<Flashcard, "id">): Promise<string | null> {
+        try {
+            const ref = await addDoc(collection(db, "flashcards"), card);
+            console.log("Flashcard added:", ref.id);
+            return ref.id;
+        } catch (err) {
+            console.error("Error adding flashcard:", err);
+            return null;
+        }
+    },
+    async addManyFlashcards(cards: Omit<Flashcard, "id">[]) {
+        try {
+            for (const card of cards) {
+                await addDoc(collection(db, "flashcards"), card);
+            }
+            console.log("Bulk flashcards added");
+        } catch (err) {
+            console.error("Bulk add error:", err);
+        }
+    },
+
+
 
     async getDailyWords(userId: string): Promise<Flashcard[]> {
         try {
@@ -206,22 +230,46 @@ export const FlashcardService = {
             const lastDateDay = data.dailyWordsDate?.toDate();
             const isNewDay = !lastDateDay || new Date(lastDateDay.getFullYear(), lastDateDay.getMonth(), lastDateDay.getDate()).getTime() !== today.getTime();
 
-            if (isNewDay || dailyWordIds.length === 0) {
+            let shouldRefresh = isNewDay || dailyWordIds.length === 0;
+
+            // First attempt to get cards
+            let result: Flashcard[] = [];
+
+            // If we have IDs and it's not a new day, try to fetch them
+            if (!shouldRefresh) {
+                for (const id of dailyWordIds) {
+                    const card = await this.getFlashcardById(id);
+                    if (card) result.push(card);
+                }
+
+                // If we found fewer cards than expected (e.g. some were deleted), force refresh
+                if (result.length < dailyWordIds.length) {
+                    shouldRefresh = true;
+                    result = []; // Clear partial results
+                }
+            }
+
+            if (shouldRefresh) {
                 const snap = await getDocs(collection(db, 'flashcards'));
                 const allIds = snap.docs.map(d => d.id);
-                dailyWordIds = allIds.sort(() => Math.random() - 0.5).slice(0, 3);
 
-                await updateDoc(userRef, {
-                    dailyWords: dailyWordIds,
-                    dailyWordsDate: Timestamp.fromDate(now)
-                });
+                if (allIds.length > 0) {
+                    dailyWordIds = allIds.sort(() => Math.random() - 0.5).slice(0, 3);
+
+                    await updateDoc(userRef, {
+                        dailyWords: dailyWordIds,
+                        dailyWordsDate: Timestamp.fromDate(now)
+                    });
+
+                    // Fetch the new cards
+                    result = [];
+                    for (const id of dailyWordIds) {
+                        const card = await this.getFlashcardById(id);
+                        if (card) result.push(card);
+                    }
+                }
             }
 
-            const result: Flashcard[] = [];
-            for (const id of dailyWordIds) {
-                const card = await this.getFlashcardById(id);
-                if (card) result.push(card);
-            }
             return result;
         } catch (err) {
             console.error("Error getting daily words:", err);
@@ -237,36 +285,79 @@ export const FlashcardService = {
             "pig.png": require("../assets/images/Animals/pig.jpg"),
             "horse.png": require("../assets/images/Animals/horse.jpg"),
             "bird.png": require("../assets/images/Animals/shuvuu.jpg"),
+            "cow.png": require("../assets/images/Animals/cow.jpg"),
+            "sheep.png": require("../assets/images/Animals/sheep.jpg"),
+            "dog.png": require("../assets/images/Animals/dog.jpg"),
+            "cat.png": require("../assets/images/Animals/cat.jpg"),
+            "wolf.png": require("../assets/images/Animals/wolf.jpeg"),
 
-            //Nature
+            // Nature
             "rock.png": require("../assets/images/Nature/rock.jpg"),
             "mountain.png": require("../assets/images/Nature/mountain.jpg"),
             "river.png": require("../assets/images/Nature/river.jpg"),
             "tree.png": require("../assets/images/Nature/tree.jpg"),
             "wind.png": require("../assets/images/Nature/wind.jpg"),
+            "lake.png": require("../assets/images/Nature/lake.jpg"),
+            "forest.png": require("../assets/images/Nature/forest.jpg"),
+            "desert.png": require("../assets/images/Nature/desert.jpg"),
+            "rain.png": require("../assets/images/Nature/rain.jpg"),
+            "snow.png": require("../assets/images/Nature/snow.jpg"),
 
-            //Technology
+            // Technology
             "computer.png": require("../assets/images/Technology/computer.jpg"),
             "camera.png": require("../assets/images/Technology/camera.jpg"),
             "chip.png": require("../assets/images/Technology/chip.jpeg"),
             "phone.png": require("../assets/images/Technology/phone.jpg"),
             "tv.png": require("../assets/images/Technology/tv.jpg"),
+            "laptop.png": require("../assets/images/Technology/laptop.jpg"),
+            "tablet.png": require("../assets/images/Technology/tablet.jpg"),
+            "robot.png": require("../assets/images/Technology/robot.jpg"),
+            "drone.png": require("../assets/images/Technology/drone.jpg"),
+            "keyboard.png": require("../assets/images/Technology/keyboard.jpg"),
 
-            //Food
+            // Food
             "apple.png": require("../assets/images/Food/apple.jpg"),
             "bread.png": require("../assets/images/Food/bread.jpg"),
             "egg.png": require("../assets/images/Food/egg.jpg"),
             "meat.png": require("../assets/images/Food/meat.jpeg"),
             "milk.png": require("../assets/images/Food/milk.jpg"),
-            //Travel
+            "cheese.png": require("../assets/images/Food/cheese.jpg"),
+            "cake.png": require("../assets/images/Food/cake.jpeg"),
+            "rice.png": require("../assets/images/Food/rice.jpg"),
+            "noodle.png": require("../assets/images/Food/noodle.jpg"),
+            "fish.png": require("../assets/images/Food/fish.png"),
+
+            // Travel
             "bus.png": require("../assets/images/Travel/bus.jpg"),
             "airplane.png": require("../assets/images/Travel/airplane.jpeg"),
             "map.png": require("../assets/images/Travel/map.jpg"),
             "passport.png": require("../assets/images/Travel/passport.jpg"),
             "train.png": require("../assets/images/Travel/train.jpg"),
-
+            "car.png": require("../assets/images/Travel/car.jpg"),
+            "ship.png": require("../assets/images/Travel/ship.jpg"),
+            "bicycle.png": require("../assets/images/Travel/bicycle.jpg"),
+            "hotel.png": require("../assets/images/Travel/hotel.jpg"),
+            "ticket.png": require("../assets/images/Travel/ticket.png"),
         };
         return images[filename] ?? require("../assets/images/placeholder.png");
+    },
+
+    async getFlashcardsByCategory(categoryId: string): Promise<Flashcard[]> {
+        try {
+            const subColRef = collection(db, "flashcards");
+
+            // Firestore queries allow filtering with where()
+            const q = query(subColRef, where('category', '==', categoryId));
+            const snap = await getDocs(q);
+
+            return snap.docs.map(doc => ({
+                id: doc.id,
+                ...(doc.data() as Omit<Flashcard, 'id'>)
+            }));
+        } catch (err) {
+            console.error("Error fetching flashcards by category:", err);
+            return [];
+        }
     }
 };
 
@@ -301,4 +392,5 @@ export const getMongolFlashcardsByCategory = async (categoryId: string): Promise
         console.error("Error fetching Mongolian flashcards by category:", err);
         return [];
     }
+
 };

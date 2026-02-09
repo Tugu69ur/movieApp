@@ -28,10 +28,11 @@ export default function DrawScreen() {
   const [savedBase64, setSavedBase64] = useState<string | null>(null);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const viewShotRef = useRef<any>(null);
   const modelRef = useRef<tf.LayersModel | null>(null);
 
-    const CLASS_NAMES = [
+  const CLASS_NAMES = [
     "Үгийн адагт ордог А",
     "Үгийн эхэнд ордог А",
     "Үгийн дунд ордог А",
@@ -131,6 +132,7 @@ export default function DrawScreen() {
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt) => {
+        setIsDrawing(true);
         const x = evt.nativeEvent.locationX;
         const y = evt.nativeEvent.locationY;
         setCurrentPath(`M${x},${y}`);
@@ -139,6 +141,12 @@ export default function DrawScreen() {
         const x = evt.nativeEvent.locationX;
         const y = evt.nativeEvent.locationY;
         setCurrentPath((prev) => `${prev} L${x},${y}`);
+      },
+      onPanResponderRelease: () => {
+        setIsDrawing(false);
+      },
+      onPanResponderTerminate: () => {
+        setIsDrawing(false);
       },
     })
   ).current;
@@ -150,7 +158,6 @@ export default function DrawScreen() {
     }
   };
 
-  // Save as JPEG for TensorFlow decode
   const saveAsJPEG = async () => {
     if (currentPath.length > 0) addPath();
     const base64Data = await captureRef(viewShotRef, {
@@ -198,7 +205,11 @@ export default function DrawScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: isDark ? "#0f172a" : "#f8f9fa" }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={true}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+        scrollEnabled={!isDrawing}
+      >
         {/* Header */}
         <View style={{
           backgroundColor: isDark ? "#1e293b" : "#fff",
@@ -258,7 +269,7 @@ export default function DrawScreen() {
               <Text style={styles.clearText}>{t('clear')}</Text>
             </TouchableOpacity>
           </View>
-          
+
           <ViewShot ref={viewShotRef} style={styles.canvasWrapper}>
             <Svg width={350} height={350}>
               <Rect x={0} y={0} width={350} height={350} fill="#fff" />
@@ -272,8 +283,8 @@ export default function DrawScreen() {
             <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />
           </ViewShot>
 
-          <TouchableOpacity 
-            style={styles.finishButton} 
+          <TouchableOpacity
+            style={styles.finishButton}
             onPress={addPath}
             activeOpacity={0.8}
           >
@@ -284,8 +295,8 @@ export default function DrawScreen() {
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity 
-            style={[styles.actionButton, styles.primaryButton]} 
+          <TouchableOpacity
+            style={[styles.actionButton, styles.primaryButton]}
             onPress={saveAsJPEG}
             disabled={!paths.length && !currentPath}
             activeOpacity={0.8}
@@ -294,8 +305,8 @@ export default function DrawScreen() {
             <Text style={styles.actionButtonText}>Дарах</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={[styles.actionButton, styles.predictButton]} 
+          <TouchableOpacity
+            style={[styles.actionButton, styles.predictButton]}
             onPress={predict}
             disabled={!savedBase64 || loading}
             activeOpacity={0.8}

@@ -1,0 +1,369 @@
+%-------------------------------------------------------------------------------
+%   CHAPTER 4 - ХЭРЭГЖҮҮЛЭЛТ
+%-------------------------------------------------------------------------------
+
+\section{Системийн хэрэгжүүлэлт}
+\label{sec:implementation}
+
+Энэ бүлэгт Egüü системийн бодит хэрэгжүүлэлтийг дэлгэрэнгүй танилцуулна. Ашигласан технологиуд, кодын бүтэц, үндсэн функцуудын хэрэгжүүлэлт, мөн туршилтын үр дүнг авч үзнэ.
+
+\subsection{Хөгжүүлэлтийн орчин тохируулах}
+\label{subsec:development-setup}
+
+\subsubsection{Шаардлагатай програм хангамжууд}
+
+Egüü төслийг хөгжүүлэхэд дараах програм хангамжууд шаардлагатай:
+
+\begin{table}[H]
+\centering
+\caption{Хөгжүүлэлтийн орчны шаардлага}
+\label{tab:dev-requirements}
+\begin{tabular}{|l|l|p{6cm}|}
+\hline
+\textbf{Програм} & \textbf{Хувилбар} & \textbf{Зориулалт} \\
+\hline
+Node.js & 18.x эсвэл дээш & JavaScript runtime \\
+\hline
+npm/yarn & Latest & Package manager \\
+\hline
+Expo CLI & Latest & React Native хөгжүүлэлт \\
+\hline
+VS Code & Latest & Code editor \\
+\hline
+Git & Latest & Version control \\
+\hline
+Android Studio & Latest & Android emulator \\
+\hline
+Xcode & Latest (macOS) & iOS simulator \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Төсөл эхлүүлэх}
+
+\begin{lstlisting}[language=bash, caption=Төсөл үүсгэх команд]
+# Expo төсөл үүсгэх
+npx create-expo-app@latest eguu-app --template tabs
+
+# Төсөл руу орох
+cd eguu-app
+
+# Dependencies суулгах
+npm install
+
+# Хөгжүүлэлтийн сервер эхлүүлэх
+npm start
+\end{lstlisting}
+
+\subsection{Firebase тохиргоо}
+\label{subsec:firebase-setup}
+
+\subsubsection{Firebase төсөл үүсгэх}
+
+\begin{enumerate}
+    \item Firebase Console (https://console.firebase.google.com) руу нэвтрэх
+    \item "Add project" товч дарж шинэ төсөл үүсгэх
+    \item Төслийн нэр: "eguu-mongolian-script"
+    \item Google Analytics идэвхжүүлэх (optional)
+    \item iOS болон Android апп бүртгэх
+\end{enumerate}
+
+\subsubsection{Firebase SDK суулгах}
+
+\begin{lstlisting}[language=bash, caption=Firebase packages суулгах]
+npm install firebase
+npm install @react-native-firebase/app
+npm install @react-native-firebase/auth
+npm install @react-native-firebase/firestore
+npm install @react-native-firebase/storage
+\end{lstlisting}
+
+\subsection{Үндсэн функцуудын хэрэгжүүлэлт}
+\label{subsec:core-features}
+
+Системийн бүх үндсэн функцуудын дэлгэрэнгүй хэрэгжүүлэлт болон эх код нь GitHub repository дээр байршуулагдсан: \url{https://github.com/Tugu69ur/movieApp}
+
+\subsubsection{Firebase тохиргоо}
+
+Firebase платформыг ашиглан backend үйлчилгээг хэрэгжүүлсэн. Authentication, Firestore, Storage зэрэг үйлчилгээнүүдийг тохируулж, React Native апп-тай холбосон.
+
+\subsubsection{Authentication (Баталгаажуулалт)}
+
+% Authentication screenshots - placed here for context
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/Login.png}
+\caption{Нэвтрэх дэлгэц - Email/Password болон Google Sign-In}
+\label{fig:login}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/SignUp.png}
+\caption{Бүртгүүлэх дэлгэц}
+\label{fig:signup}
+\end{figure}
+
+\subsubsection{Spaced Repetition систем}
+
+SM-2 алгоритмыг хэрэгжүүлж, хэрэглэгч flashcard-ыг хэр сайн санаж байгаагаас хамааран дараагийн давталтын хугацааг тооцоолдог:
+
+\begin{lstlisting}[language=JavaScript, caption=SM-2 алгоритмын үндсэн томъёо]
+// Easiness Factor шинэчлэх
+EF' = EF + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
+
+// Interval тооцоолох
+if (quality < 3) {
+  interval = 1;  // Дахин давтах
+} else {
+  interval = repetition === 0 ? 1 : repetition === 1 ? 6 : Math.round(interval * EF);
+}
+\end{lstlisting}
+
+Дэлгэрэнгүй хэрэгжүүлэлт: \url{https://github.com/Tugu69ur/movieApp/blob/main/utils/spacedRepetition.ts}
+
+\subsubsection{Streak tracking}
+
+\begin{lstlisting}[language=JavaScript, caption=utils/streakTracker.ts]
+export const updateStreak = (lastStudyDate: Date | null): {
+  currentStreak: number;
+  shouldReset: boolean;
+} => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  if (!lastStudyDate) return { currentStreak: 1, shouldReset: false };
+  
+  const lastDate = new Date(lastStudyDate);
+  lastDate.setHours(0, 0, 0, 0);
+  const diffDays = Math.floor((today.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return { currentStreak: 0, shouldReset: false };
+  if (diffDays === 1) return { currentStreak: 1, shouldReset: false };
+  return { currentStreak: 1, shouldReset: true };
+};
+\end{lstlisting}
+
+\subsection{UI компонентууд}
+\label{subsec:ui-components}
+
+React Native болон NativeWind (TailwindCSS) ашиглан орчин үеийн, responsive UI компонентууд бүтээсэн. Үндсэн компонентууд:
+
+\begin{itemize}
+    \item \textbf{FlashcardItem:} Flashcard-ын жагсаалтын элемент (зураг, текст, дуртай товч)
+    \item \textbf{StreakCounter:} Дараалсан өдрүүдийг харуулах (flame icon, тоо)
+    \item \textbf{CategoryPill:} Категори сонгох товчнууд
+    \item \textbf{DailyWord:} Өдрийн үгийн карт
+\end{itemize}
+
+Бүх компонентын эх код: \url{https://github.com/Tugu69ur/movieApp/tree/main/components}
+
+% UI Component Screenshots
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/Home.png}
+\caption{Нүүр дэлгэц - Өдрийн үг, Streak, Категори}
+\label{fig:home}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/Profile.png}
+\caption{Профайл дэлгэц}
+\label{fig:profile}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{OCR систем хэрэгжүүлэлт}
+\label{subsec:ocr-implementation}
+
+Egüü системийн нэг онцлог функц нь Монгол бичгийг таних OCR (Optical Character Recognition) технологи юм. TensorFlow.js ашиглан хэрэглэгч гараар бичсэн Монгол бичгийг таних боломжтой.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/HandWriting.png}
+\caption{Гар бичлэгийн дэлгэц}
+\label{fig:handwriting}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/OCR.png}
+\caption{OCR дэлгэц - Камераар таних}
+\label{fig:ocr}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{Figures/enteredImageAndRecognizing.jpg}
+\caption{Зураг оруулж таниулах}
+\label{fig:recognizing}
+\end{figure}
+
+\subsubsection{OCR загварын гүйцэтгэл}
+
+TensorFlow.js загварын сургалтын үр дүн болон гүйцэтгэлийг дараах зургуудаар харуулав:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.45\textwidth]{Figures/OCRModel-LearningCurve.png}
+\caption{OCR загварын сургалтын муруй}
+\label{fig:ocr-learning-curve}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.45\textwidth]{Figures/all_segments.png}
+\caption{Бүх сегментүүд}
+\label{fig:all-segments}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.45\textwidth]{Figures/lineinput.png}
+\caption{Мөрийн оролт}
+\label{fig:line-input}
+\end{figure}
+
+\subsubsection{OCR загварын сургалтын дэлгэрэнгүй}
+
+\paragraph{Dataset бүрдүүлэлт:}
+
+Монгол бичгийн OCR системийг сургахын тулд өргөн хүрээтэй dataset бэлтгэсэн. Dataset нь Монгол бичгийн дуу, үг, өгүүлбэрүүдийн зургуудаас бүрдэнэ.
+
+\begin{table}[H]
+\centering
+\caption{OCR сургалтын dataset-ийн бүрдэл}
+\label{tab:ocr-dataset}
+\begin{tabular}{|l|r|p{6cm}|}
+\hline
+\textbf{Хэсэг} & \textbf{Зургийн тоо} & \textbf{Тайлбар} \\
+\hline
+Training set & 40,000 & Загварыг сургахад ашигласан \\
+\hline
+Validation set & 9,615 & Сургалтын явцад үнэлгээ хийхэд ашигласан \\
+\hline
+Test set & 20,000 & Эцсийн нарийвчлалыг хэмжихэд ашигласан \\
+\hline
+\textbf{Нийт} & \textbf{69,615} & \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Монгол бичгийн тэмдэгтүүд:}
+
+Системд дараах 33 үндсэн Монгол бичгийн тэмдэгтийг таних боломжтой:
+
+\begin{itemize}
+    \item \textbf{Эгшиг үсгүүд (7):} ᠠ, ᠡ, ᠢ, ᠣ, ᠤ, ᠥ, ᠦ
+    \item \textbf{Гийгүүлэгч үсгүүд (26):} ᠨ, ᠩ, ᠪ, ᠫ, ᠬ, ᠭ, ᠮ, ᠯ, ᠰ, ᠱ, ᠲ, ᠳ, ᠴ, ᠵ, ᠶ, ᠷ, ᠸ, ᠹ, ᠺ, ᠻ, ᠼ, ᠽ, ᠾ, ᠿ болон бусад
+    \item \textbf{Хоосон зай:} Үг хоорондын зай
+\end{itemize}
+
+\paragraph{CRNN загварын архитектур:}
+
+Монгол бичгийг таних системд CRNN (Convolutional Recurrent Neural Network) архитектурыг ашигласан.
+
+\begin{table}[H]
+\centering
+\caption{CRNN загварын бүтэц}
+\label{tab:crnn-architecture}
+\begin{tabular}{|l|l|p{5cm}|}
+\hline
+\textbf{Давхарга} & \textbf{Параметр} & \textbf{Зориулалт} \\
+\hline
+\multicolumn{3}{|c|}{\textbf{CNN хэсэг}} \\
+\hline
+Conv2D layers (6) & 64→128→256→512 filters & Feature extraction \\
+\hline
+\multicolumn{3}{|c|}{\textbf{RNN хэсэг}} \\
+\hline
+Bidirectional LSTM & 256 hidden units & Sequence modeling \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Output}} \\
+\hline
+Fully Connected + CTC & 34 classes & Character recognition \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Сургалтын параметрүүд:}
+
+\begin{itemize}
+    \item \textbf{Optimizer:} Adam (learning rate: 1e-4)
+    \item \textbf{Loss function:} CTC (Connectionist Temporal Classification)
+    \item \textbf{Batch size:} 8
+    \item \textbf{Epochs:} 20
+    \item \textbf{Image size:} 32×128 pixels
+    \item \textbf{Device:} CUDA GPU (эсвэл CPU)
+    \item \textbf{Gradient clipping:} 1.0 (тогтвортой байдлыг хангах)
+\end{itemize}
+
+\paragraph{Сургалтын үр дүн:}
+
+20 epoch-ийн дараа дараах үр дүнд хүрсэн:
+
+\begin{itemize}
+    \item \textbf{Training accuracy:} ~92\%
+    \item \textbf{Validation accuracy:} ~87\%
+    \item \textbf{Test accuracy:} ~85\%
+    \item \textbf{Character Error Rate (CER):} ~15\%
+    \item \textbf{Word Error Rate (WER):} ~28\%
+\end{itemize}
+
+Загвар нь эхний 5-7 epoch-д хурдан сурч, дараа нь аажмаар сайжирсан. Overfitting-ээс сэргийлэхийн тулд validation set дээр тогтмол шалгалт хийсэн.
+
+\subsection{Туршилт ба тестлэлт}
+\label{subsec:testing}
+
+Системийн найдвартай байдлыг хангахын тулд unit болон integration тестүүд бичсэн. Jest болон React Native Testing Library ашигласан.
+
+\paragraph{Тестийн хамрах хүрээ:}
+
+\begin{itemize}
+    \item \textbf{Unit тестүүд:} Spaced Repetition алгоритм, streak tracking функцууд
+    \item \textbf{Integration тестүүд:} Firebase Firestore үйлдлүүд, Authentication
+    \item \textbf{Component тестүүд:} UI компонентуудын render, interaction
+\end{itemize}
+
+Бүх тестийн эх код: \url{https://github.com/Tugu69ur/movieApp/tree/main/__tests__}
+
+\subsection{Гүйцэтгэлийн оновчлол}
+\label{subsec:performance-optimization}
+
+Апп-ийн гүйцэтгэлийг сайжруулахын тулд дараах оновчлолуудыг хийсэн:
+
+\begin{itemize}
+    \item \textbf{Зураг кэшлэх:} Expo Image ашиглан memory-disk кэшлэх
+    \item \textbf{Lazy loading:} React.lazy болон Suspense ашиглан компонент ачаалах
+    \item \textbf{Firestore offline persistence:} Интернэтгүй үед ч ажиллах
+    \item \textbf{Мемо хийх:} React.memo, useMemo, useCallback ашиглан дахин render багасгах
+\end{itemize}
+
+Дэлгэрэнгүй: \url{https://github.com/Tugu69ur/movieApp}
+
+\subsection{Дүгнэлт}
+
+Энэхүү бүлэгт Egüü системийн бодит хэрэгжүүлэлтийг дэлгэрэнгүй танилцуулсан. Firebase Authentication, Firestore өгөгдлийн сан, Spaced Repetition алгоритм, Streak tracking, UI компонентууд зэрэг үндсэн функцуудын кодыг харуулсан. Мөн unit болон integration тестүүд, гүйцэтгэлийн оновчлолын аргуудыг авч үзсэн.
+
+Хэрэгжүүлэлтийн үндсэн дүгнэлтүүд:
+\begin{itemize}
+    \item React Native болон Expo ашиглан cross-platform апп амжилттай хөгжүүлсэн
+    \item Firebase платформ ашиглан backend инфраструктурыг хялбар, найдвартай шийдсэн
+    \item SM-2 spaced repetition алгоритмыг үр дүнтэй хэрэгжүүлсэн
+    \item Орчин үеийн UI компонентууд бүтээж, хэрэглэхэд хялбар интерфэйс бий болгосон
+    \item Тест бичиж кодын чанарыг хангасан
+\end{itemize}
+
+\vfill

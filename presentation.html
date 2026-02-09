@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egüü - Монгол бичгийн сургалтын апп</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            padding: 60px 80px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .slide-header h1 {
+            font-size: 48px;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .slide-header h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .slide-header p {
+            font-size: 20px;
+            color: #6B7280;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            font-size: 32px;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .content-section h3::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: #667eea;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-section li {
+            font-size: 22px;
+            color: #1F2937;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .content-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .diagram-container {
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .arch-layer {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1F2937;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            min-width: 300px;
+        }
+
+        .arch-layer.client {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .arch-layer.backend {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+        }
+
+        .arch-layer.data {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid #667eea;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 18px;
+            color: #667eea;
+            font-weight: bold;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #fef08a 0%, #fef08a 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 80%;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .methodology-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .flow-step {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1F2937;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .flow-step .number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .flow-arrow {
+            font-size: 40px;
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1>Egüü</h1>
+                <p style="font-size: 32px; color: #667eea; margin-top: 20px;">Монгол бичгийн сургалтын үсгийн картын апп
+                    хөгжүүлэх</p>
+            </div>
+            <div class="slide-content" style="text-align: center; justify-content: center;">
+                <div style="font-size: 28px; color: #1F2937; margin-bottom: 40px;">
+                    <p><strong>Гүйцэтгэгч:</strong> Б.Төгөлдөр</p>
+                    <p><strong>Удирдагч:</strong> Д.Насанжаргал</p>
+                </div>
+                <div style="font-size: 24px; color: #6B7280;">
+                    <p>Шинэ Монгол Технологийн Коллеж</p>
+                    <p>Компьютерийн ухааны тэнхим</p>
+                    <p style="margin-top: 30px;">2025 он</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Үндэслэл -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Судалгааны үндэслэл</h2>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h3>Асуудлын байдал</h3>
+                    <ul>
+                        <li>Монгол бичгийн хэрэглээ эрс багасч, залуу үеийнхний дунд уламжлалт бичгээ мэддэггүй
+                            хүмүүсийн тоо нэмэгдсээр байна</li>
+                        <li>Сургалтын материал, орчин үеийн технологид тулгуурласан хэрэгсэл маш хомс</li>
+                        <li>Интерактив, сонирхолтой сургалтын арга хэмжээ дутмаг</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3>Шийдэл</h3>
+                    <ul>
+                        <li>Орчин үеийн гар утасны технологид суурилсан интерактив сургалтын систем</li>
+                        <li>Flashcard систем + Spaced Repetition алгоритм</li>
+                        <li>TensorFlow OCR ашиглан гар бичлэг таних</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Зорилго -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Судалгааны зорилго</h2>
+            </div>
+            <div class="slide-content">
+                <div class="content-section">
+                    <h3>Үндсэн зорилго</h3>
+                    <ul>
+                        <li>Монгол бичгийг орчин үеийн технологийн тусламжтайгаар <span class="highlight">сонирхолтой,
+                                үр дүнтэй</span> суралцах боломжийг олгох <strong>"Egüü"</strong> гар утасны
+                            аппликейшныг хөгжүүлэх</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3>Үндсэн функцууд</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">Flashcard систем</div>
+                        <div class="tech-item">OCR таних</div>
+                        <div class="tech-item">Daily Word</div>
+                        <div class="tech-item">Streak Tracking</div>
+                        <div class="tech-item">Олон хэлний дэмжлэг</div>
+                        <div class="tech-item">Dark/Light Theme</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Зорилтууд -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Судалгааны зорилтууд</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="content-section">
+                        <h3>1. Онолын судалгаа</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Монгол бичгийн түүх, бүтэц судлах</li>
+                            <li>Flashcard систем, spaced repetition алгоритм</li>
+                            <li>Ижил төстэй аппликейшнуудын харьцуулсан шинжилгээ</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h3>2. Системийн шинжилгээ</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Use Case диаграмм</li>
+                            <li>Системийн архитектур</li>
+                            <li>UI/UX загвар</li>
+                            <li>Flashcard dataset бэлтгэх</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="two-column" style="margin-top: 30px;">
+                    <div class="content-section">
+                        <h3>3. Хөгжүүлэлт</h3>
+                        <ul style="font-size: 20px;">
+                            <li>React Native (Expo) апп</li>
+                            <li>Firebase Backend</li>
+                            <li>TensorFlow.js OCR</li>
+                            <li>i18n олон хэлний дэмжлэг</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h3>4. Туршилт ба үнэлгээ</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Системийн тестлэлт</li>
+                            <li>Бодит хэрэглэгчдээр туршилт</li>
+                            <li>Сэтгэл ханамжийн судалгаа</li>
+                        </ul>
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .highlight {
+                        background: linear-gradient(120deg, #fef08a 0%, #fef08a 100%);
+                        background-repeat: no-repeat;
+                        background-size: 100% 40%;
+                        background-position: 0 80%;
+                        font-weight: bold;
+                        }
+
+                        .tech-stack {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 20px;
+                        margin-top: 20px;
+                        }
+
+                        .tech-item {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        padding: 20px;
+                        border-radius: 12px;
+                        text-align: center;
+                        font-size: 18px;
+                        font-weight: bold;
+                        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                        }
+
+                        .methodology-flow {
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        margin-top: 30px;
+                        }
+
+                        .flow-step {
+                        background: white;
+                        border: 3px solid #667eea;
+                        border-radius: 50%;
+                        width: 150px;
+                        height: 150px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #1F2937;
+                        text-align: center;
+                        padding: 15px;
+                        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                        }
+
+                        .flow-step .number {
+                        background: #667eea;
+                        color: white;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 10px;
+                        font-size: 20px;
+                        }
+
+                        .flow-arrow {
+                        font-size: 40px;
+                        color: #667eea;
+                        font-weight: bold;
+                        }
+                        </style>
+                        </head>
+
+                        <body>
+                            <div class="presentation">
+                                <!-- Slide 1: Title -->
+                                <div class="slide active">
+                                    <div class="slide-header">
+                                        <h1>Egüü</h1>
+                                        <p style="font-size: 32px; color: #667eea; margin-top: 20px;">Монгол бичгийн
+                                            сургалтын үсгийн картын апп
+                                            хөгжүүлэх</p>
+                                    </div>
+                                    <div class="slide-content" style="text-align: center; justify-content: center;">
+                                        <div style="font-size: 28px; color: #1F2937; margin-bottom: 40px;">
+                                            <p><strong>Гүйцэтгэгч:</strong> Б.Төгөлдөр</p>
+                                            <p><strong>Удирдагч:</strong> Д.Насанжаргал</p>
+                                        </div>
+                                        <div style="font-size: 24px; color: #6B7280;">
+                                            <p>Шинэ Монгол Технологийн Коллеж</p>
+                                            <p>Компьютерийн ухааны тэнхим</p>
+                                            <p style="margin-top: 30px;">2025 он</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2: Үндэслэл -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Судалгааны үндэслэл</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="content-section">
+                                            <h3>Асуудлын байдал</h3>
+                                            <ul>
+                                                <li>Монгол бичгийн хэрэглээ эрс багасч, залуу үеийнхний дунд уламжлалт
+                                                    бичгээ мэддэггүй
+                                                    хүмүүсийн тоо нэмэгдсээр байна</li>
+                                                <li>Сургалтын материал, орчин үеийн технологид тулгуурласан хэрэгсэл маш
+                                                    хомс</li>
+                                                <li>Интерактив, сонирхолтой сургалтын арга хэмжээ дутмаг</li>
+                                            </ul>
+                                        </div>
+                                        <div class="content-section">
+                                            <h3>Шийдэл</h3>
+                                            <ul>
+                                                <li>Орчин үеийн гар утасны технологид суурилсан интерактив сургалтын
+                                                    систем</li>
+                                                <li>Flashcard систем + Spaced Repetition алгоритм</li>
+                                                <li>TensorFlow OCR ашиглан гар бичлэг таних</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3: Зорилго -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Судалгааны зорилго</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="content-section">
+                                            <h3>Үндсэн зорилго</h3>
+                                            <ul>
+                                                <li>Монгол бичгийг орчин үеийн технологийн тусламжтайгаар <span
+                                                        class="highlight">сонирхолтой,
+                                                        үр дүнтэй</span> суралцах боломжийг олгох
+                                                    <strong>"Egüü"</strong> гар утасны
+                                                    аппликейшныг хөгжүүлэх</li>
+                                            </ul>
+                                        </div>
+                                        <div class="content-section">
+                                            <h3>Үндсэн функцууд</h3>
+                                            <div class="tech-stack">
+                                                <div class="tech-item">Flashcard систем</div>
+                                                <div class="tech-item">OCR таних</div>
+                                                <div class="tech-item">Daily Word</div>
+                                                <div class="tech-item">Streak Tracking</div>
+                                                <div class="tech-item">Олон хэлний дэмжлэг</div>
+                                                <div class="tech-item">Dark/Light Theme</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4: Зорилтууд -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Судалгааны зорилтууд</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="two-column">
+                                            <div class="content-section">
+                                                <h3>1. Онолын судалгаа</h3>
+                                                <ul style="font-size: 20px;">
+                                                    <li>Монгол бичгийн түүх, бүтэц судлах</li>
+                                                    <li>Flashcard систем, spaced repetition алгоритм</li>
+                                                    <li>Ижил төстэй аппликейшнуудын харьцуулсан шинжилгээ</li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3>2. Системийн шинжилгээ</h3>
+                                                <ul style="font-size: 20px;">
+                                                    <li>Use Case диаграмм</li>
+                                                    <li>Системийн архитектур</li>
+                                                    <li>UI/UX загвар</li>
+                                                    <li>Flashcard dataset бэлтгэх</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="two-column" style="margin-top: 30px;">
+                                            <div class="content-section">
+                                                <h3>3. Хөгжүүлэлт</h3>
+                                                <ul style="font-size: 20px;">
+                                                    <li>React Native (Expo) апп</li>
+                                                    <li>Firebase Backend</li>
+                                                    <li>TensorFlow.js OCR</li>
+                                                    <li>i18n олон хэлний дэмжлэг</li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3>4. Туршилт ба үнэлгээ</h3>
+                                                <ul style="font-size: 20px;">
+                                                    <li>Системийн тестлэлт</li>
+                                                    <li>Бодит хэрэглэгчдээр туршилт</li>
+                                                    <li>Сэтгэл ханамжийн судалгаа</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 5: Аргазүй - Системийн архитектур -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Аргазүй: Системийн архитектур</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="two-column">
+                                            <div>
+                                                <div class="diagram-container">
+                                                    <h3
+                                                        style="text-align: center; margin-bottom: 20px; color: #667eea;">
+                                                        Системийн бүтэц</h3>
+                                                    <div class="architecture-diagram">
+                                                        <div class="arch-layer client">React Native Mobile App<br />(iOS
+                                                            & Android)</div>
+                                                        <div class="arrow-down"></div>
+                                                        <div class="arch-layer backend">Firebase Platform<br />(Auth,
+                                                            Firestore, Storage)</div>
+                                                        <div class="arrow-down"></div>
+                                                        <div class="arch-layer data">TensorFlow.js<br />(OCR Model)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="content-section">
+                                                    <h3>Технологийн стек</h3>
+                                                    <ul style="font-size: 20px;">
+                                                        <li><strong>Frontend:</strong> React Native, Expo Router,
+                                                            NativeWind</li>
+                                                        <li><strong>Backend:</strong> Firebase Authentication, Cloud
+                                                            Firestore</li>
+                                                        <li><strong>Storage:</strong> Firebase Storage</li>
+                                                        <li><strong>AI/ML:</strong> TensorFlow.js OCR</li>
+                                                        <li><strong>i18n:</strong> react-i18next</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 6: Аргазүй - Хэрэгжүүлэлтийн төлөвлөгөө -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Аргазүй: Хэрэгжүүлэлтийн төлөвлөгөө</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="methodology-flow">
+                                            <div class="flow-step">
+                                                <div class="number">1</div>
+                                                <div>Судалгаа & Шинжилгээ</div>
+                                            </div>
+                                            <div class="flow-arrow">→</div>
+                                            <div class="flow-step">
+                                                <div class="number">2</div>
+                                                <div>Зохиомж & UI/UX</div>
+                                            </div>
+                                            <div class="flow-arrow">→</div>
+                                            <div class="flow-step">
+                                                <div class="number">3</div>
+                                                <div>Хөгжүүлэлт</div>
+                                            </div>
+                                            <div class="flow-arrow">→</div>
+                                            <div class="flow-step">
+                                                <div class="number">4</div>
+                                                <div>Туршилт & Үнэлгээ</div>
+                                            </div>
+                                        </div>
+                                        <div class="content-section" style="margin-top: 50px;">
+                                            <h3>Модуляр бүтэц</h3>
+                                            <div class="two-column">
+                                                <ul style="font-size: 20px;">
+                                                    <li><strong>app/(tabs)/</strong> - Tab navigation screens</li>
+                                                    <li><strong>components/</strong> - Reusable UI components</li>
+                                                    <li><strong>services/</strong> - Firebase, OCR, i18n services</li>
+                                                </ul>
+                                                <ul style="font-size: 20px;">
+                                                    <li><strong>contexts/</strong> - State management (Auth, Theme)</li>
+                                                    <li><strong>utils/</strong> - Spaced repetition, validators</li>
+                                                    <li><strong>Firestore Collections:</strong> flashcards, users,
+                                                        userProgress, favorites, dailyWords</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 7: Data Flow Diagram -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Аргазүй: Data Flow Diagram</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="diagram-container">
+                                            <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">
+                                                Өгөгдлийн урсгал (DFD Level 1)</h3>
+                                            <svg width="100%" height="450" viewBox="0 0 800 450">
+                                                <defs>
+                                                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9"
+                                                        refY="3" orient="auto">
+                                                        <path d="M0,0 L0,6 L9,3 z" fill="#374151" />
+                                                    </marker>
+                                                </defs>
+
+                                                <!-- Left Column: User Entity -->
+                                                <rect x="50" y="180" width="120" height="80" rx="8" fill="#6366F1"
+                                                    stroke="#312E81" stroke-width="2" />
+                                                <text x="110" y="225" text-anchor="middle" fill="white"
+                                                    font-weight="bold" font-size="16">Хэрэглэгч</text>
+
+                                                <!-- Middle Column: Processes -->
+                                                <!-- 1.0 Auth -->
+                                                <circle cx="350" cy="100" r="45" fill="#10B981" stroke="#065F46"
+                                                    stroke-width="2" />
+                                                <text x="350" y="95" text-anchor="middle" fill="white"
+                                                    font-weight="bold">1.0</text>
+                                                <text x="350" y="115" text-anchor="middle" fill="white"
+                                                    font-size="12">Нэвтрэх</text>
+
+                                                <!-- 2.0 Study -->
+                                                <circle cx="350" cy="220" r="45" fill="#10B981" stroke="#065F46"
+                                                    stroke-width="2" />
+                                                <text x="350" y="215" text-anchor="middle" fill="white"
+                                                    font-weight="bold">2.0</text>
+                                                <text x="350" y="235" text-anchor="middle" fill="white"
+                                                    font-size="12">Суралцах</text>
+
+                                                <!-- 3.0 OCR -->
+                                                <circle cx="350" cy="340" r="45" fill="#10B981" stroke="#065F46"
+                                                    stroke-width="2" />
+                                                <text x="350" y="335" text-anchor="middle" fill="white"
+                                                    font-weight="bold">3.0</text>
+                                                <text x="350" y="355" text-anchor="middle" fill="white"
+                                                    font-size="12">OCR Таних</text>
+
+                                                <!-- Right Column: Data Stores & External -->
+                                                <!-- Firebase (External) -->
+                                                <rect x="600" y="40" width="120" height="60" rx="8" fill="#6366F1"
+                                                    stroke="#312E81" stroke-width="2" />
+                                                <text x="660" y="75" text-anchor="middle" fill="white"
+                                                    font-weight="bold" font-size="14">Firebase</text>
+
+                                                <!-- D1 Users -->
+                                                <path d="M550,130 h120 v40 h-120" fill="#F59E0B" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <line x1="570" y1="130" x2="570" y2="170" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <text x="635" y="155" text-anchor="middle" fill="white"
+                                                    font-weight="bold" font-size="14">D1 Users</text>
+
+                                                <!-- D2 Flashcards -->
+                                                <path d="M550,200 h120 v40 h-120" fill="#F59E0B" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <line x1="570" y1="200" x2="570" y2="240" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <text x="635" y="225" text-anchor="middle" fill="white"
+                                                    font-weight="bold" font-size="14">D2 Cards</text>
+
+                                                <!-- D3 Progress -->
+                                                <path d="M550,270 h120 v40 h-120" fill="#F59E0B" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <line x1="570" y1="270" x2="570" y2="310" stroke="#78350F"
+                                                    stroke-width="2" />
+                                                <text x="635" y="295" text-anchor="middle" fill="white"
+                                                    font-weight="bold" font-size="14">D3 Progress</text>
+
+                                                <!-- Flows -->
+                                                <!-- User -> Auth -->
+                                                <path d="M110,180 Q110,100 295,100" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+                                                <!-- Auth -> Firebase -->
+                                                <path d="M395,100 Q500,100 600,70" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+                                                <!-- Auth <-> D1 -->
+                                                <path d="M395,110 Q470,150 550,150" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+
+                                                <!-- User <-> Study -->
+                                                <line x1="170" y1="220" x2="295" y2="220" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+                                                <line x1="295" y1="235" x2="170" y2="235" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,5" />
+
+                                                <!-- Study <-> D2 -->
+                                                <line x1="395" y1="220" x2="550" y2="220" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+                                                <!-- Study -> D3 -->
+                                                <path d="M390,240 Q470,290 550,290" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+
+                                                <!-- User -> OCR -->
+                                                <path d="M110,260 Q110,340 295,340" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" />
+                                                <!-- OCR -> User (Result) -->
+                                                <path d="M305,350 Q150,350 150,260" fill="none" stroke="#374151"
+                                                    stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,5" />
+
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 8: Дүгнэлт -->
+                                <div class="slide">
+                                    <div class="slide-header">
+                                        <h2>Хүлээгдэж буй үр дүн</h2>
+                                    </div>
+                                    <div class="slide-content">
+                                        <div class="content-section">
+                                            <h3>Практик үр дүн</h3>
+                                            <ul>
+                                                <li>Монгол бичгийг залуу үеийнхэнд сонирхолтой, орчин үеийн хэлбэрээр
+                                                    заах боломж</li>
+                                                <li>Хаанаас ч, хэзээ ч, хэн ч Монгол бичиг суралцах хүртээмжтэй систем
+                                                </li>
+                                                <li>500+ flashcard агуулсан өргөн dataset</li>
+                                                <li>Cross-platform (iOS & Android) гар утасны апп</li>
+                                            </ul>
+                                        </div>
+                                        <div class="content-section">
+                                            <h3>Нийгэм, соёлын ач холбогдол</h3>
+                                            <ul>
+                                                <li>Монгол үндэстний соёл, түүхийн өвийг залуу үеийнхэнд дамжуулах</li>
+                                                <li>Монгол бичгийг албан ёсоор нэвтрүүлэх үндэсний хөтөлбөрийг дэмжих
+                                                </li>
+                                                <li>Дижитал шилжилтийг боловсролын салбарт хурдасгах</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slide-number">
+                                <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+                            </div>
+
+                            <div class="navigation">
+                                <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ Өмнөх</button>
+                                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Дараах ▶</button>
+                            </div>
+
+                            <script>
+                                let currentSlide = 0;
+                                const slides = document.querySelectorAll('.slide');
+                                const totalSlides = slides.length;
+
+                                document.getElementById('totalSlides').textContent = totalSlides;
+
+                                function showSlide(n) {
+                                    slides[currentSlide].classList.remove('active');
+                                    currentSlide = (n + totalSlides) % totalSlides;
+                                    slides[currentSlide].classList.add('active');
+
+                                    document.getElementById('currentSlide').textContent = currentSlide + 1;
+
+                                    // Update button states
+                                    document.getElementById('prevBtn').disabled = currentSlide === 0;
+                                    document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+                                }
+
+                                function changeSlide(direction) {
+                                    showSlide(currentSlide + direction);
+                                }
+
+                                // Keyboard navigation
+                                document.addEventListener('keydown', (e) => {
+                                    if (e.key === 'ArrowLeft') changeSlide(-1);
+                                    if (e.key === 'ArrowRight') changeSlide(1);
+                                });
+
+                                // Initialize
+                                showSlide(0);
+                            </script>
+                        </body>
+
+</html>

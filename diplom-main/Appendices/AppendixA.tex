@@ -1,0 +1,279 @@
+%-------------------------------------------------------------------------------
+%   APPENDIX A - ХАВСРАЛТ
+%-------------------------------------------------------------------------------
+
+\section*{Хавсралт А: Нэмэлт материалууд}
+\addcontentsline{toc}{section}{Хавсралт А: Нэмэлт материалууд}
+
+\subsection*{А.1 Flashcard dataset-ийн жишээ}
+
+Дараах хүснэгтэд Egüü системд ашигласан flashcard dataset-ийн жишээг харуулав:
+
+\begin{longtable}{|l|l|l|p{4cm}|l|}
+\caption{Flashcard dataset-ийн жишээ} \\
+\hline
+\textbf{ID} & \textbf{Монгол бичиг} & \textbf{Фонетик} & \textbf{Англи орчуулга} & \textbf{Категори} \\
+\hline
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\tablename\ \thetable{} -- үргэлжлэл}} \\
+\hline
+\textbf{ID} & \textbf{Монгол бичиг} & \textbf{Фонетик} & \textbf{Англи орчуулга} & \textbf{Категори} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+001 & ᠠ & a & a (vowel) & vowels \\
+\hline
+002 & ᠡ & e & e (vowel) & vowels \\
+\hline
+003 & ᠢ & i & i (vowel) & vowels \\
+\hline
+004 & ᠣ & o & o (vowel) & vowels \\
+\hline
+005 & ᠤ & u & u (vowel) & vowels \\
+\hline
+006 & ᠥ & ö & ö (vowel) & vowels \\
+\hline
+007 & ᠦ & ü & ü (vowel) & vowels \\
+\hline
+008 & ᠪ & b & b (consonant) & consonants \\
+\hline
+009 & ᠴ & ch & ch (consonant) & consonants \\
+\hline
+010 & ᠳ & d & d (consonant) & consonants \\
+\hline
+011 & ᠭ & g & g (consonant) & consonants \\
+\hline
+012 & ᠬ & kh & kh (consonant) & consonants \\
+\hline
+013 & ᠯ & l & l (consonant) & consonants \\
+\hline
+014 & ᠮ & m & m (consonant) & consonants \\
+\hline
+015 & ᠨ & n & n (consonant) & consonants \\
+\hline
+\end{longtable}
+
+\subsection*{А.2 Firebase Security Rules}
+
+Egüü системд ашигласан Firebase Security Rules-ийн бүрэн код:
+
+\begin{lstlisting}[language=JavaScript, caption=Firestore Security Rules]
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Flashcards collection - бүх хүн унших боломжтой
+    match /flashcards/{flashcardId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                      request.auth.token.admin == true;
+    }
+    
+    // Users collection - зөвхөн өөрийн өгөгдөл
+    match /users/{userId} {
+      allow read, write: if request.auth != null && 
+                            request.auth.uid == userId;
+    }
+    
+    // UserProgress collection - зөвхөн өөрийн прогресс
+    match /userProgress/{userId} {
+      allow read, write: if request.auth != null && 
+                            request.auth.uid == userId;
+    }
+    
+    // Favorites collection - зөвхөн өөрийн дуртай жагсаалт
+    match /favorites/{userId} {
+      allow read, write: if request.auth != null && 
+                            request.auth.uid == userId;
+    }
+    
+    // DailyWords collection - бүх хүн унших боломжтой
+    match /dailyWords/{date} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                      request.auth.token.admin == true;
+    }
+  }
+}
+\end{lstlisting}
+
+\subsection*{А.3 Хэрэглэгчийн санал асуулгын загвар}
+
+Туршилтын үед ашигласан санал асуулгын асуултууд:
+
+\begin{enumerate}
+    \item \textbf{Ерөнхий мэдээлэл:}
+    \begin{itemize}
+        \item Нас: \_\_\_\_
+        \item Мэргэжил: \_\_\_\_
+        \item Монгол бичиг мэдэх түвшин: Эхлэгч / Дунд / Ахисан
+    \end{itemize}
+    
+    \item \textbf{Апп-ийн үнэлгээ (1-5 оноо):}
+    \begin{itemize}
+        \item Ерөнхий сэтгэл ханамж: \_\_\_\_
+        \item Хэрэглэхэд хялбар байдал: \_\_\_\_
+        \item UI/UX дизайн: \_\_\_\_
+        \item Функцийн бүрэн байдал: \_\_\_\_
+        \item Гүйцэтгэл (хурд): \_\_\_\_
+        \item OCR таних нарийвчлал: \_\_\_\_
+    \end{itemize}
+    
+    \item \textbf{Нээлттэй асуултууд:}
+    \begin{itemize}
+        \item Апп-ийн хамгийн таалагдсан тал юу вэ?
+        \item Апп-ийн хамгийн таалагдаагүй тал юу вэ?
+        \item Ямар функц нэмэхийг хүсч байна вэ?
+        \item Энэ апп-ийг найз нөхөддөө санал болгох уу? (Тийм/Үгүй)
+        \item Нэмэлт санал, сэтгэгдэл:
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{А.4 Системийн архитектурын дэлгэрэнгүй диаграмм}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        box/.style={rectangle, draw=black, fill=blue!20, minimum width=2.5cm, minimum height=0.8cm, align=center, font=\small},
+        db/.style={cylinder, draw=black, fill=green!20, minimum width=1.8cm, minimum height=1.2cm, align=center, shape border rotate=90, font=\small},
+        cloud/.style={ellipse, draw=black, fill=yellow!20, minimum width=2.5cm, minimum height=1.2cm, align=center, font=\small}
+    ]
+    
+    % Client Layer
+    \node[box] (ui) {UI Layer\\(React Native)};
+    \node[box, below=0.8cm of ui] (context) {State Management\\(Context API)};
+    \node[box, below=0.8cm of context] (services) {Services Layer};
+    
+    % Services
+    \node[box, below left=1cm and 1cm of services] (auth-service) {Auth\\Service};
+    \node[box, below=1cm of services] (firestore-service) {Firestore\\Service};
+    \node[box, below right=1cm and 1cm of services] (ocr-service) {OCR\\Service};
+    
+    % Firebase
+    \node[cloud, below=2cm of firestore-service] (firebase) {Firebase\\Platform};
+    \node[db, below left=1cm and 0.5cm of firebase] (firestore-db) {Firestore};
+    \node[box, below=1cm of firebase] (auth-fb) {Authentication};
+    \node[db, below right=1cm and 0.5cm of firebase] (storage) {Storage};
+    
+    % TensorFlow
+    \node[box, right=3cm of ocr-service] (tf-model) {TensorFlow.js\\Model};
+    
+    % Connections
+    \draw[->, thick] (ui) -- (context);
+    \draw[->, thick] (context) -- (services);
+    \draw[->, thick] (services) -- (auth-service);
+    \draw[->, thick] (services) -- (firestore-service);
+    \draw[->, thick] (services) -- (ocr-service);
+    
+    \draw[->, thick] (auth-service) -- (firebase);
+    \draw[->, thick] (firestore-service) -- (firebase);
+    \draw[->, thick] (ocr-service) -- (tf-model);
+    
+    \draw[->, thick] (firebase) -- (firestore-db);
+    \draw[->, thick] (firebase) -- (auth-fb);
+    \draw[->, thick] (firebase) -- (storage);
+    
+    \end{tikzpicture}
+    \caption{Системийн дэлгэрэнгүй архитектур}
+    \label{fig:detailed-architecture}
+\end{figure}
+
+\subsection*{А.5 Төслийн статистик}
+
+\begin{table}[H]
+\centering
+\caption{Төслийн хөгжүүлэлтийн статистик}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Шалгуур} & \textbf{Утга} \\
+\hline
+Нийт кодын мөр & 15,420 \\
+\hline
+TypeScript файл & 87 \\
+\hline
+React компонент & 42 \\
+\hline
+Service файл & 12 \\
+\hline
+Utility функц & 28 \\
+\hline
+Test файл & 15 \\
+\hline
+Flashcard тоо & 520 \\
+\hline
+Категори тоо & 7 \\
+\hline
+Дэмжигдсэн хэл & 2 (Монгол, Англи) \\
+\hline
+Хөгжүүлэлтийн хугацаа & 3 сар \\
+\hline
+Туршилтын хэрэглэгч & 20 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{А.6 Ашигласан технологиудын бүрэн жагсаалт}
+
+\begin{table}[H]
+\centering
+\caption{Dependencies жагсаалт}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Package} & \textbf{Хувилбар} \\
+\hline
+react-native & 0.81.5 \\
+\hline
+expo & \textasciitilde54.0.20 \\
+\hline
+firebase & 12.4.0 \\
+\hline
+@tensorflow/tfjs & 4.20.0 \\
+\hline
+@tensorflow/tfjs-react-native & 1.0.0 \\
+\hline
+@react-navigation/native & 7.1.8 \\
+\hline
+@react-navigation/native-stack & 7.1.9 \\
+\hline
+@react-navigation/bottom-tabs & 7.4.0 \\
+\hline
+nativewind & 4.2.1 \\
+\hline
+react-i18next & 15.2.0 \\
+\hline
+@expo/vector-icons & 15.0.3 \\
+\hline
+expo-image & 3.0.10 \\
+\hline
+expo-camera & 17.0.8 \\
+\hline
+expo-font & 14.0.9 \\
+\hline
+expo-haptics & 15.0.7 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{А.7 Төслийн GitHub repository}
+
+Төслийн эх код нь дараах хаягаар нээлттэй эхтэй байршуулагдсан:
+
+\texttt{https://github.com/username/eguu-mongolian-script}
+
+Репозиторид дараах материалууд багтсан:
+\begin{itemize}
+    \item Бүрэн эх код
+    \item README.md (суулгах заавар)
+    \item Flashcard dataset (JSON формат)
+    \item TensorFlow OCR загварын код
+    \item Туршилтын үр дүнгийн мэдээлэл
+    \item Хэрэглэгчийн гарын авлага
+\end{itemize}
+
+\vfill

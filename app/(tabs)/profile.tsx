@@ -32,7 +32,9 @@ import {
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { auth, db, storage } from '../../FirebaseConfig';
+
 import { FlashcardService, Flashcard as FlashcardType } from '../../services/FlashcardService';
+import { NEW_FLASHCARDS } from '../../utils/newFlashcards';
 
 const { width } = Dimensions.get('window');
 
@@ -117,6 +119,18 @@ export default function ProfileScreen() {
     blob.close();
 
     return await getDownloadURL(fileRef);
+  };
+
+  const handleSeedData = async () => {
+    setLoading(true);
+    try {
+      await FlashcardService.addManyFlashcards(NEW_FLASHCARDS);
+      Alert.alert("Success", "New flashcards added to database!");
+    } catch (e: any) {
+      Alert.alert("Error", e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {

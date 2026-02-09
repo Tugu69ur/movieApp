@@ -1,0 +1,758 @@
+%-------------------------------------------------------------------------------
+%   CHAPTER 3 - СУДАЛГААНЫ АРГА ЗҮЙ
+%-------------------------------------------------------------------------------
+
+\section{Судалгааны арга зүй}
+\label{sec:methodology}
+
+Энэ бүлэгт Egüü системийн шаардлагыг тодорхойлж, системийн шинжилгээ, зохиомж, архитектурын шийдлүүдийг дэлгэрэнгүй танилцуулна. Мөн хэрэглэгчийн интерфэйс (UI/UX) загвар, өгөгдлийн сангийн зохиомжийг авч үзнэ.
+
+\subsection{Системийн зохиомжийн шийдлүүд}
+\label{subsec:design-decisions}
+
+Энэ хэсэгт Egüü системийг хэрхэн зохион бүтээх, ямар технологи ашиглах, яагаад тэр технологиудыг сонгосон талаар тодорхой тайлбарлана.
+
+\subsubsection{Гадаад зохиомж (External Design)}
+
+\textbf{Хэрэглэгчийн харагдах хэсэг:} Egüü систем нь хэрэглэгчид tab-based навигацитай 5 үндсэн дэлгэц (Нүүр, Хайлт, Дуртай, Профайл, Камер) өгч, flashcard-уудыг категориор (эгшиг, гийгүүлэгч, үг) ангилж, хайлтын функцээр хялбар олох боломжийг олгодог бөгөөд энэ нь хэрэглэгчид ойлгомжтой, интуитив туршлага өгдөг.
+
+\paragraph{Гадаад зохиомжийн үндсэн шийдлүүд:}
+
+\begin{itemize}
+    \item \textbf{Навигаци:} Tab-based навигаци ашигласан нь хэрэглэгч хамгийн түгээмэл хэрэглэгддэг дэлгэцүүд рүү нэг товшилтоор шилжих боломжтой болгодог
+    
+    \item \textbf{Категоризаци:} Flashcard-уудыг категориор ангилсан нь хэрэглэгч өөрийн сонирхсон хэсгээс эхлэн суралцах боломжтой
+    
+    \item \textbf{Хайлт:} Фонетик, англи орчуулга, тодорхойлолтоор хайх боломжтой нь хэрэглэгч хурдан олох боломжтой
+    
+    \item \textbf{Gamification элементүүд:} Streak counter, daily word, progress bar зэрэг нь хэрэглэгчийн мотивацийг нэмэгдүүлдэг
+\end{itemize}
+
+\subsubsection{Дотоод зохиомж (Internal Design)}
+
+\textbf{Системийн дотоод бүтэц:} Систем нь client-server архитектураар зохион байгуулагдсан бөгөөд React Native клиент нь Firebase Backend (Authentication, Firestore, Storage) болон TensorFlow.js OCR модультай REST API болон SDK-аар харилцаж, бизнес логик нь клиент талд, өгөгдлийн хадгалалт нь Firebase үүлэн дээр байрладаг.
+
+\paragraph{Дотоод зохиомжийн үндсэн бүрэлдэхүүн хэсгүүд:}
+
+\begin{enumerate}
+    \item \textbf{Client Layer (React Native):}
+    \begin{itemize}
+        \item Presentation Layer: UI компонентууд (FlashcardItem, StreakCounter, DailyWordCard)
+        \item Business Logic Layer: Spaced repetition алгоритм, streak tracker, validators
+        \item Data Access Layer: Firebase SDK, TensorFlow.js wrapper
+    \end{itemize}
+    
+    \item \textbf{Backend Layer (Firebase):}
+    \begin{itemize}
+        \item Authentication Service: Хэрэглэгчийн баталгаажуулалт
+        \item Database Service: Firestore NoSQL өгөгдлийн сан
+        \item Storage Service: Зураг, файл хадгалах
+        \item Security Rules: Өгөгдлийн хандалтын хяналт
+    \end{itemize}
+    
+    \item \textbf{ML Layer (TensorFlow.js):}
+    \begin{itemize}
+        \item OCR Model: Монгол бичиг таних загвар
+        \item Image Preprocessing: Зураг боловсруулах
+        \item Prediction Engine: Таних үйлдэл гүйцэтгэх
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Өгөгдлийн сангийн сонголт}
+
+\textbf{Cloud Firestore NoSQL сонголт:} Cloud Firestore NoSQL өгөгдлийн санг сонгосон учир нь real-time синхрончлол (хэрэглэгчийн өөрчлөлтүүд шууд бүх төхөөрөмжид харагдах), offline persistence (интернэтгүй үед ч ажиллах), автомат scalability (хэрэглэгчийн тоо нэмэгдэхэд автоматаар өргөжих), мөн document-based бүтэц нь Монгол бичгийн flashcard өгөгдлийг (mongolBichig, phonetic, english, definition, imageUrl гэх мэт олон талбартай) уян хатан хадгалахад тохиромжтой.
+
+\paragraph{Firestore vs бусад өгөгдлийн сангийн харьцуулалт:}
+
+\begin{table}[H]
+\centering
+\caption{Өгөгдлийн сангийн харьцуулалт}
+\label{tab:database-comparison}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Шинж чанар} & \textbf{Firestore} & \textbf{MongoDB} & \textbf{PostgreSQL} \\
+\hline
+Real-time sync & +++ & ++ & - \\
+\hline
+Offline support & +++ & + & - \\
+\hline
+Auto-scaling & +++ & ++ & + \\
+\hline
+Setup хялбар байдал & +++ & ++ & + \\
+\hline
+Mobile SDK & +++ & + & - \\
+\hline
+Үнэ (жижиг төсөл) & +++ & ++ & ++ \\
+\hline
+Нарийн query & + & +++ & +++ \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Технологийн стек сонголт}
+
+\textbf{Ашигласан технологиуд ба шалтгаан:} React Native (cross-platform хөгжүүлэлт, нэг кодоор iOS/Android дээр ажиллах), Firebase (backend-as-a-service, сервер удирдах шаардлагагүй), TensorFlow.js (client-side ML, privacy хадгалах), NativeWind (Tailwind CSS for React Native, хурдан UI хөгжүүлэлт), react-i18next (олон хэлний дэмжлэг, Монгол/Англи хэл солих) зэрэг орчин үеийн технологиудыг сонгосон нь хөгжүүлэлтийн хурд, найдвартай байдал, хэрэглэгчийн туршлагыг сайжруулж, засвар үйлчилгээний зардлыг бууруулдаг.
+
+\paragraph{Технологи бүрийн сонголтын шалтгаан:}
+
+\begin{table}[H]
+\centering
+\caption{Технологийн сонголтын шалтгаан}
+\label{tab:tech-stack-reasons}
+\begin{tabular}{|l|p{5cm}|p{6cm}|}
+\hline
+\textbf{Технологи} & \textbf{Давуу тал} & \textbf{Egüü төсөлд яагаад тохиромжтой} \\
+\hline
+React Native & Cross-platform, Hot Reload, Том коммьюнити & Нэг удаа бичээд iOS/Android дээр ажиллуулах, хөгжүүлэлтийн цаг 50\% хэмнэнэ \\
+\hline
+Firebase & BaaS, Real-time, Auto-scaling & Сервер удирдах шаардлагагүй, бага төсөвт тохиромжтой \\
+\hline
+TensorFlow.js & Client-side ML, Privacy & Хэрэглэгчийн өгөгдөл сервер рүү явахгүй, offline ажиллана \\
+\hline
+NativeWind & Tailwind CSS, Хурдан UI & Utility-first CSS, responsive дизайн хялбар \\
+\hline
+i18next & Олон хэлний дэмжлэг & Монгол/Англи хэл солих, цаашид бусад хэл нэмэх хялбар \\
+\hline
+Expo & Managed workflow, EAS Build & Xcode/Android Studio суулгах шаардлагагүй, хурдан туршилт \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Системийн шаардлага}
+\label{subsec:requirements}
+
+\subsubsection{Функциональ шаардлага}
+
+Функциональ шаардлага нь системийн хийх ёстой үндсэн үйлдлүүдийг тодорхойлдог. Egüü системд дараах функциональ шаардлагууд тавигдана:
+
+\paragraph{Хэрэглэгчийн удирдлага:}
+\begin{itemize}
+    \item FR-1: Хэрэглэгч Email/Password-оор бүртгүүлэх, нэвтрэх боломжтой байх
+    \item FR-2: Хэрэглэгч Google account-аар нэвтрэх боломжтой байх
+    \item FR-3: Хэрэглэгч профайл мэдээллээ засах боломжтой байх
+    \item FR-4: Хэрэглэгч нууц үгээ сэргээх боломжтой байх
+\end{itemize}
+
+\paragraph{Flashcard сургалтын систем:}
+\begin{itemize}
+    \item FR-5: Систем нь Монгол бичгийн үсгүүдийг flashcard хэлбэрээр харуулах
+    \item FR-6: Flashcard нь зураг, фонетик, англи орчуулга, тодорхойлолт агуулах
+    \item FR-7: Хэрэглэгч flashcard-ыг эргүүлж хариултыг харах боломжтой байх
+    \item FR-8: Систем нь spaced repetition алгоритмаар дараагийн давталтын хугацааг тооцоолох
+    \item FR-9: Хэрэглэгч flashcard-д "амархан", "дунд", "хэцүү" гэх мэтээр үнэлгээ өгөх боломжтой байх
+\end{itemize}
+
+\paragraph{Ангилал ба хайлт:}
+\begin{itemize}
+    \item FR-10: Flashcard-уудыг категориор (эгшиг, гийгүүлэгч, үг гэх мэт) ангилах
+    \item FR-11: Хэрэглэгч flashcard хайх боломжтой байх (фонетик, англи орчуулгаар)
+    \item FR-12: Категори бүрээр шүүх боломжтой байх
+\end{itemize}
+
+\paragraph{Дуртай жагсаалт:}
+\begin{itemize}
+    \item FR-13: Хэрэглэгч flashcard-ыг дуртай жагсаалтдаа нэмэх боломжтой байх
+    \item FR-14: Дуртай flashcard-уудыг тусдаа харах боломжтой байх
+    \item FR-15: Дуртай жагсаалтаас хасах боломжтой байх
+\end{itemize}
+
+\paragraph{Өдөр бүрийн үг (Daily Word):}
+\begin{itemize}
+    \item FR-16: Систем нь өдөр бүр шинэ үг санал болгох
+    \item FR-17: Хэрэглэгч өдрийн үгийг дэлгэрэнгүй үзэх боломжтой байх
+    \item FR-18: Өдрийн үгийн түүхийг хадгалах
+\end{itemize}
+
+\paragraph{Streak (Дараалсан өдрүүд) tracking:}
+\begin{itemize}
+    \item FR-19: Систем нь хэрэглэгчийн дараалсан суралцсан өдрүүдийг тооцоолох
+    \item FR-20: Streak тасарсан тохиолдолд мэдэгдэл өгөх
+    \item FR-21: Streak-ийн статистикийг харуулах
+\end{itemize}
+
+\paragraph{OCR (Гар бичлэг таних):}
+\begin{itemize}
+    \item FR-22: Хэрэглэгч камераар Монгол бичгийн үсэг зурж таниулах боломжтой байх
+    \item FR-23: Систем нь TensorFlow.js ашиглан үсгийг таних
+    \item FR-24: Таниулсан үсгийн үр дүнг харуулах
+    \item FR-25: Таниулсан үсгийн түүхийг хадгалах
+\end{itemize}
+
+\paragraph{Тохиргоо ба хэл солих:}
+\begin{itemize}
+    \item FR-26: Хэрэглэгч интерфэйсийн хэлийг солих боломжтой байх (Монгол, Англи)
+    \item FR-27: Dark/Light theme солих боломжтой байх
+    \item FR-28: Мэдэгдлийн тохиргоог өөрчлөх боломжтой байх
+\end{itemize}
+
+\subsubsection{Функциональ бус шаардлага}
+
+Функциональ бус шаардлага нь системийн чанар, гүйцэтгэл, аюулгүй байдал зэрэг шинж чанаруудыг тодорхойлдог.
+
+\paragraph{Гүйцэтгэл (Performance):}
+\begin{itemize}
+    \item NFR-1: Апп нь 3 секундээс бага хугацаанд ачаалагдах ёстой
+    \item NFR-2: Flashcard эргүүлэх үйлдэл нь 100ms-ээс бага хугацаанд ажиллах
+    \item NFR-3: Хайлтын үр дүн нь 500ms-ээс бага хугацаанд харагдах
+    \item NFR-4: OCR таних үйлдэл нь 2 секундээс бага хугацаанд дуусах
+\end{itemize}
+
+\paragraph{Хэрэглэхэд хялбар байдал (Usability):}
+\begin{itemize}
+    \item NFR-5: Интерфэйс нь ойлгомжтой, интуитив байх
+    \item NFR-6: Шинэ хэрэглэгч 5 минутын дотор үндсэн функцуудыг ашиглаж сурах
+    \item NFR-7: Бүх товч, текст нь тодорхой, уншихад хялбар байх
+    \item NFR-8: Алдааны мэдэгдэл нь ойлгомжтой, шийдлийн зөвлөмж өгөх
+\end{itemize}
+
+\paragraph{Найдвартай байдал (Reliability):}
+\begin{itemize}
+    \item NFR-9: Систем нь 99\% uptime хангах
+    \item NFR-10: Өгөгдөл алдагдахгүй байх (Firebase backup)
+    \item NFR-11: Offline горимд ажиллах боломжтой байх
+    \item NFR-12: Алдаа гарсан тохиолдолд хэрэглэгчид ойлгомжтой мэдэгдэл өгөх
+\end{itemize}
+
+\paragraph{Аюулгүй байдал (Security):}
+\begin{itemize}
+    \item NFR-13: Хэрэглэгчийн нууц үг нь hash хийгдсэн байх
+    \item NFR-14: Firebase Security Rules ашиглан өгөгдлийн хандалтыг хязгаарлах
+    \item NFR-15: HTTPS протокол ашиглах
+    \item NFR-16: Хэрэглэгчийн хувийн мэдээлэл гуравдагч талд дамжихгүй байх
+\end{itemize}
+
+\paragraph{Өргөтгөх боломж (Scalability):}
+\begin{itemize}
+    \item NFR-17: Систем нь 10,000+ хэрэглэгчид үйлчлэх боломжтой байх
+    \item NFR-18: Flashcard dataset-ийг хялбар нэмэх боломжтой байх
+    \item NFR-19: Шинэ хэл нэмэх боломжтой байх (i18n)
+    \item NFR-20: Шинэ функц нэмэхэд хялбар байх (модуляр архитектур)
+\end{itemize}
+
+\subsection{UML диаграммууд}
+\label{subsec:uml-diagrams}
+
+Энэ хэсэгт Egüü системийн үйл ажиллагааг янз бүрийн өнцгөөс харуулсан UML (Unified Modeling Language) диаграммуудыг танилцуулна. Эдгээр диаграммууд нь системийн бүтэц, үйл явц, өгөгдлийн урсгалыг ойлгомжтой байдлаар харуулдаг.
+
+\subsubsection{Use Case диаграмм}
+
+Use Case диаграмм нь системийн үндсэн функцуудыг болон хэрэглэгчийн харилцааг харуулдаг. Egüü системд дараах үндсэн use case-ууд байна:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={stick figure, draw=black, minimum width=1cm, minimum height=2cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1cm, align=center},
+        system/.style={rectangle, draw=black, minimum width=10cm, minimum height=12cm}
+    ]
+    
+    % System boundary
+    \node[system] (system) at (5, 0) {};
+    \node[above] at (system.north) {\textbf{Egüü System}};
+    
+    % Actor
+    \node[actor] (user) at (-2, 0) {};
+    \node[below] at (user.south) {Хэрэглэгч};
+    
+    % Use cases
+    \node[usecase] (register) at (5, 5) {Бүртгүүлэх/\\Нэвтрэх};
+    \node[usecase] (study) at (5, 3) {Flashcard\\суралцах};
+    \node[usecase] (search) at (5, 1) {Flashcard\\хайх};
+    \node[usecase] (favorite) at (5, -1) {Дуртай\\жагсаалт};
+    \node[usecase] (daily) at (5, -3) {Өдрийн үг\\үзэх};
+    \node[usecase] (ocr) at (5, -5) {Гар бичлэг\\таниулах};
+    \node[usecase] (profile) at (9, 0) {Профайл\\удирдах};
+    
+    % Associations
+    \draw (user) -- (register);
+    \draw (user) -- (study);
+    \draw (user) -- (search);
+    \draw (user) -- (favorite);
+    \draw (user) -- (daily);
+    \draw (user) -- (ocr);
+    \draw (user) -- (profile);
+    
+    \end{tikzpicture}
+    \caption{Egüü системийн Use Case диаграмм}
+    \label{fig:use-case}
+\end{figure}
+
+\paragraph{Use Case диаграммын тайлбар:}
+
+Диаграмм нь системийн 7 үндсэн функцийг харуулж байна: Бүртгүүлэх/Нэвтрэх, Flashcard суралцах, Flashcard хайх, Дуртай жагсаалт, Өдрийн үг үзэх, Гар бичлэг таниулах, Профайл удирдах.
+
+\subsubsection{Sequence Diagram - Хэрэглэгч нэвтрэх процесс}
+
+Sequence диаграмм нь системийн объектууд хоорондын харилцааг цаг хугацааны дагуу харуулдаг. Доорх диаграмм нь хэрэглэгч нэвтрэх процессыг алхам алхмаар харуулж байна.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=3cm,
+        box/.style={rectangle, draw=black, minimum width=2cm, minimum height=0.8cm, align=center},
+        message/.style={->, >=stealth, thick}
+    ]
+    
+    % Actors/Objects
+    \node[box] (user) {Хэрэглэгч};
+    \node[box, right=of user] (ui) {UI\\(Login Screen)};
+    \node[box, right=of ui] (auth) {Auth\\Service};
+    \node[box, right=of auth] (firebase) {Firebase\\Auth};
+    \node[box, right=of firebase] (firestore) {Firestore};
+    
+    % Lifelines
+    \draw[dashed] (user.south) -- ++(0,-10);
+    \draw[dashed] (ui.south) -- ++(0,-10);
+    \draw[dashed] (auth.south) -- ++(0,-10);
+    \draw[dashed] (firebase.south) -- ++(0,-10);
+    \draw[dashed] (firestore.south) -- ++(0,-10);
+    
+    % Messages
+    \draw[message] ([yshift=-1cm]user.south) -- node[above, font=\tiny] {1: Email, Password оруулах} ([yshift=-1cm]ui.south);
+    
+    \draw[message] ([yshift=-2cm]ui.south) -- node[above, font=\tiny] {2: signIn(email, password)} ([yshift=-2cm]auth.south);
+    
+    \draw[message] ([yshift=-3cm]auth.south) -- node[above, font=\tiny] {3: signInWithEmailAndPassword()} ([yshift=-3cm]firebase.south);
+    
+    \draw[message] ([yshift=-4cm]firebase.south) -- node[below, font=\tiny] {4: User token} ([yshift=-4cm]auth.south);
+    
+    \draw[message] ([yshift=-5cm]auth.south) -- node[above, font=\tiny] {5: getUserData(userId)} ([yshift=-5cm]firestore.south);
+    
+    \draw[message] ([yshift=-6cm]firestore.south) -- node[below, font=\tiny] {6: User data} ([yshift=-6cm]auth.south);
+    
+    \draw[message] ([yshift=-7cm]auth.south) -- node[below, font=\tiny] {7: Login success} ([yshift=-7cm]ui.south);
+    
+    \draw[message] ([yshift=-8cm]ui.south) -- node[below, font=\tiny] {8: Нүүр дэлгэц рүү шилжих} ([yshift=-8cm]user.south);
+    
+    \end{tikzpicture}
+    \caption{Хэрэглэгч нэвтрэх процессын Sequence диаграмм}
+    \label{fig:sequence-login}
+\end{figure}
+
+\paragraph{Sequence диаграммын тайлбар:}
+
+Диаграмм нь нэвтрэх процессыг 8 алхамд хуваан харуулж байна: (1) Email/Password оруулах, (2) Auth Service руу хүсэлт, (3) Firebase баталгаажуулалт, (4) Token буцаах, (5-6) Хэрэглэгчийн өгөгдөл татах, (7-8) Нүүр дэлгэц рүү шилжих. Firebase Authentication ашигласнаар аюулгүй токен-д суурилсан баталгаажуулалт хэрэгждэг.
+
+\subsubsection{Activity Diagram - Flashcard суралцах процесс}
+
+Activity диаграмм нь системийн үйл явцын урсгалыг (workflow) харуулдаг. Энэ нь алхам алхмаар юу болж байгааг, ямар шийдвэр гаргаж байгааг харуулна. Доорх диаграмм нь хэрэглэгч flashcard суралцах процессыг харуулж байна.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        start/.style={ellipse, draw=black, fill=green!30, minimum width=2cm, minimum height=0.8cm, align=center},
+        end/.style={ellipse, draw=black, fill=red!30, minimum width=2cm, minimum height=0.8cm, align=center},
+        process/.style={rectangle, draw=black, fill=blue!20, minimum width=3cm, minimum height=0.8cm, align=center},
+        decision/.style={diamond, draw=black, fill=yellow!30, minimum width=2.5cm, minimum height=2cm, align=center, aspect=2},
+        arrow/.style={->, >=stealth, thick}
+    ]
+    
+    % Start
+    \node[start] (start) {Эхлэх};
+    
+    % Process nodes
+    \node[process, below=of start] (load) {Flashcard\\ачаалах};
+    \node[process, below=of load] (show) {Урд тал\\харуулах};
+    \node[decision, below=of show] (flip) {Эргүүлэх\\үү?};
+    \node[process, right=3cm of flip] (showback) {Ард тал\\харуулах};
+    \node[decision, below=of showback] (rate) {Үнэлгээ\\өгөх};
+    \node[process, below=of rate] (update) {Progress\\шинэчлэх};
+    \node[decision, below=of update] (more) {Дараагийн\\карт?};
+    \node[end, below=of more] (finish) {Дуусгах};
+    
+    % Arrows
+    \draw[arrow] (start) -- (load);
+    \draw[arrow] (load) -- (show);
+    \draw[arrow] (show) -- (flip);
+    \draw[arrow] (flip) -- node[above] {Тийм} (showback);
+    \draw[arrow] (flip) -- node[left] {Үгүй} ++(0,-1) -| (show);
+    \draw[arrow] (showback) -- (rate);
+    \draw[arrow] (rate) -- node[right, font=\tiny] {Амархан/Дунд/Хэцүү} (update);
+    \draw[arrow] (update) -- (more);
+    \draw[arrow] (more) -- node[right] {Тийм} ++(2,0) |- (load);
+    \draw[arrow] (more) -- node[left] {Үгүй} (finish);
+    
+    \end{tikzpicture}
+    \caption{Flashcard суралцах процессын Activity диаграмм}
+    \label{fig:activity-flashcard}
+\end{figure}
+
+\paragraph{Activity диаграммын тайлбар:}
+
+Диаграмм нь суралцах процессыг харуулна: Flashcard ачаалах → Урд тал харуулах → Эргүүлэх → Ард тал харуулах → Үнэлгээ өгөх (Амархан/Дунд/Хэцүү) → Progress шинэчлэх → Дараагийн карт эсвэл дуусгах. Spaced repetition алгоритм нь хэрэглэгчийн үнэлгээний дагуу дараагийн давталтын огноог тооцоолдог.
+
+\subsubsection{Data Flow Diagram (DFD) - Өгөгдлийн урсгалын диаграмм}
+
+Data Flow Diagram нь системд өгөгдөл хэрхэн урсаж, боловсруулагдаж, хадгалагдаж байгааг харуулдаг. Энэ нь системийн өгөгдлийн архитектурыг ойлгоход тусалдаг.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=3cm,
+        entity/.style={rectangle, draw=black, minimum width=2.5cm, minimum height=1cm, align=center},
+        process/.style={circle, draw=black, fill=blue!20, minimum size=2cm, align=center},
+        datastore/.style={rectangle, draw=black, fill=green!20, minimum width=2.5cm, minimum height=0.8cm, align=center},
+        flow/.style={->, >=stealth, thick}
+    ]
+    
+    % External entities
+    \node[entity] (user) {Хэрэглэгч};
+    \node[entity, right=5cm of user] (firebase) {Firebase\\Platform};
+    
+    % Processes
+    \node[process, below=of user] (auth) {1.0\\Баталгаа-\\жуулалт};
+    \node[process, below=of auth] (study) {2.0\\Суралцах};
+    \node[process, right=of study] (ocr) {3.0\\OCR\\таних};
+    
+    % Data stores
+    \node[datastore, below=of study] (userdb) {D1: Users};
+    \node[datastore, right=of userdb] (flashdb) {D2: Flashcards};
+    \node[datastore, right=of flashdb] (progdb) {D3: UserProgress};
+    
+    % Data flows
+    \draw[flow] (user) -- node[left, font=\tiny] {Email, Password} (auth);
+    \draw[flow] (auth) -- node[right, font=\tiny] {User token} (user);
+    \draw[flow] (auth) -- node[above, font=\tiny] {Auth request} (firebase);
+    \draw[flow] (firebase) -- node[below, font=\tiny] {Token} (auth);
+    
+    \draw[flow] (user) -- node[left, font=\tiny] {Суралцах хүсэлт} (study);
+    \draw[flow] (study) -- node[right, font=\tiny] {Flashcard} (user);
+    \draw[flow] (study) -- (flashdb);
+    \draw[flow] (flashdb) -- (study);
+    \draw[flow] (study) -- (progdb);
+    \draw[flow] (progdb) -- (study);
+    
+    \draw[flow] (user) -- node[above, font=\tiny] {Зураг} (ocr);
+    \draw[flow] (ocr) -- node[below, font=\tiny] {Таниулсан үр дүн} (user);
+    
+    \draw[flow] (auth) -- (userdb);
+    \draw[flow] (userdb) -- (auth);
+    
+    \end{tikzpicture}
+    \caption{Egüü системийн Data Flow Diagram (Level 1)}
+    \label{fig:dfd-level1}
+\end{figure}
+
+\paragraph{Data Flow Diagram-ын тайлбар:}
+
+Диаграмм нь 3 үндсэн процессыг харуулна: (1) Баталгаажуулалт - Firebase-ээр хэрэглэгчийг баталгаажуулах, (2) Суралцах - Flashcards сангаас карт авч UserProgress санд хадгалах, (3) OCR таних - TensorFlow.js ашиглан Монгол бичиг таних. Өгөгдлийн сангууд: Users, Flashcards, UserProgress.
+
+
+
+\subsection{Системийн архитектур}
+\label{subsec:architecture}
+
+\subsubsection{Системийн ерөнхий архитектур}
+
+Egüü систем нь client-server архитектураар зохион байгуулагдсан бөгөөд дараах үндсэн бүрэлдэхүүн хэсгүүдээс бүрдэнэ:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=2cm,
+        box/.style={rectangle, draw=black, fill=blue!20, minimum width=3cm, minimum height=1cm, align=center},
+        db/.style={cylinder, draw=black, fill=green!20, minimum width=2cm, minimum height=1.5cm, align=center, shape border rotate=90},
+        cloud/.style={ellipse, draw=black, fill=yellow!20, minimum width=3cm, minimum height=1.5cm, align=center}
+    ]
+    
+    % Client layer
+    \node[box] (client) {React Native\\Mobile App};
+    
+    % Firebase services
+    \node[cloud, below=of client] (firebase) {Firebase\\Platform};
+    \node[db, below left=1.5cm and 1cm of firebase] (firestore) {Cloud\\Firestore};
+    \node[box, below=of firebase] (auth) {Firebase\\Authentication};
+    \node[db, below right=1.5cm and 1cm of firebase] (storage) {Firebase\\Storage};
+    
+    % TensorFlow
+    \node[box, right=3cm of client] (tf) {TensorFlow.js\\OCR Model};
+    
+    % Connections
+    \draw[->, thick] (client) -- (firebase);
+    \draw[->, thick] (firebase) -- (firestore);
+    \draw[->, thick] (firebase) -- (auth);
+    \draw[->, thick] (firebase) -- (storage);
+    \draw[->, thick] (client) -- (tf);
+    
+    \end{tikzpicture}
+    \caption{Egüü системийн ерөнхий архитектур}
+    \label{fig:system-architecture}
+\end{figure}
+
+\paragraph{Архитектурын тайлбар:}
+
+\begin{enumerate}
+    \item \textbf{Client Layer (React Native Mobile App):}
+    \begin{itemize}
+        \item iOS болон Android төхөөрөмж дээр ажиллах гар утасны аппликейшн
+        \item Expo Router ашиглан навигаци удирдлага
+        \item NativeWind/Tailwind CSS ашиглан UI дизайн
+        \item React Context API ашиглан төлөв удирдлага
+    \end{itemize}
+    
+    \item \textbf{Firebase Platform:}
+    \begin{itemize}
+        \item \textbf{Cloud Firestore:} Flashcard, хэрэглэгчийн мэдээлэл, дуртай жагсаалт, streak өгөгдөл хадгалах
+        \item \textbf{Firebase Authentication:} Email/Password, Google Sign-In баталгаажуулалт
+        \item \textbf{Firebase Storage:} Flashcard зургууд, хэрэглэгчийн профайл зураг хадгалах
+    \end{itemize}
+    
+    \item \textbf{TensorFlow.js OCR Model:}
+    \begin{itemize}
+        \item Хэрэглэгчийн гараар бичсэн Монгол бичгийг таних
+        \item Client-side дээр ажиллах (privacy)
+        \item Pre-trained model ашиглах
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Модуляр архитектур}
+
+Egüü апп нь модуляр архитектураар зохион байгуулагдсан бөгөөд дараах үндсэн модулиудаас бүрдэнэ:
+
+\begin{lstlisting}[language=JavaScript, caption=Модуляр бүтэц]
+app/
+├── (tabs)/                 // Tab navigation
+│   ├── index.tsx           // Home screen
+│   ├── search.tsx          // Search screen
+│   ├── favorites.tsx       // Favorites screen
+│   └── profile.tsx         // Profile screen
+├── flashcard/
+│   └── [id].tsx            // Flashcard detail
+├── camera.tsx              // OCR camera screen
+├── settings.tsx            // Settings screen
+├── _layout.tsx             // Root layout
+│
+components/                 // Reusable components
+├── FlashcardItem.tsx
+├── CategoryPill.tsx
+├── StreakCounter.tsx
+└── DailyWordCard.tsx
+│
+services/                   // Business logic
+├── firebase/
+│   ├── auth.ts
+│   ├── firestore.ts
+│   └── storage.ts
+├── ocr/
+│   └── tensorflowOCR.ts
+└── i18n/
+    └── translations.ts
+│
+contexts/                   // State management
+├── AuthContext.tsx
+├── FlashcardContext.tsx
+└── ThemeContext.tsx
+│
+utils/                      // Utility functions
+├── spacedRepetition.ts
+├── dateHelpers.ts
+└── validators.ts
+\end{lstlisting}
+
+\subsection{Өгөгдлийн сангийн зохиомж}
+\label{subsec:database-design}
+
+\subsubsection{Firestore өгөгдлийн бүтэц}
+
+Egüü систем нь Cloud Firestore NoSQL өгөгдлийн санг ашигладаг. Дараах collection-ууд байна:
+
+\paragraph{1. Flashcards Collection:}
+
+\begin{lstlisting}[language=JavaScript, caption=Flashcards collection бүтэц]
+flashcards/
+  {flashcardId}/
+    - mongolBichig: string          // Монгол бичгийн үсэг "ᠠ"
+    - phonetic: string               // Фонетик "a"
+    - english: string                // Англи орчуулга "a (vowel)"
+    - definition: string             // Тодорхойлолт "Эгшиг үсэг"
+    - imageUrl: string               // Зургийн URL
+    - category: string               // Категори "vowels"
+    - difficulty: number             // Хүндрэл (1-5)
+    - createdAt: Timestamp
+    - updatedAt: Timestamp
+\end{lstlisting}
+
+\paragraph{2. Users Collection:}
+
+\begin{lstlisting}[language=JavaScript, caption=Users collection бүтэц]
+users/
+  {userId}/
+    - email: string
+    - displayName: string
+    - photoURL: string
+    - createdAt: Timestamp
+    - lastLoginAt: Timestamp
+    - preferences:
+        - language: string           // "mn" | "en"
+        - theme: string              // "light" | "dark"
+        - notifications: boolean
+    - stats:
+        - totalStudied: number       // Нийт суралцсан flashcard
+        - currentStreak: number      // Одоогийн streak
+        - longestStreak: number      // Хамгийн урт streak
+        - lastStudyDate: Timestamp
+\end{lstlisting}
+
+\paragraph{3. UserProgress Collection:}
+
+\begin{lstlisting}[language=JavaScript, caption=UserProgress collection бүтэц]
+userProgress/
+  {userId}/
+    flashcards/
+      {flashcardId}/
+        - easinessFactor: number     // SM-2 алгоритмын EF
+        - interval: number           // Дараагийн давталт хүртэлх хоног
+        - repetition: number         // Давталтын тоо
+        - nextReviewDate: Timestamp  // Дараагийн давталтын огноо
+        - lastReviewDate: Timestamp
+        - reviewHistory: array       // Давталтын түүх
+            - date: Timestamp
+            - quality: number        // 0-5
+\end{lstlisting}
+
+\paragraph{4. Favorites Collection:}
+
+\begin{lstlisting}[language=JavaScript, caption=Favorites collection бүтэц]
+favorites/
+  {userId}/
+    flashcards: array<string>        // Flashcard ID-ийн жагсаалт
+    addedAt: map<string, Timestamp>  // Нэмсэн огноо
+\end{lstlisting}
+
+\paragraph{5. DailyWords Collection:}
+
+\begin{lstlisting}[language=JavaScript, caption=DailyWords collection бүтэц]
+dailyWords/
+  {date}/                            // YYYY-MM-DD формат
+    - flashcardId: string
+    - createdAt: Timestamp
+\end{lstlisting}
+
+\subsubsection{Өгөгдлийн бүтцийн диаграмм}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=2.5cm,
+        entity/.style={rectangle, draw=black, fill=blue!20, minimum width=3cm, minimum height=1.5cm, align=center},
+        relationship/.style={diamond, draw=black, fill=yellow!20, minimum width=2cm, minimum height=1cm, align=center}
+    ]
+    
+    % Entities
+    \node[entity] (user) {Users};
+    \node[entity, right=of user] (flashcard) {Flashcards};
+    \node[entity, below=of user] (progress) {UserProgress};
+    \node[entity, below=of flashcard] (favorite) {Favorites};
+    \node[entity, right=of flashcard] (daily) {DailyWords};
+    
+    % Relationships
+    \draw[->, thick] (user) -- node[above] {has} (progress);
+    \draw[->, thick] (user) -- node[above] {has} (favorite);
+    \draw[->, thick] (flashcard) -- node[right] {tracked in} (progress);
+    \draw[->, thick] (flashcard) -- node[right] {saved in} (favorite);
+    \draw[->, thick] (flashcard) -- node[above] {featured in} (daily);
+    
+    \end{tikzpicture}
+    \caption{Өгөгдлийн бүтцийн харилцаа}
+    \label{fig:data-model}
+\end{figure}
+
+\subsection{Хэрэглэгчийн интерфэйс (UI/UX) загвар}
+\label{subsec:ui-ux-design}
+
+\subsubsection{Дизайны зарчмууд}
+
+Egüü апп-ийн UI/UX дизайныг боловсруулахдаа дараах зарчмуудыг баримталсан:
+
+\begin{enumerate}
+    \item \textbf{Энгийн, ойлгомжтой:} Шинэ хэрэглэгч хялбар ашиглаж сурах
+    \item \textbf{Монгол соёлын элементүүд:} Монгол бичгийн уламжлалт дүрс, өнгө ашиглах
+    \item \textbf{Орчин үеийн, сонирхолтой:} Залуу үеийнхний анхаарлыг татах
+    \item \textbf{Хүртээмжтэй:} Бүх хэрэглэгчдэд ойлгомжтой (accessibility)
+    \item \textbf{Тууштай:} Бүх дэлгэцүүд нэгдмэл дизайнтай
+\end{enumerate}
+
+\subsubsection{Өнгөний палитр}
+
+Систем нь орчин үеийн өнгөний схем ашигладаг: Primary Blue (\#3B82F6), Success Green (\#10B981), Error Red (\#EF4444), мөн Light/Dark theme дэмжлэгтэй.
+
+\subsubsection{Үндсэн дэлгэцүүдийн загвар}
+
+Систем нь 4 үндсэн дэлгэцтэй: (1) Нүүр дэлгэц - Өдрийн үг, Streak counter, Категори жагсаалт; (2) Flashcard суралцах дэлгэц - Эргэдэг карт, үнэлгээ өгөх товчнууд; (3) Хайлтын дэлгэц - Хайлтын талбар, категори шүүлтүүр; (4) OCR дэлгэц - Камерын preview, таниулсан үр дүн.
+
+\subsection{Spaced Repetition алгоритмын хэрэгжүүлэлт}
+\label{subsec:spaced-repetition-implementation}
+
+Egüü систем нь SuperMemo 2 (SM-2) алгоритмын хялбаршуулсан хувилбарыг ашигладаг. Дараах кодоор хэрэгжүүлсэн:
+
+\begin{lstlisting}[language=JavaScript, caption=SM-2 алгоритмын хэрэгжүүлэлт]
+interface CardProgress {
+  easinessFactor: number;  // 1.3 - 2.5
+  interval: number;        // Хоногоор
+  repetition: number;      // Давталтын тоо
+  nextReviewDate: Date;
+}
+
+function calculateNextReview(
+  progress: CardProgress,
+  quality: number  // 0-5 (0=буруу, 5=маш амархан)
+): CardProgress {
+  let { easinessFactor, interval, repetition } = progress;
+  
+  // Quality 3-аас бага бол эхнээс эхлүүлэх
+  if (quality < 3) {
+    interval = 1;
+    repetition = 0;
+  } else {
+    // Interval тооцоолох
+    if (repetition === 0) {
+      interval = 1;
+    } else if (repetition === 1) {
+      interval = 6;
+    } else {
+      interval = Math.round(interval * easinessFactor);
+    }
+    repetition += 1;
+  }
+  
+  // Easiness Factor шинэчлэх
+  easinessFactor = easinessFactor + 
+    (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  
+  // EF-ийн доод хязгаар
+  if (easinessFactor < 1.3) {
+    easinessFactor = 1.3;
+  }
+  
+  // Дараагийн давталтын огноо
+  const nextReviewDate = new Date();
+  nextReviewDate.setDate(nextReviewDate.getDate() + interval);
+  
+  return {
+    easinessFactor,
+    interval,
+    repetition,
+    nextReviewDate
+  };
+}
+\end{lstlisting}
+
+\subsection{Дүгнэлт}
+
+Энэхүү бүлэгт Egüü системийн шаардлага, архитектур, өгөгдлийн сангийн зохиомж, UI/UX загвар, мөн spaced repetition алгоритмын хэрэгжүүлэлтийг дэлгэрэнгүй танилцуулсан.
+
+Судалгааны арга зүйн үндсэн дүгнэлтүүд:
+\begin{itemize}
+    \item Системийн шаардлагыг функциональ болон функциональ бус гэж ангилж тодорхойлсон
+    \item Client-server архитектураар Firebase платформыг ашиглан backend шийдсэн
+    \item NoSQL Firestore өгөгдлийн санг ашиглан уян хатан, scalable өгөгдлийн бүтэц бүтээсэн
+    \item Орчин үеийн, хэрэглэхэд хялбар UI/UX дизайн боловсруулсан
+    \item SM-2 spaced repetition алгоритмыг хэрэгжүүлж үр дүнтэй сургалтын систем бүтээсэн
+\end{itemize}
+
+Дараагийн бүлэгт эдгээр зохиомжийн дагуу системийн бодит хэрэгжүүлэлтийг дэлгэрэнгүй танилцуулна.
+
+\vfill

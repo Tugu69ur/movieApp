@@ -1,0 +1,246 @@
+%-------------------------------------------------------------------------------
+%   CHAPTER 2 - ОНОЛЫН БОЛОН ХАРЬЦУУЛСАН СУДАЛГАА
+%-------------------------------------------------------------------------------
+
+\section{Онолын болон харьцуулсан судалгаа}
+\label{sec:literature-review}
+
+Энэ бүлэгт Монгол бичгийн түүх, flashcard сургалтын систем, орчин үеийн гар утасны аппликейшн хөгжүүлэлтийн технологиуд, мөн ижил төстэй хэл сурах аппликейшнуудын талаарх онолын судалгааг дэлгэрэнгүй авч үзнэ.
+
+\subsection{Монгол бичгийн түүх ба онцлог}
+\label{subsec:mongolian-script}
+
+\subsubsection{Монгол бичгийн түүхэн хөгжил}
+
+Монгол бичиг нь XIII зууны эхээр Чингис хааны үед албан ёсоор нэвтэрсэн. Уйгур бичгээс гаралтай бөгөөд дэлхийн ховор босоо бичгүүдийн нэг юм~\cite{poppe1974mongolian}. 1941 онд кирилл үсэг нэвтэрснээр хэрэглээ эрс багассан боловч 2020 оноос "Монгол бичгийг нэвтрүүлэх үндэсний хөтөлбөр"-ийг хэрэгжүүлж эхэлсэн~\cite{mongolia2020}.
+
+\subsubsection{Монгол бичгийн бүтэц ба онцлог}
+
+Монгол бичиг нь босоо бичгийн систем бөгөөд дээрээс доош, зүүнээс баруун тийш бичигддэг. Үндсэн онцлогууд:
+
+\begin{itemize}
+    \item \textbf{Үсгийн тоо:} 7 эгшиг, 26 гийгүүлэгч, нийт 33 үндсэн үсэг
+    \item \textbf{Байрлалын хувилбарууд:} Нэг үсэг үгийн эхэнд, дунд, төгсгөлд өөр өөр хэлбэртэй бичигддэг
+    \item \textbf{Холбох дүрэм:} Үсгүүд үгийн дотор холбогдож, үг бүрийг нэг бүтэн хэлбэрээр бичнэ
+\end{itemize}
+
+\paragraph{Сурахад тулгардаг хүндрэлүүд:}
+
+\begin{itemize}
+    \item Нэг үсгийн олон хэлбэр (3-4 өөр хэлбэр)
+    \item Холбох дүрмийн нарийн ширийн зүйл
+    \item Орчин үеийн сургалтын материалын хомсдол
+\end{itemize}
+
+\subsection{Flashcard систем ба Spaced Repetition}
+\label{subsec:flashcard-systems}
+
+Flashcard (үсгийн карт) нь хамгийн үр дүнтэй сургалтын аргуудын нэг юм. Идэвхтэй сануулалт (Active Recall) болон Spaced Repetition зарчмуудад тулгуурладаг~\cite{karpicke2008critical}.
+
+\subsubsection{Spaced Repetition алгоритм}
+
+Spaced Repetition нь мэдээллийг тодорхой хугацааны интервалаар давтаж санах нь урт хугацааны санамжинд хадгалахад илүү үр дүнтэй гэсэн онолд тулгуурладаг. Hermann Ebbinghaus-ийн судалгаагаар хүмүүс шинэ мэдээллийг маш хурдан мартдаг боловч давтаж санах бүрт мартах хурд удааширдаг~\cite{ebbinghaus1985memory}.
+
+\paragraph{SuperMemo алгоритм (SM-2):}
+
+1987 онд Piotr Woźniak SuperMemo алгоритмыг хөгжүүлсэн. Энэ нь Leitner системээс илүү нарийвчилсан бөгөөд хүн бүрийн сурах хурдыг тооцдог. Анки (Anki) зэрэг алдартай flashcard аппликейшнууд энэ алгоритмыг ашигладаг~\cite{wozniak1990optimization}. SM-2 алгоритм нь Easiness Factor (EF), Interval, Repetition гэсэн гурван үндсэн параметрийг ашигладаг.
+
+\subsection{Гар утасны аппликейшн хөгжүүлэлтийн технологиуд}
+\label{subsec:mobile-technologies}
+
+\subsubsection{React Native - Cross-Platform фреймворк}
+
+React Native нь Facebook (Meta) компаниас 2015 онд нээлттэй эх болгон гаргасан гар утасны аппликейшн хөгжүүлэлтийн фреймворк юм. Энэ нь JavaScript ашиглан iOS болон Android үйлдлийн системд зэрэг ажиллах native аппликейшн хөгжүүлэх боломжийг олгодог.
+
+\paragraph{React Native-ийн ажиллах зарчим:}
+
+React Native нь "Learn once, write anywhere" (Нэг удаа сур, хаана ч бич) гэсэн философид тулгуурладаг. Энэ нь дараах бүрэлдэхүүн хэсгүүдээс бүрдэнэ:
+
+\begin{enumerate}
+    \item \textbf{JavaScript Thread:} Апп-ийн бизнес логик JavaScript дээр ажиллана.
+    
+    \item \textbf{Bridge (Гүүр):} JavaScript болон Native код хооронд мэдээлэл дамжуулах гүүр. Энэ нь JSON формат ашиглан асинхрон харилцаа хийдэг.
+    
+    \item \textbf{Native Thread:} Төхөөрөмжийн native боломжууд (камер, GPS, файл систем гэх мэт) энд ажиллана.
+    
+    \item \textbf{UI Thread:} Хэрэглэгчийн интерфэйс native компонентуудаар (iOS-д UIKit, Android-д Android Views) дүрслэгдэнэ.
+\end{enumerate}
+
+\paragraph{React Native-ийн давуу талууд Egüү төсөлд:}
+
+\begin{itemize}
+    \item \textbf{Cross-platform:} Нэг удаа бичээд iOS болон Android дээр ажиллуулах
+    \item \textbf{Hot Reload:} Кодод өөрчлөлт оруулахад аппыг дахин ачаалахгүйгээр үр дүнг шууд харах
+    \item \textbf{Том коммьюнити:} npm дээр 400,000+ package
+\end{itemize}
+
+\subsubsection{Expo - React Native хөгжүүлэлтийн платформ}
+
+Expo нь React Native дээр суурилсан платформ бөгөөд гар утасны аппликейшн хөгжүүлэлтийг илүү хялбар болгодог. Энэ нь "managed workflow" болон "bare workflow" гэсэн хоёр төрлийн хөгжүүлэлтийн загварыг санал болгодог.
+
+\paragraph{Expo-ийн үндсэн боломжууд:}
+
+\begin{itemize}
+    \item \textbf{Expo Go:} Бодит төхөөрөмж дээр шууд туршилт хийх боломжтой. QR код уншуулахад л хангалттай.
+    
+    \item \textbf{Expo SDK:} 50+ бэлэн модуль (камер, GPS, мэдэгдэл, файл систем гэх мэт). Native код бичих шаардлагагүй.
+    
+    \item \textbf{EAS Build:} Үүлэн дээр build хийх боломжтой. Локал машинд Xcode/Android Studio суулгах шаардлагагүй.
+    
+    \item \textbf{OTA Updates:} App Store/Google Play-д дахин илгээхгүйгээр JavaScript кодын шинэчлэлтийг хэрэглэгчдэд шууд хүргэх боломжтой.
+\end{itemize}
+
+\paragraph{Expo Router - Файлын бүтцэд суурилсан навигаци:}
+
+Expo Router нь Next.js-тэй төстэй routing системийг React Native-д авчирсан. Файлын бүтэц нь шууд навигацийн бүтэц болдог.
+
+\subsection{Firebase - Backend-as-a-Service}
+\label{subsec:firebase}
+
+\subsubsection{Firebase платформын тойм}
+
+Firebase нь Google-ийн үүлэн тооцооллын платформ бөгөөд гар утас болон вэб аппликейшн хөгжүүлэхэд зориулагдсан цогц шийдэл юм. "Backend-as-a-Service" (BaaS) загвараар ажилладаг бөгөөд энэ нь сервер талын инфраструктурыг бүрэн удирдах шаардлагагүй болгодог.
+
+\paragraph{Firebase-ийн түүх:}
+
+\begin{itemize}
+    \item \textbf{2011 он:} Firebase стартап компани болон байгуулагдсан (бодит цагийн чат апп хийх зорилготой)
+    \item \textbf{2014 он:} Google компани Firebase-ийг худалдан авсан
+    \item \textbf{2016 он:} Google I/O дээр Firebase-ийг Google Cloud Platform-тэй нэгтгэсэн
+    \item \textbf{Одоо:} Дэлхий даяар 3 сая гаруй апп Firebase ашигладаг
+\end{itemize}
+
+\subsubsection{Cloud Firestore - NoSQL өгөгдлийн сан}
+
+Cloud Firestore нь Firebase-ийн хамгийн чухал үйлчилгээ бөгөөд NoSQL документ-суурьтай (document-oriented) өгөгдлийн сан юм. Firestore нь өгөгдлийг collection (цуглуулга) болон document (баримт) бүтцээр хадгалдаг.
+
+\paragraph{Firestore-ийн өгөгдлийн бүтэц:}
+
+Firestore нь collection (цуглуулга) болон document (баримт) бүтцээр өгөгдөл хадгалдаг. Жишээ нь: flashcards collection нь flashcard document-үүдийг агуулна (mongolBichig, phonetic, english, definition, imageUrl, category гэх мэт талбаруудтай).
+
+\paragraph{Firestore-ийн онцлог боломжууд:}
+
+\begin{itemize}
+    \item \textbf{Real-time синхрончлол:} Өгөгдөл өөрчлөгдөхөд бүх холбогдсон клиентүүдэд шууд мэдэгддэг. \texttt{onSnapshot()} функцээр бодит цагийн сонсогч (listener) тохируулж болно.
+    
+    \item \textbf{Offline Persistence:} Интернэт холболтгүй үед ч аппликейшн ажиллах чадвартай. Өгөгдөл локал кэшэд хадгалагдаж, холболт сэргэхэд автоматаар синхрончлогддог.
+    
+    \item \textbf{Scalability:} Хэрэглэгчийн тоо нэмэгдэхэд автоматаар scale хийгддэг. Google-ийн дэд бүтцийг ашигладаг тул сая сая хэрэглэгчид үйлчлэх боломжтой.
+    
+    \item \textbf{Security Rules:} Нарийвчилсан хандалтын эрхийн удирдлага. Хэн ямар өгөгдөлд хандаж болохыг тодорхойлох боломжтой.
+\end{itemize}
+
+\begin{lstlisting}[language=JavaScript, caption=Firestore Security Rules жишээ]
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Бүх хүн flashcard-уудыг унших боломжтой
+    match /flashcards/{flashcardId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Зөвхөн өөрийн өгөгдлөө унших, бичих боломжтой
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Firebase Authentication}
+
+Firebase Authentication нь хэрэглэгчийн бүртгэл, нэвтрэлтийг удирдах бэлэн шийдэл юм. Egüü төсөлд Email/Password, Google Sign-In, Anonymous зэрэг аргуудыг ашигласан.
+
+\subsection{TensorFlow.js ба OCR технологи}
+\label{subsec:tensorflow-ocr}
+
+\subsubsection{TensorFlow.js - Вэб болон гар утсанд Machine Learning}
+
+TensorFlow.js нь Google-ийн TensorFlow машин сургалтын фреймворкийн JavaScript хувилбар юм. Энэ нь вэб хөтөч болон Node.js орчинд машин сургалтын загваруудыг ажиллуулах боломжийг олгодог.
+
+\paragraph{TensorFlow.js-ийн давуу талууд:}
+
+\begin{itemize}
+    \item \textbf{Client-side inference:} Сервер рүү өгөгдөл илгээх шаардлагагүй, төхөөрөмж дээр шууд ажиллана.
+    
+    \item \textbf{Privacy:} Хэрэглэгчийн өгөгдөл төхөөрөмжөөс гардаггүй.
+    
+    \item \textbf{Offline боломж:} Интернэтгүй ч ажиллах боломжтой.
+    
+    \item \textbf{React Native дэмжлэг:} @tensorflow/tfjs-react-native package ашиглан React Native апп дээр ажиллуулж болно.
+\end{itemize}
+
+\subsubsection{OCR (Optical Character Recognition) технологи}
+
+OCR нь зураг дээрх текстийг таних технологи юм. Egüü төсөлд хэрэглэгчийн гараар бичсэн Монгол бичгийг таних зорилгоор TensorFlow.js ашиглан хэрэгжүүлсэн. Процесс нь: Зураг авах → Preprocessing → Segmentation → Feature extraction → Classification → Post-processing гэсэн дарааллаар явагдана.
+
+\subsection{Ижил төстэй аппликейшнуудын харьцуулсан судалгаа}
+\label{subsec:comparative-analysis}
+
+Дэлхий даяар түгээмэл хэрэглэгддэг хэл сурах аппликейшнуудыг судалж, Egüү төсөлд хэрэглэх боломжтой шийдлүүдийг тодорхойлсон.
+
+\subsubsection{Гол аппликейшнууд}
+
+\begin{itemize}
+    \item \textbf{Duolingo:} Gamification элементүүдтэй (XP, streak, leaderboard). 500 сая+ хэрэглэгч. Монгол бичиг дэмждэггүй.
+    
+    \item \textbf{Anki:} SM-2 spaced repetition алгоритм ашигладаг. Маш үр дүнтэй боловч UI хуучирсан, эхлэгчдэд хэцүү.
+    
+    \item \textbf{Memrise:} Бодит хүмүүсийн видео агуулгатай. Spaced repetition дэмждэг.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Хэл сурах аппликейшнуудын харьцуулалт}
+\label{tab:app-comparison}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Онцлог} & \textbf{Duolingo} & \textbf{Anki} & \textbf{Memrise} & \textbf{Egüü} \\
+\hline
+Gamification & +++ & - & ++ & ++ \\
+\hline
+Spaced Repetition & + & +++ & ++ & +++ \\
+\hline
+UI/UX & +++ & + & ++ & +++ \\
+\hline
+Монгол бичиг & - & - & - & +++ \\
+\hline
+OCR таних & - & - & - & ++ \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Egüү төслийн давуу талууд}
+
+Дээрх судалгааны үндсэн дээр Egüü төсөл нь дараах давуу талуудтай:
+
+\begin{enumerate}
+    \item \textbf{Монгол бичигт тусгайлсан:} Одоогоор Монгол бичиг заах орчин үеийн апп байхгүй. Egüü нь энэ зах зээлийн цорын ганц шийдэл болно.
+    
+    \item \textbf{OCR технологи:} Хэрэглэгч гараар бичсэн үгээ таниулах боломжтой. Энэ нь бусад аппуудад байхгүй онцлог юм.
+    
+    \item \textbf{Орчин үеийн UI/UX:} React Native, NativeWind ашиглан орчин үеийн, сонирхолтой интерфэйс бүтээсэн.
+    
+    \item \textbf{Gamification + Spaced Repetition:} Duolingo-ийн gamification болон Anki-ийн spaced repetition-ийг хослуулсан.
+    
+    \item \textbf{Олон хэлний дэмжлэг:} i18n ашиглан Монгол, Англи хэлээр ашиглах боломжтой.
+    
+    \item \textbf{Үнэгүй, нээлттэй эх:} Бүх хүнд хүртээмжтэй, коммьюнитид хувь нэмэр оруулах боломжтой.
+\end{enumerate}
+
+\subsection{Дүгнэлт}
+
+Энэхүү бүлэгт Монгол бичгийн түүх, flashcard сургалтын систем, орчин үеийн гар утасны аппликейшн хөгжүүлэлтийн технологиуд, мөн ижил төстэй хэл сурах аппликейшнуудын талаарх дэлгэрэнгүй судалгааг хийлээ.
+
+Судалгааны үр дүнгээс харахад:
+\begin{itemize}
+    \item Монгол бичиг нь түүхэн өв болох уламжлалт бичиг боловч орчин үед сурах боломж хязгаарлагдмал байна
+    \item Flashcard систем болон spaced repetition алгоритм нь хэл сурахад маш үр дүнтэй арга болох нь батлагдсан
+    \item React Native, Firebase, TensorFlow.js зэрэг технологиуд нь орчин үеийн, үр дүнтэй гар утасны апп хөгжүүлэх боломжийг олгодог
+    \item Одоогоор Монгол бичигт тусгайлсан орчин үеийн апп байхгүй тул Egüü төсөл нь чухал хэрэгцээг хангах болно
+\end{itemize}
+
+Дараагийн бүлэгт эдгээр онолын судалгаанд үндэслэн Egüü системийн шинжилгээ, зохиомжийг дэлгэрэнгүй танилцуулна.
+
+\vfill

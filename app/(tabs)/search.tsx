@@ -94,12 +94,12 @@ export default function SearchScreen() {
   );
 
   const categories = [
-    { id: "All", label: t("all") || "All" },
-    { id: "Animals", label: t("animals") },
-    { id: "Nature", label: t("nature") },
-    { id: "Technology", label: t("tech") },
-    { id: "Food", label: t("food") },
-    { id: "Travel", label: t("travel") },
+    { id: "All", label: t("alll") || "All" },
+    { id: "Animals", label: t("animalss") },
+    { id: "Nature", label: t("naturee") },
+    { id: "Technology", label: t("techh") },
+    { id: "Food", label: t("foodd") },
+    { id: "Travel", label: t("travell") },
   ];
 
   const sections = [
@@ -203,7 +203,7 @@ export default function SearchScreen() {
               {isGrid ? (
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 16 }}>
                   {filteredCards.map((card) => (
-                    <TouchableOpacity key={card.id} style={[styles.card, { width: cardWidth, backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}
+                    <TouchableOpacity key={card.id} style={[styles.card, { width: cardWidth, marginRight: 0, backgroundColor: isDark ? "#1e293b" : "#fff", borderColor: isDark ? "#374151" : "#e2e8f0" }]}
                       onPress={() => router.push(`/movies/${card.id}`)} activeOpacity={0.9}>
                       <Image source={FlashcardService.getLocalImage(card.image)} style={styles.cardImage} />
                       <View style={styles.cardOverlay} />

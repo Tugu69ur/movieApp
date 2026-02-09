@@ -1,3 +1,4 @@
+
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
@@ -57,7 +58,7 @@ export default function CategoryScreen() {
     <SafeAreaView className="flex-1 bg-neutral-50 dark:bg-neutral-900">
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View className="flex-row items-center px-4 py-2 mb-2">
+      <View className="flex-row items-center px-4 py-2">
         <TouchableOpacity onPress={() => router.back()} className="p-2 bg-white dark:bg-neutral-800 rounded-full shadow-sm mr-4">
           <ArrowLeft size={24} color="#4b5563" />
         </TouchableOpacity>
@@ -84,3 +85,4 @@ export default function CategoryScreen() {
     </SafeAreaView>
   );
 }
+
