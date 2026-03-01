@@ -212,50 +212,79 @@ export default function DrawScreen() {
       >
         {/* Header */}
         <View style={{
-          backgroundColor: isDark ? "#1e293b" : "#fff",
+          backgroundColor: isDark ? "#1e293b" : "#8b5cf6",
           paddingTop: Platform.OS === "ios" ? 60 : 20,
           paddingHorizontal: 24,
           paddingBottom: 24,
-          borderBottomLeftRadius: 24,
-          borderBottomRightRadius: 24,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
           marginBottom: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
           ...Platform.select({
             ios: {
               shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: isDark ? 0.3 : 0.05,
-              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: isDark ? 0.4 : 0.2,
+              shadowRadius: 12,
             },
             android: {
-              elevation: 3,
+              elevation: 8,
             },
           }),
         }}>
-          <View>
-            <Text style={{ fontSize: 28, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a", marginBottom: 4 }}>{t('handwritten')}</Text>
-            <Text style={{ fontSize: 15, color: isDark ? "#94a3b8" : "#64748b", fontWeight: "500" }}>Монгол бичиг зурах</Text>
+          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 12 }}>
+            <View style={{
+              backgroundColor: isDark ? "#8b5cf6" : "#ffffff",
+              padding: 10,
+              borderRadius: 16,
+              marginRight: 12,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.1,
+              shadowRadius: 4,
+              elevation: 2,
+            }}>
+              <MaterialIcons name="gesture" size={24} color={isDark ? "#ffffff" : "#8b5cf6"} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                fontSize: 32,
+                fontWeight: "800",
+                color: "#ffffff",
+                letterSpacing: -0.5,
+                marginBottom: 2
+              }}>
+                {t('handwritten')}
+              </Text>
+              <Text style={{
+                fontSize: 15,
+                color: isDark ? "#cbd5e1" : "#ede9fe",
+                fontWeight: "600",
+                letterSpacing: 0.3
+              }}>
+                Монгол бичиг зурах
+              </Text>
+            </View>
           </View>
-          <View style={styles.statusContainer}>
+          <View style={{
+            backgroundColor: isDark ? "#374151" : "rgba(255, 255, 255, 0.25)",
+            paddingHorizontal: 12,
+            paddingVertical: 6,
+            borderRadius: 12,
+            borderWidth: 1,
+            borderColor: isDark ? "#4b5563" : "rgba(255, 255, 255, 0.4)",
+            alignSelf: "flex-start",
+          }}>
             {modelRef.current ? (
               <View style={{
-                backgroundColor: isDark ? "#374151" : "#f1f5f9",
-                paddingHorizontal: 12,
-                paddingVertical: 6,
-                borderRadius: 12,
-                borderWidth: 1,
-                borderColor: isDark ? "#4b5563" : "#e2e8f0",
                 flexDirection: "row",
                 alignItems: "center",
                 gap: 6,
               }}>
                 <View style={styles.statusDot} />
-                <Text style={styles.statusText}>{t('model_ready')}</Text>
+                <Text style={{ fontSize: 12, fontWeight: "600", color: isDark ? "#10b981" : "#ffffff" }}>{t('model_ready')}</Text>
               </View>
             ) : (
-              <Text style={styles.statusTextLoading}>{t('model_loading')}</Text>
+              <Text style={{ fontSize: 12, fontWeight: "600", color: isDark ? "#f59e0b" : "#ffffff" }}>{t('model_loading')}</Text>
             )}
           </View>
         </View>

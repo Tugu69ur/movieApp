@@ -1,0 +1,219 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{poppe1974mongolian}{book}{}
+      \name{author}{1}{}{%
+        {{hash=69a0fbbc88e9421773abe0f9a0296546}{%
+           family={Poppe},
+           familyi={P\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Otto Harrassowitz}%
+      }
+      \strng{namehash}{69a0fbbc88e9421773abe0f9a0296546}
+      \strng{fullhash}{69a0fbbc88e9421773abe0f9a0296546}
+      \strng{bibnamehash}{69a0fbbc88e9421773abe0f9a0296546}
+      \strng{authorbibnamehash}{69a0fbbc88e9421773abe0f9a0296546}
+      \strng{authornamehash}{69a0fbbc88e9421773abe0f9a0296546}
+      \strng{authorfullhash}{69a0fbbc88e9421773abe0f9a0296546}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Mongolian Monuments in ḥP'ags-pa Script}
+      \field{year}{1974}
+    \endentry
+    \entry{janhunen2003mongolic}{book}{}
+      \name{author}{1}{}{%
+        {{hash=3475c39488fe7fbce296aeb69fc197cf}{%
+           family={Janhunen},
+           familyi={J\bibinitperiod},
+           given={Juha},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Routledge}%
+      }
+      \strng{namehash}{3475c39488fe7fbce296aeb69fc197cf}
+      \strng{fullhash}{3475c39488fe7fbce296aeb69fc197cf}
+      \strng{bibnamehash}{3475c39488fe7fbce296aeb69fc197cf}
+      \strng{authorbibnamehash}{3475c39488fe7fbce296aeb69fc197cf}
+      \strng{authornamehash}{3475c39488fe7fbce296aeb69fc197cf}
+      \strng{authorfullhash}{3475c39488fe7fbce296aeb69fc197cf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Mongolic Languages}
+      \field{year}{2003}
+    \endentry
+    \entry{godwin2016mobile}{article}{}
+      \name{author}{1}{}{%
+        {{hash=59f8fa3e33ef434eb609e7b7ceefbacd}{%
+           family={Godwin-Jones},
+           familyi={G\bibinithyphendelim J\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \strng{fullhash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \strng{bibnamehash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \strng{authorbibnamehash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \strng{authornamehash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \strng{authorfullhash}{59f8fa3e33ef434eb609e7b7ceefbacd}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Language Learning \& Technology}
+      \field{number}{2}
+      \field{title}{Mobile app for language learning}
+      \field{volume}{20}
+      \field{year}{2016}
+      \field{pages}{3\bibrangedash 9}
+      \range{pages}{7}
+    \endentry
+    \entry{nakata2011computer}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a44390072ba7fd07303c6c05a4776eb8}{%
+           family={Nakata},
+           familyi={N\bibinitperiod},
+           given={Tatsuya},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{a44390072ba7fd07303c6c05a4776eb8}
+      \strng{fullhash}{a44390072ba7fd07303c6c05a4776eb8}
+      \strng{bibnamehash}{a44390072ba7fd07303c6c05a4776eb8}
+      \strng{authorbibnamehash}{a44390072ba7fd07303c6c05a4776eb8}
+      \strng{authornamehash}{a44390072ba7fd07303c6c05a4776eb8}
+      \strng{authorfullhash}{a44390072ba7fd07303c6c05a4776eb8}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computer Assisted Language Learning}
+      \field{number}{1}
+      \field{title}{Computer-assisted second language vocabulary learning in a paired-associate paradigm: A critical investigation of flashcard software}
+      \field{volume}{24}
+      \field{year}{2011}
+      \field{pages}{17\bibrangedash 38}
+      \range{pages}{22}
+    \endentry
+    \entry{karpicke2008critical}{article}{}
+      \name{author}{2}{}{%
+        {{hash=585da0827f5f2a43fc258a4f97ee1590}{%
+           family={Karpicke},
+           familyi={K\bibinitperiod},
+           given={Jeffrey\bibnamedelima D},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=1e92f0f4dc19f38ecb56336e0fbeb042}{%
+           family={Roediger\bibnamedelima III},
+           familyi={R\bibinitperiod\bibinitdelim I\bibinitperiod},
+           given={Henry\bibnamedelima L},
+           giveni={H\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Association for the Advancement of Science}%
+      }
+      \strng{namehash}{ac556f17b5a7389e5bb0434356889487}
+      \strng{fullhash}{ac556f17b5a7389e5bb0434356889487}
+      \strng{bibnamehash}{ac556f17b5a7389e5bb0434356889487}
+      \strng{authorbibnamehash}{ac556f17b5a7389e5bb0434356889487}
+      \strng{authornamehash}{ac556f17b5a7389e5bb0434356889487}
+      \strng{authorfullhash}{ac556f17b5a7389e5bb0434356889487}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science}
+      \field{number}{5865}
+      \field{title}{The critical importance of retrieval for learning}
+      \field{volume}{319}
+      \field{year}{2008}
+      \field{pages}{966\bibrangedash 968}
+      \range{pages}{3}
+    \endentry
+    \entry{ebbinghaus1985memory}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5d7a6e7e0e82bcc144f01ac47862fe2f}{%
+           family={Ebbinghaus},
+           familyi={E\bibinitperiod},
+           given={Hermann},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Teachers college, Columbia university}%
+      }
+      \strng{namehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \strng{fullhash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \strng{bibnamehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \strng{authorbibnamehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \strng{authornamehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \strng{authorfullhash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Memory: A contribution to experimental psychology}
+      \field{year}{1885}
+    \endentry
+    \entry{wozniak1990optimization}{article}{}
+      \name{author}{2}{}{%
+        {{hash=098dcc12967fae4e45ef78066e79fd31}{%
+           family={Woźniak},
+           familyi={W\bibinitperiod},
+           given={Piotr},
+           giveni={P\bibinitperiod}}}%
+        {{hash=7df4e19362858b29a45e3853ac2d69ab}{%
+           family={Gorzelańczyk},
+           familyi={G\bibinitperiod},
+           given={Edward\bibnamedelima J},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \strng{fullhash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \strng{bibnamehash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \strng{authorbibnamehash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \strng{authornamehash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \strng{authorfullhash}{4dafd8ca00f14b7d8c23f880772cd565}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Acta neurobiologiae experimentalis}
+      \field{title}{Optimization of repetition spacing in the practice of learning}
+      \field{volume}{51}
+      \field{year}{1990}
+      \field{pages}{59\bibrangedash 62}
+      \range{pages}{4}
+    \endentry
+  \enddatalist
+  \missing{nack2016learning}
+  \missing{smilkov2019tensorflow}
+  \missing{welekar2017firebase}
+\endrefsection
+\endinput
+

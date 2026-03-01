@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as LocalAuthentication from 'expo-local-authentication';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, ChevronRight, Key, Lock, Shield, Smartphone, Trash2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
@@ -20,6 +22,42 @@ export default function SecurityPrivacyScreen() {
     const isDark = colorScheme === "dark";
 
     const [biometricsEnabled, setBiometricsEnabled] = React.useState(false);
+    const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
+
+    React.useEffect(() => {
+        (async () => {
+            const compatible = await LocalAuthentication.hasHardwareAsync();
+            const enrolled = await LocalAuthentication.isEnrolledAsync();
+            setIsBiometricSupported(compatible && enrolled);
+
+            const saved = await AsyncStorage.getItem('biometric_enabled');
+            setBiometricsEnabled(saved === 'true');
+        })();
+    }, []);
+
+    const handleBiometricToggle = async (value: boolean) => {
+        if (!isBiometricSupported) {
+            Alert.alert('Not Supported', 'Biometric authentication is not available or not enrolled on this device.');
+            return;
+        }
+
+        if (value) {
+            const result = await LocalAuthentication.authenticateAsync({
+                promptMessage: 'Authenticate to enable biometric login',
+                fallbackLabel: 'Use Passcode',
+            });
+            if (result.success) {
+                setBiometricsEnabled(true);
+                await AsyncStorage.setItem('biometric_enabled', 'true');
+            } else {
+                setBiometricsEnabled(false);
+                Alert.alert('Authentication failed', 'Could not verify Your identity');
+            }
+        } else {
+            setBiometricsEnabled(false);
+            await AsyncStorage.setItem('biometric_enabled', 'false');
+        }
+    };
 
     const handleDeleteAccount = () => {
         Alert.alert(
@@ -107,8 +145,9 @@ export default function SecurityPrivacyScreen() {
                                     trackColor={{ false: '#767577', true: '#6366f1' }}
                                     thumbColor={biometricsEnabled ? '#ffffff' : '#f4f3f4'}
                                     ios_backgroundColor="#3e3e3e"
-                                    onValueChange={setBiometricsEnabled}
+                                    onValueChange={handleBiometricToggle}
                                     value={biometricsEnabled}
+                                    disabled={!isBiometricSupported}
                                 />
                             </View>
                         </View>

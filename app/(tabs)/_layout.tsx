@@ -9,19 +9,18 @@ const TabIcon = ({ focused, icon, title, isDark }: any) => {
   return (
     <View style={styles.tabIconContainer}>
       {focused ? (
-        <View style={styles.activeTabBackground}>
-          <View style={styles.iconWrapper}>
-            <View style={styles.iconCircle}>
-              <Image
-                source={icon}
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: "#fff",
-                }}
-              />
-            </View>
-          </View>
+        <View style={[
+          styles.activeTabBackground,
+          isDark && styles.activeTabBackgroundDark
+        ]}>
+          <Image
+            source={icon}
+            style={{
+              width: 24,
+              height: 24,
+              tintColor: "#fff",
+            }}
+          />
           <Text style={styles.activeTabLabel}>{title}</Text>
         </View>
       ) : (
@@ -31,7 +30,7 @@ const TabIcon = ({ focused, icon, title, isDark }: any) => {
             style={{
               width: 24,
               height: 24,
-              tintColor: isDark ? "#6b7280" : "#94a3b8",
+              tintColor: isDark ? "#64748b" : "#94a3b8",
             }}
           />
         </View>
@@ -53,30 +52,25 @@ export default function Layout() {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: isDark ? "#1e293b" : "#fff",
-          height: 70,
-          paddingBottom: 8,
+          backgroundColor: "transparent",
+          height: Platform.OS === "ios" ? 69 : 60,
+          paddingBottom: Platform.OS === "ios" ? 20 : 8,
           paddingTop: 8,
+          paddingHorizontal: 16,
           borderTopWidth: 0,
           position: "absolute",
-          ...Platform.select({
-            ios: {
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: -2 },
-              shadowOpacity: isDark ? 0.3 : 0.05,
-              shadowRadius: 8,
-            },
-            android: {
-              elevation: 8,
-            },
-          }),
+          elevation: 0,
         },
         tabBarBackground: () => (
           <View style={styles.tabBarBackground}>
             <View
               style={[
                 styles.tabBarContent,
-                { backgroundColor: isDark ? "#1e293b" : "#fff" },
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#ffffff",
+                  borderWidth: 1,
+                  borderColor: isDark ? "#334155" : "#f1f5f9",
+                },
               ]}
             />
           </View>
@@ -152,7 +146,7 @@ export default function Layout() {
             <TabIcon
               focused={focused}
               icon={icons.person}
-              title="Орчуулга"
+              title="Профайл"
               isDark={isDark}
             />
           ),
@@ -167,46 +161,48 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 4,
   },
   activeTabBackground: {
     backgroundColor: "#6366f1",
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    borderRadius: 24,
+    paddingHorizontal: 22,
+    paddingVertical: 12,
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    shadowColor: "#6366f1",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
+    minHeight: 54,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#6366f1",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 12,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
+  },
+  activeTabBackgroundDark: {
+    backgroundColor: "#6366f1",
   },
   iconWrapper: {
     alignItems: "center",
     justifyContent: "center",
   },
-  iconCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconImage: {
-    width: 20,
-    height: 20,
-  },
   activeTabLabel: {
     color: "#fff",
     fontSize: 13,
     fontWeight: "700",
+    letterSpacing: 0.3,
   },
   inactiveTab: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 4,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    opacity: 0.5, // make it look smaller
   },
   tabBarBackground: {
     flex: 1,
@@ -214,7 +210,19 @@ const styles = StyleSheet.create({
   },
   tabBarContent: {
     flex: 1,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
+    marginHorizontal: 16,
+    marginBottom: Platform.OS === "ios" ? 8 : 4,
+    borderRadius: 28,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 16,
+      },
+      android: {
+        elevation: 12,
+      },
+    }),
   },
 });

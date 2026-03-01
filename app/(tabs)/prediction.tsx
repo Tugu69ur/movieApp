@@ -148,7 +148,7 @@ export default function PhotoPredictScreen() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [13, 13], // 50x650px орчим нарийн, босоо зураг авах
       quality: 1,
     });
 
@@ -237,7 +237,7 @@ export default function PhotoPredictScreen() {
     }
   };
 
-  const recognizeMongolImage = async (uri: string) => {
+  const recognizeMongolImage = async (uri: string, endpoint: "ocr" | "camera" = "ocr") => {
     setLoading(true);
     try {
       const formData = new FormData();
@@ -247,8 +247,8 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch("http://192.168.1.5:8000/ocr", {
-        //    const response = await fetch("http://192.168.1.19:8000/ocr", {
+      const response = await fetch(`http://172.20.10.4:8000/${endpoint}`, {
+        //    const response = await fetch(`http://192.168.1.19:8000/${endpoint}`, {
         method: "POST",
         body: formData,
         // ⚠️ Битгий Content-Type зааж өг
@@ -271,7 +271,7 @@ export default function PhotoPredictScreen() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [1, 13], // 50x650px орчим нарийн, босоо зураг авах
       quality: 1,
     });
 
@@ -279,8 +279,8 @@ export default function PhotoPredictScreen() {
       const uri = result.assets[0].uri;
       setImageUri(uri);
 
-      // OCR дуудаж текст авна
-      const text = await recognizeMongolImage(uri);
+      // OCR дуудаж текст авна (OCR Scan endpoint)
+      const text = await recognizeMongolImage(uri, "ocr");
       setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
 
       // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
@@ -307,29 +307,37 @@ export default function PhotoPredictScreen() {
     if (!hasPermission) return;
 
     try {
-      // 1️⃣ Камер нээж, crop ratio-тай зураг авах
+      // 1️⃣ Өөрийнхөө камераар зураг дарах (Camera open)
       const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
-        aspect: [1, 0.25], // width:height = 1:0.25
+        // Текст уншуулахад ихэвчлэн урт, нарийн зураг авах нь тохиромжтой байдаг
+        aspect: [1, 13], // 50x650px
         quality: 1,
       });
 
       if (result.canceled || !result.assets?.length) return;
 
       const uri = result.assets[0].uri;
-      setImageUri(uri); // preview-д харуулах
+      setImageUri(uri); // Зургийг дэлгэцэнд харуулах
 
       setLoading(true);
 
-      // 2️⃣ TensorFlow prediction хийх
-      const text = await recognizeMongolImage(uri);
-      setInputText(text); // input-д Монгол бичиг автоматаар дүүргэнэ
+      // 2️⃣ OCR API (http://172.20.10.4:8000/camera)-рүү зургаа илгээж текст болгох
+      const text = await recognizeMongolImage(uri, "camera");
+      setInputText(text); // Буцаж ирсэн текстийг input-д дүүргэх
 
-      // Debounced conversion direction-г хүчээр Монгол бичиг → Кирилл
-      const converted = await convertText(text, "Монгол бичиг", "Крилл");
-      setConvertedText(converted);
+      if (text.trim() !== "") {
+        // 3️⃣ Хэрвээ текст амжилттай уншсан бол Монгол бичгийг Кирилл руу хөрвүүлэх
+        const converted = await convertText(text, "Монгол бичиг", "Крилл");
+        setConvertedText(converted);
+      } else {
+        setConvertedText("");
+      }
     } catch (err) {
       console.error("Camera error:", err);
+    } finally {
+      // Loading төлөвийг арилгах
+      setLoading(false);
     }
   };
 
@@ -347,58 +355,73 @@ export default function PhotoPredictScreen() {
           {/* Header */}
           <View
             style={{
-              backgroundColor: isDark ? "#1e293b" : "#fff",
+              backgroundColor: isDark ? "#1e293b" : "#10b981",
               paddingTop: Platform.OS === "ios" ? 60 : 20,
               paddingHorizontal: 24,
               paddingBottom: 24,
-              borderBottomLeftRadius: 24,
-              borderBottomRightRadius: 24,
+              borderBottomLeftRadius: 32,
+              borderBottomRightRadius: 32,
               marginBottom: 20,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
               ...Platform.select({
                 ios: {
                   shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: isDark ? 0.3 : 0.05,
-                  shadowRadius: 8,
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: isDark ? 0.4 : 0.2,
+                  shadowRadius: 12,
                 },
                 android: {
-                  elevation: 3,
+                  elevation: 8,
                 },
               }),
             }}
           >
-            <View>
-              <Text
-                style={{
-                  fontSize: 32,
-                  fontWeight: "700",
-                  color: isDark ? "#f8fafc" : "#1a1a1a",
-                  marginBottom: 4,
-                }}
-              >
-                {t("translation")}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: isDark ? "#94a3b8" : "#64748b",
-                  fontWeight: "500",
-                }}
-              >
-                Монгол бичиг ↔ Крилл
-              </Text>
+            <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 12 }}>
+              <View style={{
+                backgroundColor: isDark ? "#10b981" : "#ffffff",
+                padding: 10,
+                borderRadius: 16,
+                marginRight: 12,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+                elevation: 2,
+              }}>
+                <Ionicons name="language" size={24} color={isDark ? "#ffffff" : "#10b981"} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={{
+                    fontSize: 32,
+                    fontWeight: "800",
+                    color: "#ffffff",
+                    letterSpacing: -0.5,
+                    marginBottom: 2,
+                  }}
+                >
+                  {t("translation")}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    color: isDark ? "#cbd5e1" : "#d1fae5",
+                    fontWeight: "600",
+                    letterSpacing: 0.3,
+                  }}
+                >
+                  Монгол бичиг ↔ Крилл
+                </Text>
+              </View>
             </View>
             <View
               style={{
-                backgroundColor: isDark ? "#374151" : "#f1f5f9",
+                backgroundColor: isDark ? "#374151" : "rgba(255, 255, 255, 0.25)",
                 paddingHorizontal: 12,
                 paddingVertical: 6,
                 borderRadius: 12,
                 borderWidth: 1,
-                borderColor: isDark ? "#4b5563" : "#e2e8f0",
+                borderColor: isDark ? "#4b5563" : "rgba(255, 255, 255, 0.4)",
+                alignSelf: "flex-start",
               }}
             >
               {model ? (
@@ -410,14 +433,14 @@ export default function PhotoPredictScreen() {
                       width: 8,
                       height: 8,
                       borderRadius: 4,
-                      backgroundColor: "#10b981",
+                      backgroundColor: isDark ? "#10b981" : "#ffffff",
                     }}
                   />
                   <Text
                     style={{
                       fontSize: 12,
                       fontWeight: "600",
-                      color: "#10b981",
+                      color: isDark ? "#10b981" : "#ffffff",
                     }}
                   >
                     {t("model_ready")}
@@ -425,7 +448,7 @@ export default function PhotoPredictScreen() {
                 </View>
               ) : (
                 <Text
-                  style={{ fontSize: 12, fontWeight: "600", color: "#f59e0b" }}
+                  style={{ fontSize: 12, fontWeight: "600", color: isDark ? "#f59e0b" : "#ffffff" }}
                 >
                   {t("model_loading")}
                 </Text>

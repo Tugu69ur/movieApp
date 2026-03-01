@@ -239,33 +239,33 @@ export default function ProfileScreen() {
             <View className="bg-white dark:bg-neutral-800 rounded-3xl p-2 shadow-sm">
 
               <MenuItem
-                icon={<User2 size={20} color={isDark ? "#fff" : "#6366f1"} />}
+                icon={<User2 size={20} color={isDark ? "#a5b4fc" : "#6366f1"} />}
                 label="Personal Information"
-                color="bg-indigo-50 dark:bg-indigo-900/20"
+                color="bg-indigo-50 dark:bg-indigo-500/20"
                 onPress={() => router.push('/personal-info')}
                 isDark={isDark}
               />
 
               <MenuItem
-                icon={<Bell size={20} color={isDark ? "#fff" : "#3b82f6"} />}
+                icon={<Bell size={20} color={isDark ? "#93c5fd" : "#3b82f6"} />}
                 label="Notifications"
-                color="bg-blue-50 dark:bg-blue-900/20"
+                color="bg-blue-50 dark:bg-blue-500/20"
                 onPress={() => router.push('/notifications')}
                 isDark={isDark}
               />
 
               <MenuItem
-                icon={<Shield size={20} color={isDark ? "#fff" : "#10b981"} />}
+                icon={<Shield size={20} color={isDark ? "#6ee7b7" : "#10b981"} />}
                 label="Security & Privacy"
-                color="bg-emerald-50 dark:bg-emerald-900/20"
+                color="bg-emerald-50 dark:bg-emerald-500/20"
                 onPress={() => router.push('/security-privacy')}
                 isDark={isDark}
               />
 
               <MenuItem
-                icon={<Settings size={20} color={isDark ? "#fff" : "#737373"} />}
+                icon={<Settings size={20} color={isDark ? "#d4d4d4" : "#737373"} />}
                 label="App Settings"
-                color="bg-neutral-100 dark:bg-neutral-700/30"
+                color="bg-neutral-100 dark:bg-neutral-500/20"
                 isLast
                 onPress={() => router.push('/app-settings')}
                 isDark={isDark}
@@ -276,7 +276,7 @@ export default function ProfileScreen() {
               onPress={handleLogout}
               className="mt-6 flex-row items-center justify-center bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 p-4 rounded-2xl active:scale-95 transition-transform"
             >
-              <LogOut size={20} color={isDark ? "#fff" : "#ef4444"} />
+              <LogOut size={20} color={isDark ? "#fca5a5" : "#ef4444"} />
               <Text className="ml-2 text-red-600 dark:text-red-400 font-bold text-base">
                 Log Out
               </Text>
@@ -323,6 +323,6 @@ const MenuItem = ({
       {label}
     </Text>
 
-    <ChevronRight size={20} color={isDark ? "#fff" : "#9ca3af"} />
+    <ChevronRight size={20} color={isDark ? "#9ca3af" : "#9ca3af"} />
   </TouchableOpacity>
 );

@@ -168,7 +168,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortlocale</bcf:key>
-      <bcf:value>english</bcf:value>
+      <bcf:value>mongolian</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortingtemplatename</bcf:key>
@@ -2363,14 +2363,14 @@
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">poppe1974mongolian</bcf:citekey>
     <bcf:citekey order="2" intorder="1">janhunen2003mongolic</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">mongolia2020</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">godwin2016mobile</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">nakata2011computer</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">poppe1974mongolian</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">mongolia2020</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">karpicke2008critical</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">ebbinghaus1985memory</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">wozniak1990optimization</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">godwin2016mobile</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">nakata2011computer</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">karpicke2008critical</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">ebbinghaus1985memory</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">wozniak1990optimization</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">nack2016learning</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">welekar2017firebase</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">smilkov2019tensorflow</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

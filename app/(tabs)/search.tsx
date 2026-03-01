@@ -116,28 +116,50 @@ export default function SearchScreen() {
 
       {/* Header */}
       <View style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
         paddingTop: Platform.OS === "ios" ? 60 : 20,
         paddingHorizontal: 24,
-        paddingBottom: 20,
-        backgroundColor: isDark ? "#1e293b" : "#fff",
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
+        paddingBottom: 24,
+        backgroundColor: isDark ? "#1e293b" : "#6366f1",
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
         marginBottom: 20,
         ...Platform.select({
-          ios: { shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: isDark ? 0.3 : 0.05, shadowRadius: 8 },
-          android: { elevation: 3 },
+          ios: { shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: isDark ? 0.4 : 0.2, shadowRadius: 12 },
+          android: { elevation: 8 },
         }),
       }}>
-        <View>
-          <Text style={{ fontSize: 28, fontWeight: "700", color: isDark ? "#f8fafc" : "#1a1a1a", marginBottom: 4 }}>
-            {t("search")}
-          </Text>
-          <Text style={{ fontSize: 15, color: isDark ? "#94a3b8" : "#666", fontWeight: "500" }}>
-            Discover new words
-          </Text>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 8 }}>
+          <View style={{
+            backgroundColor: isDark ? "#6366f1" : "#ffffff",
+            padding: 10,
+            borderRadius: 16,
+            marginRight: 12,
+            ...Platform.select({
+              ios: { shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4 },
+              android: { elevation: 2 },
+            }),
+          }}>
+            <Search color={isDark ? "#ffffff" : "#6366f1"} size={24} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={{
+              fontSize: 32,
+              fontWeight: "800",
+              color: "#ffffff",
+              letterSpacing: -0.5,
+              marginBottom: 2
+            }}>
+              {t("search")}
+            </Text>
+            <Text style={{
+              fontSize: 15,
+              color: isDark ? "#cbd5e1" : "#e0e7ff",
+              fontWeight: "600",
+              letterSpacing: 0.3
+            }}>
+              Discover new words
+            </Text>
+          </View>
         </View>
       </View>
 

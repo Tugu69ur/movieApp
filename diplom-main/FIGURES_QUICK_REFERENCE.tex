@@ -1,0 +1,59 @@
+% Quick Reference: All 27 Figure Macros Available
+
+% SYSTEM DIAGRAMS - Use in Chapter 3
+\figUseCaseDiagram        % Use case diagram with all system functions
+\figSequenceDiagram       % Authentication process sequence
+\figActivityDiagram       % Flashcard learning workflow
+\figDataFlowDiagram       % Data flow through system
+\figERDiagram             % Database schema design
+
+% FIREBASE ARCHITECTURE - Use in Chapter 4
+\figFirebaseAuth          % Firebase authentication configuration
+\figFirebaseDB            % Firestore database structure
+\figFirebaseStorage       % Cloud storage for assets
+
+% AUTHENTICATION SCREENS - Use in Chapter 4
+\figLoginScreen           % Login interface
+\figSignUpScreen          % User registration interface
+
+% MAIN UI SCREENS - Use in Chapter 4
+\figHomeScreen            % Home dashboard with daily word and streak
+\figSearchScreen          % Multi-modal search functionality
+\figProfileScreen         % User profile and statistics
+\figSettingsScreen        % App preferences and configuration
+\figNotificationScreen    % Learning reminders and notifications
+\figSecurityPrivacyScreen % Security and privacy settings
+
+% OCR/HANDWRITING SCREENS - Use in Chapter 4
+\figCameraInputScreen     % Camera-based handwriting input
+\figHandwritingInput      % Digital canvas for character drawing
+\figHandwrittenText       % Recognized character with feedback
+\figOCRRegularView        % Character details display
+\figOCRImageToText        % Text extraction from image
+\figOCRCyrillicScript     % Script conversion demonstration
+
+% MODEL TRAINING & PERFORMANCE - Use in Chapter 5
+\figOCRLearningCurve      % Training loss and validation accuracy progress
+\figTrainingEpochs        % Epoch-by-epoch performance metrics
+\figModelSegmentation     % Character detection and segmentation
+\figLineInputProcessing   % Preprocessing pipeline visualization
+\figPythonAPI             % Backend API architecture diagram
+
+% USAGE GUIDELINES:
+% 1. All figures have descriptive captions explaining their content
+% 2. Each figure has a unique label (e.g., \label{fig:usecase})
+% 3. Use \ref{fig:label} to reference figures in text
+% 4. All images are stored in Figures/ subdirectories
+% 5. Figures use [H] positioning for precise placement
+% 6. Width range: 0.55-0.85\textwidth for optimal layout
+
+% EXAMPLE USAGE IN CHAPTERS:
+% \subsection{System Overview}
+% 
+% Our system uses a three-tier architecture as shown below.
+% 
+% \figUseCaseDiagram
+% 
+% The use cases demonstrate...
+
+% ALL FIGURES DEFINED IN: Chapters/figures-definitions.tex

@@ -3,7 +3,8 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1,T2A]{fontenc}
-\usepackage[mongolian,english]{babel}
+\usepackage[english,mongolian]{babel} % make Mongolian the main language
+
 
 % Geometry
 \usepackage{geometry}
@@ -18,6 +19,19 @@
 \usepackage{array,multirow,longtable} % longtable нэмэв
 \usepackage{xcolor,colortbl}
 \usepackage{float} % [H] байршлын тохируулга
+
+% Mongolian captions for figures and tables — ensure babel sets them when Mongolian is active
+\renewcommand{\figurename}{Зураг}
+\renewcommand{\tablename}{Хүснэгт}
+\AtBeginDocument{%
+  % ensure captions are correct even if language switches
+  \addto\captionsmongolian{\renewcommand{\figurename}{Зураг}}%
+  \addto\captionsmongolian{\renewcommand{\tablename}{Хүснэгт}}%
+  \addto\captionsenglish{\renewcommand{\figurename}{Зураг}}%
+  \addto\captionsenglish{\renewcommand{\tablename}{Хүснэгт}}%
+  % select Mongolian as the document language early
+  \selectlanguage{mongolian}%
+}
 
 % Code listings
 \usepackage{listings}
@@ -60,14 +74,13 @@
     showtabs=false,                  
     tabsize=2,
     extendedchars=true,
-    inputencoding=utf8,
+    texcl=true,
     aboveskip=8pt,
     belowskip=8pt
 }
 \lstset{style=mystyle}
 % Allow UTF-8 characters in listings
-\lstset{extendedchars=\true}
-\lstset{inputencoding=utf8}
+\lstset{extendedchars=true}
 
 % TikZ for diagrams
 \usepackage{tikz}
@@ -96,6 +109,15 @@
 % Simple verbatim for code samples
 \usepackage{verbatim}
 
+% Figure sizing optimization for page count reduction
+\setcounter{totalnumber}{3}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{1}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.70}
+\renewcommand{\floatpagefraction}{0.66}
+
 % Preamble metadata (edit as needed)
 \newcommand{\univname}{Шинэ Монгол Технологийн Коллеж}
 \newcommand{\facname}{Мэдээлэл Технологийн Сургууль}
@@ -112,7 +134,7 @@
 
 \newcommand{\supervisor}{Д.Насанжаргал}
 
-\newcommand{\submitdate}{2025 оны 12 сар}
+\newcommand{\submitdate}{2026 оны 12 сар}
 \newcommand{\degree}{Программ хангамжийн мэргэжилтэн}
 
 \newcommand{\keywordsMN}{Монгол бичиг, flashcard систем, React Native, Firebase, TensorFlow OCR, гар утасны аппликейшн, хэл сурах апп}
@@ -161,8 +183,10 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-% Table of contents
+% Load all figure definitions
+\input{Chapters/figures-definitions}
 
+% Table of contents
 \newpage
 
 % ...existing code...
@@ -180,5 +204,7 @@
 % Bibliography
 \printbibliography[heading=bibintoc,title={Ном зүй}]
 \clearpage
+
+
 
 \end{document}

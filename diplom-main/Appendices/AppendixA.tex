@@ -219,11 +219,11 @@ service cloud.firestore {
     \label{fig:detailed-architecture}
 \end{figure}
 
-\\subsection*{А.8 Системийн цөм функцуудын кодчилол}
+\subsection*{А.8 Системийн цөм функцуудын кодчилол}
 
 Egüü системийн гол функцуудын хэрэгжүүлэлтийн кодчилол:
 
-\\begin{lstlisting}[language=bash, caption=Төсөл үүсгэх команд]
+\begin{lstlisting}[language=bash, caption=Төсөл үүсгэх команд]
 # Expo төсөл үүсгэх
 npx create-expo-app@latest eguu-app --template tabs
 
@@ -235,17 +235,17 @@ npm install
 
 # Хөгжүүлэлтийн сервер эхлүүлэх
 npm start
-\\end{lstlisting}
+\end{lstlisting}
 
-\\begin{lstlisting}[language=bash, caption=Firebase packages суулгах]
+\begin{lstlisting}[language=bash, caption=Firebase packages суулгах]
 npm install firebase
 npm install @react-native-firebase/app
 npm install @react-native-firebase/auth
 npm install @react-native-firebase/firestore
 npm install @react-native-firebase/storage
-\\end{lstlisting}
+\end{lstlisting}
 
-\\begin{lstlisting}[language=JavaScript, caption=SM-2 алгоритмын үндсэн томъёо]
+\begin{lstlisting}[language=JavaScript, caption=SM-2 алгоритмын үндсэн томъёо]
 // Update Easiness Factor
 EF' = EF + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
 
@@ -255,9 +255,9 @@ if (quality < 3) {
 } else {
   interval = repetition === 0 ? 1 : repetition === 1 ? 6 : Math.round(interval * EF);
 }
-\\end{lstlisting}
+\end{lstlisting}
 
-\\begin{lstlisting}[language=JavaScript, caption=utils/streakTracker.ts]
+\begin{lstlisting}[language=JavaScript, caption=utils/streakTracker.ts]
 export const updateStreak = (lastStudyDate: Date | null): {
   currentStreak: number;
   shouldReset: boolean;
@@ -275,9 +275,9 @@ export const updateStreak = (lastStudyDate: Date | null): {
   if (diffDays === 1) return { currentStreak: 1, shouldReset: false };
   return { currentStreak: 1, shouldReset: true };
 };
-\\end{lstlisting}
+\end{lstlisting}
 
-\\subsection*{А.9 Төслийн статистик}
+\subsection*{А.9 Төслийн статистик}
 
 \begin{table}[H]
 \centering
