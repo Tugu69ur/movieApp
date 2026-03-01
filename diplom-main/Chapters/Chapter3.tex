@@ -5,7 +5,22 @@
 \section{Судалгааны арга зүй}
 \label{sec:methodology}
 
-Энэ бүлэгт Egüü системийн шаардлагыг тодорхойлж, системийн шинжилгээ, зохиомж, архитектурын шийдлүүдийг дэлгэрэнгүй танилцуулна. Мөн хэрэглэгчийн интерфэйс (UI/UX) загвар, өгөгдлийн сангийн зохиомжийг авч үзнэ.
+Энэ бүлэгт Egüü системийн шаардлагыг тодорхойлж, системийн шинжилгээ, зохиомж, архитектурын шийдлүүдийг дэлгэрэнгүй танилцуулна. Мөн хэрэглэгчийн интерфэйс (UI/UX) модель, өгөгдлийн сангийн зохиомжийг авч үзнэ.
+
+\subsection{Судалгааны арга зүйн логик дараалал}
+\label{subsec:method-sequence}
+
+Энэхүү ТСА нь дараах 3 үе шаттай логик дарааллаар хэрэгжсэн. Үе шат бүр өмнөх шатны үр дүнд тулгуурлан дараагийн шийдлийг тодорхойлсон нь судалгааны дотоод уялдаа, баталгаажуулалтын чанарыг хангах үндэс болсон.
+
+\begin{enumerate}
+    \item \textbf{Модель сургалт ба OCR-ийн урьдчилсан бэлтгэл:} Монгол бичгийн үсэг таних OCR модулийн өгөгдлийн бэлтгэл, таних урсгалын (preprocessing \textrightarrow{} inference \textrightarrow{} post-processing) шаардлагыг тодорхойлж, TensorFlow.js-ээр ажиллах моделийн интеграцийн нөхцөлийг урьдчилан тогтоосон.
+
+    \item \textbf{Аппликейшн хөгжүүлэлт ба системийн интеграц:} React Native/Expo дээр хэрэглэгчийн интерфэйс, Firebase backend, flashcard ба SM-2 алгоритмын логик, OCR функцийг нэгтгэн системийн үндсэн функцуудыг хэрэгжүүлсэн.
+
+    \item \textbf{Туршилт, хэрэглэгчийн санал хүсэлт ба үнэлгээ:} Хөгжүүлсэн систем дээр функциональ ба гүйцэтгэлийн шалгалт хийж, хэрэглэгчийн туршилтаар ашиглахад ойлгомжтой байдал, үр нөлөө, сайжруулах шаардлагатай хэсгүүдийг тодорхойлсон.
+\end{enumerate}
+
+Дээрх дарааллын дагуу онолын үндэслэл, инженерийн хэрэгжүүлэлт, хэрэглээний үнэлгээг нэг шугамд уялдуулснаар ТСА-ийн зорилго, зорилтын биелэлтийг шат дараатайгаар баталгаажуулсан.
 
 \subsection{Системийн архитектур болон зохиомжийн шийдлүүд}
 \label{subsec:design-decisions}
@@ -16,7 +31,7 @@
 
 \textbf{Хэрэглэгчтэй харилцах хэсэг (Frontend UI):} Egüü систем нь орчин үеийн мобайл аппликейшны стандартын дагуу ``Tab-based'' буюу цэсэнд суурилсан навигацийн бүтцийг ашигласан бөгөөд Нүүр, Хайлт, Дуртай, Профайл, Камер гэсэн 5 үндсэн дэлгэцээс бүрдэнэ. Сургалтын хэрэглэгдэхүүн болох Flashcard-уудыг танин мэдэхүйн ачааллыг бууруулах зорилгоор эгшиг, гийгүүлэгч, үг зэрэг дэд категориудад системтэйгээр ангилсан болно. Мөн үг хайлтын ухаалаг функц нь хэрэглэгчид шаардлагатай мэдээллээ богино хугацаанд олох, интуитив (хялбар ойлгогдох) туршлагаар хангах зорилготой юм.
 
-\paragraph{Гадаад зохиомжийн үндсэн шийдлүүд:}
+\paragraph{Гадаад зохиомжийн үндсэн шийдлүүд нь дараах байдалтай.}
 
 \begin{itemize}
     \item \textbf{Навигаци:} Tab-based навигаци ашигласан нь хэрэглэгч хамгийн түгээмэл хэрэглэгддэг дэлгэцүүд рүү нэг товшилтоор шилжих боломжтой болгодог
@@ -30,13 +45,13 @@
 
 \subsubsection{Дотоод зохиомж буюу Системийн архитектур (Internal Design)}
 
-Систем нь Client-Server архитектурын загвараар зохион бүтээгдсэн. React Native клиент (Presentation, Business Logic, Data Access layers-ээс бүрдэнэ) нь Firebase Backend (Authentication, Database, Storage)-ээр нэмэлтээд TensorFlow.js OCR модултай асинхроноор харилцан ажиллана. Бизнес логик (Spaced repetition) нь клиент талд, өгөгдлийн синхрончлол нь Firebase-д хийгдэнэ.
+Систем нь Client-Server архитектурын моделээр зохион бүтээгдсэн. React Native клиент (Presentation, Business Logic, Data Access layers-ээс бүрдэнэ) нь Firebase Backend (Authentication, Database, Storage)-ээр нэмэлтээд TensorFlow.js OCR модултай асинхроноор харилцан ажиллана. Бизнес логик (Spaced repetition) нь клиент талд, өгөгдлийн синхрончлол нь Firebase-д хийгдэнэ.
 
 \subsubsection{Өгөгдлийн сангийн архитектурын шийдэл}
 
 Cloud Firestore NoSQL сонгосон байна. Энэ сонголтын үндэслэл: Бодит цагийн синхрончлол, offline persistence, auto-scalability зэрэг давуу талууд. Document-based бүтэц нь flashcard объектуудыг (уламжлалт бичиг, галиг, орчуулга, тодорхойлолт, зураг) үр дүнтэйгээр хадгалахад оновчтой юм.
 
-\paragraph{Firestore vs бусад өгөгдлийн сангийн харьцуулалт:}
+\paragraph{Firestore-ийг бусад өгөгдлийн сантай харьцуулбал дараах үр дүн гарна.}
 
 \begin{table}[H]
 \centering
@@ -63,7 +78,7 @@ Mobile SDK & +++ & + & - \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Програм хангамжийн технологийн стек (Technology Stack)}
+\subsubsection{программ хангамжийн технологийн стек (Technology Stack)}
 
 React Native (cross-platform), Firebase (BaaS, real-time), TensorFlow.js (client-side ML, хувийн нууцлал), NativeWind (Tailwind CSS), react-i18next (олон хэл). Энэ стек нь хөгжүүлэлтийн цаг хэмнэж, найдвартай системтүүлж, засварын зардлыг бууруулдаг. Дэлгэрэнгүй төлөвлөгөөгүүд Appendix A-д орлуулагдсан.
 
@@ -78,7 +93,7 @@ Egüü системийн гол функциональ шаардлагууды
 
 \subsubsection{Функциональ бус шаардлага}
 
-Гүйцэтгэл: Апп 3 секундээс их ачаалагдахгүй, OCR 2 секундээс их таньдахгүй; Хэрэглэхэд хялбар: ойлгомжтой UI, шинэ хэрэглэгч 5 минутээр сурна; Найдвартай: 99\% uptime, Firebase backup, offline режим; Аюулгүй: Пасс hash-ийн хийлт, Security Rules, HTTPS, өгөгдлийн нууцлал; Өргөтгөх: 10,000+ хэрэглэгч, flashcard нэмэх хялбар, шинэ хэл нэмэх боломж.
+Гүйцэтгэл: Аппликейшн 3 секундээс их ачаалагдахгүй, OCR 2 секундээс их таньдахгүй; Хэрэглэхэд хялбар: ойлгомжтой UI, шинэ хэрэглэгч 5 минутээр сурна; Найдвартай: 99\% uptime, Firebase backup, offline режим; Аюулгүй: Пасс hash-ийн хийлт, Security Rules, HTTPS, өгөгдлийн нууцлал; Өргөтгөх: 10,000+ хэрэглэгч, flashcard нэмэх хялбар, шинэ хэл нэмэх боломж.
 
 \subsection{UML диаграммууд}
 \label{subsec:uml-diagrams}
@@ -232,33 +247,7 @@ Egüü систем нь client-server архитектураар зохион �
 
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[
-        node distance=2cm,
-        box/.style={rectangle, draw=black, fill=blue!20, minimum width=3cm, minimum height=1cm, align=center},
-        db/.style={cylinder, draw=black, fill=green!20, minimum width=2cm, minimum height=1.5cm, align=center, shape border rotate=90},
-        cloud/.style={ellipse, draw=black, fill=yellow!20, minimum width=3cm, minimum height=1.5cm, align=center}
-    ]
-    
-    % Client layer
-    \node[box] (client) {React Native\\Mobile App};
-    
-    % Firebase services
-    \node[cloud, below=of client] (firebase) {Firebase\\Platform};
-    \node[db, below left=1.5cm and 1cm of firebase] (firestore) {Cloud\\Firestore};
-    \node[box, below=of firebase] (auth) {Firebase\\Authentication};
-    \node[db, below right=1.5cm and 1cm of firebase] (storage) {Firebase\\Storage};
-    
-    % TensorFlow
-    \node[box, right=3cm of client] (tf) {TensorFlow.js\\OCR Model};
-    
-    % Connections
-    \draw[->, thick] (client) -- (firebase);
-    \draw[->, thick] (firebase) -- (firestore);
-    \draw[->, thick] (firebase) -- (auth);
-    \draw[->, thick] (firebase) -- (storage);
-    \draw[->, thick] (client) -- (tf);
-    
-    \end{tikzpicture}
+    \includegraphics[width=0.9\textwidth]{Figures/diagrams/system_architecture.png}
     \caption{Egüü системийн ерөнхий архитектур}
     \label{fig:system-architecture}
 \end{figure}
@@ -278,7 +267,7 @@ Appp-ийн бүтэц: screens (tab-based навигаци, camera, settings), 
 
 Firestore-ийн 5 үндсэн collection: Flashcards (үсэг, үг, зураг), Users (хэрэглэгчийн мэдээлэл, streak, статистик), UserProgress (SM-2 прогресс, дараагийн давталт), Favorites (дуртай жагсаалт), DailyWords (өдрийн үг). Бүх сачтайгаа реляцион: Users $\leftrightarrow$ UserProgress, Flashcards $\leftrightarrow$ UserProgress. (Дэлгэрэнгүй бүтэц: Appendix A харна.)
 
-\subsection{Хэрэглэгчийн интерфэйс (UI/UX) загвар}
+\subsection{Хэрэглэгчийн интерфэйс (UI/UX) модель}
 \label{subsec:ui-ux-design}
 
 UI/UX дизайнын зарчмууд: (1) Энгийн, ойлгомжтой интерфэйс; (2) Монгол соёлын элементүүд; (3) Орчин үеийн дизайн; (4) Accessibility дэмжлэг; (5) Тууштай дизайн. Өнгөний палитр: Primary Blue и Success Green. 4 үндсэн дэлгэц: Нүүр (Daily Word, Streak), Flashcard суралцах, Хайлт, OCR камер.
@@ -290,6 +279,6 @@ SuperMemo 2 (SM-2) алгоритмыг хэрэгжүүлсэн. Алгорит
 
 \subsection{Бүлгийн дүгнэлт}
 
-Энэхүү бүлэгт системийн шаардлага, Client-Server архитектур, NoSQL Firestore, User-centered дизайн, SuperMemo-2 алгоритмыг танилцуулсан. Дараагийн бүлэгт хэрэгжүүлэлтийн үйл явцыг дэлгэрэнгүй авч үзнэ.
+Энэхүү бүлэгт ТСА-ийн хүрээнд Egüü системийн шаардлага, архитектур, өгөгдлийн модель, UI/UX шийдэл болон SM-2 алгоритмын зохиомжийг нэг мөр болгож тодорхойллоо. Дараагийн бүлэгт эдгээр зохиомжийг бодит кодчилол, интеграц, туршилтын түвшинд хэрхэн хэрэгжүүлснийг тайлбарлана.
 
 \vfill

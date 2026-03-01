@@ -10,9 +10,9 @@
 \subsection{Хөгжүүлэлтийн орчин тохируулах}
 \label{subsec:development-setup}
 
-\subsubsection{Шаардлагатай програм хангамжууд}
+\subsubsection{Шаардлагатай программ хангамжууд}
 
-Egüü төслийг хөгжүүлэхэд дараах програм хангамжууд шаардлагатай:
+Egüü ТСА-г хэрэгжүүлэхэд дараах программ хангамжууд шаардлагатай:
 
 \begin{table}[H]
 \centering
@@ -20,7 +20,7 @@ Egüü төслийг хөгжүүлэхэд дараах програм хан�
 \label{tab:dev-requirements}
 \begin{tabular}{|l|l|l|}
 \hline
-\textbf{Програм} & \textbf{Хувилбар} & \textbf{Зориулалт} \\
+\textbf{программ} & \textbf{Хувилбар} & \textbf{Зориулалт} \\
 \hline
 Node.js & 18.x эсвэл дээш & JavaScript runtime \\
 \hline
@@ -39,31 +39,31 @@ Xcode & Latest (macOS) & iOS simulator \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Төсөл эхлүүлэх}
+\subsubsection{ТСА эхлүүлэх}
 
 Expo-аар React Native төсөл үүсгэж, dependencies суулгахын дараа хөгжүүлэлтийн сервер эхлүүлдэг. Нарийвчлалыг Appendix A.8-д үзүүлэв.
 
 \subsection{Firebase тохиргоо}
 \label{subsec:firebase-setup}
 
-\subsubsection{Firebase төсөл үүсгэх}
+\subsubsection{Firebase үүсгэх}
 
 \begin{enumerate}
     \item Firebase Console (https://console.firebase.google.com) руу нэвтрэх
-    \item "Add project" товч дарж шинэ төсөл үүсгэх
-    \item Төслийн нэр: "eguu-mongolian-script"
+    \item "Add project" товч дарж шинээр үүсгэх
+    \item ТСА нэр: "eguu-mongolian-script"
     \item Google Analytics идэвхжүүлэх (optional)
-    \item iOS болон Android апп бүртгэх
+    \item iOS болон Android аппликейшн бүртгэх
 \end{enumerate}
 
 \subsubsection{Firebase SDK суулгах}
 
 Firebase SDK-д багтсан Auth, Firestore, Storage үйлчилгээний packages суулгадаг (Appendix A.8 харна.).
 
-\subsection{Системийн цөм модулиудын програм хангамжийн хэрэгжүүлэлт}
+\subsection{Системийн цөм модулиудын программ хангамжийн хэрэгжүүлэлт}
 \label{subsec:core-features}
 
-Egüü системийн бүтэц, архитектурын загварын дагуу хөгжүүлэгдсэн цөм модулиудын эх код (Source code) болон хэрэгжүүлэлтийн дэлгэрэнгүй баримтжуулалтыг нээлттэй эхийн GitHub платформ дээр байршуулсан болно: \url{https://github.com/Tugu69ur/movieApp}. Дараах дэд хэсгүүдэд системийн амин чухал функцуудын кодчилол болон техникийн шийдлүүдийг тайлбарлах болно.
+Egüü системийн бүтэц, архитектурын моделийн дагуу хөгжүүлэгдсэн цөм модулиудын эх код (Source code) болон хэрэгжүүлэлтийн дэлгэрэнгүй баримтжуулалтыг нээлттэй эхийн GitHub платформ дээр байршуулсан болно: \url{https://github.com/Tugu69ur/Eguu}. Дараах дэд хэсгүүдэд системийн амин чухал функцуудын кодчилол болон техникийн шийдлүүдийг тайлбарлах болно.
 
 \subsubsection{Үүлэн дэд бүтэц буюу Firebase интеграци}
 
@@ -80,11 +80,13 @@ Egüü системийн бүтэц, архитектурын загварын 
 
 \subsubsection{Spaced Repetition систем}
 
-SM-2 алгоритмыг хэрэгжүүлж, flashcard-ыг хэр сайн санаж байгаагаас хамааран дараагийн давталтын хугацааг тооцоолдог (Appendix A.8 харна.). GitHub дээр дэлгэрэнгүй: \url{https://github.com/Tugu69ur/movieApp/blob/main/utils/spacedRepetition.ts}
+SM-2 алгоритмыг хэрэгжүүлж, flashcard-ыг хэр сайн санаж байгаагаас хамааран дараагийн давталтын хугацааг тооцоолдог (Appendix A.8 харна.). GitHub дээр дэлгэрэнгүй: \url{https://github.com/Tugu69ur/Eguu/blob/main/utils/spacedRepetition.ts}
 
 \subsubsection{Streak tracking}
 
 Дараалсан өдрүүдийн тоог тооцоолж, мотивацийг үнэлэх функцийг хэрэгжүүлсэн (Appendix A.8 харна.).
+
+Энэ хэсгийн кодын жишээнүүд нь зураг биш бөгөөд Хавсралт А-д \textbf{List} хэлбэрээр гарчиг, тайлбартайгаар оруулсан (жишээ нь, \ref{lst:flashcards-structure}, \ref{lst:firestore-rules}).
 
 \subsection{UI компонентууд}
 \label{subsec:ui-components}
@@ -98,11 +100,23 @@ React Native болон NativeWind (TailwindCSS) ашиглан орчин үе�
     \item \textbf{DailyWord:} Өдрийн үгийн карт
 \end{itemize}
 
-Бүх компонентын эх код: \url{https://github.com/Tugu69ur/movieApp/tree/main/components}
+Бүх компонентын эх код: \url{https://github.com/Tugu69ur/Eguu/tree/main/components}
 
 % UI Component Screenshots
-\figHomeScreen
-\figSearchScreen
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/home.png}
+    \captionof{figure}{Нүүр дэлгэц – өдрийн үг, streak ба категориор ангилсан картууд.}
+    \label{fig:home}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/search.png}
+    \captionof{figure}{Хайлтын дэлгэц – фонетик, орчуулгаар flashcard хайх интерфейс.}
+    \label{fig:search}
+\end{minipage}
+\vspace{0.8em}
 \figProfileScreen
 \figSettingsScreen
 \figNotificationScreen
@@ -121,20 +135,62 @@ React Native болон NativeWind (TailwindCSS) ашиглан орчин үе�
 \subsection{OCR систем хэрэгжүүлэлт}
 \label{subsec:ocr-implementation}
 
-Egüü системийн нэг онцлог функц нь Монгол бичгийг таних OCR (Optical Character Recognition) технологи юм. TensorFlow.js ашиглан хэрэглэгч гараар бичсэн Монгол бичгийг таних боломжтой.
+Egüü системийн нэг онцлог функц нь Монгол бичгийг таних OCR технологи юм. TensorFlow.js ашиглан хэрэглэгч гараар бичсэн Монгол бичгийг таних боломжтой.
 
-\figCameraInputScreen
-\figHandwritingInput
-\figHandwrittenText
-\figOCRRegularView
-\figOCRImageToText
-\figOCRCyrillicScript
+\vspace{1.2em}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/camera.jpg}
+    \captionof{figure}{Камераар гар бичвэр оруулах OCR дэлгэц.}
+    \label{fig:camera}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/handwriting.png}
+    \captionof{figure}{Дэлгэцэн дээр уламжлалт Монгол бичгийг гараар зурах гар бичвэрийн canvas.}
+    \label{fig:handwriting}
+\end{minipage}
+\vspace{0.8em}
+\clearpage
+\begingroup
+\captionsetup{font=footnotesize}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.19\textheight,keepaspectratio]{Figures/pages/handwroten.png}
+    \captionof{figure}{OCR-оор таниулсан гар бичвэрийн үр дүнгийн дэлгэц.}
+    \label{fig:handwritten-result}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.19\textheight,keepaspectratio]{Figures/pages/ocr_regular_view.png}
+    \captionof{figure}{OCR-оор таниулсан үсгийн дэлгэрэнгүй мэдээлэл бүхий дэлгэц.}
+    \label{fig:ocr-regular}
+\end{minipage}
+\vspace{1.0em}
 
-\subsubsection{OCR загварын гүйцэтгэл}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.19\textheight,keepaspectratio]{Figures/pages/ocr_imagetotext.png}
+    \captionof{figure}{Гар бичвэрийг зургаас текст болгон хөрвүүлэх OCR дэлгэц.}
+    \label{fig:ocr-image-to-text}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.19\textheight,keepaspectratio]{Figures/pages/ocr_cyrillic_to_script.png}
+    \captionof{figure}{Кирилл бичгээс уламжлалт Монгол бичиг рүү хөрвүүлэх OCR жишээ.}
+    \label{fig:ocr-cyrillic}
+\end{minipage}
+\endgroup
+\vspace{0.8em}
 
-TensorFlow.js загварын сургалтын үр дүн болон гүйцэтгэлийг дараах зургуудаар харуулав:
+\subsubsection{OCR моделийн гүйцэтгэл}
 
-\subsubsection{OCR загварын сургалтын дэлгэрэнгүй}
+TensorFlow.js моделийн сургалтын үр дүн болон гүйцэтгэлийг дараах зургуудаар харуулав:
+
+\subsubsection{OCR моделийн сургалтын дэлгэрэнгүй}
 
 \paragraph{Dataset бүрдүүлэлт:}
 
@@ -148,7 +204,7 @@ TensorFlow.js загварын сургалтын үр дүн болон гүй�
 \hline
 \textbf{Хэсэг} & \textbf{Зургийн тоо} & \textbf{Тайлбар} \\
 \hline
-Training set & 40,000 & Загварыг сургахад ашигласан \\
+Training set & 40,000 & Моделийг сургахад ашигласан \\
 \hline
 Validation set & 9,615 & Сургалтын явцад үнэлгээ хийхэд ашигласан \\
 \hline
@@ -169,13 +225,13 @@ Test set & 20,000 & Эцсийн нарийвчлалыг хэмжихэд аш�
     \item \textbf{Хоосон зай:} Үг хоорондын зай
 \end{itemize}
 
-\paragraph{CRNN загварын архитектур:}
+\paragraph{CRNN моделийн архитектур:}
 
 Монгол бичгийг таних системд CRNN (Convolutional Recurrent Neural Network) архитектурыг ашигласан.
 
 \begin{table}[H]
 \centering
-\caption{CRNN загварын бүтэц}
+\caption{CRNN моделийн бүтэц}
 \label{tab:crnn-architecture}
 \begin{tabular}{|l|l|l|}
 \hline
@@ -220,7 +276,7 @@ Fully Connected + CTC & 34 classes & Character recognition \\
     \item \textbf{Word Error Rate (WER):} ~28\%
 \end{itemize}
 
-Загвар нь эхний 5-7 epoch-д хурдан сурч, дараа нь аажмаар сайжирсан. Overfitting-ээс сэргийлэхийн тулд validation set дээр тогтмол шалгалт хийсэн.
+Модель нь эхний 5-7 epoch-д хурдан сурч, дараа нь аажмаар сайжирсан. Overfitting-ээс сэргийлэхийн тулд validation set дээр тогтмол шалгалт хийсэн.
 
 \subsection{Туршилт ба тестлэлт}
 \label{subsec:testing}
@@ -235,12 +291,12 @@ Fully Connected + CTC & 34 classes & Character recognition \\
     \item \textbf{Component тестүүд:} UI компонентуудын render, interaction
 \end{itemize}
 
-Бүх тестийн эх код: \url{https://github.com/Tugu69ur/movieApp/tree/main/__tests__}
+Бүх тестийн эх код: \url{https://github.com/Eguu/movieApp/tree/main/__tests__}
 
 \subsection{Гүйцэтгэлийн оновчлол}
 \label{subsec:performance-optimization}
 
-Апп-ийн гүйцэтгэлийг сайжруулахын тулд дараах оновчлолуудыг хийсэн:
+Аппликейшний гүйцэтгэлийг сайжруулахын тулд дараах оновчлолуудыг хийсэн:
 
 \begin{itemize}
     \item \textbf{Зураг кэшлэх:} Expo Image ашиглан memory-disk кэшлэх
@@ -249,19 +305,10 @@ Fully Connected + CTC & 34 classes & Character recognition \\
     \item \textbf{Мемо хийх:} React.memo, useMemo, useCallback ашиглан дахин render багасгах
 \end{itemize}
 
-Дэлгэрэнгүй: \url{https://github.com/Tugu69ur/movieApp}
+Дэлгэрэнгүй: \url{https://github.com/Tugu69ur/Eguu}
 
 \subsection{Бүлгийн дүгнэлт}
 
-Энэхүү бүлэгт Egüü системийн дизайн, архитектурын дагуу хийгдсэн практик кодчилол болон бодит хэрэгжүүлэлтийн үйл явцыг дэлгэрэнгүй тайлбарлалаа. Firebase Authentication, Firestore өгөгдлийн сан, Spaced Repetition танин мэдэхүйн алгоритм, хэрэглэгчийн мотивацийн Streak tracking болон орчин үеийн UI компонентууд зэрэг архитектурын үндсэн элементүүдийн програмын кодыг танилцуулан задлан шинжиллээ. Мөн програмын найдвартай ажиллагааг хангах хэсэгчилсэн (Unit) болон нэгтгэсэн (Integration) тестүүд, аппликейшны гүйцэтгэлийг нэмэгдүүлэх оновчлолын аргуудыг авч үзсэн болно.
-
-Системийн хэрэгжүүлэлтээс гарсан голлох үр дүнгүүд:
-\begin{itemize}
-    \item React Native болон Expo хүрээг ашиглан iOS болон Android төхөөрөмжүүд дээр тогтвортой ажиллах cross-platform аппликейшныг амжилттай хөгжүүлэн гаргав.
-    \item Firebase үүлэн платформ дээр төвлөрсөн, серверийн засвар үйлчилгээ шаардахгүй найдвартай, өргөжүүлэх боломжтой Backend дэд бүтцийг нэвтрүүлсэн.
-    \item Танин мэдэхүйд суурилсан SuperMemo-2 spaced repetition (зайтай давталт) алгоритмыг бүрэн кодчилж, тасралтгүй суралцах үйл явцыг программ хангамжаар дэмжиж чадсан.
-    \item Хэрэглэгч төвтэй, харилцан үйлчлэл өндөртэй орчин үеийн UI компонентуудыг зохион бүтээж, програмын интерфэйсийг хялбар бөгөөд ойлгомжтой болгосон.
-    \item Програм хангамжийн инженерингийн арга зүйн дагуу тестийн процессуудыг автоматжуулан нэвтрүүлж, кодын чанар, серверийн найдвартай ажиллагааг баталгаажуулав.
-\end{itemize}
+Энэхүү бүлэгт ТСА-ийн хүрээнд төлөвлөсөн архитектурын шийдлүүдийг бодит хэрэгжүүлэлт болгон шилжүүлж, React Native/Expo, Firebase интеграц, OCR модуль, spaced repetition логик болон UI компонентуудыг нэг системд нэгтгэснийг харууллаа. Мөн гүйцэтгэл, найдвартай ажиллагааны шалгалтаар системийн үндсэн функцууд ажиллах чадвартайг баталсан тул дараагийн бүлэгт үр дүн, хэлэлцүүлгийн түвшний дүн шинжилгээг хийх суурь бүрдсэн.
 
 \vfill

@@ -47,6 +47,8 @@
 \hline
 015 & n (traditional Mongolian) & n & n (consonant) & consonants \\
 \hline
+016 & \ifdefined\XeTeXversion\input{Appendices/mongolian_phrase}\else\ifdefined\directlua\input{Appendices/mongolian_phrase}\else [Traditional Mongolian phrase; render with XeLaTeX/LuaLaTeX]\fi\fi & phrase & phrase sample & examples \\
+\hline
 \end{tabular}
 \end{table}
 
@@ -54,7 +56,7 @@
 
 Egüü системд ашигласан Cloud Firestore-ийн өгөгдлийн бүтэц:
 
-\begin{lstlisting}[language=JavaScript, caption=Flashcards Collection Structure]
+\begin{lstlisting}[language=JavaScript, caption=Flashcards collection-ийн бүтэц, label={lst:flashcards-structure}]
 flashcards/
   {flashcardId}/
     - mongolBichig: string          // Монгол үсэг
@@ -67,14 +69,18 @@ flashcards/
     - createdAt: Timestamp
 \end{lstlisting}
 
-\begin{lstlisting}[language=JavaScript, caption=Users Collection Structure]
+  Энэхүү List нь flashcard бүрийн үндсэн талбаруудыг (үсэг, орчуулга, категори, хүндрэл, үүсгэсэн огноо) хэрхэн хадгалж байгааг харуулна.
+
+\begin{lstlisting}[language=JavaScript, caption=Users collection-ийн бүтэц, label={lst:users-structure}]
 users/{userId}/
     - email, displayName, photoURL
     - preferences: {language, theme, notifications}
     - stats: {totalStudied, currentStreak, longestStreak, lastStudyDate}
 \end{lstlisting}
 
-\begin{lstlisting}[language=JavaScript, caption=UserProgress Collection Structure]
+  Энэ List нь хэрэглэгчийн профайл, тохиргоо болон суралцах статистикийг нэг баримт дээр нэгтгэн хадгалах логикийг илэрхийлнэ.
+
+\begin{lstlisting}[language=JavaScript, caption=UserProgress collection-ийн бүтэц, label={lst:userprogress-structure}]
 userProgress/{userId}/flashcards/{flashcardId}/
     - easinessFactor: number        // SM-2 parameter (1.3-2.5)
     - interval: number              // Days until next review
@@ -83,7 +89,9 @@ userProgress/{userId}/flashcards/{flashcardId}/
     - reviewHistory: [{date, quality}]
 \end{lstlisting}
 
-\begin{lstlisting}[language=JavaScript, caption=Favorites and DailyWords]
+  Энэхүү List нь SM-2 алгоритмын хувьсагчид болон дараагийн давталтын огноог хэрэглэгчийн түвшинд хэрхэн хадгалдгийг харуулна.
+
+\begin{lstlisting}[language=JavaScript, caption=Favorites болон DailyWords collection-ийн бүтэц, label={lst:favorites-dailywords}]
 favorites/{userId}/
     - flashcards: array<string>
     - addedAt: map<string, Timestamp>
@@ -93,11 +101,13 @@ dailyWords/{date}/
     - createdAt: Timestamp
 \end{lstlisting}
 
+Энэ List нь хэрэглэгчийн дуртай жагсаалт болон өдрийн үгийн санамсаргүй сонголтын өгөгдлийн бүтцийг товчлон үзүүлнэ.
+
 \subsection*{А.3 Firebase Security Rules}
 
 Egüü системд ашигласан Firebase Security Rules-ийн бүрэн код:
 
-\begin{lstlisting}[language=JavaScript, caption=Firestore Security Rules]
+\begin{lstlisting}[language=JavaScript, caption=Firestore security rules-ийн код, label={lst:firestore-rules}]
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -137,7 +147,9 @@ service cloud.firestore {
 }
 \end{lstlisting}
 
-\subsection*{А.3 Хэрэглэгчийн санал асуулгын загвар}
+Энэхүү List нь өгөгдөлд хандах эрхийн түвшинг collection бүрээр ялгаж, зөвхөн тухайн хэрэглэгч өөрийн мэдээлэлд хандах хамгаалалтын зарчмыг хэрэгжүүлж байгааг харуулна.
+
+\subsection*{А.3 Хэрэглэгчийн санал асуулгын модель}
 
 Туршилтын үед ашигласан санал асуулгын асуултууд:
 
@@ -149,7 +161,7 @@ service cloud.firestore {
         \item Монгол бичиг мэдэх түвшин: Эхлэгч / Дунд / Ахисан
     \end{itemize}
     
-    \item \textbf{Апп-ийн үнэлгээ (1-5 оноо):}
+    \item \textbf{Аппликейшний үнэлгээ (1-5 оноо):}
     \begin{itemize}
         \item Ерөнхий сэтгэл ханамж: \_\_\_\_
         \item Хэрэглэхэд хялбар байдал: \_\_\_\_
@@ -161,10 +173,10 @@ service cloud.firestore {
     
     \item \textbf{Нээлттэй асуултууд:}
     \begin{itemize}
-        \item Апп-ийн хамгийн таалагдсан тал юу вэ?
-        \item Апп-ийн хамгийн таалагдаагүй тал юу вэ?
+        \item Аппликейшний хамгийн таалагдсан тал юу вэ?
+        \item Аппликейшний хамгийн таалагдаагүй тал юу вэ?
         \item Ямар функц нэмэхийг хүсч байна вэ?
-        \item Энэ апп-ийг найз нөхөддөө санал болгох уу? (Тийм/Үгүй)
+        \item Энэ аппликейшнийг найз нөхөддөө санал болгох уу? (Тийм/Үгүй)
         \item Нэмэлт санал, сэтгэгдэл:
     \end{itemize}
 \end{enumerate}
@@ -223,7 +235,7 @@ service cloud.firestore {
 
 Egüü системийн гол функцуудын хэрэгжүүлэлтийн кодчилол:
 
-\begin{lstlisting}[language=bash, caption=Төсөл үүсгэх команд]
+\begin{lstlisting}[language=bash, caption=ТСА үүсгэх команд]
 # Expo төсөл үүсгэх
 npx create-expo-app@latest eguu-app --template tabs
 
@@ -237,6 +249,8 @@ npm install
 npm start
 \end{lstlisting}
 
+Энэ List нь ТСА-ийн эхлүүлэх орчныг бэлтгэх үндсэн командуудын дарааллыг харуулж байна.
+
 \begin{lstlisting}[language=bash, caption=Firebase packages суулгах]
 npm install firebase
 npm install @react-native-firebase/app
@@ -244,6 +258,8 @@ npm install @react-native-firebase/auth
 npm install @react-native-firebase/firestore
 npm install @react-native-firebase/storage
 \end{lstlisting}
+
+Энэхүү List нь authentication, өгөгдлийн сан, storage ашиглахад шаардлагатай Firebase сангуудыг суулгах командыг харуулна.
 
 \begin{lstlisting}[language=JavaScript, caption=SM-2 алгоритмын үндсэн томъёо]
 // Update Easiness Factor
@@ -256,6 +272,8 @@ if (quality < 3) {
   interval = repetition === 0 ? 1 : repetition === 1 ? 6 : Math.round(interval * EF);
 }
 \end{lstlisting}
+
+Энэ Listийн утга нь хэрэглэгчийн үнэлгээнээс хамаарч давталтын зайг динамикаар тооцох SM-2 алгоритмын цөм логикийг харуулахад оршино.
 
 \begin{lstlisting}[language=JavaScript, caption=utils/streakTracker.ts]
 export const updateStreak = (lastStudyDate: Date | null): {
@@ -277,11 +295,13 @@ export const updateStreak = (lastStudyDate: Date | null): {
 };
 \end{lstlisting}
 
-\subsection*{А.9 Төслийн статистик}
+Энэхүү List нь хэрэглэгчийн сүүлийн суралцсан өдрөөс хамаарч streak-ийг хадгалах эсвэл reset хийх дүрмийг кодын түвшинд тайлбарлаж байна.
+
+\subsection*{А.9 ТСА статистик}
 
 \begin{table}[H]
 \centering
-\caption{Төслийн хөгжүүлэлтийн статистик}
+\caption{ТСА хөгжүүлэлтийн статистик}
 \begin{tabular}{|l|r|}
 \hline
 \textbf{Шалгуур} & \textbf{Утга} \\
@@ -353,18 +373,18 @@ expo-haptics & 15.0.7 \\
 \end{tabular}
 \end{table}
 
-\subsection*{А.11 Төслийн GitHub repository}
+\subsection*{А.11 ТСА GitHub repository}
 
 Төслийн эх код нь дараах хаягаар нээлттэй эхтэй байршуулагдсан:
 
-\texttt{https://github.com/Tugu69ur/movieApp}
+\texttt{https://github.com/Tugu69ur/Eguu}
 
 Репозиторид дараах материалууд багтсан:
 \begin{itemize}
     \item Бүрэн эх код
     \item README.md (суулгах заавар)
     \item Flashcard dataset (JSON формат)
-    \item TensorFlow OCR загварын код
+    \item TensorFlow OCR моделийн код
     \item Туршилтын үр дүнгийн мэдээлэл
     \item Хэрэглэгчийн гарын авлага
 \end{itemize}

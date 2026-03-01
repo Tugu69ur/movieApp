@@ -11,7 +11,9 @@
 \geometry{margin=2.0cm}
 
 % Bibliography (biblatex + biber)
-\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=ieee,sorting=none,giveninits=true]{biblatex}
+\DeclareLanguageMapping{mongolian}{english}
 \addbibresource{references.bib}
 
 % Graphics, math, tables
@@ -81,6 +83,8 @@
 \lstset{style=mystyle}
 % Allow UTF-8 characters in listings
 \lstset{extendedchars=true}
+\renewcommand{\lstlistingname}{List}
+\renewcommand{\lstlistlistingname}{Listing}
 
 % TikZ for diagrams
 \usepackage{tikz}
@@ -133,15 +137,17 @@
 \newcommand{\authorphone}{99689168}
 
 \newcommand{\supervisor}{Д.Насанжаргал}
+% academic degree/title of the supervisor (e.g. доктор, профессор)
+\newcommand{\supervisortitle}{Доктор}
 
 \newcommand{\submitdate}{2026 оны 12 сар}
 \newcommand{\degree}{Программ хангамжийн мэргэжилтэн}
 
-\newcommand{\keywordsMN}{Монгол бичиг, flashcard систем, React Native, Firebase, TensorFlow OCR, гар утасны аппликейшн, хэл сурах апп}
-\newcommand{\keywordnames}{Монгол бичиг, flashcard систем, React Native, Firebase, TensorFlow OCR, гар утасны аппликейшн, хэл сурах апп}
+\newcommand{\keywordsMN}{Монгол бичиг, flashcard систем, React Native, Firebase, TensorFlow OCR, гар утасны аппликейшн, хэл сурах аппликейшн}
+\newcommand{\keywordnames}{Монгол бичиг, flashcard систем, React Native, Firebase, TensorFlow OCR, гар утасны аппликейшн, хэл сурах аппликейшн}
 \newcommand{\authorshipname}{Зохиогчийн мэдүүлэг}
 \newcommand{\acknowledgementname}{Талархал}
-\newcommand{\abbrevname}{Товчлолын жагсаалт}
+\newcommand{\abbrevname}{Товчилсон үгийн жагсаалт}
 \newcommand{\addressname}{}
 
 % Aliases for front-matter files compatibility
