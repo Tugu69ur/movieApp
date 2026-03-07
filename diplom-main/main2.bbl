@@ -122,6 +122,48 @@
       \field{pages}{17\bibrangedash 38}
       \range{pages}{22}
     \endentry
+    \entry{bolor-toli}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=283b2626b49ec1d77987b7dcfd382f9c}{%
+           family={{Bolorsoft LLC}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \strng{fullhash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \strng{bibnamehash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \strng{authorbibnamehash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \strng{authornamehash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \strng{authorfullhash}{283b2626b49ec1d77987b7dcfd382f9c}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Web application / mobile service}
+      \field{note}{Accessed: 2026-03-02}
+      \field{title}{Bolor Toli -- English-Mongolian Dictionary and Translation Service}
+      \field{year}{2026}
+    \endentry
+    \entry{tungaamal-toli}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=05436905bdf31ef6997246a2d80fd427}{%
+           family={{Tungaamal Team}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{05436905bdf31ef6997246a2d80fd427}
+      \strng{fullhash}{05436905bdf31ef6997246a2d80fd427}
+      \strng{bibnamehash}{05436905bdf31ef6997246a2d80fd427}
+      \strng{authorbibnamehash}{05436905bdf31ef6997246a2d80fd427}
+      \strng{authornamehash}{05436905bdf31ef6997246a2d80fd427}
+      \strng{authorfullhash}{05436905bdf31ef6997246a2d80fd427}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Mobile application}
+      \field{note}{Accessed: 2026-03-02}
+      \field{title}{Tungaamal Toli -- Mongolian Script Support Tool (voice/convert use cases)}
+      \field{year}{2026}
+    \endentry
     \entry{karpicke2008critical}{article}{}
       \name{author}{2}{}{%
         {{hash=585da0827f5f2a43fc258a4f97ee1590}{%
@@ -144,8 +186,8 @@
       \strng{authorbibnamehash}{ac556f17b5a7389e5bb0434356889487}
       \strng{authornamehash}{ac556f17b5a7389e5bb0434356889487}
       \strng{authorfullhash}{ac556f17b5a7389e5bb0434356889487}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -173,8 +215,8 @@
       \strng{authorbibnamehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
       \strng{authornamehash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
       \strng{authorfullhash}{5d7a6e7e0e82bcc144f01ac47862fe2f}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Memory: A contribution to experimental psychology}
@@ -199,8 +241,8 @@
       \strng{authorbibnamehash}{4dafd8ca00f14b7d8c23f880772cd565}
       \strng{authornamehash}{4dafd8ca00f14b7d8c23f880772cd565}
       \strng{authorfullhash}{4dafd8ca00f14b7d8c23f880772cd565}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Acta neurobiologiae experimentalis}
@@ -222,8 +264,8 @@
       \strng{authorbibnamehash}{350a86b0327152e3a50596538f38a5db}
       \strng{authornamehash}{350a86b0327152e3a50596538f38a5db}
       \strng{authorfullhash}{350a86b0327152e3a50596538f38a5db}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://reactnative.dev/docs/getting-started}}
@@ -243,8 +285,8 @@
       \strng{authorbibnamehash}{7b568e72d25af32b0cec03e49cbf3f70}
       \strng{authornamehash}{7b568e72d25af32b0cec03e49cbf3f70}
       \strng{authorfullhash}{7b568e72d25af32b0cec03e49cbf3f70}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://firebase.google.com/docs}}

@@ -73,11 +73,6 @@ Egüü системийн бүтэц, архитектурын моделийн 
 \figFirebaseDB
 \figFirebaseStorage
 
-\subsubsection{Authentication (Баталгаажуулалт)}
-
-\figLoginScreen
-\figSignUpScreen
-
 \subsubsection{Spaced Repetition систем}
 
 SM-2 алгоритмыг хэрэгжүүлж, flashcard-ыг хэр сайн санаж байгаагаас хамааран дараагийн давталтын хугацааг тооцоолдог (Appendix A.8 харна.). GitHub дээр дэлгэрэнгүй: \url{https://github.com/Tugu69ur/Eguu/blob/main/utils/spacedRepetition.ts}
@@ -102,7 +97,33 @@ React Native болон NativeWind (TailwindCSS) ашиглан орчин үе�
 
 Бүх компонентын эх код: \url{https://github.com/Tugu69ur/Eguu/tree/main/components}
 
+\subsubsection{Аппын дэлгэцийн бүтэц ба урсгал}
+
+Egüü аппын дэлгэцийн урсгал нь \textbf{Нэвтрэлт/Бүртгэл $\rightarrow$ Үндсэн таб дэлгэцүүд $\rightarrow$ Профайл ба тохиргоо} гэсэн дарааллаар зохион байгуулагдсан.
+
+\paragraph{Нэвтрэлт ба бүртгэл}
+Нэвтрэх болон бүртгүүлэх хэсгийг Зураг~\ref{fig:login}, Зураг~\ref{fig:signup}-т үзүүлэв.
+
+\paragraph{Үндсэн таб дэлгэцүүд}
+Хэрэглэгчийн өдөр тутмын ашиглалтын үндсэн интерфэйс болох Нүүр ба Хайлтын дэлгэцүүдийг Зураг~\ref{fig:home}, Зураг~\ref{fig:search}-д үзүүлэв.
+
 % UI Component Screenshots
+\vspace{0.8em}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/Login.png}
+    \captionof{figure}{Нэвтрэх дэлгэц – хэрэглэгчийн мэдээллийг оруулах интерфейс.}
+    \label{fig:login}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.43\textwidth,height=0.33\textheight,keepaspectratio]{Figures/pages/Signup.png}
+    \captionof{figure}{Бүртгүүлэх дэлгэц – хэрэглэгчийн мэдээллийг оруулах интерфейс.}
+    \label{fig:signup}
+\end{minipage}
+\vspace{0.8em}
+
 \noindent
 \begin{minipage}[t]{0.48\textwidth}
     \centering
@@ -117,6 +138,12 @@ React Native болон NativeWind (TailwindCSS) ашиглан орчин үе�
     \label{fig:search}
 \end{minipage}
 \vspace{0.8em}
+
+
+
+\paragraph{Профайл ба тохиргооны дэлгэцүүд}
+Хэрэглэгчийн ахиц, мэдэгдэл болон нууцлалын тохиргооны дэлгэцүүдийг Зураг~\ref{fig:profile}, Зураг~\ref{fig:settings}, Зураг~\ref{fig:notifications}, Зураг~\ref{fig:security-privacy}-д үзүүлэв.
+
 \figProfileScreen
 \figSettingsScreen
 \figNotificationScreen
@@ -136,6 +163,8 @@ React Native болон NativeWind (TailwindCSS) ашиглан орчин үе�
 \label{subsec:ocr-implementation}
 
 Egüü системийн нэг онцлог функц нь Монгол бичгийг таних OCR технологи юм. TensorFlow.js ашиглан хэрэглэгч гараар бичсэн Монгол бичгийг таних боломжтой.
+
+OCR-ийн хэрэглэгчийн урсгал нь (1) оролт авах, (2) танилт ба үр дүн харуулах, (3) хөрвүүлэлтийн горим гэсэн үндсэн гурван алхамтай. Оролтын дэлгэцүүдийг Зураг~\ref{fig:camera}, Зураг~\ref{fig:handwriting}-т, танилтын үр дүнгийн дэлгэцүүдийг Зураг~\ref{fig:handwritten-result}, Зураг~\ref{fig:ocr-regular}-т, хөрвүүлэлтийн дэлгэцүүдийг Зураг~\ref{fig:ocr-image-to-text}, Зураг~\ref{fig:ocr-cyrillic}-д тус тус үзүүлэв.
 
 \vspace{1.2em}
 \noindent
@@ -190,6 +219,22 @@ Egüü системийн нэг онцлог функц нь Монгол би�
 
 TensorFlow.js моделийн сургалтын үр дүн болон гүйцэтгэлийг дараах зургуудаар харуулав:
 
+\vspace{0.8em}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/ocrresponse.png}
+    \captionof{figure}{OCR моделийн таамаглалын (prediction response) жишээ үр дүн.}
+    \label{fig:ocr-response}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/trainingloss.png}
+    \captionof{figure}{OCR моделийн сургалтын loss-ийн бууралт.}
+    \label{fig:training-loss}
+\end{minipage}
+\vspace{0.8em}
+
 \subsubsection{OCR моделийн сургалтын дэлгэрэнгүй}
 
 \paragraph{Dataset бүрдүүлэлт:}
@@ -222,7 +267,6 @@ Test set & 20,000 & Эцсийн нарийвчлалыг хэмжихэд аш�
 \begin{itemize}
     \item \textbf{Эгшиг үсгүүд (7):} a, e, i, o, u, ö, ü (уламжлалт Монгол бичгийн тэмдэгтүүд)
     \item \textbf{Гийгүүлэгч үсгүүд (26):} n, ng, b, p, kh, g, m, l, s, sh, t, d, ch, j, y, r, w, f, k, q, ts, dz, h зэрэг уламжлалт бичгийн гийгүүлэгчүүд
-    \item \textbf{Хоосон зай:} Үг хоорондын зай
 \end{itemize}
 
 \paragraph{CRNN моделийн архитектур:}

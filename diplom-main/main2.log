@@ -1,9 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.30)  2 MAR 2026 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.30)  2 MAR 2026 17:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\def\jobname{main2}\input{main.tex}
-(main.tex (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+**./main.tex
+(main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
 File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
@@ -1556,7 +1559,7 @@ Package hyperref Info: Link coloring ON on input line 173.
 \openout2 = `FrontBackMatter/TittlePage.aux'.
 
  (FrontBackMatter/TittlePage.tex
-<Figures/logo.png, id=357, 214.8025pt x 236.885pt>
+<Figures/logo.png, id=369, 214.8025pt x 236.885pt>
 File: Figures/logo.png Graphic file (type png)
 <use Figures/logo.png>
 Package pdftex.def Info: Figures/logo.png  used on input line 8.
@@ -1646,7 +1649,7 @@ Overfull \hbox (4.29198pt too wide) in paragraph at lines 99--100
 \openout2 = `Chapters/Chapter2.aux'.
 
  (Chapters/Chapter2.tex
-Overfull \hbox (0.87337pt too wide) in paragraph at lines 33--34
+Overfull \hbox (0.87337pt too wide) in paragraph at lines 47--48
 \T2A/cmr/m/n/12 лас-наар тус-даа сер-ве-рийн удирд-ла-га шаар-дал-гій-гээр хэ-р
 эг-лэг-чийн °г°г-д°л хад-га-лах, синх-
  []
@@ -1655,19 +1658,19 @@ Overfull \hbox (0.87337pt too wide) in paragraph at lines 33--34
 
 
 
-]
-Overfull \hbox (6.43718pt too wide) in paragraph at lines 78--79
+] [5]
+Overfull \hbox (6.43718pt too wide) in paragraph at lines 102--103
 []\T2A/cmr/bx/n/12 Gamification + Spaced Repetition: \T2A/cmr/m/n/12 Duolingo-и
 йн gamification бо-лон Anki-ийн spaced
  []
 
 
-Overfull \hbox (11.37485pt too wide) in paragraph at lines 87--88
+Overfull \hbox (11.37485pt too wide) in paragraph at lines 111--112
 \T2A/cmr/m/n/12 суурь шийд-ліі-дийг то-дор-хой-лов: Мон-гол бич-гийн сур-гал-ты
 н онц-логт нийц-сэн flashcard+SM-
  []
 
-) [5]
+) [6]
 \openout2 = `Chapters/Chapter3.aux'.
 
  (Chapters/Chapter3.tex
@@ -1682,7 +1685,7 @@ Overfull \hbox (1.5272pt too wide) in paragraph at lines 23--24
 -рэг-жіі-лэлт, хэ-рэг-лээ-ний інэл-
  []
 
-[6
+[7
 
 
 
@@ -1698,51 +1701,52 @@ Overfull \hbox (3.18272pt too wide) in paragraph at lines 48--49
  асинх-ро-ноор ха-рил-цан ажил-
  []
 
-[7]
-<Figures/diagrams/usecasediagram.png, id=541, 2504.35625pt x 2150.0325pt>
+[8]
+<Figures/diagrams/usecasediagram.png, id=581, 2504.35625pt x 2150.0325pt>
 File: Figures/diagrams/usecasediagram.png Graphic file (type png)
 <use Figures/diagrams/usecasediagram.png>
 Package pdftex.def Info: Figures/diagrams/usecasediagram.png  used on input lin
 e 107.
 (pdftex.def)             Requested size: 386.95897pt x 332.20178pt.
-<Figures/diagrams/sequence.png, id=543, 564.6696pt x 272.9397pt>
+<Figures/diagrams/sequence.png, id=583, 564.6696pt x 272.9397pt>
 File: Figures/diagrams/sequence.png Graphic file (type png)
 <use Figures/diagrams/sequence.png>
 Package pdftex.def Info: Figures/diagrams/sequence.png  used on input line 117.
 
 (pdftex.def)             Requested size: 411.14528pt x 198.73204pt.
- [8 <./Figures/diagrams/usecasediagram.png>]
-<Figures/diagrams/activitydiagram.png, id=551, 1291.9467pt x 181.6386pt>
+ [9 <./Figures/diagrams/usecasediagram.png>]
+<Figures/diagrams/activitydiagram.png, id=591, 1291.9467pt x 181.6386pt>
 File: Figures/diagrams/activitydiagram.png Graphic file (type png)
 <use Figures/diagrams/activitydiagram.png>
 Package pdftex.def Info: Figures/diagrams/activitydiagram.png  used on input li
 ne 127.
 (pdftex.def)             Requested size: 386.95897pt x 54.4033pt.
-<Figures/diagrams/dataflow.png, id=552, 859.41075pt x 536.60475pt>
+<Figures/diagrams/dataflow.png, id=592, 859.41075pt x 536.60475pt>
 File: Figures/diagrams/dataflow.png Graphic file (type png)
 <use Figures/diagrams/dataflow.png>
 Package pdftex.def Info: Figures/diagrams/dataflow.png  used on input line 180.
 
 (pdftex.def)             Requested size: 411.14528pt x 256.70761pt.
- [9 <./Figures/diagrams/sequence.png> <./Figures/diagrams/activitydiagram.png>]
-<Figures/diagrams/erd.png, id=563, 518.53725pt x 352.9185pt>
+ [10 <./Figures/diagrams/sequence.png> <./Figures/diagrams/activitydiagram.png>
+]
+<Figures/diagrams/erd.png, id=603, 518.53725pt x 352.9185pt>
 File: Figures/diagrams/erd.png Graphic file (type png)
 <use Figures/diagrams/erd.png>
 Package pdftex.def Info: Figures/diagrams/erd.png  used on input line 239.
 (pdftex.def)             Requested size: 386.95897pt x 263.36348pt.
-<Figures/diagrams/system_architecture.png, id=564, 1211.52625pt x 711.65875pt>
+<Figures/diagrams/system_architecture.png, id=604, 1211.52625pt x 711.65875pt>
 File: Figures/diagrams/system_architecture.png Graphic file (type png)
 <use Figures/diagrams/system_architecture.png>
 Package pdftex.def Info: Figures/diagrams/system_architecture.png  used on inpu
 t line 250.
 (pdftex.def)             Requested size: 435.32422pt x 255.7083pt.
- [10 <./Figures/diagrams/dataflow.png> <./Figures/diagrams/erd.png>]
+ [11 <./Figures/diagrams/dataflow.png> <./Figures/diagrams/erd.png>]
 Overfull \hbox (14.68402pt too wide) in paragraph at lines 257--258
  []\T2A/cmr/bx/n/12 Архитектурын тайл-бар:[] \T2A/cmr/m/n/12 Client (React Nati
 ve) нь Firebase (Cloud Firestore, Authentication,
  []
 
-[11 <./Figures/diagrams/system_architecture.png>]) [12]
+[12 <./Figures/diagrams/system_architecture.png>]) [13]
 \openout2 = `Chapters/Chapter4.aux'.
 
  (Chapters/Chapter4.tex
@@ -1756,7 +1760,7 @@ LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/cyrillic\t2acmtt.fd
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-[13
+[14
 
 
 
@@ -1766,19 +1770,19 @@ Overfull \hbox (14.44255pt too wide) in paragraph at lines 70--71
 ард-даг-гій (Serverless) Firebase
  []
 
-<Figures/firebase/firebaseAuth.png, id=599, 637.1805pt x 61.4295pt>
+<Figures/firebase/firebaseAuth.png, id=638, 637.1805pt x 61.4295pt>
 File: Figures/firebase/firebaseAuth.png Graphic file (type png)
 <use Figures/firebase/firebaseAuth.png>
 Package pdftex.def Info: Figures/firebase/firebaseAuth.png  used on input line 
 72.
 (pdftex.def)             Requested size: 362.77264pt x 34.97485pt.
-<Figures/firebase/firebaseDB.png, id=600, 757.02824pt x 313.17pt>
+<Figures/firebase/firebaseDB.png, id=639, 757.02824pt x 313.17pt>
 File: Figures/firebase/firebaseDB.png Graphic file (type png)
 <use Figures/firebase/firebaseDB.png>
 Package pdftex.def Info: Figures/firebase/firebaseDB.png  used on input line 73
 .
 (pdftex.def)             Requested size: 386.95897pt x 160.08252pt.
-<Figures/firebase/firebaseStorage.png, id=601, 677.53125pt x 28.908pt>
+<Figures/firebase/firebaseStorage.png, id=640, 677.53125pt x 28.908pt>
 File: Figures/firebase/firebaseStorage.png Graphic file (type png)
 <use Figures/firebase/firebaseStorage.png>
 Package pdftex.def Info: Figures/firebase/firebaseStorage.png  used on input li
@@ -1790,9 +1794,9 @@ Overfull \hbox (8.69643pt too wide) in paragraph at lines 82--83
 к-цийг хэ-рэг-жііл-сэн (Appendix
  []
 
-[14 <./Figures/firebase/firebaseAuth.png> <./Figures/firebase/firebaseDB.png> <
+[15 <./Figures/firebase/firebaseAuth.png> <./Figures/firebase/firebaseDB.png> <
 ./Figures/firebase/firebaseStorage.png>]
-<Figures/pages/Login.png, id=622, 1174.3875pt x 2541.495pt>
+<Figures/pages/Login.png, id=661, 1174.3875pt x 2541.495pt>
 File: Figures/pages/Login.png Graphic file (type png)
 <use Figures/pages/Login.png>
 Package pdftex.def Info: Figures/pages/Login.png  used on input line 115.
@@ -1803,7 +1807,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 116.
 See the caption package documentation for explanation.
 
-<Figures/pages/Signup.png, id=623, 1174.3875pt x 2541.495pt>
+<Figures/pages/Signup.png, id=662, 1174.3875pt x 2541.495pt>
 File: Figures/pages/Signup.png Graphic file (type png)
 <use Figures/pages/Signup.png>
 Package pdftex.def Info: Figures/pages/Signup.png  used on input line 121.
@@ -1813,7 +1817,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 122.
 See the caption package documentation for explanation.
 
-<Figures/pages/home.png, id=624, 1174.3875pt x 2412.01125pt>
+<Figures/pages/home.png, id=663, 1174.3875pt x 2412.01125pt>
 File: Figures/pages/home.png Graphic file (type png)
 <use Figures/pages/home.png>
 Package pdftex.def Info: Figures/pages/home.png  used on input line 130.
@@ -1823,7 +1827,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 131.
 See the caption package documentation for explanation.
 
-<Figures/pages/search.png, id=625, 1174.3875pt x 2407.99625pt>
+<Figures/pages/search.png, id=664, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/search.png Graphic file (type png)
 <use Figures/pages/search.png>
 Package pdftex.def Info: Figures/pages/search.png  used on input line 136.
@@ -1833,24 +1837,24 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 137.
 See the caption package documentation for explanation.
 
-[15 <./Figures/pages/Login.png> <./Figures/pages/Signup.png>]
-<Figures/pages/profile.png, id=640, 1174.3875pt x 2407.99625pt>
+[16 <./Figures/pages/Login.png> <./Figures/pages/Signup.png>]
+<Figures/pages/profile.png, id=679, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/profile.png Graphic file (type png)
 <use Figures/pages/profile.png>
 Package pdftex.def Info: Figures/pages/profile.png  used on input line 147.
 (pdftex.def)             Requested size: 169.29684pt x 347.11128pt.
-<Figures/pages/settings.png, id=641, 1174.3875pt x 1218.5525pt>
+<Figures/pages/settings.png, id=680, 1174.3875pt x 1218.5525pt>
 File: Figures/pages/settings.png Graphic file (type png)
 <use Figures/pages/settings.png>
 Package pdftex.def Info: Figures/pages/settings.png  used on input line 148.
 (pdftex.def)             Requested size: 169.29684pt x 175.65364pt.
-<Figures/pages/notification.png, id=642, 1174.3875pt x 1727.45375pt>
+<Figures/pages/notification.png, id=681, 1174.3875pt x 1727.45375pt>
 File: Figures/pages/notification.png Graphic file (type png)
 <use Figures/pages/notification.png>
 Package pdftex.def Info: Figures/pages/notification.png  used on input line 149
 .
 (pdftex.def)             Requested size: 169.29684pt x 249.01146pt.
-<Figures/pages/security_privacy.png, id=643, 1174.3875pt x 1626.075pt>
+<Figures/pages/security_privacy.png, id=682, 1174.3875pt x 1626.075pt>
 File: Figures/pages/security_privacy.png Graphic file (type png)
 <use Figures/pages/security_privacy.png>
 Package pdftex.def Info: Figures/pages/security_privacy.png  used on input line
@@ -1862,10 +1866,10 @@ Overfull \hbox (15.51958pt too wide) in paragraph at lines 165--166
 -них OCR тех-но-ло-ги юм. TensorFlow.js
  []
 
-[16 <./Figures/pages/home.png> <./Figures/pages/search.png> <./Figures/pages/pr
-ofile.png>] [17 <./Figures/pages/settings.png> <./Figures/pages/notification.pn
+[17 <./Figures/pages/home.png> <./Figures/pages/search.png> <./Figures/pages/pr
+ofile.png>] [18 <./Figures/pages/settings.png> <./Figures/pages/notification.pn
 g>]
-<Figures/pages/camera.jpg, id=668, 949.5475pt x 2055.68pt>
+<Figures/pages/camera.jpg, id=707, 949.5475pt x 2055.68pt>
 File: Figures/pages/camera.jpg Graphic file (type jpg)
 <use Figures/pages/camera.jpg>
 Package pdftex.def Info: Figures/pages/camera.jpg  used on input line 173.
@@ -1876,7 +1880,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 174.
 See the caption package documentation for explanation.
 
-<Figures/pages/handwriting.png, id=669, 1174.3875pt x 2423.0525pt>
+<Figures/pages/handwriting.png, id=708, 1174.3875pt x 2423.0525pt>
 File: Figures/pages/handwriting.png Graphic file (type png)
 <use Figures/pages/handwriting.png>
 Package pdftex.def Info: Figures/pages/handwriting.png  used on input line 179.
@@ -1887,9 +1891,9 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 180.
 See the caption package documentation for explanation.
 
-[18 <./Figures/pages/security_privacy.png> <./Figures/pages/camera.jpg> <./Figu
+[19 <./Figures/pages/security_privacy.png> <./Figures/pages/camera.jpg> <./Figu
 res/pages/handwriting.png>]
-<Figures/pages/handwroten.png, id=682, 1174.3875pt x 2423.0525pt>
+<Figures/pages/handwroten.png, id=722, 1174.3875pt x 2423.0525pt>
 File: Figures/pages/handwroten.png Graphic file (type png)
 <use Figures/pages/handwroten.png>
 Package pdftex.def Info: Figures/pages/handwroten.png  used on input line 190.
@@ -1900,7 +1904,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 191.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_regular_view.png, id=683, 1174.3875pt x 2412.01125pt>
+<Figures/pages/ocr_regular_view.png, id=723, 1174.3875pt x 2412.01125pt>
 File: Figures/pages/ocr_regular_view.png Graphic file (type png)
 <use Figures/pages/ocr_regular_view.png>
 Package pdftex.def Info: Figures/pages/ocr_regular_view.png  used on input line
@@ -1911,7 +1915,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 197.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_imagetotext.png, id=684, 1174.3875pt x 2392.94pt>
+<Figures/pages/ocr_imagetotext.png, id=724, 1174.3875pt x 2392.94pt>
 File: Figures/pages/ocr_imagetotext.png Graphic file (type png)
 <use Figures/pages/ocr_imagetotext.png>
 Package pdftex.def Info: Figures/pages/ocr_imagetotext.png  used on input line 
@@ -1922,7 +1926,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 206.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_cyrillic_to_script.png, id=685, 1174.3875pt x 2407.99625pt>
+<Figures/pages/ocr_cyrillic_to_script.png, id=725, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/ocr_cyrillic_to_script.png Graphic file (type png)
 <use Figures/pages/ocr_cyrillic_to_script.png>
 Package pdftex.def Info: Figures/pages/ocr_cyrillic_to_script.png  used on inpu
@@ -1933,7 +1937,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 212.
 See the caption package documentation for explanation.
 
-<Figures/ocrresponse.png, id=686, 915.42pt x 134.5025pt>
+<Figures/ocrresponse.png, id=726, 915.42pt x 134.5025pt>
 File: Figures/ocrresponse.png Graphic file (type png)
 <use Figures/ocrresponse.png>
 Package pdftex.def Info: Figures/ocrresponse.png  used on input line 226.
@@ -1948,7 +1952,7 @@ Underfull \hbox (badness 2582) in paragraph at lines 227--227
 []\T2A/cmr/m/n/12 Зураг 24: |[]OCR мо-де-лийн таа-маг-ла-лын
  []
 
-<Figures/trainingloss.png, id=687, 968.61874pt x 213.79875pt>
+<Figures/trainingloss.png, id=727, 968.61874pt x 213.79875pt>
 File: Figures/trainingloss.png Graphic file (type png)
 <use Figures/trainingloss.png>
 Package pdftex.def Info: Figures/trainingloss.png  used on input line 232.
@@ -1958,15 +1962,15 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 233.
 See the caption package documentation for explanation.
 
-[19
+[20
 
  <./Figures/pages/handwroten.png> <./Figures/pages/ocr_regular_view.png> <./Fig
 ures/pages/ocr_imagetotext.png> <./Figures/pages/ocr_cyrillic_to_script.png> <.
-/Figures/ocrresponse.png> <./Figures/trainingloss.png>] [20]) [21]
+/Figures/ocrresponse.png> <./Figures/trainingloss.png>] [21]) [22]
 \openout2 = `Chapters/Chapter5.aux'.
 
 
-(Chapters/Chapter5.tex [22
+(Chapters/Chapter5.tex [23
 
 
 
@@ -1982,31 +1986,88 @@ Overfull \hbox (9.8364pt too wide) in paragraph at lines 110--111
 Monitor, Firebase Performance Monitoring 
  []
 
-[23] [24] [25] [26]) [27]
-\openout2 = `Appendices/AppendixA.aux'.
+[24]
+<Figures/evalution/confusion_matrix_heatmap_top30.png, id=777, 867.24pt x 722.7
+pt>
+File: Figures/evalution/confusion_matrix_heatmap_top30.png Graphic file (type p
+ng)
+<use Figures/evalution/confusion_matrix_heatmap_top30.png>
+Package pdftex.def Info: Figures/evalution/confusion_matrix_heatmap_top30.png  
+used on input line 140.
+(pdftex.def)             Requested size: 193.043pt x 160.86916pt.
 
- (Appendices/AppendixA.tex
-Overfull \hbox (142.22925pt too wide) in paragraph at lines 16--53
- [][] 
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 141.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 5985) in paragraph at lines 141--141
+[]\T2A/cmr/m/n/12 Зураг 27: |[]OCR тэм-дэг-тийн ан-гил-лын
  []
 
+<Figures/evalution/prf_top_support_clean.png, id=778, 1084.05pt x 433.62pt>
+File: Figures/evalution/prf_top_support_clean.png Graphic file (type png)
+<use Figures/evalution/prf_top_support_clean.png>
+Package pdftex.def Info: Figures/evalution/prf_top_support_clean.png  used on i
+nput line 146.
+(pdftex.def)             Requested size: 220.56102pt x 88.2244pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 147.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 1286) in paragraph at lines 147--147
+[]\T2A/cmr/m/n/12 Зураг 28: |[]Топ support-той ан-гил-луу-дын
+ []
+
+<Figures/evalution/worst_recall_clean.png, id=779, 939.51pt x 433.62pt>
+File: Figures/evalution/worst_recall_clean.png Graphic file (type png)
+<use Figures/evalution/worst_recall_clean.png>
+Package pdftex.def Info: Figures/evalution/worst_recall_clean.png  used on inpu
+t line 155.
+(pdftex.def)             Requested size: 220.55551pt x 101.79485pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 156.
+See the caption package documentation for explanation.
+
+<Figures/evalution/hardest_chars_fp_fn_clean.png, id=780, 939.51pt x 433.62pt>
+File: Figures/evalution/hardest_chars_fp_fn_clean.png Graphic file (type png)
+<use Figures/evalution/hardest_chars_fp_fn_clean.png>
+Package pdftex.def Info: Figures/evalution/hardest_chars_fp_fn_clean.png  used 
+on input line 161.
+(pdftex.def)             Requested size: 220.55551pt x 101.79485pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 162.
+See the caption package documentation for explanation.
+
+[25 <./Figures/evalution/confusion_matrix_heatmap_top30.png> <./Figures/evaluti
+on/prf_top_support_clean.png> <./Figures/evalution/worst_recall_clean.png> <./F
+igures/evalution/hardest_chars_fp_fn_clean.png>] [26] [27] [28] [29]) [30]
+\openout2 = `Appendices/AppendixA.aux'.
+
+
+(Appendices/AppendixA.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 59.
-[28
+nput line 57.
+ [31
 
 
 
 ]
 LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 117.
- [29] [30]
+(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 115.
+ [32] [33]
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-[31] [32]) [33] [34
+[34] [35]) [36] [37
 
 
 ] (main2.aux (FrontBackMatter/TittlePage.aux)
@@ -2018,29 +2079,33 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main2.out' has not changed.
-(rerunfilecheck)             Checksum: 12CF5272AD26E327726E1665626150AD;22070.
+(rerunfilecheck)             Checksum: 6C17D2EAD7017B758896C4D6BE599054;23324.
 Package logreq Info: Writing requests to 'main2.run.xml'.
 \openout1 = `main2.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38858 strings out of 474485
- 754076 string characters out of 5745149
- 2214542 words of memory out of 5000000
- 60130 multiletter control sequences out of 15000+600000
+ 38922 strings out of 474485
+ 756279 string characters out of 5745149
+ 2208542 words of memory out of 5000000
+ 60170 multiletter control sequences out of 15000+600000
  579058 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,10n,90p,1112b,2286s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,10n,87p,1133b,2286s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1095.
 pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt0800
 .pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm060
 0.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx10
 00.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1
 000.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt
-1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lat
-i1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
-tcrm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600
+1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\t
+crm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\
+lati1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600
 \larm1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
 0\lacc1728.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi6
 00\labx1728.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi
@@ -2049,13 +2114,19 @@ i600\labx1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/d
 pi600\labx1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/
 dpi600\larm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
 /dpi600\laxc1440.pk><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmmi12.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (40 pages, 9497689 bytes).
+ic/amsfonts/cm/cmex10.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmmi12.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/68/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/68/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/68/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/68/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/68/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/68/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main2.pdf (43 pages, 10059890 bytes).
 PDF statistics:
- 1921 PDF objects out of 2073 (max. 8388607)
- 350 named destinations out of 1000 (max. 500000)
- 895 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2033 PDF objects out of 2073 (max. 8388607)
+ 375 named destinations out of 1000 (max. 500000)
+ 939 words of extra memory for PDF output out of 10000 (max. 10000000)
 

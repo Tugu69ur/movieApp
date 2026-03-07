@@ -1,12 +1,20 @@
-
-import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft } from 'lucide-react-native';
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Flashcard from '../../components/Flashcard';
-import { auth } from '../../FirebaseConfig';
-import { FlashcardService, Flashcard as FlashcardType } from '../../services/FlashcardService';
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { ArrowLeft } from "lucide-react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Flashcard from "../../components/Flashcard";
+import { auth } from "../../FirebaseConfig";
+import {
+  FlashcardService,
+  Flashcard as FlashcardType,
+} from "../../services/FlashcardService";
 
 export default function CategoryScreen() {
   const { id } = useLocalSearchParams();
@@ -17,12 +25,14 @@ export default function CategoryScreen() {
 
   useEffect(() => {
     const loadData = async () => {
-      if (typeof id === 'string') {
+      if (typeof id === "string") {
         const cards = await FlashcardService.getFlashcardsByCategory(id);
         setFlashcards(cards);
 
         if (auth.currentUser) {
-          const ids = await FlashcardService.getFavoriteIds(auth.currentUser.uid);
+          const ids = await FlashcardService.getFavoriteIds(
+            auth.currentUser.uid,
+          );
           setFavorites(ids);
         }
       }
@@ -37,7 +47,7 @@ export default function CategoryScreen() {
     const isFav = favorites.includes(cardId);
     let newFavs;
     if (isFav) {
-      newFavs = favorites.filter(fid => fid !== cardId);
+      newFavs = favorites.filter((fid) => fid !== cardId);
     } else {
       newFavs = [...favorites, cardId];
     }
@@ -59,13 +69,21 @@ export default function CategoryScreen() {
       <Stack.Screen options={{ headerShown: false }} />
 
       <View className="flex-row items-center px-4 py-2">
-        <TouchableOpacity onPress={() => router.back()} className="p-2 bg-white dark:bg-neutral-800 rounded-full shadow-sm mr-4">
+        <TouchableOpacity
+          onPress={() => router.back()}
+          className="p-2 bg-white dark:bg-neutral-800 rounded-full shadow-sm mr-4"
+        >
           <ArrowLeft size={24} color="#4b5563" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-neutral-900 dark:text-white">Practice</Text>
+        <Text className="text-xl font-bold text-neutral-900 dark:text-white">
+          Practice
+        </Text>
       </View>
 
-      <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 40 }}>
+      <ScrollView
+        className="flex-1 px-4"
+        contentContainerStyle={{ paddingBottom: 40 }}
+      >
         {flashcards.length > 0 ? (
           flashcards.map((card, index) => (
             <View key={card.id} className="mb-8">
@@ -78,11 +96,12 @@ export default function CategoryScreen() {
           ))
         ) : (
           <View className="items-center justify-center mt-20">
-            <Text className="text-neutral-500 text-lg">No flashcards found in this category.</Text>
+            <Text className="text-neutral-500 text-lg">
+              No flashcards found in this category.
+            </Text>
           </View>
         )}
       </ScrollView>
     </SafeAreaView>
   );
 }
-

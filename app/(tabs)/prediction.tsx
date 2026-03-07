@@ -119,7 +119,7 @@ export default function PhotoPredictScreen() {
           require("../../assets/model/group1-shard2of2.bin"),
         ];
         const loadedModel = await tf.loadLayersModel(
-          bundleResourceIO(modelJson, modelWeights)
+          bundleResourceIO(modelJson, modelWeights),
         );
         setModel(loadedModel);
         console.log("✅ Model Loaded!");
@@ -213,7 +213,7 @@ export default function PhotoPredictScreen() {
     _.debounce(async (text: string) => {
       const converted = await convertText(text);
       setConvertedText(converted);
-    }, 500)
+    }, 500),
   ).current;
 
   // ================= Swap Languages =================
@@ -237,7 +237,10 @@ export default function PhotoPredictScreen() {
     }
   };
 
-  const recognizeMongolImage = async (uri: string, endpoint: "ocr" | "camera" = "ocr") => {
+  const recognizeMongolImage = async (
+    uri: string,
+    endpoint: "ocr" | "camera" = "ocr",
+  ) => {
     setLoading(true);
     try {
       const formData = new FormData();
@@ -247,13 +250,16 @@ export default function PhotoPredictScreen() {
         type: "image/png",
       } as any);
 
-      const response = await fetch(`http://172.20.10.4:8000/${endpoint}`, {
-        //    const response = await fetch(`http://192.168.1.19:8000/${endpoint}`, {
-        method: "POST",
-        body: formData,
-        // ⚠️ Битгий Content-Type зааж өг
-        // headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await fetch(
+        `https://ocrapi-production-dee1.up.railway.app/${endpoint}`,
+        {
+          //    const response = await fetch(`http://192.168.1.19:8000/${endpoint}`, {
+          method: "POST",
+          body: formData,
+          // ⚠️ Битгий Content-Type зааж өг
+          // headers: { "Content-Type": "multipart/form-data" },
+        },
+      );
 
       const data = await response.json(); // server JSON буцааж байгаа тул json() ашиглах
       console.log("OCR Response:", data);
@@ -294,7 +300,7 @@ export default function PhotoPredictScreen() {
       if (status !== "granted") {
         Alert.alert(
           "Camera access required",
-          "Please allow camera permissions to use this feature."
+          "Please allow camera permissions to use this feature.",
         );
         return false;
       }
@@ -375,19 +381,31 @@ export default function PhotoPredictScreen() {
               }),
             }}
           >
-            <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 12 }}>
-              <View style={{
-                backgroundColor: isDark ? "#10b981" : "#ffffff",
-                padding: 10,
-                borderRadius: 16,
-                marginRight: 12,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
-                elevation: 2,
-              }}>
-                <Ionicons name="language" size={24} color={isDark ? "#ffffff" : "#10b981"} />
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 12,
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: isDark ? "#10b981" : "#ffffff",
+                  padding: 10,
+                  borderRadius: 16,
+                  marginRight: 12,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 4,
+                  elevation: 2,
+                }}
+              >
+                <Ionicons
+                  name="language"
+                  size={24}
+                  color={isDark ? "#ffffff" : "#10b981"}
+                />
               </View>
               <View style={{ flex: 1 }}>
                 <Text
@@ -415,7 +433,9 @@ export default function PhotoPredictScreen() {
             </View>
             <View
               style={{
-                backgroundColor: isDark ? "#374151" : "rgba(255, 255, 255, 0.25)",
+                backgroundColor: isDark
+                  ? "#374151"
+                  : "rgba(255, 255, 255, 0.25)",
                 paddingHorizontal: 12,
                 paddingVertical: 6,
                 borderRadius: 12,
@@ -448,7 +468,11 @@ export default function PhotoPredictScreen() {
                 </View>
               ) : (
                 <Text
-                  style={{ fontSize: 12, fontWeight: "600", color: isDark ? "#f59e0b" : "#ffffff" }}
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "600",
+                    color: isDark ? "#f59e0b" : "#ffffff",
+                  }}
                 >
                   {t("model_loading")}
                 </Text>

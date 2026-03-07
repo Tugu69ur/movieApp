@@ -9,20 +9,18 @@
 \contentsline {subsection}{\numberline {1.3}Судалгааны зорилтууд}{1}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Судалгааны ач холбогдол}{2}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}ТСА-ийн технологийн ач холбогдол}{2}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}ТСА-ийн хэрэглээний ач холбогдол}{3}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.2}ТСА-ийн хэрэглээний ач холбогдол}{2}{subsubsection.1.4.2}%
 \contentsline {subsection}{\numberline {1.5}Судалгааны хамрах хүрээ ба хязгаарлалт}{3}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}Төгсөлтийн судалгааны ажлын бүтэц}{3}{subsection.1.6}%
 \contentsline {section}{\numberline {2}Онолын болон харьцуулсан судалгаа}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Монгол бичгийн түүх ба онцлог}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Мэдлэг эзэмших танин мэдэхүйн аргууд: Spaced Repetition болон Flashcard}{4}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}SM-2 алгоритмын математик томьёолол}{4}{subsubsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.3}Гар утасны аппликейшн хөгжүүлэлтийн технологиуд}{4}{subsection.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.1}React Native - Cross-Platform фреймворк}{4}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Firebase - Backend-as-a-Service}{5}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2}Firebase - Backend-as-a-Service}{4}{subsubsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.4}TensorFlow.js ба OCR технологи}{5}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}OCR сургалтын зорилтот функц (CTC)}{5}{subsubsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.5}Ижил төстэй аппликейшнуудын харьцуулсан судалгаа}{5}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Egüü ТСА давуу талууд}{6}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.1}Egüü ТСА давуу талууд}{5}{subsubsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.6}Бүлгийн дүгнэлт}{6}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Судалгааны арга зүй}{7}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Судалгааны арга зүйн логик дараалал}{7}{subsection.3.1}%
@@ -75,12 +73,12 @@
 \contentsline {subsubsection}{\numberline {4.5.1}OCR моделийн гүйцэтгэл}{20}{subsubsection.4.5.1}%
 \contentsline {subsubsection}{\numberline {4.5.2}OCR моделийн сургалтын дэлгэрэнгүй}{20}{subsubsection.4.5.2}%
 \contentsline {paragraph}{Dataset бүрдүүлэлт:}{20}{section*.29}%
-\contentsline {paragraph}{Монгол бичгийн тэмдэгтүүд:}{21}{section*.31}%
+\contentsline {paragraph}{Монгол бичгийн тэмдэгтүүд:}{20}{section*.31}%
 \contentsline {paragraph}{CRNN моделийн архитектур:}{21}{section*.32}%
 \contentsline {paragraph}{Сургалтын параметрүүд:}{21}{section*.34}%
 \contentsline {paragraph}{Сургалтын үр дүн:}{21}{section*.35}%
-\contentsline {subsection}{\numberline {4.6}Туршилт ба тестлэлт}{22}{subsection.4.6}%
-\contentsline {paragraph}{Тестийн хамрах хүрээ:}{22}{section*.36}%
+\contentsline {subsection}{\numberline {4.6}Туршилт ба тестлэлт}{21}{subsection.4.6}%
+\contentsline {paragraph}{Тестийн хамрах хүрээ:}{21}{section*.36}%
 \contentsline {subsection}{\numberline {4.7}Гүйцэтгэлийн оновчлол}{22}{subsection.4.7}%
 \contentsline {subsection}{\numberline {4.8}Бүлгийн дүгнэлт}{22}{subsection.4.8}%
 \contentsline {section}{\numberline {5}Үр дүн, хэлэлцүүлэг, дүгнэлт}{23}{section.5}%
@@ -93,28 +91,19 @@
 \contentsline {subsection}{\numberline {5.2}Хэрэглэгчийн туршилт}{24}{subsection.5.2}%
 \contentsline {subsubsection}{\numberline {5.2.1}Туршилтын арга зүй}{24}{subsubsection.5.2.1}%
 \contentsline {subsubsection}{\numberline {5.2.2}Үр дүнгийн анализ}{25}{subsubsection.5.2.2}%
-\contentsline {paragraph}{OCR алдааны шинжилгээний визуал үр дүн:}{25}{section*.43}%
-\contentsline {subsubsection}{\numberline {5.2.3}Судалгааны баталгаажуулалтыг гүнзгийрүүлэх шаардлагатай хэмжилтүүд}{26}{subsubsection.5.2.3}%
-\contentsline {paragraph}{(1) Хэрэглэгчийн судалгааны загвар ба мэдээлэл}{26}{section*.44}%
-\contentsline {paragraph}{(2) Pre-test / Post-test сургалтын ахиц}{26}{section*.45}%
-\contentsline {paragraph}{(3) Статистикийн ач холбогдол}{26}{section*.46}%
-\contentsline {paragraph}{(4) A/B туршилтын дизайн}{26}{section*.47}%
-\contentsline {paragraph}{(5) OCR алдааны шинжилгээ (Error Analysis)}{26}{section*.48}%
-\contentsline {paragraph}{(6) Моделийн хувилбарын харьцуулалт}{26}{section*.49}%
-\contentsline {subsection}{\numberline {5.3}Хэлэлцүүлэг: бусад аппликейшнтай харьцуулалт}{27}{subsection.5.3}%
-\contentsline {paragraph}{Шинэлэг талын хэлэлцүүлэг:}{27}{section*.51}%
-\contentsline {paragraph}{Давуу талын хэлэлцүүлэг:}{27}{section*.52}%
-\contentsline {paragraph}{Сул талын хэлэлцүүлэг:}{27}{section*.53}%
-\contentsline {subsection}{\numberline {5.4}Дүгнэлт}{27}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Судалгааны зорилго биелэлт}{27}{subsubsection.5.4.1}%
-\contentsline {paragraph}{Үндсэн зорилго:}{27}{section*.54}%
-\contentsline {paragraph}{Зорилтуудын биелэлт:}{28}{table.caption.56}%
-\contentsline {subsubsection}{\numberline {5.4.2}Судалгааны шинэлэг тал}{28}{subsubsection.5.4.2}%
-\contentsline {subsubsection}{\numberline {5.4.3}Хязгаарлалт ба бэрхшээлүүд}{28}{subsubsection.5.4.3}%
-\contentsline {subsubsection}{\numberline {5.4.4}Системийн deployment ба эх код}{29}{subsubsection.5.4.4}%
-\contentsline {paragraph}{Deployment статус:}{29}{section*.57}%
-\contentsline {paragraph}{Эх кодын хадгалалт:}{29}{section*.58}%
-\contentsline {subsubsection}{\numberline {5.4.5}Цаашдын хөгжүүлэлтийн саналууд}{29}{subsubsection.5.4.5}%
-\contentsline {subsubsection}{\numberline {5.4.6}Ерөнхий дүгнэлт}{29}{subsubsection.5.4.6}%
-\contentsline {section}{Хавсралт А: Нэмэлт материалууд}{31}{section*.59}%
-\contentsline {section}{Ном зүй}{37}{section*.73}%
+\contentsline {subsection}{\numberline {5.3}Хэлэлцүүлэг: бусад аппликейшнтай харьцуулалт}{25}{subsection.5.3}%
+\contentsline {paragraph}{Шинэлэг талын хэлэлцүүлэг:}{25}{section*.44}%
+\contentsline {paragraph}{Давуу талын хэлэлцүүлэг:}{25}{section*.45}%
+\contentsline {paragraph}{Сул талын хэлэлцүүлэг:}{25}{section*.46}%
+\contentsline {subsection}{\numberline {5.4}Дүгнэлт}{25}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Судалгааны зорилго биелэлт}{25}{subsubsection.5.4.1}%
+\contentsline {paragraph}{Үндсэн зорилго:}{26}{section*.47}%
+\contentsline {paragraph}{Зорилтуудын биелэлт:}{26}{table.caption.49}%
+\contentsline {subsubsection}{\numberline {5.4.2}Судалгааны шинэлэг тал}{26}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Хязгаарлалт ба бэрхшээлүүд}{26}{subsubsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.4}Системийн deployment ба эх код}{27}{subsubsection.5.4.4}%
+\contentsline {paragraph}{Deployment статус:}{27}{section*.50}%
+\contentsline {paragraph}{Эх кодын хадгалалт:}{27}{section*.51}%
+\contentsline {subsubsection}{\numberline {5.4.5}Цаашдын хөгжүүлэлтийн саналууд}{27}{subsubsection.5.4.5}%
+\contentsline {subsubsection}{\numberline {5.4.6}Ерөнхий дүгнэлт}{27}{subsubsection.5.4.6}%
+\contentsline {section}{Хавсралт А: Нэмэлт материалууд}{29}{section*.52}%

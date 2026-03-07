@@ -2366,20 +2366,12 @@
     <bcf:citekey order="2" intorder="1">janhunen2003mongolic</bcf:citekey>
     <bcf:citekey order="3" intorder="1">godwin2016mobile</bcf:citekey>
     <bcf:citekey order="4" intorder="1">nakata2011computer</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">bolor-toli</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">tungaamal-toli</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">karpicke2008critical</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">ebbinghaus1985memory</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">wozniak1990optimization</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">nack2016learning</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">welekar2017firebase</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">smilkov2019tensorflow</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">bolor-toli</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">tungaamal-toli</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">bolor-toli</bcf:citekey>
-    <bcf:citekey order="15" intorder="2">tungaamal-toli</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">bolor-toli</bcf:citekey>
-    <bcf:citekey order="16" intorder="2">tungaamal-toli</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">karpicke2008critical</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">ebbinghaus1985memory</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">wozniak1990optimization</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">nack2016learning</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">welekar2017firebase</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">smilkov2019tensorflow</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

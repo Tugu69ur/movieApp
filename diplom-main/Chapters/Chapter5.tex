@@ -26,7 +26,7 @@ Egüü систем нь төлөвлөсөн бүх үндсэн функцуу
 \hline
 Flashcard тоо & 500+ & + 520 flashcard \\
 \hline
-Категори & 5+ & + 7 категори (эгшиг, гийгүүлэгч, үг гэх мэт) \\
+Категори & 5+ & + 7 категори (Байгаль, технологи, аялал гэх мэт) \\
 \hline
 Хэл дэмжлэг & 2 хэл & + Монгол, Англи \\
 \hline
@@ -90,18 +90,12 @@ Firestore бичих & < 1s & 380ms & + \\
 
 \begin{figure}[H]
 \centering
-\begin{minipage}[b]{0.49\textwidth}
+\begin{minipage}[b]{\textwidth}
     \centering
-    \includegraphics[width=0.49\textwidth,height=0.22\textheight,keepaspectratio]{Figures/pages/home.png}
+    \includegraphics[width=\textwidth,height=0.22\textheight,keepaspectratio]{Figures/pages/ocr_imagetotext.png}
     \captionof{figure}{OCR моделийн суралтын гүйцэтгэл}
     \label{fig:learning-curve}
 \end{minipage}\hfill
-\begin{minipage}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=0.49\textwidth,height=0.22\textheight,keepaspectratio]{Figures/pages/search.png}
-    \captionof{figure}{Epoch бүрийн үнэлгээний үр дүн}
-    \label{fig:epochs}
-\end{minipage}
 \end{figure}
 
 \paragraph{Тестийн орчин:}
@@ -121,7 +115,11 @@ Firestore бичих & < 1s & 380ms & + \\
 
 \subsubsection{Туршилтын арга зүй}
 
-Эмпирик туршилтын зохилт: оролцогчид $n=20$ ($M_{age}=22.3$, SD=3.2; Монгол хэлний оюутан 50%, бусад чиглэл 50%), рандомчилагдсан байшил, 2 долоо хоногийн судалгах үе шат. Хэмжүүр: System Usability Scale (Brooke, 1996), 7-ээс Likert хуваарь дээр нийтлэг сэтгэл ханамждын шалгуур (Harris & Brown, 2010). Гүйцсний дараа чанарыг хэмжих (qualitative) интервьюгээр гүнзгий анализ хийв.
+Судалгаанд нийт $n = 20$ оролцогч ($M_{age} = 19$) хамрагдсан. 
+Оролцогчдын 50\% нь Монгол хэлний мэргэжлийн оюутан, 50\% нь бусад чиглэлийн оюутнууд байв. 
+Судалгааг 2 долоо хоногийн хугацаанд санал асуулгын аргаар үе шаттайгаар зохион байгуулсан.
+
+Мөн оролцогчдоос Хавсралт~A.3-т тусгасан дараах санал асуулгын асуултуудыг авсан болно.
 
 \subsubsection{Үр дүнгийн анализ}
 
@@ -130,6 +128,91 @@ Firestore бичих & < 1s & 380ms & + \\
 \textbf{Дизайны үр нөлөө:} UI/UX категорий хамгийн өндөр үнэлэлттэй ($M=4.8$, SD=0.3), судалгаа-сургалтын системүүд ($M=4.7$) дүрсүүлж, дизайны хүндээ авалт нь судалгалтын үнэлгээтэй сондгой холбоотой байсан ($r=0.73, p<0.01$). 
 
 \textbf{Сул талууд:} OCR таних нарийвчлал ($M=3.9$, SD=0.8) бусад шалгуурт эсрэгээр хамгийн доогуур. Энэ нь TensorFlow.js модель 85% нарийвчлалтай гар үсэг таних эхний хувилбар байдагтай холбоотой. 60% оролцогчид OCR сайжруулахыг дэвшүүлсэн, энэ нь найдвартай анхааралсуулах чиглэл.
+
+\paragraph{OCR алдааны шинжилгээний визуал үр дүн:}
+
+OCR ангиллын алдааны бүтцийг confusion matrix, precision/recall/F1 тархалт, мөн хамгийн хүндрэлтэй тэмдэгтүүдийн түвшинд шинжилж, Зураг~\ref{fig:eval-confusion-matrix}, Зураг~\ref{fig:eval-prf-support}, Зураг~\ref{fig:eval-worst-recall}, Зураг~\ref{fig:eval-hardest-fp-fn}-д үзүүлэв.
+
+\vspace{0.8em}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/evalution/confusion_matrix_heatmap_top30.png}
+    \captionof{figure}{OCR тэмдэгтийн ангиллын confusion matrix (top-30).}
+    \label{fig:eval-confusion-matrix}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/evalution/prf_top_support_clean.png}
+    \captionof{figure}{Топ support-той ангиллуудын precision, recall, F1 үзүүлэлт.}
+    \label{fig:eval-prf-support}
+\end{minipage}
+\vspace{0.8em}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/evalution/worst_recall_clean.png}
+    \captionof{figure}{Recall хамгийн бага ангиллуудын харьцуулалт.}
+    \label{fig:eval-worst-recall}
+\end{minipage}\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth,height=0.22\textheight,keepaspectratio]{Figures/evalution/hardest_chars_fp_fn_clean.png}
+    \captionof{figure}{False Positive/False Negative өндөртэй хамгийн хүндрэлтэй тэмдэгтүүд.}
+    \label{fig:eval-hardest-fp-fn}
+\end{minipage}
+\vspace{0.8em}
+
+Эдгээр визуал дүнгээс харахад алдаа нь бүх ангилалд жигд тархаагүй, тодорхой цөөн тэмдэгт дээр төвлөрсөн байна. Ялангуяа recall бага ангиллууд болон FP/FN өндөртэй тэмдэгтүүд нь дүрсийн хэлбэр төстэй, бичлэгийн хувилбар олон, эсвэл сургалтын өгөгдлийн давтамж харьцангуй бага байгаатай уялдсан байж болохыг харуулж байна. Иймээс дараагийн шатанд тухайн ангиллууд дээр зорилтот augmentation, class-balanced sampling, болон алдаанд суурилсан дахин сургалт хийх нь нийт OCR гүйцэтгэлийг сайжруулах гол чиглэл болно.
+
+\subsubsection{Судалгааны баталгаажуулалтыг гүнзгийрүүлэх шаардлагатай хэмжилтүүд}
+
+Энэхүү ТСА нь инженерийн хэрэгжүүлэлтийн үр дүнг сайн харуулсан боловч академик баталгаажуулалтыг нэмэгдүүлэхийн тулд дараах хэмжилтүүдийг заавал тайлагнах шаардлагатай.
+
+\paragraph{(1) Хэрэглэгчийн судалгааны загвар ба мэдээлэл}
+
+Дараах мэдээллүүдийг бүрэн тайлагнана: нийт оролцогчийн тоо, нас/түвшин/хүйсийн бүтэц, хамруулах ба хасах шалгуур, туршилтын хугацаа, dropout хувь.
+
+\paragraph{(2) Pre-test / Post-test сургалтын ахиц}
+
+Суралцах ахицыг нэг оролцогчийн түвшинд дараах байдлаар тооцно:
+
+\begin{equation}
+\Delta_i = Post_i - Pre_i, \qquad \overline{\Delta} = \frac{1}{N}\sum_{i=1}^{N}\Delta_i
+\end{equation}
+
+Мөн normalized gain ашиглавал:
+
+\begin{equation}
+g_i = \frac{Post_i - Pre_i}{100 - Pre_i}
+\end{equation}
+
+\paragraph{(3) Статистикийн ач холбогдол}
+
+Нэг бүлгийн pre/post харьцуулалтад paired t-test (эсвэл тархалт зөрвөл Wilcoxon signed-rank) хэрэглэнэ. Нөлөөний хэмжээг Cohen's $d$-аар тайлагнахыг зөвлөе:
+
+\begin{equation}
+d = \frac{\overline{\Delta}}{s_{\Delta}}
+\end{equation}
+
+\paragraph{(4) A/B туршилтын дизайн}
+
+Spaced repetition-тэй (A) болон энгийн давталттай (B) урсгалын харьцуулалтыг random assignment-аар хийж, post-test болон хадгалалтын тест (delayed test)-ийн дундаж зөрүүг $p$-value, 95\% CI-тай тайлагнана.
+
+\paragraph{(5) OCR алдааны шинжилгээ (Error Analysis)}
+
+Нийт нарийвчлалаас гадна тэмдэгт түвшний confusion matrix ($C \in \mathbb{N}^{K\times K}$)-ийг тайлагнана. $C_{ij}$ нь бодит $i$ ангиллыг $j$ гэж андуурсан тоог илэрхийлнэ. Ингэснээр:
+\begin{itemize}
+    \item хамгийн их андуурагддаг үсгүүд,
+    \item андууралд нөлөөлөх дүрсний төстэй байдал,
+    \item өгөгдлийн тэнцвэргүй байдал, бичвэрийн чанарын нөлөөг
+\end{itemize}
+тодорхойлох боломжтой.
+
+\paragraph{(6) Моделийн хувилбарын харьцуулалт}
+
+CRNN baseline-ийг дараах хувилбаруудтай ижил тест сет дээр харьцуулна: CNN-only, augmentation on/off, image size (32$\times$128, 48$\times$192, 64$\times$256). Тайлагнах үндсэн үзүүлэлт: CER, WER, inference time.
 
 \subsection{Хэлэлцүүлэг: бусад аппликейшнтай харьцуулалт}
 \label{subsec:discussion-comparison}
@@ -209,7 +292,7 @@ Egüü нь одоогоор контентын хэмжээ, OCR нарийвч
 Энэхүү судалгааны ажлын шинэлэг талууд:
 
 \begin{enumerate}
-    \item \textbf{Монгол бичигт тусгайлсан орчин үеийн аппликейшн:} Одоогоор Монгол бичиг заах ийм төрлийн аппликейшн байхгүй. Egüü нь анхны орчин үеийн, интерактив Монгол бичиг сургах аппликейшн юм.
+    \item \textbf{Монгол бичигт тусгайлсан орчин үеийн шийдэл:} Bolor Toli, Tungaamal Toli зэрэг Монгол хэлний хэрэглээний аппликейшнүүд~\cite{bolor-toli,tungaamal-toli} байгаа боловч \textit{судалгаанд хамруулсан (reviewed) аппликейшнуудын хүрээнд} Egüü нь Монгол бичгийн сургалтыг OCR танилт, flashcard, spaced repetition урсгалтай нэгтгэсэн байдлаараа ялгарна.
     
     \item \textbf{OCR технологи:} Монгол бичгийг таних OCR системийг React Native аппликейшн дээр хэрэгжүүлсэн нь шинэлэг шийдэл юм.
     
@@ -284,7 +367,7 @@ Egüü системийг цаашид хөгжүүлэхэд дараах са�
 
 \textbf{Судалгааны нийлбэртэй дүгнэлтүүд:} Энэхүү төгсөлтийн ажлын хүрээнд "Egüü – Монгол бичгийн сургалтын ухаалаг үсгийн картын аппликейшн" системийг амжилттай хөгжүүлж, эмпирик туршилтаар үнэлэв. Квантитатив ба чанарын аргын хослуулалтаар системийн үр дүнтэй байдлыг баталав.
 
-\textbf{ТСА-ийн зорилго, зорилтын биелэлт:} ТСА-ийн үндсэн зорилго болох Монгол бичгийг орчин үеийн технологийн тусламжтайгаар сонирхолтой, үр дүнтэй суралцах боломжтой Egüü аппликейшнийг зохион бүтээж, хөгжүүлэх зорилго бүрэн хэрэгжсэн. Мөн тодорхойлсон зорилтууд болох онолын болон харьцуулсан судалгаа, системийн шинжилгээ ба зохиомж, программ хангамжийн хэрэгжүүлэлт, туршилт ба үнэлгээ нь бүгд биелж, \ref{tab:objectives-completion} хүснэгтэд 100\%-ийн биелэлттэйгээр баталгаажсан.
+\textbf{ТСА-ийн зорилго, зорилтын биелэлт:} ТСА-ийн үндсэн зорилго болох Монгол бичгийг орчин үеийн технологийн тусламжтайгаар сонирхолтой, үр дүнтэй суралцах боломжтой Egüü аппликейшнийг зохион бүтээж, хөгжүүлэх зорилго бүрэн хэрэгжсэн. Мөн тодорхойлсон зорилтууд болох онолын болон харьцуулсан судалгаа, системийн шинжилгээ ба зохиомж, программ хангамжийн хэрэгжүүлэлт, туршилт ба үнэлгээ нь бүгд биелж, Хүснэгт~\ref{tab:objectives-completion}-д 100\%-ийн биелэлттэйгээр баталгаажсан.
 
 \textbf{Гол нээлтүүд:} (1) SM-2 алгоритмын мобайл интеграци хэрэглэгчдийн сурах үр дүнг 78.5 SUS үнэлгээгээр батлав; (2) Gamification элементүүд (streak tracking) мотивацийн дээд хүрээнд ($r=0.68, p<0.01$) коррелятив; (3) Cross-platform архитектур хөгжүүлэлтийн хугацааг 30% бүрд; (4) Монгол бичигт өндөр специфик фокус (95% оролцогч судлал-сонирхолтой сэтгэгдэл); (5) OCR таних нарийвчлалын хил 85% байгаа нь практик дээр хүрэлцэхүйцэнэ боловч дараагийн хөгжүүлэлтийн гол чиглэл.
 

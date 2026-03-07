@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Tugu Translate",
-    "slug": "Eguu",
+    "slug": "movieApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/eguu.png",
@@ -44,9 +44,7 @@
       [
         "expo-font",
         {
-          "fonts": [
-            "./assets/fonts/Montserrat-VariableFont_wght.ttf"
-          ]
+          "fonts": ["./assets/fonts/Montserrat-VariableFont_wght.ttf"]
         }
       ]
     ],
