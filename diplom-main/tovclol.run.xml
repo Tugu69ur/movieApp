@@ -44,21 +44,18 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>main2.bcf</file>
+      <file>tovclol.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>main2.bbl</file>
+      <file>tovclol.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
       <file>blx-compat.def</file>
       <file>biblatex.def</file>
       <file>standard.bbx</file>
-      <file>numeric.bbx</file>
-      <file>numeric-comp.bbx</file>
-      <file>ieee.bbx</file>
-      <file>numeric-verb.cbx</file>
-      <file>ieee.cbx</file>
+      <file>authoryear.bbx</file>
+      <file>authoryear.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
     </requires>
@@ -67,19 +64,19 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>main2</infile>
+      <infile>tovclol</infile>
     </cmdline>
     <input>
-      <file>main2.bcf</file>
+      <file>tovclol.bcf</file>
     </input>
     <output>
-      <file>main2.bbl</file>
+      <file>tovclol.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>main2.bbl</file>
+      <file>tovclol.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>main2.bcf</file>
+      <file>tovclol.bcf</file>
     </requires>
     <requires type="editable">
       <file>references.bib</file>

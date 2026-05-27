@@ -1,107 +1,122 @@
 \babel@toc {mongolian}{}\relax 
 \babel@toc {mongolian}{}\relax 
 \contentsline {section}{Хураангуй}{i}{Doc-Start}%
-\contentsline {section}{Товчилсон үгийн жагсаалт}{ii}{Doc-Start}%
-\contentsline {section}{{\Mongolian \CYRA \cyrg \cyru \cyru \cyrl \cyrg \cyra }}{iii}{section*.1}%
+\contentsline {section}{{\Mongolian \CYRA \cyrg \cyru \cyru \cyrl \cyrg \cyra }}{ii}{section*.1}%
+\contentsline {section}{Товчилсон үгийн жагсаалт}{v}{section*.1}%
+\contentsline {section}{Ажлын төлөвлөгөө}{viii}{section*.1}%
 \contentsline {section}{\numberline {1}Удиртгал}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Судалгааны үндэслэл}{1}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Судалгааны зорилго}{1}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Судалгааны зорилтууд}{1}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Судалгааны ач холбогдол}{2}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}ТСА-ийн технологийн ач холбогдол}{2}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}ТСА-ийн хэрэглээний ач холбогдол}{2}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.2}ТСА-ийн хэрэглээний ач холбогдол}{3}{subsubsection.1.4.2}%
 \contentsline {subsection}{\numberline {1.5}Судалгааны хамрах хүрээ ба хязгаарлалт}{3}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}Төгсөлтийн судалгааны ажлын бүтэц}{3}{subsection.1.6}%
 \contentsline {section}{\numberline {2}Онолын болон харьцуулсан судалгаа}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Монгол бичгийн түүх ба онцлог}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Мэдлэг эзэмших танин мэдэхүйн аргууд: Spaced Repetition болон Flashcard}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Гар утасны аппликейшн хөгжүүлэлтийн технологиуд}{4}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}React Native - Cross-Platform фреймворк}{4}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Firebase - Backend-as-a-Service}{4}{subsubsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.4}TensorFlow.js ба OCR технологи}{4}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.1}SM-2 алгоритмын математик томьёолол}{4}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Гар утасны аппликейшн хөгжүүлэлтийн технологиуд}{5}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}React Native - Cross-Platform фреймворк}{5}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Firebase - Backend-as-a-Service}{5}{subsubsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.4}TensorFlow.js ба OCR технологи}{5}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}OCR сургалтын зорилтот функц (CTC)}{5}{subsubsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.5}Ижил төстэй аппликейшнуудын харьцуулсан судалгаа}{5}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Egüü ТСА давуу талууд}{5}{subsubsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.6}Бүлгийн дүгнэлт}{5}{subsection.2.6}%
-\contentsline {section}{\numberline {3}Судалгааны арга зүй}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Судалгааны арга зүйн логик дараалал}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Системийн архитектур болон зохиомжийн шийдлүүд}{6}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Гадаад зохиомж буюу Хэрэглэгчийн интерфэйс (External Design)}{6}{subsubsection.3.2.1}%
-\contentsline {paragraph}{Гадаад зохиомжийн үндсэн шийдлүүд нь дараах байдалтай.}{6}{section*.4}%
-\contentsline {subsubsection}{\numberline {3.2.2}Дотоод зохиомж буюу Системийн архитектур (Internal Design)}{7}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Өгөгдлийн сангийн архитектурын шийдэл}{7}{subsubsection.3.2.3}%
-\contentsline {paragraph}{Firestore-ийг бусад өгөгдлийн сантай харьцуулбал дараах үр дүн гарна.}{7}{table.caption.6}%
-\contentsline {subsubsection}{\numberline {3.2.4}программ хангамжийн технологийн стек (Technology Stack)}{7}{subsubsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.3}Системийн шаардлага}{7}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Функциональ шаардлага}{7}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Функциональ бус шаардлага}{8}{subsubsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.4}UML диаграммууд}{8}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Use Case диаграмм}{8}{subsubsection.3.4.1}%
-\contentsline {paragraph}{Use Case диаграммын тайлбар:}{8}{section*.8}%
-\contentsline {subsubsection}{\numberline {3.4.2}Sequence Diagram - Хэрэглэгч нэвтрэх процесс}{9}{subsubsection.3.4.2}%
-\contentsline {paragraph}{Sequence диаграммын тайлбар:}{9}{section*.10}%
-\contentsline {subsubsection}{\numberline {3.4.3}Activity Diagram - Flashcard суралцах процесс}{9}{subsubsection.3.4.3}%
-\contentsline {paragraph}{Activity диаграммын тайлбар:}{9}{section*.12}%
-\contentsline {subsubsection}{\numberline {3.4.4}Data Flow Diagram (DFD) - Өгөгдлийн урсгалын диаграмм}{9}{subsubsection.3.4.4}%
-\contentsline {paragraph}{Data Flow Diagram-ын тайлбар:}{10}{section*.14}%
-\contentsline {subsubsection}{\numberline {3.4.5}Entity-Relationship Diagram (ERD) - Өгөгдлийн бүтцийн диаграмм}{10}{subsubsection.3.4.5}%
-\contentsline {subsection}{\numberline {3.5}Системийн архитектур}{11}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Системийн ерөнхий архитектур}{11}{subsubsection.3.5.1}%
-\contentsline {paragraph}{Архитектурын тайлбар:}{11}{section*.17}%
-\contentsline {subsubsection}{\numberline {3.5.2}Модуляр архитектур}{11}{subsubsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.6}Өгөгдлийн сангийн зохиомж}{11}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Firestore өгөгдлийн бүтэц}{11}{subsubsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.7}Хэрэглэгчийн интерфэйс (UI/UX) модель}{11}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Spaced Repetition алгоритм}{12}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Бүлгийн дүгнэлт}{12}{subsection.3.9}%
-\contentsline {section}{\numberline {4}Системийн хэрэгжүүлэлт}{13}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Хөгжүүлэлтийн орчин тохируулах}{13}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Шаардлагатай программ хангамжууд}{13}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}ТСА эхлүүлэх}{13}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Firebase тохиргоо}{13}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Firebase үүсгэх}{13}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Firebase SDK суулгах}{13}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Системийн цөм модулиудын программ хангамжийн хэрэгжүүлэлт}{13}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Үүлэн дэд бүтэц буюу Firebase интеграци}{14}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Authentication (Баталгаажуулалт)}{14}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Spaced Repetition систем}{14}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Streak tracking}{14}{subsubsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.4}UI компонентууд}{15}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {2.5.1}Egüü ТСА давуу талууд}{6}{subsubsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.6}Бүлгийн дүгнэлт}{6}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Судалгааны арга зүй}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Судалгааны арга зүйн дараалал}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Системийн архитектур болон зохиомжийн шийдлүүд}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Гадаад зохиомж буюу Хэрэглэгчийн интерфэйс (External Design)}{7}{subsubsection.3.2.1}%
+\contentsline {paragraph}{Гадаад зохиомжийн үндсэн шийдлүүд нь дараах байдалтай.}{8}{paragraph*.4}%
+\contentsline {subsubsection}{\numberline {3.2.2}Дотоод зохиомж буюу Системийн архитектур (Internal Design)}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Өгөгдлийн сангийн архитектурын шийдэл}{8}{subsubsection.3.2.3}%
+\contentsline {paragraph}{Firestore-ийг бусад өгөгдлийн сантай харьцуулбал дараах үр дүн гарна.}{8}{paragraph*.5}%
+\contentsline {subsubsection}{\numberline {3.2.4}Программ хангамжийн технологийн стек (Technology Stack)}{8}{subsubsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.3}Системийн шаардлага}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Функциональ шаардлага}{9}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Функциональ бус шаардлага}{9}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}UML диаграммууд}{10}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Use Case диаграмм}{10}{subsubsection.3.4.1}%
+\contentsline {paragraph}{Use Case диаграммын тайлбар:}{10}{paragraph*.8}%
+\contentsline {subsubsection}{\numberline {3.4.2}Sequence Diagram - Хэрэглэгч нэвтрэх процесс}{10}{subsubsection.3.4.2}%
+\contentsline {paragraph}{Sequence диаграммын тайлбар:}{10}{paragraph*.10}%
+\contentsline {subsubsection}{\numberline {3.4.3}Activity Diagram - Flashcard суралцах процесс}{11}{subsubsection.3.4.3}%
+\contentsline {paragraph}{Activity диаграммын тайлбар:}{11}{paragraph*.12}%
+\contentsline {subsubsection}{\numberline {3.4.4}Data Flow Diagram (DFD) - Өгөгдлийн урсгалын диаграмм}{11}{subsubsection.3.4.4}%
+\contentsline {paragraph}{Data Flow Diagram-ын тайлбар:}{11}{paragraph*.14}%
+\contentsline {subsubsection}{\numberline {3.4.5}Entity-Relationship Diagram (ERD) - Өгөгдлийн бүтцийн диаграмм}{12}{subsubsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.5}Системийн архитектур}{12}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Системийн ерөнхий архитектур}{12}{subsubsection.3.5.1}%
+\contentsline {paragraph}{Архитектурын тайлбар:}{13}{paragraph*.17}%
+\contentsline {subsubsection}{\numberline {3.5.2}Модуляр архитектур}{13}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.6}Өгөгдлийн сангийн зохиомж}{13}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Firestore өгөгдлийн бүтэц}{13}{subsubsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.7}Хэрэглэгчийн интерфэйс (UI/UX) модель}{13}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Spaced Repetition алгоритм}{14}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Бүлгийн дүгнэлт}{14}{subsection.3.9}%
+\contentsline {section}{\numberline {4}Системийн хэрэгжүүлэлт}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Хөгжүүлэлтийн орчин тохируулах}{15}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Шаардлагатай программ хангамжууд}{15}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}ТСА эхлүүлэх}{15}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Firebase тохиргоо}{15}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Firebase үүсгэх}{15}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Firebase SDK суулгах}{15}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Системийн цөм модулиудын программ хангамжийн хэрэгжүүлэлт}{16}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Үүлэн дэд бүтэц буюу Firebase интеграци}{16}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Spaced Repetition систем}{16}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Streak tracking}{17}{subsubsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.4}UI компонентууд}{17}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Аппын дэлгэцийн бүтэц ба урсгал}{17}{subsubsection.4.4.1}%
+\contentsline {paragraph}{Нэвтрэлт ба бүртгэл}{17}{paragraph*.22}%
+\contentsline {paragraph}{Үндсэн таб дэлгэцүүд}{17}{paragraph*.23}%
+\contentsline {paragraph}{Профайл ба тохиргооны дэлгэцүүд}{18}{paragraph*.24}%
 \contentsline {subsection}{\numberline {4.5}OCR систем хэрэгжүүлэлт}{19}{subsection.4.5}%
 \contentsline {subsubsection}{\numberline {4.5.1}OCR моделийн гүйцэтгэл}{20}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}OCR моделийн сургалтын дэлгэрэнгүй}{20}{subsubsection.4.5.2}%
-\contentsline {paragraph}{Dataset бүрдүүлэлт:}{20}{section*.28}%
-\contentsline {paragraph}{Монгол бичгийн тэмдэгтүүд:}{20}{section*.30}%
-\contentsline {paragraph}{CRNN моделийн архитектур:}{21}{section*.31}%
-\contentsline {paragraph}{Сургалтын параметрүүд:}{21}{section*.33}%
-\contentsline {paragraph}{Сургалтын үр дүн:}{21}{section*.34}%
-\contentsline {subsection}{\numberline {4.6}Туршилт ба тестлэлт}{21}{subsection.4.6}%
-\contentsline {paragraph}{Тестийн хамрах хүрээ:}{21}{section*.35}%
+\contentsline {subsubsection}{\numberline {4.5.2}OCR моделийн сургалтын дэлгэрэнгүй}{21}{subsubsection.4.5.2}%
+\contentsline {paragraph}{Dataset бүрдүүлэлт:}{21}{paragraph*.27}%
+\contentsline {paragraph}{Монгол бичгийн тэмдэгтүүд:}{21}{paragraph*.29}%
+\contentsline {paragraph}{CRNN моделийн архитектур:}{21}{paragraph*.30}%
+\contentsline {paragraph}{Сургалтын параметрүүд:}{21}{paragraph*.32}%
+\contentsline {paragraph}{Сургалтын үр дүн:}{22}{paragraph*.33}%
+\contentsline {subsection}{\numberline {4.6}Туршилт ба тестлэлт}{22}{subsection.4.6}%
+\contentsline {paragraph}{Тестийн хамрах хүрээ:}{22}{paragraph*.35}%
 \contentsline {subsection}{\numberline {4.7}Гүйцэтгэлийн оновчлол}{22}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Бүлгийн дүгнэлт}{22}{subsection.4.8}%
-\contentsline {section}{\numberline {5}Үр дүн, хэлэлцүүлэг, дүгнэлт}{23}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Системийн үр дүн}{23}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Хөгжүүлэлтийн үр дүн}{23}{subsubsection.5.1.1}%
-\contentsline {paragraph}{Техникийн үр дүн:}{23}{table.caption.37}%
-\contentsline {paragraph}{Функциональ үр дүн:}{23}{section*.38}%
-\contentsline {subsubsection}{\numberline {5.1.2}Гүйцэтгэлийн үр дүн}{23}{subsubsection.5.1.2}%
-\contentsline {paragraph}{Тестийн орчин:}{24}{section*.41}%
-\contentsline {subsection}{\numberline {5.2}Хэрэглэгчийн туршилт}{24}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Туршилтын арга зүй}{24}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Үр дүнгийн анализ}{24}{subsubsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.3}Хэлэлцүүлэг: бусад аппликейшнтай харьцуулалт}{25}{subsection.5.3}%
-\contentsline {paragraph}{Шинэлэг талын хэлэлцүүлэг:}{25}{section*.43}%
-\contentsline {paragraph}{Давуу талын хэлэлцүүлэг:}{25}{section*.44}%
-\contentsline {paragraph}{Сул талын хэлэлцүүлэг:}{25}{section*.45}%
-\contentsline {subsection}{\numberline {5.4}Дүгнэлт}{25}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Судалгааны зорилго биелэлт}{25}{subsubsection.5.4.1}%
-\contentsline {paragraph}{Үндсэн зорилго:}{25}{section*.46}%
-\contentsline {paragraph}{Зорилтуудын биелэлт:}{26}{table.caption.48}%
-\contentsline {subsubsection}{\numberline {5.4.2}Судалгааны шинэлэг тал}{26}{subsubsection.5.4.2}%
-\contentsline {subsubsection}{\numberline {5.4.3}Хязгаарлалт ба бэрхшээлүүд}{26}{subsubsection.5.4.3}%
-\contentsline {subsubsection}{\numberline {5.4.4}Системийн deployment ба эх код}{27}{subsubsection.5.4.4}%
-\contentsline {paragraph}{Deployment статус:}{27}{section*.49}%
-\contentsline {paragraph}{Эх кодын хадгалалт:}{27}{section*.50}%
-\contentsline {subsubsection}{\numberline {5.4.5}Цаашдын хөгжүүлэлтийн саналууд}{27}{subsubsection.5.4.5}%
-\contentsline {subsubsection}{\numberline {5.4.6}Ерөнхий дүгнэлт}{27}{subsubsection.5.4.6}%
-\contentsline {section}{Хавсралт А: Нэмэлт материалууд}{29}{section*.51}%
-\contentsline {section}{Ном зүй}{35}{section*.65}%
+\contentsline {subsection}{\numberline {4.8}Бүлгийн дүгнэлт}{23}{subsection.4.8}%
+\contentsline {section}{\numberline {5}Үр дүн, хэлэлцүүлэг, дүгнэлт}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Системийн үр дүн}{24}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Хөгжүүлэлтийн үр дүн}{24}{subsubsection.5.1.1}%
+\contentsline {paragraph}{Техникийн үр дүн:}{24}{paragraph*.36}%
+\contentsline {paragraph}{Функциональ үр дүн:}{24}{paragraph*.38}%
+\contentsline {subsubsection}{\numberline {5.1.2}Гүйцэтгэлийн үр дүн}{24}{subsubsection.5.1.2}%
+\contentsline {paragraph}{Тестийн орчин:}{26}{paragraph*.41}%
+\contentsline {subsection}{\numberline {5.2}Хэрэглэгчийн туршилт}{26}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Туршилтын арга зүй}{26}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Үр дүнгийн анализ}{26}{subsubsection.5.2.2}%
+\contentsline {paragraph}{OCR алдааны шинжилгээний визуал үр дүн:}{26}{paragraph*.42}%
+\contentsline {subsubsection}{\numberline {5.2.3}Pre/Post суралцах ахицын дүн шинжилгээ}{27}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Туршилтын загвар:}{27}{paragraph*.43}%
+\contentsline {paragraph}{Raw оноонууд:}{28}{paragraph*.44}%
+\contentsline {paragraph}{Тооцооллын арга зүй:}{28}{paragraph*.46}%
+\contentsline {paragraph}{Дүн шинжилгээ:}{28}{paragraph*.48}%
+\contentsline {subsubsection}{\numberline {5.2.4}Хэрэглэгчийн идэвхжил ба хяналтын шинжилгээ}{29}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}Нэгтгэсэн KPI хүснэгт}{29}{subsubsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.3}Хэлэлцүүлэг}{30}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Жин өгсөн үнэлгээний матриц}{30}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}OCR алдааны нарийвчилсан шинжилгээ}{30}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}SUS дүнгийн гүнзгий шинжилгээ}{30}{subsubsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.4}Дүгнэлт}{31}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Судалгааны зорилго биелэлт}{31}{subsubsection.5.4.1}%
+\contentsline {paragraph}{Үндсэн зорилго:}{31}{paragraph*.52}%
+\contentsline {paragraph}{Зорилтуудын биелэлт:}{31}{paragraph*.53}%
+\contentsline {subsubsection}{\numberline {5.4.2}Судалгааны шинэлэг тал}{31}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Хязгаарлалт ба бэрхшээлүүд}{32}{subsubsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.4}Системийн deployment ба эх код}{32}{subsubsection.5.4.4}%
+\contentsline {paragraph}{Deployment статус:}{32}{paragraph*.55}%
+\contentsline {paragraph}{Эх кодын хадгалалт:}{32}{paragraph*.56}%
+\contentsline {subsubsection}{\numberline {5.4.5}Цаашдын хөгжүүлэлтийн саналууд}{33}{subsubsection.5.4.5}%
+\contentsline {subsubsection}{\numberline {5.4.6}Ерөнхий дүгнэлт}{33}{subsubsection.5.4.6}%
+\contentsline {section}{Хавсралт А: Нэмэлт материалууд}{34}{subsubsection.5.4.6}%
+\contentsline {section}{Ном зүй}{41}{table.caption.60}%
+\contentsline {section}{Товчлол}{42}{table.caption.60}%

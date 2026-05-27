@@ -139,7 +139,7 @@ export default function Index() {
                   letterSpacing: 0.3,
                 }}
               >
-                Let's learn something new today!
+                Let&apos;s learn something new today!
               </Text>
             </View>
           </View>

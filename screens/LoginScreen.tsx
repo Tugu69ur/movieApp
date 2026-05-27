@@ -1,5 +1,5 @@
 import * as Google from "expo-auth-session/providers/google";
-import { Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
 import { Link } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
@@ -26,8 +26,9 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
 
-const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-  clientId: "1011743891450-qcjh153r0tar0177oud6h7gkdhil5ulm.apps.googleusercontent.com",
+const googleClientId = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID ?? "";
+const [, response, promptAsync] = Google.useIdTokenAuthRequest({
+  clientId: googleClientId,
 });
 
 
@@ -94,7 +95,7 @@ const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
                 borderRadius: 16,
               }}
               useNativeControls
-              resizeMode="contain"
+              resizeMode={ResizeMode.CONTAIN}
               isMuted
               isLooping
               shouldPlay
@@ -162,6 +163,13 @@ const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
             <TouchableOpacity
               className="w-full bg-white py-3 rounded-xl items-center mt-4"
               onPress={() => {
+                if (!googleClientId) {
+                  Alert.alert(
+                    "Configuration Error",
+                    "Google Sign-In is not configured. Add EXPO_PUBLIC_GOOGLE_CLIENT_ID to your .env file.",
+                  );
+                  return;
+                }
                 promptAsync();
               }}
             >

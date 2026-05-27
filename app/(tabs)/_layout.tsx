@@ -9,10 +9,12 @@ const TabIcon = ({ focused, icon, title, isDark }: any) => {
   return (
     <View style={styles.tabIconContainer}>
       {focused ? (
-        <View style={[
-          styles.activeTabBackground,
-          isDark && styles.activeTabBackgroundDark
-        ]}>
+        <View
+          style={[
+            styles.activeTabBackground,
+            isDark && styles.activeTabBackgroundDark,
+          ]}
+        >
           <Image
             source={icon}
             style={{
@@ -78,20 +80,21 @@ export default function Layout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="prediction"
         options={{
-          title: "Home",
+          title: "Prediction",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              icon={icons.home}
-              title="Нүүр"
+              icon={icons.translator}
+              title="Орчуулга"
               isDark={isDark}
             />
           ),
         }}
       />
+
       <Tabs.Screen
         name="search"
         options={{
@@ -108,15 +111,15 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="prediction"
+        name="index"
         options={{
-          title: "Prediction",
+          title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              icon={icons.translator}
-              title="Орчуулга"
+              icon={icons.home}
+              title="Нүүр"
               isDark={isDark}
             />
           ),

@@ -1,0 +1,41 @@
+\babel@toc {mongolian}{}\relax 
+\babel@toc {mongolian}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Egüü системийн үндсэн use case диаграмм.}}{10}{figure.caption.7}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Хэрэглэгч нэвтрэх үеийн sequence диаграмм.}}{11}{figure.caption.9}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Flashcard-аар суралцах үйл явцын activity диаграмм.}}{11}{figure.caption.11}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Egüü системийн өгөгдөл дамжих урсгалын диаграмм.}}{12}{figure.caption.13}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Egüü системийн өгөгдлийн сангийн ER диаграмм.}}{12}{figure.caption.15}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Egüü системийн ерөнхий архитектур}}{13}{figure.caption.16}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Firebase Authentication тохиргоо, нэвтрэх аргуудын тохируулга.}}{16}{figure.caption.19}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Firestore өгөгдлийн сангийн collection–ийн бүтцийн диаграмм.}}{16}{figure.caption.20}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Firebase Storage дээр зураг, медиа файлууд хадгалах бүтцийн диаграмм.}}{16}{figure.caption.21}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Нэвтрэх дэлгэц – хэрэглэгчийн мэдээллийг оруулах интерфейс.}}{17}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Бүртгүүлэх дэлгэц – хэрэглэгчийн мэдээллийг оруулах интерфейс.}}{17}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Нүүр дэлгэц – өдрийн үг, streak ба категориор ангилсан картууд.}}{18}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Хайлтын дэлгэц – фонетик, орчуулгаар flashcard хайх интерфейс.}}{18}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Профайл дэлгэц – статистик, streak, ахиц дэвшлийн мэдээлэл.}}{18}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Тохиргооны дэлгэц – хэл сонголт, theme, мэдэгдэл ба зорилтын тохиргоо.}}{18}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Мэдэгдлийн дэлгэц – сануулга, streak болон амжилтын мэдэгдлүүд.}}{18}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Аюулгүй байдал ба нууцлалын тохиргооны дэлгэц.}}{18}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Камераар гар бичвэр оруулах OCR дэлгэц.}}{19}{figure.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Дэлгэцэн дээр уламжлалт Монгол бичгийг гараар зурах гар бичвэрийн canvas.}}{19}{figure.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces OCR-оор таниулсан гар бичвэрийн үр дүнгийн дэлгэц.}}{20}{figure.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces OCR-оор таниулсан үсгийн дэлгэрэнгүй мэдээлэл бүхий дэлгэц.}}{20}{figure.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Гар бичвэрийг зургаас текст болгон хөрвүүлэх OCR дэлгэц.}}{20}{figure.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Кирилл бичгээс уламжлалт Монгол бичиг рүү хөрвүүлэх OCR жишээ.}}{20}{figure.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces OCR моделийн таамаглалын (prediction response) жишээ үр дүн.}}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {25}{\ignorespaces OCR моделийн сургалтын loss-ийн бууралт.}}{20}{figure.caption.26}%
+\contentsline {figure}{\numberline {26}{\ignorespaces OCR моделийн суралтын гүйцэтгэл}}{25}{figure.caption.40}%
+\contentsline {figure}{\numberline {27}{\ignorespaces OCR тэмдэгтийн ангиллын confusion matrix (top-30).}}{27}{figure.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Топ support-той ангиллуудын precision, recall, F1 үзүүлэлт.}}{27}{figure.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Recall хамгийн бага ангиллуудын харьцуулалт.}}{27}{figure.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces False Positive/False Negative өндөртэй хамгийн хүндрэлтэй тэмдэгтүүд.}}{27}{figure.30}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Системийн дэлгэрэнгүй архитектур}}{37}{figure.caption.58}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Системийн use case диаграм}}{43}{figure.32}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Системийн өгөгдлийн урсгалын диаграм}}{43}{figure.33}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Гараар бичих оролтын дэлгэц}}{44}{figure.34}%
+\contentsline {figure}{\numberline {35}{\ignorespaces OCR загварын precision, recall, F1 үзүүлэлт}}{44}{figure.35}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Use case diagram of the system}}{48}{figure.36}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Data flow diagram of the system}}{48}{figure.37}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Handwriting input interface}}{48}{figure.38}%
+\contentsline {figure}{\numberline {39}{\ignorespaces Precision, recall, and F1 score of OCR model}}{49}{figure.39}%

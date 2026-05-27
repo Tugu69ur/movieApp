@@ -1,0 +1,30 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Encoding / font support (Cyrillic / Mongolian) ──────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,mongolian]{babel}
+
+% ── Packages ────────────────────────────────────────────────────────────────
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{titlesec}
+
+% ── Bibliography (AppendixB uses \printbibliography) ────────────────────────
+\usepackage{csquotes}
+\usepackage[backend=biber,style=authoryear,sorting=nyt,giveninits=true]{biblatex}
+\DeclareLanguageMapping{mongolian}{english}
+\addbibresource{references.bib}
+
+% ── Custom macros (copied from main.tex) ────────────────────────────────────
+\newcommand{\deptname}{КОМПЬЮТЕРЫН УХААНЫ ТЭНХИМ}
+\newcommand{\authorshort}{Б.Төгөлдөр}
+\newcommand{\authorcode}{s21c114b}
+\newcommand{\supervisor}{Д.Насанжаргал}
+
+\begin{document}
+
+\input{Appendices/AppendixB}
+
+\end{document}

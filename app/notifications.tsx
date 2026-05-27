@@ -20,6 +20,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
+        shouldShowBanner: true,
+        shouldShowList: true,
         shouldPlaySound: true,
         shouldSetBadge: false,
     }),
@@ -95,10 +97,10 @@ export default function NotificationsScreen() {
     async function scheduleDailyNotification(notificationTime: Date) {
         await Notifications.cancelAllScheduledNotificationsAsync();
 
-        const trigger = {
+        const trigger: Notifications.DailyTriggerInput = {
+            type: Notifications.SchedulableTriggerInputTypes.DAILY,
             hour: notificationTime.getHours(),
             minute: notificationTime.getMinutes(),
-            repeats: true,
         };
 
         await Notifications.scheduleNotificationAsync({
@@ -112,8 +114,6 @@ export default function NotificationsScreen() {
     }
 
     async function registerForPushNotificationsAsync() {
-        let token;
-
         if (Platform.OS === 'android') {
             await Notifications.setNotificationChannelAsync('default', {
                 name: 'default',

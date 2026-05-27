@@ -1,12 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.30)  2 MAR 2026 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.30)  21 APR 2026 21:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\def\jobname{main2}\input{main.tex}
-(main.tex (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+**./main.tex
+(main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
-File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count187
 \c@section=\count188
@@ -20,10 +23,20 @@ File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
 )
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen141
+\ar@mcellbox=\box51
+\extrarowheight=\dimen142
+\NC@list=\toks17
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box52
+)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks17
-\inpenc@posthook=\toks18
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
@@ -243,7 +256,7 @@ File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count195
-\U@D=\dimen141
+\U@D=\dimen143
 \l@unhyphenated=\language79
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
@@ -281,12 +294,27 @@ glish.tex
 Package babel Info: Importing font and identification data for english
 (babel)             from babel-en.ini. Reported on input line 11.
 )
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box53
+\beforetitleunit=\skip52
+\aftertitleunit=\skip53
+\ttl@plus=\dimen144
+\ttl@minus=\dimen145
+\ttl@toksa=\toks20
+\titlewidth=\dimen146
+\titlewidthlast=\dimen147
+\titlewidthfirst=\dimen148
+)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks19
+\KV@toks@=\toks21
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
@@ -297,15 +325,15 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \Gm@cnth=\count197
 \Gm@cntv=\count198
 \c@Gm@tempcnt=\count199
-\Gm@bindingoffset=\dimen142
-\Gm@wd@mp=\dimen143
-\Gm@odd@mp=\dimen144
-\Gm@even@mp=\dimen145
-\Gm@layoutwidth=\dimen146
-\Gm@layoutheight=\dimen147
-\Gm@layouthoffset=\dimen148
-\Gm@layoutvoffset=\dimen149
-\Gm@dimlist=\toks20
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks22
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.sty
@@ -321,7 +349,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \csq@qlevel=\count270
 \csq@maxlvl=\count271
 \csq@tshold=\count272
-\csq@ltx@everypar=\toks21
+\csq@ltx@everypar=\toks23
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.def
 File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
@@ -412,14 +440,14 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \blx@sectionciteorderinternal@0=\count314
 \blx@entrysetcounter=\count315
 \blx@biblioinstance=\count316
-\labelnumberwidth=\skip50
-\labelalphawidth=\skip51
-\biblabelsep=\skip52
-\bibitemsep=\skip53
-\bibnamesep=\skip54
-\bibinitsep=\skip55
-\bibparsep=\skip56
-\bibhang=\skip57
+\labelnumberwidth=\skip54
+\labelalphawidth=\skip55
+\biblabelsep=\skip56
+\bibitemsep=\skip57
+\bibnamesep=\skip58
+\bibinitsep=\skip59
+\bibparsep=\skip60
+\bibhang=\skip61
 \blx@bcfin=\read3
 \blx@bcfout=\write3
 \blx@langwohyphens=\language80
@@ -433,7 +461,7 @@ Package biblatex Info: ... file 'blx-dm.def' found.
 File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'ieee.dbx' not found.
+Package biblatex Info: ... file 'authoryear.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count320
@@ -504,20 +532,20 @@ Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@savedoriglanguage=\count385
 \c@pageref=\count386
 \c@savedpageref=\count387
-\shorthandwidth=\skip58
-\shortjournalwidth=\skip59
-\shortserieswidth=\skip60
-\shorttitlewidth=\skip61
-\shortauthorwidth=\skip62
-\shorteditorwidth=\skip63
-\locallabelnumberwidth=\skip64
-\locallabelalphawidth=\skip65
-\localshorthandwidth=\skip66
-\localshortjournalwidth=\skip67
-\localshortserieswidth=\skip68
-\localshorttitlewidth=\skip69
-\localshortauthorwidth=\skip70
-\localshorteditorwidth=\skip71
+\shorthandwidth=\skip62
+\shortjournalwidth=\skip63
+\shortserieswidth=\skip64
+\shorttitlewidth=\skip65
+\shortauthorwidth=\skip66
+\shorteditorwidth=\skip67
+\locallabelnumberwidth=\skip68
+\locallabelalphawidth=\skip69
+\localshorthandwidth=\skip70
+\localshortjournalwidth=\skip71
+\localshortserieswidth=\skip72
+\localshorttitlewidth=\skip73
+\localshortauthorwidth=\skip74
+\localshorteditorwidth=\skip75
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -543,22 +571,12 @@ File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
 \biburllcskip=\muskip20
 \c@smartand=\count396
 )
-Package biblatex Info: Trying to load bibliography style 'ieee'...
-Package biblatex Info: ... file 'ieee.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
 
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-ieee\ieee.bbx
-File: ieee.bbx 2025-08-01 v1.4f biblatex bibliography style
-Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
-Package biblatex Info: ... file 'numeric-comp.bbx' found.
-
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\numeric-comp.
-bbx
-File: numeric-comp.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
-
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\numeric.bbx
-File: numeric.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\authoryear.bb
+x
+File: authoryear.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -566,32 +584,24 @@ Package biblatex Info: ... file 'standard.bbx' found.
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
 \c@bbx:relatedcount=\count397
 \c@bbx:relatedtotal=\count398
-))))
-Package biblatex Info: Trying to load citation style 'ieee'...
-Package biblatex Info: ... file 'ieee.cbx' found.
- (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-ieee\ieee.cbx
-File: ieee.cbx 2025-08-01 v1.4f biblatex citation style
-Package biblatex Info: Trying to load citation style 'numeric-verb'...
-Package biblatex Info: ... file 'numeric-verb.cbx' found.
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
 
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\numeric-verb.
-cbx
-File: numeric-verb.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\authoryear.cb
+x
+File: authoryear.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
 Package biblatex Info: Redefining '\textcite'.
-Package biblatex Info: Redefining '\supercite'.
-Package biblatex Info: Redefining '\parencites'.
-Package biblatex Info: Redefining '\smartcites'.
 Package biblatex Info: Redefining '\textcites'.
-))
+)
 Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
-
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
+ (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
 File: biblatex.cfg 
 )
 Package biblatex Info: Input encoding 'utf8' detected.
@@ -604,7 +614,7 @@ Package: expl3 2024-01-04 L3 programming layer (loader)
 .def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count399
-\l__pdf_internal_box=\box51
+\l__pdf_internal_box=\box54
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-01-04 L3 programming layer (loader) 
@@ -635,11 +645,11 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen150
-\Gin@req@width=\dimen151
+\Gin@req@height=\dimen157
+\Gin@req@width=\dimen158
 ) (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2023/05/13 v2.17o AMS math features
-\@mathmargin=\skip72
+\@mathmargin=\skip76
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
@@ -647,12 +657,12 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks22
-\ex@=\dimen152
+\@emptytoks=\toks24
+\ex@=\dimen159
 ))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen153
+\pmbraise@=\dimen160
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
@@ -668,13 +678,13 @@ LaTeX Info: Redefining \colon on input line 410.
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box52
-\strutbox@=\box53
+\Mathstrutbox@=\box55
+\strutbox@=\box56
 LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen154
+\big@size=\dimen161
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \macc@depth=\count405
@@ -687,21 +697,21 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \dotsspace@=\muskip21
 \c@parentequation=\count407
 \dspbrk@lvl=\count408
-\tag@help=\toks23
+\tag@help=\toks25
 \row@=\count409
 \column@=\count410
 \maxfields@=\count411
-\andhelp@=\toks24
-\eqnshift@=\dimen155
-\alignsep@=\dimen156
-\tagshift@=\dimen157
-\tagwidth@=\dimen158
-\totwidth@=\dimen159
-\lineht@=\dimen160
-\@envbody=\toks25
-\multlinegap=\skip73
-\multlinetaggap=\skip74
-\mathdisplay@stack=\toks26
+\andhelp@=\toks26
+\eqnshift@=\dimen162
+\alignsep@=\dimen163
+\tagshift@=\dimen164
+\tagwidth@=\dimen165
+\totwidth@=\dimen166
+\lineht@=\dimen167
+\@envbody=\toks27
+\multlinegap=\skip77
+\multlinetaggap=\skip78
+\mathdisplay@stack=\toks28
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
@@ -718,37 +728,37 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen161
-\lightrulewidth=\dimen162
-\cmidrulewidth=\dimen163
-\belowrulesep=\dimen164
-\belowbottomsep=\dimen165
-\aboverulesep=\dimen166
-\abovetopsep=\dimen167
-\cmidrulesep=\dimen168
-\cmidrulekern=\dimen169
-\defaultaddspace=\dimen170
+\heavyrulewidth=\dimen168
+\lightrulewidth=\dimen169
+\cmidrulewidth=\dimen170
+\belowrulesep=\dimen171
+\belowbottomsep=\dimen172
+\aboverulesep=\dimen173
+\abovetopsep=\dimen174
+\cmidrulesep=\dimen175
+\cmidrulekern=\dimen176
+\defaultaddspace=\dimen177
 \@cmidla=\count412
 \@cmidlb=\count413
-\@aboverulesep=\dimen171
-\@belowrulesep=\dimen172
+\@aboverulesep=\dimen178
+\@belowrulesep=\dimen179
 \@thisruleclass=\count414
 \@lastruleclass=\count415
-\@thisrulewidth=\dimen173
+\@thisrulewidth=\dimen180
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen174
-\captionmargin=\dimen175
-\caption@leftmargin=\dimen176
-\caption@rightmargin=\dimen177
-\caption@width=\dimen178
-\caption@indent=\dimen179
-\caption@parindent=\dimen180
-\caption@hangindent=\dimen181
+\caption@tempdima=\dimen181
+\captionmargin=\dimen182
+\caption@leftmargin=\dimen183
+\caption@rightmargin=\dimen184
+\caption@width=\dimen185
+\caption@indent=\dimen186
+\caption@parindent=\dimen187
+\caption@hangindent=\dimen188
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count416
@@ -761,41 +771,31 @@ Package caption Info: New subtype `subfigure' on input line 238.
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count419
 )
-(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
-\col@sep=\dimen182
-\ar@mcellbox=\box54
-\extrarowheight=\dimen183
-\NC@list=\toks27
-\extratabsurround=\skip75
-\backup@length=\skip76
-\ar@cellbox=\box55
-)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip77
+\multirow@colwidth=\skip79
 \multirow@cntb=\count420
-\multirow@dima=\skip78
-\bigstrutjot=\dimen184
+\multirow@dima=\skip80
+\bigstrutjot=\dimen189
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
-\LTleft=\skip79
-\LTright=\skip80
-\LTpre=\skip81
-\LTpost=\skip82
+\LTleft=\skip81
+\LTright=\skip82
+\LTpre=\skip83
+\LTpost=\skip84
 \LTchunksize=\count421
-\LTcapwidth=\dimen185
-\LT@head=\box56
-\LT@firsthead=\box57
-\LT@foot=\box58
-\LT@lastfoot=\box59
-\LT@gbox=\box60
+\LTcapwidth=\dimen190
+\LT@head=\box57
+\LT@firsthead=\box58
+\LT@foot=\box59
+\LT@lastfoot=\box60
+\LT@gbox=\box61
 \LT@cols=\count422
 \LT@rows=\count423
 \c@LT@tables=\count424
 \c@LT@chunks=\count425
-\LT@p@ftn=\toks28
+\LT@p@ftn=\toks29
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
@@ -818,37 +818,117 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
-\everycr=\toks29
-\minrowclearance=\skip83
+\everycr=\toks30
+\minrowclearance=\skip85
 \rownum=\count426
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count427
-\float@exts=\toks30
-\float@box=\box61
-\@float@everytoks=\toks31
-\@floatcapt=\box62
+\float@exts=\toks31
+\float@box=\box62
+\@float@everytoks=\toks32
+\@floatcapt=\box63
+)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen191
+\TX@old@table=\dimen192
+\TX@old@col=\dimen193
+\TX@target=\dimen194
+\TX@delta=\dimen195
+\TX@cols=\count428
+\TX@ftn=\toks33
+)
+(C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
+\c@tracingmulticols=\count429
+\mult@box=\box64
+\multicol@leftmargin=\dimen196
+\c@unbalance=\count430
+\c@collectmore=\count431
+\doublecol@number=\count432
+\multicoltolerance=\count433
+\multicolpretolerance=\count434
+\full@width=\dimen197
+\page@free=\dimen198
+\premulticols=\dimen199
+\postmulticols=\dimen256
+\multicolsep=\skip86
+\multicolbaselineskip=\skip87
+\partial@page=\box65
+\last@line=\box66
+\mc@boxedresult=\box67
+\maxbalancingoverflow=\dimen257
+\mult@rightbox=\box68
+\mult@grightbox=\box69
+\mult@firstbox=\box70
+\mult@gfirstbox=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\c@minrows=\count435
+\c@columnbadness=\count436
+\c@finalcolumnbadness=\count437
+\last@try=\dimen258
+\multicolovershoot=\dimen259
+\multicolundershoot=\dimen260
+\mult@nat@firstbox=\box108
+\colbreak@box=\box109
+\mc@col@check@num=\count438
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count428
-\lst@gtempboxa=\box63
-\lst@token=\toks32
-\lst@length=\count429
-\lst@currlwidth=\dimen186
-\lst@column=\count430
-\lst@pos=\count431
-\lst@lostspace=\dimen187
-\lst@width=\dimen188
-\lst@newlines=\count432
-\lst@lineno=\count433
-\lst@maxwidth=\dimen189
+\lst@mode=\count439
+\lst@gtempboxa=\box110
+\lst@token=\toks34
+\lst@length=\count440
+\lst@currlwidth=\dimen261
+\lst@column=\count441
+\lst@pos=\count442
+\lst@lostspace=\dimen262
+\lst@width=\dimen263
+\lst@newlines=\count443
+\lst@lineno=\count444
+\lst@maxwidth=\dimen264
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count434
-\lst@skipnumbers=\count435
-\lst@framebox=\box64
+\c@lstnumber=\count445
+\lst@skipnumbers=\count446
+\lst@framebox=\box111
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -860,13 +940,13 @@ Package: listings 2023/02/27 1.9 (Carsten Heinz)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-co
 mmon.tex
-\pgfutil@everybye=\toks33
-\pgfutil@tempdima=\dimen190
-\pgfutil@tempdimb=\dimen191
+\pgfutil@everybye=\toks35
+\pgfutil@tempdima=\dimen265
+\pgfutil@tempdimb=\dimen266
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-la
 tex.def
-\pgfutil@abb=\box65
+\pgfutil@abb=\box112
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.cod
 e.tex
@@ -885,33 +965,33 @@ Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.co
 de.tex
-\pgfkeys@pathtoks=\toks34
-\pgfkeys@temptoks=\toks35
+\pgfkeys@pathtoks=\toks36
+\pgfkeys@temptoks=\toks37
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeyslib
 raryfiltered.code.tex
-\pgfkeys@tmptoks=\toks36
+\pgfkeys@tmptoks=\toks38
 ))
-\pgf@x=\dimen192
-\pgf@y=\dimen193
-\pgf@xa=\dimen194
-\pgf@ya=\dimen195
-\pgf@xb=\dimen196
-\pgf@yb=\dimen197
-\pgf@xc=\dimen198
-\pgf@yc=\dimen199
-\pgf@xd=\dimen256
-\pgf@yd=\dimen257
+\pgf@x=\dimen267
+\pgf@y=\dimen268
+\pgf@xa=\dimen269
+\pgf@ya=\dimen270
+\pgf@xb=\dimen271
+\pgf@yb=\dimen272
+\pgf@xc=\dimen273
+\pgf@yc=\dimen274
+\pgf@xd=\dimen275
+\pgf@yd=\dimen276
 \w@pgf@writea=\write4
 \r@pgf@reada=\read4
-\c@pgf@counta=\count436
-\c@pgf@countb=\count437
-\c@pgf@countc=\count438
-\c@pgf@countd=\count439
-\t@pgf@toka=\toks37
-\t@pgf@tokb=\toks38
-\t@pgf@tokc=\toks39
-\pgf@sys@id@count=\count440
+\c@pgf@counta=\count447
+\c@pgf@countb=\count448
+\c@pgf@countc=\count449
+\c@pgf@countd=\count450
+\t@pgf@toka=\toks39
+\t@pgf@tokb=\toks40
+\t@pgf@tokc=\toks41
+\pgf@sys@id@count=\count451
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
@@ -929,8 +1009,8 @@ File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysso
 ftpath.code.tex
 File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfsyssoftpath@smallbuffer@items=\count441
-\pgfsyssoftpath@bigbuffer@items=\count442
+\pgfsyssoftpath@smallbuffer@items=\count452
+\pgfsyssoftpath@bigbuffer@items=\count453
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyspr
 otocol.code.tex
@@ -946,12 +1026,12 @@ x
 e.tex)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.c
 ode.tex
-\pgfmath@dimen=\dimen258
-\pgfmath@count=\count443
-\pgfmath@box=\box66
-\pgfmath@toks=\toks40
-\pgfmath@stack@operand=\toks41
-\pgfmath@stack@operation=\toks42
+\pgfmath@dimen=\dimen277
+\pgfmath@count=\count454
+\pgfmath@box=\box113
+\pgfmath@toks=\toks42
+\pgfmath@stack@operand=\toks43
+\pgfmath@stack@operation=\toks44
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
 s.code.tex)
@@ -975,59 +1055,59 @@ s.integerarithmetics.code.tex)
 e.tex)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.co
 de.tex
-\c@pgfmathroundto@lastzeros=\count444
+\c@pgfmathroundto@lastzeros=\count455
 ))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepo
 ints.code.tex
 File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@picminx=\dimen259
-\pgf@picmaxx=\dimen260
-\pgf@picminy=\dimen261
-\pgf@picmaxy=\dimen262
-\pgf@pathminx=\dimen263
-\pgf@pathmaxx=\dimen264
-\pgf@pathminy=\dimen265
-\pgf@pathmaxy=\dimen266
-\pgf@xx=\dimen267
-\pgf@xy=\dimen268
-\pgf@yx=\dimen269
-\pgf@yy=\dimen270
-\pgf@zx=\dimen271
-\pgf@zy=\dimen272
+\pgf@picminx=\dimen278
+\pgf@picmaxx=\dimen279
+\pgf@picminy=\dimen280
+\pgf@picmaxy=\dimen281
+\pgf@pathminx=\dimen282
+\pgf@pathmaxx=\dimen283
+\pgf@pathminy=\dimen284
+\pgf@pathmaxy=\dimen285
+\pgf@xx=\dimen286
+\pgf@xy=\dimen287
+\pgf@yx=\dimen288
+\pgf@yy=\dimen289
+\pgf@zx=\dimen290
+\pgf@zy=\dimen291
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
 thconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@path@lastx=\dimen273
-\pgf@path@lasty=\dimen274
+\pgf@path@lastx=\dimen292
+\pgf@path@lasty=\dimen293
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
 thusage.code.tex
 File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@shorten@end@additional=\dimen275
-\pgf@shorten@start@additional=\dimen276
+\pgf@shorten@end@additional=\dimen294
+\pgf@shorten@start@additional=\dimen295
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoresc
 opes.code.tex
 File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfpic=\box67
-\pgf@hbox=\box68
-\pgf@layerbox@main=\box69
-\pgf@picture@serial@count=\count445
+\pgfpic=\box114
+\pgf@hbox=\box115
+\pgf@layerbox@main=\box116
+\pgf@picture@serial@count=\count456
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregr
 aphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgflinewidth=\dimen277
+\pgflinewidth=\dimen296
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretr
 ansformations.code.tex
 File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@pt@x=\dimen278
-\pgf@pt@y=\dimen279
-\pgf@pt@temp=\dimen280
+\pgf@pt@x=\dimen297
+\pgf@pt@y=\dimen298
+\pgf@pt@temp=\dimen299
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequ
 ick.code.tex
@@ -1044,14 +1124,14 @@ File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorear
 rows.code.tex
 File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowsep=\dimen281
+\pgfarrowsep=\dimen300
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoresh
 ade.code.tex
 File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@max=\dimen282
-\pgf@sys@shading@range@num=\count446
-\pgf@shadingcount=\count447
+\pgf@max=\dimen301
+\pgf@sys@shading@range@num=\count457
+\pgf@shadingcount=\count458
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreim
 age.code.tex
@@ -1060,7 +1140,7 @@ File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreex
 ternal.code.tex
 File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfexternal@startupbox=\box70
+\pgfexternal@startupbox=\box117
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorela
 yers.code.tex
@@ -1081,7 +1161,7 @@ File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulesha
 pes.code.tex
 File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodeparttextbox=\box71
+\pgfnodeparttextbox=\box118
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplo
 t.code.tex
@@ -1090,8 +1170,8 @@ File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-
 version-0-65.sty
 Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
-\pgf@nodesepstart=\dimen283
-\pgf@nodesepend=\dimen284
+\pgf@nodesepstart=\dimen302
+\pgf@nodesepend=\dimen303
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-
 version-1-18.sty
@@ -1107,10 +1187,10 @@ x))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.cod
 e.tex
 Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
-\pgffor@iter=\dimen285
-\pgffor@skip=\dimen286
-\pgffor@stack=\toks43
-\pgffor@toks=\toks44
+\pgffor@iter=\dimen304
+\pgffor@skip=\dimen305
+\pgffor@stack=\toks45
+\pgffor@toks=\toks46
 ))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\t
 ikz.code.tex
@@ -1119,34 +1199,34 @@ Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrary
 plothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count448
-\pgfplotmarksize=\dimen287
+\pgf@plot@mark@count=\count459
+\pgfplotmarksize=\dimen306
 )
-\tikz@lastx=\dimen288
-\tikz@lasty=\dimen289
-\tikz@lastxsaved=\dimen290
-\tikz@lastysaved=\dimen291
-\tikz@lastmovetox=\dimen292
-\tikz@lastmovetoy=\dimen293
-\tikzleveldistance=\dimen294
-\tikzsiblingdistance=\dimen295
-\tikz@figbox=\box72
-\tikz@figbox@bg=\box73
-\tikz@tempbox=\box74
-\tikz@tempbox@bg=\box75
-\tikztreelevel=\count449
-\tikznumberofchildren=\count450
-\tikznumberofcurrentchild=\count451
-\tikz@fig@count=\count452
+\tikz@lastx=\dimen307
+\tikz@lasty=\dimen308
+\tikz@lastxsaved=\dimen309
+\tikz@lastysaved=\dimen310
+\tikz@lastmovetox=\dimen311
+\tikz@lastmovetoy=\dimen312
+\tikzleveldistance=\dimen313
+\tikzsiblingdistance=\dimen314
+\tikz@figbox=\box119
+\tikz@figbox@bg=\box120
+\tikz@tempbox=\box121
+\tikz@tempbox@bg=\box122
+\tikztreelevel=\count460
+\tikznumberofchildren=\count461
+\tikznumberofcurrentchild=\count462
+\tikz@fig@count=\count463
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulemat
 rix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count453
-\pgfmatrixcurrentcolumn=\count454
-\pgf@matrix@numberofcolumns=\count455
+\pgfmatrixcurrentrow=\count464
+\pgfmatrixcurrentcolumn=\count465
+\pgf@matrix@numberofcolumns=\count466
 )
-\tikz@expandcount=\count456
+\tikz@expandcount=\count467
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
 ibraries\tikzlibrarytopaths.code.tex
@@ -1199,26 +1279,26 @@ File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pgf
 libraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box76
-\pgfnodeparttwobox=\box77
-\pgfnodepartthreebox=\box78
-\pgfnodepartfourbox=\box79
-\pgfnodeparttwentybox=\box80
-\pgfnodepartnineteenbox=\box81
-\pgfnodeparteighteenbox=\box82
-\pgfnodepartseventeenbox=\box83
-\pgfnodepartsixteenbox=\box84
-\pgfnodepartfifteenbox=\box85
-\pgfnodepartfourteenbox=\box86
-\pgfnodepartthirteenbox=\box87
-\pgfnodeparttwelvebox=\box88
-\pgfnodepartelevenbox=\box89
-\pgfnodeparttenbox=\box90
-\pgfnodepartninebox=\box91
-\pgfnodeparteightbox=\box92
-\pgfnodepartsevenbox=\box93
-\pgfnodepartsixbox=\box94
-\pgfnodepartfivebox=\box95
+\pgfnodepartlowerbox=\box123
+\pgfnodeparttwobox=\box124
+\pgfnodepartthreebox=\box125
+\pgfnodepartfourbox=\box126
+\pgfnodeparttwentybox=\box127
+\pgfnodepartnineteenbox=\box128
+\pgfnodeparteighteenbox=\box129
+\pgfnodepartseventeenbox=\box130
+\pgfnodepartsixteenbox=\box131
+\pgfnodepartfifteenbox=\box132
+\pgfnodepartfourteenbox=\box133
+\pgfnodepartthirteenbox=\box134
+\pgfnodeparttwelvebox=\box135
+\pgfnodepartelevenbox=\box136
+\pgfnodeparttenbox=\box137
+\pgfnodepartninebox=\box138
+\pgfnodeparteightbox=\box139
+\pgfnodepartsevenbox=\box140
+\pgfnodepartsixbox=\box141
+\pgfnodepartfivebox=\box142
 )))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
 ibraries\tikzlibraryarrows.code.tex
@@ -1227,7 +1307,7 @@ File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrary
 arrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen296
+\arrowsize=\dimen315
 ))
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
 ibraries\tikzlibrarypositioning.code.tex
@@ -1281,11 +1361,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 tring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count457
+\c@section@level=\count468
 )
-\@linkdim=\dimen297
-\Hy@linkcounter=\count458
-\Hy@pagecounter=\count459
+\@linkdim=\dimen316
+\Hy@linkcounter=\count469
+\Hy@pagecounter=\count470
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2023-11-26 v7.01g Hyperref: PDFDocEncoding definition (HO)
@@ -1295,7 +1375,7 @@ Now handling font encoding PD1 ...
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count460
+\Hy@SavedSpaceFactor=\count471
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2023-11-26 v7.01g Hyperref: PDF Unicode definition (HO)
@@ -1310,9 +1390,9 @@ Package hyperref Info: Plain pages OFF on input line 4196.
 Package hyperref Info: Backreferencing OFF on input line 4201.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4448.
-\c@Hy@tempcnt=\count461
+\c@Hy@tempcnt=\count472
 LaTeX Info: Redefining \url on input line 4786.
-\XeTeXLinkMargin=\dimen298
+\XeTeXLinkMargin=\dimen317
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -1322,9 +1402,9 @@ y
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count462
-\Field@Width=\dimen299
-\Fld@charsize=\dimen300
+\Fld@menulength=\count473
+\Field@Width=\dimen318
+\Fld@charsize=\dimen319
 Package hyperref Info: Hyper figures OFF on input line 6065.
 Package hyperref Info: Link nesting OFF on input line 6070.
 Package hyperref Info: Hyper index ON on input line 6073.
@@ -1336,9 +1416,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6095.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count463
-\c@Item=\count464
-\c@Hfootnote=\count465
+\Hy@abspage=\count474
+\c@Item=\count475
+\c@Hfootnote=\count476
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
@@ -1349,8 +1429,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count466
-\c@bookmark@seq@number=\count467
+\Fld@listcount=\count477
+\c@bookmark@seq@number=\count478
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilech
 eck.sty
@@ -1363,68 +1443,68 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip84
+\Hy@SectionHShift=\skip88
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has section divisions on input line 51.
-\cftparskip=\skip85
-\cftbeforetoctitleskip=\skip86
-\cftaftertoctitleskip=\skip87
-\cftbeforepartskip=\skip88
-\cftpartnumwidth=\skip89
-\cftpartindent=\skip90
-\cftbeforesecskip=\skip91
-\cftsecindent=\skip92
-\cftsecnumwidth=\skip93
-\cftbeforesubsecskip=\skip94
-\cftsubsecindent=\skip95
-\cftsubsecnumwidth=\skip96
-\cftbeforesubsubsecskip=\skip97
-\cftsubsubsecindent=\skip98
-\cftsubsubsecnumwidth=\skip99
-\cftbeforeparaskip=\skip100
-\cftparaindent=\skip101
-\cftparanumwidth=\skip102
-\cftbeforesubparaskip=\skip103
-\cftsubparaindent=\skip104
-\cftsubparanumwidth=\skip105
-\cftbeforeloftitleskip=\skip106
-\cftafterloftitleskip=\skip107
-\cftbeforefigskip=\skip108
-\cftfigindent=\skip109
-\cftfignumwidth=\skip110
-\c@lofdepth=\count468
-\c@lotdepth=\count469
-\cftbeforelottitleskip=\skip111
-\cftafterlottitleskip=\skip112
-\cftbeforetabskip=\skip113
-\cfttabindent=\skip114
-\cfttabnumwidth=\skip115
+\cftparskip=\skip89
+\cftbeforetoctitleskip=\skip90
+\cftaftertoctitleskip=\skip91
+\cftbeforepartskip=\skip92
+\cftpartnumwidth=\skip93
+\cftpartindent=\skip94
+\cftbeforesecskip=\skip95
+\cftsecindent=\skip96
+\cftsecnumwidth=\skip97
+\cftbeforesubsecskip=\skip98
+\cftsubsecindent=\skip99
+\cftsubsecnumwidth=\skip100
+\cftbeforesubsubsecskip=\skip101
+\cftsubsubsecindent=\skip102
+\cftsubsubsecnumwidth=\skip103
+\cftbeforeparaskip=\skip104
+\cftparaindent=\skip105
+\cftparanumwidth=\skip106
+\cftbeforesubparaskip=\skip107
+\cftsubparaindent=\skip108
+\cftsubparanumwidth=\skip109
+\cftbeforeloftitleskip=\skip110
+\cftafterloftitleskip=\skip111
+\cftbeforefigskip=\skip112
+\cftfigindent=\skip113
+\cftfignumwidth=\skip114
+\c@lofdepth=\count479
+\c@lotdepth=\count480
+\cftbeforelottitleskip=\skip115
+\cftafterlottitleskip=\skip116
+\cftbeforetabskip=\skip117
+\cfttabindent=\skip118
+\cfttabnumwidth=\skip119
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip116
-\f@nch@offset@elh=\skip117
-\f@nch@offset@erh=\skip118
-\f@nch@offset@olh=\skip119
-\f@nch@offset@orh=\skip120
-\f@nch@offset@elf=\skip121
-\f@nch@offset@erf=\skip122
-\f@nch@offset@olf=\skip123
-\f@nch@offset@orf=\skip124
-\f@nch@height=\skip125
-\f@nch@footalignment=\skip126
-\f@nch@widthL=\skip127
-\f@nch@widthC=\skip128
-\f@nch@widthR=\skip129
-\@temptokenb=\toks45
+\f@nch@headwidth=\skip120
+\f@nch@offset@elh=\skip121
+\f@nch@offset@erh=\skip122
+\f@nch@offset@olh=\skip123
+\f@nch@offset@orh=\skip124
+\f@nch@offset@elf=\skip125
+\f@nch@offset@erf=\skip126
+\f@nch@offset@olf=\skip127
+\f@nch@offset@orf=\skip128
+\f@nch@height=\skip129
+\f@nch@footalignment=\skip130
+\f@nch@widthL=\skip131
+\f@nch@widthC=\skip132
+\f@nch@widthR=\skip133
+\@temptokenb=\toks47
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
 Package: verbatim 2023-11-06 v1.5v LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks46
-\verbatim@line=\toks47
+\every@verbatim=\toks48
+\verbatim@line=\toks49
 \verbatim@in@stream=\read5
 )
 Package csquotes Info: Checking for multilingual support...
@@ -1433,35 +1513,42 @@ Package csquotes Info: Adjusting default style.
 
 
 Package csquotes Warning: No style for language 'mongolian'.
-(csquotes)                Using fallback style on input line 173.
+(csquotes)                Using fallback style on input line 188.
 
 Package csquotes Info: Redefining alias 'default' -> 'fallback'.
-(main2.aux (FrontBackMatter/TittlePage.aux) (FrontBackMatter/Abstract.aux)
-(FrontBackMatter/Abberaviation.aux) (FrontBackMatter/TableOfContent.aux)
-(Chapters/Chapter1.aux) (Chapters/Chapter2.aux) (Chapters/Chapter3.aux)
-(Chapters/Chapter4.aux) (Chapters/Chapter5.aux) (Appendices/AppendixA.aux))
-\openout1 = `main2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
+Package biblatex Warning: Conflicting options.
+(biblatex)                '<namepart>inits' conflicts with 'uniquename=full'.
+(biblatex)                Setting 'uniquename=init' on input line 188.
+
+(main.aux (FrontBackMatter/TittlePage.aux) (FrontBackMatter/Abstract.aux)
+(FrontBackMatter/TableOfContent.aux) (FrontBackMatter/Abberaviation.aux)
+(FrontBackMatter/Plan-review.aux) (Chapters/Chapter1.aux)
+(Chapters/Chapter2.aux) (Chapters/Chapter3.aux) (Chapters/Chapter4.aux)
+(Chapters/Chapter5.aux) (Appendices/AppendixA.aux) (Appendices/AppendixB.aux)
+(Appendices/AppendixC.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 188.
+LaTeX Font Info:    ... okay on input line 188.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1471,23 +1558,23 @@ LaTeX Font Info:    ... okay on input line 173.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
+* h-part:(L,W,R)=(85.35826pt, 469.47049pt, 42.67912pt)
 * v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=483.69687pt
+* \textwidth=469.47049pt
 * \textheight=731.23584pt
-* \oddsidemargin=-15.36449pt
-* \evensidemargin=-15.36449pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
 * \topmargin=-52.36449pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=11.0pt
 * \footskip=30.0pt
-* \marginparwidth=35.0pt
+* \marginparwidth=50.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -1505,28 +1592,28 @@ File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `main2.bcf'.
+\openout3 = `main.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main2.bbl' found.
+Package biblatex Info: ... file 'main.bbl' found.
 
-(main2.bbl)
-Package biblatex Info: Reference section=0 on input line 173.
-Package biblatex Info: Reference segment=0 on input line 173.
+(main.bbl)
+Package biblatex Info: Reference section=0 on input line 188.
+Package biblatex Info: Reference segment=0 on input line 188.
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count470
-\scratchdimen=\dimen301
-\scratchbox=\box96
-\nofMPsegments=\count471
-\nofMParguments=\count472
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count473
-\MPscratchDim=\dimen302
-\MPnumerator=\count474
-\makeMPintoPDFobject=\count475
-\everyMPtoPDFconversion=\toks49
+\scratchcounter=\count481
+\scratchdimen=\dimen320
+\scratchbox=\box143
+\nofMPsegments=\count482
+\nofMParguments=\count483
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count484
+\MPscratchDim=\dimen321
+\MPnumerator=\count485
+\makeMPintoPDFobject=\count486
+\everyMPtoPDFconversion=\toks51
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base
 .sty
@@ -1546,31 +1633,29 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count476
-Package hyperref Info: Link coloring ON on input line 173.
+\c@lstlisting=\count487
+Package hyperref Info: Link coloring ON on input line 188.
 
-(main2.out) (main2.out)
+(main.out) (main.out)
 \@outlinefile=\write5
-\openout5 = `main2.out'.
+\openout5 = `main.out'.
 
 \openout2 = `FrontBackMatter/TittlePage.aux'.
 
  (FrontBackMatter/TittlePage.tex
-<Figures/logo.png, id=357, 214.8025pt x 236.885pt>
+<Figures/logo.png, id=394, 214.8025pt x 236.885pt>
 File: Figures/logo.png Graphic file (type png)
 <use Figures/logo.png>
-Package pdftex.def Info: Figures/logo.png  used on input line 8.
-(pdftex.def)             Requested size: 72.55157pt x 80.00848pt.
+Package pdftex.def Info: Figures/logo.png  used on input line 11.
+(pdftex.def)             Requested size: 70.4177pt x 77.6554pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
- []
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+
 
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1583,7 +1668,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.67 \end{titlepage}
+l.90 \end{titlepage}
                      [1])
 \openout2 = `FrontBackMatter/Abstract.aux'.
 
@@ -1592,63 +1677,92 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.182 \include{FrontBackMatter/Abstract}
+l.196 \include{FrontBackMatter/Abstract}
                                          [1
-
-
-
-]
-\openout2 = `FrontBackMatter/Abberaviation.aux'.
-
- (FrontBackMatter/Abberaviation.tex) [2
 
 
 
 ]
 \openout2 = `FrontBackMatter/TableOfContent.aux'.
 
- (FrontBackMatter/TableOfContent.tex (main2.toc [3
 
+(FrontBackMatter/TableOfContent.tex (main.toc [2
+
+
+
+] [3])
+\tf@toc=\write6
+\openout6 = `main.toc'.
+
+) [4]
+\openout2 = `FrontBackMatter/Abberaviation.aux'.
+
+
+(FrontBackMatter/Abberaviation.tex) [5
+
+
+
+] (main.lot)
+\tf@lot=\write7
+\openout7 = `main.lot'.
+
+ (main.lof [6
 
 
 ])
-\tf@toc=\write6
-\openout6 = `main2.toc'.
+\tf@lof=\write8
+\openout8 = `main.lof'.
 
-) [4]
-(Chapters/figures-definitions.tex)
+ [7]
+\openout2 = `FrontBackMatter/Plan-review.aux'.
+
+
+(FrontBackMatter/Plan-review.tex
+Overfull \hbox (39.53653pt too wide) in paragraph at lines 17--95
+ [][] 
+ []
+
+) [8
+
+] (Chapters/figures-definitions.tex)
 \openout2 = `Chapters/Chapter1.aux'.
 
- (Chapters/Chapter1.tex [1
+ (Chapters/Chapter1.tex
+Overfull \hbox (14.6046pt too wide) in paragraph at lines 13--14
+[]\T2A/cmr/m/n/10.95 М°н олон ул-сад хэл су-рах апп-ли-кейш-нууд (Duolingo, Ank
+i, Memrise) °р-г°н тарх-сан []Godwin-
+ []
+
+[1
 
 
 
 
 ]
-Overfull \hbox (10.17523pt too wide) in paragraph at lines 70--71
-[]\T2A/cmr/bx/n/12 Модель сур-гах ач хол-бог-дол: \T2A/cmr/m/n/12 Мон-гол бич-г
-ийн OCR мо-де-лийг сур-гаж TensorFlow.js-
- []
-
-[2]
-Overfull \hbox (2.82443pt too wide) in paragraph at lines 95--96
-[]\T2A/cmr/m/n/12 Онолын су-дал-гаа бо-лон ижил т°с-тэй сис-те-міі-дийн харь-цу
-ул-сан шин-
+Overfull \hbox (0.85826pt too wide) in paragraph at lines 40--41
+[]\T2A/cmr/m/n/10.95 Сургалтад ашиг-лаг-дах Flashcard °г°гд-лийн сан бу-юу data
+set-ийг сис-тем-тэй-гээр бэлт-
  []
 
 
-Overfull \hbox (4.29198pt too wide) in paragraph at lines 99--100
-[]\T2A/cmr/m/n/12 Системийн хэ-рэг-жіі-лэлт, ашиг-ла-сан тех-но-ло-ги, тур-шилт
- ба ір дінг
+Overfull \hbox (1.5312pt too wide) in paragraph at lines 46--47
+[]\T2A/cmr/m/n/10.95 Firebase (Authentication, Firestore, Cloud Functions) ійл-
+чил-гээ-ніі-дэд ті-шиг-лэн аюул-
  []
 
-) [3]
+
+Overfull \hbox (2.49408pt too wide) in paragraph at lines 66--67
+\T2A/cmr/m/n/10.95 platform шийд-лээр Мон-гол би-чиг су-рах сис-те-мийг хэ-рэг-
+лээнд бэ-лэн тів-шинд хэ-рэг-жіілж,
+ []
+
+[2]) [3]
 \openout2 = `Chapters/Chapter2.aux'.
 
  (Chapters/Chapter2.tex
-Overfull \hbox (0.87337pt too wide) in paragraph at lines 33--34
-\T2A/cmr/m/n/12 лас-наар тус-даа сер-ве-рийн удирд-ла-га шаар-дал-гій-гээр хэ-р
-эг-лэг-чийн °г°г-д°л хад-га-лах, синх-
+Overfull \hbox (15.99034pt too wide) in paragraph at lines 17--17
+|[]\T2A/cmr/bx/n/12 Мэдлэг эзэм-ших та-нин мэ-дэ-хійн ар-гууд: Spaced Repetitio
+n бо-лон Flashcard| 
  []
 
 [4
@@ -1656,317 +1770,288 @@ Overfull \hbox (0.87337pt too wide) in paragraph at lines 33--34
 
 
 ]
-Overfull \hbox (6.43718pt too wide) in paragraph at lines 78--79
-[]\T2A/cmr/bx/n/12 Gamification + Spaced Repetition: \T2A/cmr/m/n/12 Duolingo-и
-йн gamification бо-лон Anki-ийн spaced
+Overfull \hbox (2.78336pt too wide) in paragraph at lines 71--72
+\T2A/cmr/m/n/10.95 ритм), Memrise (ви-део) гэх мэ-тіід тэр-гіі-лэг-чіід юм. Мон
+-гол хэл-ний ор-чинд Bolor Toli []Bolorsoft
  []
 
-
-Overfull \hbox (11.37485pt too wide) in paragraph at lines 87--88
-\T2A/cmr/m/n/12 суурь шийд-ліі-дийг то-дор-хой-лов: Мон-гол бич-гийн сур-гал-ты
-н онц-логт нийц-сэн flashcard+SM-
- []
-
-) [5]
+[5]) [6]
 \openout2 = `Chapters/Chapter3.aux'.
 
- (Chapters/Chapter3.tex
-Overfull \hbox (3.79579pt too wide) in paragraph at lines 8--9
-\T2A/cmr/m/n/12 хи-тек-ту-рын шийд-ліі-дийг дэл-гэ-рэн-гій та-нил-цуул-на. М°н 
-хэ-рэг-лэг-чийн ин-тер-фэйс (UI/UX)
- []
-
-
-Overfull \hbox (1.5272pt too wide) in paragraph at lines 23--24
-[]\T2A/cmr/m/n/12 Дээрх да-раал-лын да-гуу оно-лын ін-дэс-лэл, ин-же-не-рийн хэ
--рэг-жіі-лэлт, хэ-рэг-лээ-ний інэл-
- []
-
-[6
+ (Chapters/Chapter3.tex [7
 
 
 
-]
-Overfull \hbox (26.5018pt too wide) in paragraph at lines 48--49
-\T2A/cmr/m/n/12 (Presentation, Business Logic, Data Access layers-ээс бір-дэ-нэ
-) нь Firebase Backend (Authentication,
- []
-
-
-Overfull \hbox (3.18272pt too wide) in paragraph at lines 48--49
-\T2A/cmr/m/n/12 Database, Storage)-ээр нэ-мэл-тээд TensorFlow.js OCR мо-дул-тай
- асинх-ро-ноор ха-рил-цан ажил-
- []
-
-[7]
-<Figures/diagrams/usecasediagram.png, id=541, 2504.35625pt x 2150.0325pt>
+] [8] [9]
+<Figures/diagrams/usecasediagram.png, id=752, 2504.35625pt x 2150.0325pt>
 File: Figures/diagrams/usecasediagram.png Graphic file (type png)
 <use Figures/diagrams/usecasediagram.png>
 Package pdftex.def Info: Figures/diagrams/usecasediagram.png  used on input lin
-e 107.
-(pdftex.def)             Requested size: 386.95897pt x 332.20178pt.
-<Figures/diagrams/sequence.png, id=543, 564.6696pt x 272.9397pt>
+e 134.
+(pdftex.def)             Requested size: 375.57782pt x 322.42535pt.
+<Figures/diagrams/sequence.png, id=754, 564.6696pt x 272.9397pt>
 File: Figures/diagrams/sequence.png Graphic file (type png)
 <use Figures/diagrams/sequence.png>
-Package pdftex.def Info: Figures/diagrams/sequence.png  used on input line 117.
+Package pdftex.def Info: Figures/diagrams/sequence.png  used on input line 144.
 
-(pdftex.def)             Requested size: 411.14528pt x 198.73204pt.
- [8 <./Figures/diagrams/usecasediagram.png>]
-<Figures/diagrams/activitydiagram.png, id=551, 1291.9467pt x 181.6386pt>
+(pdftex.def)             Requested size: 399.05278pt x 192.88895pt.
+ [10 <./Figures/diagrams/usecasediagram.png>]
+<Figures/diagrams/activitydiagram.png, id=762, 1291.9467pt x 181.6386pt>
 File: Figures/diagrams/activitydiagram.png Graphic file (type png)
 <use Figures/diagrams/activitydiagram.png>
 Package pdftex.def Info: Figures/diagrams/activitydiagram.png  used on input li
-ne 127.
-(pdftex.def)             Requested size: 386.95897pt x 54.4033pt.
-<Figures/diagrams/dataflow.png, id=552, 859.41075pt x 536.60475pt>
+ne 154.
+(pdftex.def)             Requested size: 469.47049pt x 66.00235pt.
+<Figures/diagrams/dataflow.png, id=763, 859.41075pt x 536.60475pt>
 File: Figures/diagrams/dataflow.png Graphic file (type png)
 <use Figures/diagrams/dataflow.png>
-Package pdftex.def Info: Figures/diagrams/dataflow.png  used on input line 180.
+Package pdftex.def Info: Figures/diagrams/dataflow.png  used on input line 206.
 
-(pdftex.def)             Requested size: 411.14528pt x 256.70761pt.
- [9 <./Figures/diagrams/sequence.png> <./Figures/diagrams/activitydiagram.png>]
-<Figures/diagrams/erd.png, id=563, 518.53725pt x 352.9185pt>
+(pdftex.def)             Requested size: 399.05278pt x 249.15836pt.
+<Figures/diagrams/erd.png, id=764, 518.53725pt x 352.9185pt>
 File: Figures/diagrams/erd.png Graphic file (type png)
 <use Figures/diagrams/erd.png>
-Package pdftex.def Info: Figures/diagrams/erd.png  used on input line 239.
-(pdftex.def)             Requested size: 386.95897pt x 263.36348pt.
-<Figures/diagrams/system_architecture.png, id=564, 1211.52625pt x 711.65875pt>
+Package pdftex.def Info: Figures/diagrams/erd.png  used on input line 265.
+(pdftex.def)             Requested size: 375.57782pt x 255.61972pt.
+ [11 <./Figures/diagrams/sequence.png> <./Figures/diagrams/activitydiagram.png>
+]
+<Figures/diagrams/system_architecture.png, id=773, 1211.52625pt x 711.65875pt>
 File: Figures/diagrams/system_architecture.png Graphic file (type png)
 <use Figures/diagrams/system_architecture.png>
 Package pdftex.def Info: Figures/diagrams/system_architecture.png  used on inpu
-t line 250.
-(pdftex.def)             Requested size: 435.32422pt x 255.7083pt.
- [10 <./Figures/diagrams/dataflow.png> <./Figures/diagrams/erd.png>]
-Overfull \hbox (14.68402pt too wide) in paragraph at lines 257--258
- []\T2A/cmr/bx/n/12 Архитектурын тайл-бар:[] \T2A/cmr/m/n/12 Client (React Nati
-ve) нь Firebase (Cloud Firestore, Authentication,
- []
-
-[11 <./Figures/diagrams/system_architecture.png>]) [12]
+t line 276.
+(pdftex.def)             Requested size: 422.52057pt x 248.19385pt.
+ [12 <./Figures/diagrams/dataflow.png> <./Figures/diagrams/erd.png>]
+[13 <./Figures/diagrams/system_architecture.png>]) [14]
 \openout2 = `Chapters/Chapter4.aux'.
 
  (Chapters/Chapter4.tex
-Overfull \hbox (0.23601pt too wide) in paragraph at lines 61--62
-\T2A/cmr/m/n/12 Firebase SDK-д багт-сан Auth, Firestore, Storage ійл-чил-гээ-ни
-й packages суул-га-даг (Appendix
- []
-
 LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
 66.
+
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/cyrillic\t2acmtt.fd
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-[13
+[15
 
 
 
 ]
-Overfull \hbox (14.44255pt too wide) in paragraph at lines 70--71
-\T2A/cmr/m/n/12 Системийн Backend дэд біт-цийн хувьд сер-ве-рийн удирд-ла-га ша
-ард-даг-гій (Serverless) Firebase
- []
-
-<Figures/firebase/firebaseAuth.png, id=599, 637.1805pt x 61.4295pt>
+<Figures/firebase/firebaseAuth.png, id=801, 637.1805pt x 61.4295pt>
 File: Figures/firebase/firebaseAuth.png Graphic file (type png)
 <use Figures/firebase/firebaseAuth.png>
 Package pdftex.def Info: Figures/firebase/firebaseAuth.png  used on input line 
 72.
-(pdftex.def)             Requested size: 362.77264pt x 34.97485pt.
-<Figures/firebase/firebaseDB.png, id=600, 757.02824pt x 313.17pt>
+(pdftex.def)             Requested size: 352.10286pt x 33.9466pt.
+<Figures/firebase/firebaseDB.png, id=802, 757.02824pt x 313.17pt>
 File: Figures/firebase/firebaseDB.png Graphic file (type png)
 <use Figures/firebase/firebaseDB.png>
 Package pdftex.def Info: Figures/firebase/firebaseDB.png  used on input line 73
 .
-(pdftex.def)             Requested size: 386.95897pt x 160.08252pt.
-<Figures/firebase/firebaseStorage.png, id=601, 677.53125pt x 28.908pt>
+(pdftex.def)             Requested size: 375.57782pt x 155.37563pt.
+<Figures/firebase/firebaseStorage.png, id=803, 677.53125pt x 28.908pt>
 File: Figures/firebase/firebaseStorage.png Graphic file (type png)
 <use Figures/firebase/firebaseStorage.png>
 Package pdftex.def Info: Figures/firebase/firebaseStorage.png  used on input li
 ne 74.
-(pdftex.def)             Requested size: 362.77264pt x 15.47862pt.
-
-Overfull \hbox (8.69643pt too wide) in paragraph at lines 82--83
-\T2A/cmr/m/n/12 Дараалсан °д-ріі-дийн тоог тоо-цоолж, мо-ти-ва-цийг інэ-лэх фун
-к-цийг хэ-рэг-жііл-сэн (Appendix
- []
-
-[14 <./Figures/firebase/firebaseAuth.png> <./Figures/firebase/firebaseDB.png> <
-./Figures/firebase/firebaseStorage.png>]
-<Figures/pages/Login.png, id=622, 1174.3875pt x 2541.495pt>
+(pdftex.def)             Requested size: 352.10286pt x 15.0234pt.
+ [16 <./Figures/firebase/firebaseAuth.png> <./Figures/firebase/firebaseDB.png> 
+<./Figures/firebase/firebaseStorage.png>]
+<Figures/pages/Login.png, id=821, 1174.3875pt x 2541.495pt>
 File: Figures/pages/Login.png Graphic file (type png)
 <use Figures/pages/Login.png>
 Package pdftex.def Info: Figures/pages/Login.png  used on input line 115.
-(pdftex.def)             Requested size: 99.83057pt x 216.04361pt.
+(pdftex.def)             Requested size: 96.89174pt x 209.68369pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 116.
 See the caption package documentation for explanation.
 
-<Figures/pages/Signup.png, id=623, 1174.3875pt x 2541.495pt>
+<Figures/pages/Signup.png, id=822, 1174.3875pt x 2541.495pt>
 File: Figures/pages/Signup.png Graphic file (type png)
 <use Figures/pages/Signup.png>
 Package pdftex.def Info: Figures/pages/Signup.png  used on input line 121.
-(pdftex.def)             Requested size: 99.83057pt x 216.04361pt.
+(pdftex.def)             Requested size: 96.89174pt x 209.68369pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 122.
 See the caption package documentation for explanation.
 
-<Figures/pages/home.png, id=624, 1174.3875pt x 2412.01125pt>
+<Figures/pages/home.png, id=823, 1174.3875pt x 2412.01125pt>
 File: Figures/pages/home.png Graphic file (type png)
 <use Figures/pages/home.png>
 Package pdftex.def Info: Figures/pages/home.png  used on input line 130.
-(pdftex.def)             Requested size: 99.83057pt x 205.03665pt.
+(pdftex.def)             Requested size: 96.89174pt x 199.00075pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 131.
 See the caption package documentation for explanation.
 
-<Figures/pages/search.png, id=625, 1174.3875pt x 2407.99625pt>
+<Figures/pages/search.png, id=824, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/search.png Graphic file (type png)
 <use Figures/pages/search.png>
 Package pdftex.def Info: Figures/pages/search.png  used on input line 136.
-(pdftex.def)             Requested size: 99.83057pt x 204.69534pt.
+(pdftex.def)             Requested size: 96.89174pt x 198.6695pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 137.
 See the caption package documentation for explanation.
 
-[15 <./Figures/pages/Login.png> <./Figures/pages/Signup.png>]
-<Figures/pages/profile.png, id=640, 1174.3875pt x 2407.99625pt>
+[17 <./Figures/pages/Login.png> <./Figures/pages/Signup.png>]
+<Figures/pages/profile.png, id=837, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/profile.png Graphic file (type png)
 <use Figures/pages/profile.png>
-Package pdftex.def Info: Figures/pages/profile.png  used on input line 147.
-(pdftex.def)             Requested size: 169.29684pt x 347.11128pt.
-<Figures/pages/settings.png, id=641, 1174.3875pt x 1218.5525pt>
+Package pdftex.def Info: Figures/pages/profile.png  used on input line 150.
+(pdftex.def)             Requested size: 78.45238pt x 160.86092pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 150.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 150--150
+[]\T2A/cmr/m/n/10.95 Зураг 14: |[]Профайл дэл-гэц ^^U ста-тис-тик,
+ []
+
+<Figures/pages/settings.png, id=838, 1174.3875pt x 1218.5525pt>
 File: Figures/pages/settings.png Graphic file (type png)
 <use Figures/pages/settings.png>
-Package pdftex.def Info: Figures/pages/settings.png  used on input line 148.
-(pdftex.def)             Requested size: 169.29684pt x 175.65364pt.
-<Figures/pages/notification.png, id=642, 1174.3875pt x 1727.45375pt>
+Package pdftex.def Info: Figures/pages/settings.png  used on input line 153.
+(pdftex.def)             Requested size: 155.04112pt x 160.87173pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 153.
+See the caption package documentation for explanation.
+
+<Figures/pages/notification.png, id=839, 1174.3875pt x 1727.45375pt>
 File: Figures/pages/notification.png Graphic file (type png)
 <use Figures/pages/notification.png>
-Package pdftex.def Info: Figures/pages/notification.png  used on input line 149
+Package pdftex.def Info: Figures/pages/notification.png  used on input line 159
 .
-(pdftex.def)             Requested size: 169.29684pt x 249.01146pt.
-<Figures/pages/security_privacy.png, id=643, 1174.3875pt x 1626.075pt>
+(pdftex.def)             Requested size: 109.36385pt x 160.86768pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 159.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 159--159
+[]\T2A/cmr/m/n/10.95 Зураг 16: |[]Мэдэгдлийн дэл-гэц ^^U са-нуул-га,
+ []
+
+<Figures/pages/security_privacy.png, id=840, 1174.3875pt x 1626.075pt>
 File: Figures/pages/security_privacy.png Graphic file (type png)
 <use Figures/pages/security_privacy.png>
 Package pdftex.def Info: Figures/pages/security_privacy.png  used on input line
- 150.
-(pdftex.def)             Requested size: 169.29684pt x 234.39778pt.
+ 162.
+(pdftex.def)             Requested size: 116.17332pt x 160.85538pt.
 
-Overfull \hbox (15.51958pt too wide) in paragraph at lines 165--166
-\T2A/cmr/m/n/12 Eg^^Du^^Du сис-те-мийн нэг онц-лог функц нь Мон-гол бич-гийг та
--них OCR тех-но-ло-ги юм. TensorFlow.js
- []
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 162.
+See the caption package documentation for explanation.
 
-[16 <./Figures/pages/home.png> <./Figures/pages/search.png> <./Figures/pages/pr
-ofile.png>] [17 <./Figures/pages/settings.png> <./Figures/pages/notification.pn
-g>]
-<Figures/pages/camera.jpg, id=668, 949.5475pt x 2055.68pt>
+[18 <./Figures/pages/home.png> <./Figures/pages/search.png> <./Figures/pages/pr
+ofile.png> <./Figures/pages/settings.png> <./Figures/pages/notification.png> <.
+/Figures/pages/security_privacy.png>]
+<Figures/pages/camera.jpg, id=858, 949.5475pt x 2055.68pt>
 File: Figures/pages/camera.jpg Graphic file (type jpg)
 <use Figures/pages/camera.jpg>
-Package pdftex.def Info: Figures/pages/camera.jpg  used on input line 173.
-(pdftex.def)             Requested size: 99.82858pt x 216.11938pt.
+Package pdftex.def Info: Figures/pages/camera.jpg  used on input line 186.
+(pdftex.def)             Requested size: 96.88733pt x 209.75186pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 174.
+(caption)                particular \caption on input line 187.
 See the caption package documentation for explanation.
 
-<Figures/pages/handwriting.png, id=669, 1174.3875pt x 2423.0525pt>
+<Figures/pages/handwriting.png, id=859, 1174.3875pt x 2423.0525pt>
 File: Figures/pages/handwriting.png Graphic file (type png)
 <use Figures/pages/handwriting.png>
-Package pdftex.def Info: Figures/pages/handwriting.png  used on input line 179.
+Package pdftex.def Info: Figures/pages/handwriting.png  used on input line 192.
 
-(pdftex.def)             Requested size: 99.83057pt x 205.97522pt.
+(pdftex.def)             Requested size: 96.89174pt x 199.9117pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 180.
+(caption)                particular \caption on input line 193.
 See the caption package documentation for explanation.
 
-[18 <./Figures/pages/security_privacy.png> <./Figures/pages/camera.jpg> <./Figu
-res/pages/handwriting.png>]
-<Figures/pages/handwroten.png, id=682, 1174.3875pt x 2423.0525pt>
+[19 <./Figures/pages/camera.jpg> <./Figures/pages/handwriting.png>]
+<Figures/pages/handwroten.png, id=865, 1174.3875pt x 2423.0525pt>
 File: Figures/pages/handwroten.png Graphic file (type png)
 <use Figures/pages/handwroten.png>
-Package pdftex.def Info: Figures/pages/handwroten.png  used on input line 190.
+Package pdftex.def Info: Figures/pages/handwroten.png  used on input line 203.
 (pdftex.def)             Requested size: 67.32426pt x 138.90665pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 191.
+(caption)                particular \caption on input line 204.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_regular_view.png, id=683, 1174.3875pt x 2412.01125pt>
+<Figures/pages/ocr_regular_view.png, id=866, 1174.3875pt x 2412.01125pt>
 File: Figures/pages/ocr_regular_view.png Graphic file (type png)
 <use Figures/pages/ocr_regular_view.png>
 Package pdftex.def Info: Figures/pages/ocr_regular_view.png  used on input line
- 196.
+ 209.
 (pdftex.def)             Requested size: 67.64682pt x 138.93616pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 197.
+(caption)                particular \caption on input line 210.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_imagetotext.png, id=684, 1174.3875pt x 2392.94pt>
+<Figures/pages/ocr_imagetotext.png, id=867, 1174.3875pt x 2392.94pt>
 File: Figures/pages/ocr_imagetotext.png Graphic file (type png)
 <use Figures/pages/ocr_imagetotext.png>
 Package pdftex.def Info: Figures/pages/ocr_imagetotext.png  used on input line 
-205.
+218.
 (pdftex.def)             Requested size: 68.1844pt x 138.93301pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 206.
+(caption)                particular \caption on input line 219.
 See the caption package documentation for explanation.
 
-<Figures/pages/ocr_cyrillic_to_script.png, id=685, 1174.3875pt x 2407.99625pt>
+<Figures/pages/ocr_cyrillic_to_script.png, id=868, 1174.3875pt x 2407.99625pt>
 File: Figures/pages/ocr_cyrillic_to_script.png Graphic file (type png)
 <use Figures/pages/ocr_cyrillic_to_script.png>
 Package pdftex.def Info: Figures/pages/ocr_cyrillic_to_script.png  used on inpu
-t line 211.
+t line 224.
 (pdftex.def)             Requested size: 67.75433pt x 138.92534pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 212.
+(caption)                particular \caption on input line 225.
 See the caption package documentation for explanation.
 
-<Figures/ocrresponse.png, id=686, 915.42pt x 134.5025pt>
+<Figures/ocrresponse.png, id=869, 915.42pt x 134.5025pt>
 File: Figures/ocrresponse.png Graphic file (type png)
 <use Figures/ocrresponse.png>
-Package pdftex.def Info: Figures/ocrresponse.png  used on input line 226.
-(pdftex.def)             Requested size: 220.55734pt x 32.40643pt.
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 227.
-See the caption package documentation for explanation.
-
-
-Underfull \hbox (badness 2582) in paragraph at lines 227--227
-[]\T2A/cmr/m/n/12 Зураг 24: |[]OCR мо-де-лийн таа-маг-ла-лын
- []
-
-<Figures/trainingloss.png, id=687, 968.61874pt x 213.79875pt>
+Package pdftex.def Info: Figures/ocrresponse.png  used on input line 239.
+(pdftex.def)             Requested size: 422.52057pt x 62.08122pt.
+<Figures/trainingloss.png, id=870, 968.61874pt x 213.79875pt>
 File: Figures/trainingloss.png Graphic file (type png)
 <use Figures/trainingloss.png>
-Package pdftex.def Info: Figures/trainingloss.png  used on input line 232.
-(pdftex.def)             Requested size: 220.56064pt x 48.68332pt.
+Package pdftex.def Info: Figures/trainingloss.png  used on input line 248.
+(pdftex.def)             Requested size: 422.52057pt x 93.26268pt.
 
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 233.
-See the caption package documentation for explanation.
+Overfull \hbox (1.2148pt too wide) in paragraph at lines 259--260
+[] []\T2A/cmr/bx/n/10.95 Dataset бір-діі-лэлт:[] \T2A/cmr/m/n/10.95 Мон-гол бич
+-гийн OCR сис-те-мийг сур-га-хын тулд °р-г°н хі-рээ-тэй dataset
+ []
 
-[19
+[20
 
  <./Figures/pages/handwroten.png> <./Figures/pages/ocr_regular_view.png> <./Fig
 ures/pages/ocr_imagetotext.png> <./Figures/pages/ocr_cyrillic_to_script.png> <.
-/Figures/ocrresponse.png> <./Figures/trainingloss.png>] [20]) [21]
+/Figures/ocrresponse.png> <./Figures/trainingloss.png>]
+Overfull \hbox (16.48053pt too wide) in paragraph at lines 291--292
+[] []\T2A/cmr/bx/n/10.95 CRNN мо-де-лийн ар-хи-тек-тур:[] \T2A/cmr/m/n/10.95 Мо
+н-гол бич-гийг та-них сис-темд CRNN (Convolutional Recurrent
+ []
+
+[21] [22]) [23]
 \openout2 = `Chapters/Chapter5.aux'.
 
-
-(Chapters/Chapter5.tex [22
+ (Chapters/Chapter5.tex [24
 
 
 
@@ -1975,87 +2060,392 @@ File: Figures/pages/ocr_imagetotext.png Graphic file (type png)
 <use Figures/pages/ocr_imagetotext.png>
 Package pdftex.def Info: Figures/pages/ocr_imagetotext.png  used on input line 
 95.
-(pdftex.def)             Requested size: 78.93622pt x 160.84099pt.
-
-Overfull \hbox (9.8364pt too wide) in paragraph at lines 110--111
-[]\T2A/cmr/bx/n/12 Хэмжих хэ-рэг-сэл: \T2A/cmr/m/n/12 React Native Performance 
-Monitor, Firebase Performance Monitoring 
+(pdftex.def)             Requested size: 251.19817pt x 511.84312pt.
+ [25]
+Overfull \hbox (1.51736pt too wide) in paragraph at lines 134--135
+[] []\T2A/cmr/bx/n/10.95 OCR ал-даа-ны шин-жил-гээ-ний ви-зуал ір дін:[] \T2A/c
+mr/m/n/10.95 OCR ан-гил-лын ал-даа-ны біт-цийг confusion
  []
 
-[23] [24] [25] [26]) [27]
+<Figures/evalution/confusion_matrix_heatmap_top30.png, id=917, 867.24pt x 722.7
+pt>
+File: Figures/evalution/confusion_matrix_heatmap_top30.png Graphic file (type p
+ng)
+<use Figures/evalution/confusion_matrix_heatmap_top30.png>
+Package pdftex.def Info: Figures/evalution/confusion_matrix_heatmap_top30.png  
+used on input line 140.
+(pdftex.def)             Requested size: 193.043pt x 160.86916pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 141.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+[]\T2A/cmr/m/n/10.95 Зураг 27: |[]OCR тэм-дэг-тийн ан-гил-лын
+ []
+
+<Figures/evalution/prf_top_support_clean.png, id=918, 1084.05pt x 433.62pt>
+File: Figures/evalution/prf_top_support_clean.png Graphic file (type png)
+<use Figures/evalution/prf_top_support_clean.png>
+Package pdftex.def Info: Figures/evalution/prf_top_support_clean.png  used on i
+nput line 146.
+(pdftex.def)             Requested size: 214.0603pt x 85.62411pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 147.
+See the caption package documentation for explanation.
+
+
+Underfull \hbox (badness 5245) in paragraph at lines 147--147
+[]\T2A/cmr/m/n/10.95 Зураг 28: |[]Топ support-той ан-гил-луу-дын
+ []
+
+[26]
+<Figures/evalution/worst_recall_clean.png, id=925, 939.51pt x 433.62pt>
+File: Figures/evalution/worst_recall_clean.png Graphic file (type png)
+<use Figures/evalution/worst_recall_clean.png>
+Package pdftex.def Info: Figures/evalution/worst_recall_clean.png  used on inpu
+t line 155.
+(pdftex.def)             Requested size: 214.07574pt x 98.80418pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 156.
+See the caption package documentation for explanation.
+
+<Figures/evalution/hardest_chars_fp_fn_clean.png, id=926, 939.51pt x 433.62pt>
+File: Figures/evalution/hardest_chars_fp_fn_clean.png Graphic file (type png)
+<use Figures/evalution/hardest_chars_fp_fn_clean.png>
+Package pdftex.def Info: Figures/evalution/hardest_chars_fp_fn_clean.png  used 
+on input line 161.
+(pdftex.def)             Requested size: 214.07574pt x 98.80418pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 162.
+See the caption package documentation for explanation.
+
+[27 <./Figures/evalution/confusion_matrix_heatmap_top30.png> <./Figures/evaluti
+on/prf_top_support_clean.png> <./Figures/evalution/worst_recall_clean.png> <./F
+igures/evalution/hardest_chars_fp_fn_clean.png>] [28] [29]
+Overfull \hbox (4.57826pt too wide) in paragraph at lines 360--361
+[]\T2A/cmr/bx/n/10.95 Гийгіілэгчийн ал-даа: $\OML/cmm/m/it/10.95 n$\T2A/cmr/m/n
+/10.95 /$\OML/cmm/m/it/10.95 ng$\T2A/cmr/m/n/10.95 , $\OML/cmm/m/it/10.95 b$\T2
+A/cmr/m/n/10.95 /$\OML/cmm/m/it/10.95 p$ \T2A/cmr/m/n/10.95 зэ-рэг дір-сийн ял-
+гаа ба-га хо-сууд хам-гийн °н-д°р FP/FN-
+ []
+
+[30] [31]
+Overfull \hbox (1.27812pt too wide) in paragraph at lines 442--443
+[]\T2A/cmr/bx/n/10.95 Хугацааны хяз-гаар: \T2A/cmr/m/n/10.95 3 са-рын ху-га-цаа
+нд х°г-жііл-сэн тул за-рим функ-цууд (social features,
+ []
+
+[32]
+Overfull \hbox (7.6153pt too wide) in paragraph at lines 496--497
+\T2A/cmr/m/n/10.95 лалт бо-ловс-ро-лын мо-байл апп-ли-кейшнд эр-гіі-лэл-тийн ір
+ дін-тэй па-ра-диг-мыг ізііл-сэн. Serverless
+ []
+
+) [33]
 \openout2 = `Appendices/AppendixA.aux'.
 
  (Appendices/AppendixA.tex
-Overfull \hbox (142.22925pt too wide) in paragraph at lines 16--53
- [][] 
- []
-
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 59.
-[28
+nput line 57.
+ [34
 
 
 
 ]
 LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 117.
- [29] [30]
+(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 115.
+ [35] [36]
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (C:\Users\68\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-[31] [32]) [33] [34
+[37] [38] [39]) [40]
+Overfull \hbox (1.096pt too wide) in paragraph at lines 229--229
+[][]\T2A/cmr/m/n/10.95 Cohen, J. (1988). \T2A/cmr/m/it/10.95 Statistical Power 
+Analysis for the Behavioral Sciences\T2A/cmr/m/n/10.95 . 2nd. Hillsdale, NJ: La
+wrence
+ []
 
 
-] (main2.aux (FrontBackMatter/TittlePage.aux)
-(FrontBackMatter/Abstract.aux) (FrontBackMatter/Abberaviation.aux)
-(FrontBackMatter/TableOfContent.aux) (Chapters/Chapter1.aux)
-(Chapters/Chapter2.aux) (Chapters/Chapter3.aux) (Chapters/Chapter4.aux)
-(Chapters/Chapter5.aux) (Appendices/AppendixA.aux))
+Overfull \hbox (12.5957pt too wide) in paragraph at lines 229--229
+[][]\T2A/cmr/m/n/10.95 Ebbinghaus, H. (1885). \T2A/cmr/m/it/10.95 Memory: A con
+tribution to experimental psychology\T2A/cmr/m/n/10.95 . Teachers college, Colu
+mbia
+ []
+
+
+Overfull \hbox (4.08664pt too wide) in paragraph at lines 229--229
+\T2A/cmr/m/n/10.95 paradigm: A critical investigation of flashcard software\T2A
+/cmr/bx/n/10.95 ? \T2A/cmr/m/n/10.95 In: \T2A/cmr/m/it/10.95 Computer Assisted 
+Language Learning
+ []
+
+[41
+
+
+]
+\openout2 = `Appendices/AppendixB.aux'.
+
+ (Appendices/AppendixB.tex [42
+
+]
+File: Figures/diagrams/usecasediagram.png Graphic file (type png)
+<use Figures/diagrams/usecasediagram.png>
+Package pdftex.def Info: Figures/diagrams/usecasediagram.png  used on input lin
+e 58.
+(pdftex.def)             Requested size: 156.21828pt x 134.11424pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 60.
+See the caption package documentation for explanation.
+
+File: Figures/diagrams/dataflow.png Graphic file (type png)
+<use Figures/diagrams/dataflow.png>
+Package pdftex.def Info: Figures/diagrams/dataflow.png  used on input line 67.
+(pdftex.def)             Requested size: 156.21828pt x 97.53447pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 69.
+See the caption package documentation for explanation.
+
+File: Figures/pages/handwriting.png Graphic file (type png)
+<use Figures/pages/handwriting.png>
+Package pdftex.def Info: Figures/pages/handwriting.png  used on input line 78.
+(pdftex.def)             Requested size: 142.43472pt x 293.85947pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 80.
+See the caption package documentation for explanation.
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
+\T2A/cmr/m/n/10.95 Системийг хэ-рэг-жіілс-ний да-раа інд-сэн
+ []
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 89.
+See the caption package documentation for explanation.
+
+File: Figures/evalution/prf_top_support_clean.png Graphic file (type png)
+<use Figures/evalution/prf_top_support_clean.png>
+Package pdftex.def Info: Figures/evalution/prf_top_support_clean.png  used on i
+nput line 129.
+(pdftex.def)             Requested size: 151.6261pt x 60.64684pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 131.
+See the caption package documentation for explanation.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 138.
+See the caption package documentation for explanation.
+
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+\T2A/cmr/m/it/10.95 Mongolian Dictionary and Translation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+\T2A/cmr/m/n/10.95 learning and student performance: A
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+[][]\T2A/cmr/m/n/10.95 Tungaamal Team (2026). \T2A/cmr/m/it/10.95 Tungaamal Tol
+i
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+\T2A/cmr/m/it/10.95 -- Mongolian Script Support Tool
+ []
+
+[45]) [46]
+\openout2 = `Appendices/AppendixC.aux'.
+
+ (Appendices/AppendixC.tex
+Overfull \hbox (16.40924pt too wide) in paragraph at lines 1--1
+|\T2A/cmr/bx/n/10.95 IMAGE RECOGNITION^^UBASED MONGOLIAN SCRIPT LEARNING APPLIC
+ATION| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+[]\T2A/cmr/m/n/10.95 Implement a flashcard system for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+[]\T2A/cmr/m/n/10.95 Use OCR to recognize handwritten
+ []
+
+File: Figures/diagrams/usecasediagram.png Graphic file (type png)
+<use Figures/diagrams/usecasediagram.png>
+Package pdftex.def Info: Figures/diagrams/usecasediagram.png  used on input lin
+e 56.
+(pdftex.def)             Requested size: 156.21828pt x 134.11424pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 58.
+See the caption package documentation for explanation.
+
+[47
+
+
+
+]
+File: Figures/diagrams/dataflow.png Graphic file (type png)
+<use Figures/diagrams/dataflow.png>
+Package pdftex.def Info: Figures/diagrams/dataflow.png  used on input line 65.
+(pdftex.def)             Requested size: 156.21828pt x 97.53447pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 67.
+See the caption package documentation for explanation.
+
+File: Figures/pages/handwriting.png Graphic file (type png)
+<use Figures/pages/handwriting.png>
+Package pdftex.def Info: Figures/pages/handwriting.png  used on input line 74.
+(pdftex.def)             Requested size: 142.43472pt x 293.85947pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 76.
+See the caption package documentation for explanation.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 83.
+See the caption package documentation for explanation.
+
+File: Figures/evalution/prf_top_support_clean.png Graphic file (type png)
+<use Figures/evalution/prf_top_support_clean.png>
+Package pdftex.def Info: Figures/evalution/prf_top_support_clean.png  used on i
+nput line 114.
+(pdftex.def)             Requested size: 151.6261pt x 60.64684pt.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 116.
+See the caption package documentation for explanation.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 122.
+See the caption package documentation for explanation.
+
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+\T2A/cmr/m/n/10.95 user progress tracking, the app provides
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+\T2A/cmr/m/n/10.95 a more flexible and effective learning
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+\T2A/cmr/m/n/10.95 OCR accuracy, adding adaptive learning
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+\T2A/cmr/m/n/10.95 algorithms, and introducing gamification
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
+\T2A/cmr/m/it/10.95 Mongolian Dictionary and Translation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
+\T2A/cmr/m/n/10.95 learning and student performance: A
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
+[][]\T2A/cmr/m/n/10.95 Tungaamal Team (2026). \T2A/cmr/m/it/10.95 Tungaamal Tol
+i
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
+\T2A/cmr/m/it/10.95 -- Mongolian Script Support Tool
+ []
+
+[49]) [50] (main.aux (FrontBackMatter/TittlePage.aux)
+(FrontBackMatter/Abstract.aux) (FrontBackMatter/TableOfContent.aux)
+(FrontBackMatter/Abberaviation.aux) (FrontBackMatter/Plan-review.aux)
+(Chapters/Chapter1.aux) (Chapters/Chapter2.aux) (Chapters/Chapter3.aux)
+(Chapters/Chapter4.aux) (Chapters/Chapter5.aux) (Appendices/AppendixA.aux)
+(Appendices/AppendixB.aux) (Appendices/AppendixC.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-Package rerunfilecheck Info: File `main2.out' has not changed.
-(rerunfilecheck)             Checksum: 12CF5272AD26E327726E1665626150AD;22070.
-Package logreq Info: Writing requests to 'main2.run.xml'.
-\openout1 = `main2.run.xml'.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 5C250B4614A1FADFE977F9EB4A33E239;24606.
+Package logreq Info: Writing requests to 'main.run.xml'.
+\openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38858 strings out of 474485
- 754076 string characters out of 5745149
- 2214542 words of memory out of 5000000
- 60130 multiletter control sequences out of 15000+600000
- 579058 words of font info for 82 fonts, out of 8000000 for 9000
+ 39657 strings out of 474485
+ 769020 string characters out of 5745149
+ 2218542 words of memory out of 5000000
+ 60827 multiletter control sequences out of 15000+600000
+ 583852 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,10n,90p,1112b,2286s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1095.
-pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt0800
-.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm060
-0.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx10
-00.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1
-000.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt
-1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lat
-i1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
-tcrm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600
-\larm1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
-0\lacc1728.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi6
-00\labx1728.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi
-600\laxc1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
-i600\labx1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/d
-pi600\labx1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/
-dpi600\larm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
-/dpi600\laxc1440.pk><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmmi12.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (40 pages, 9497689 bytes).
+ 84i,16n,87p,1151b,2282s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1000.
+pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1000
+.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt080
+0.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm06
+00.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx0
+900.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm
+0900.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lat
+t1095.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+tcrm1095.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600
+\lati1095.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
+0\labx1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi6
+00\larm0800.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi
+600\labx0800.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
+i600\labx1095.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/d
+pi600\larm1200.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/
+dpi600\lacc1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
+/dpi600\labx1440.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2
+a/dpi600\larm1095.pk> <C:\Users\68\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t
+2a/dpi600\laxc1440.pk><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmmi10.pfb><C:/Users/68/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/68/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/68/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/68/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/68/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/68/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/68/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/68
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Use
+rs/68/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
+:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.p
+fb><C:/Users/68/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbo
+ls/msam10.pfb>
+Output written on main.pdf (60 pages, 10237558 bytes).
 PDF statistics:
- 1921 PDF objects out of 2073 (max. 8388607)
- 350 named destinations out of 1000 (max. 500000)
- 895 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2489 PDF objects out of 2984 (max. 8388607)
+ 416 named destinations out of 1000 (max. 500000)
+ 995 words of extra memory for PDF output out of 10000 (max. 10000000)
 

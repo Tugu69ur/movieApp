@@ -1,18 +1,26 @@
 % Modular main.tex: includes front-matter files from FrontBackMatter/
-\documentclass[12pt,a4paper,oneside]{article}
-
+\documentclass[11pt,a4paper,oneside]{article}
+\usepackage{array}
 \usepackage[utf8]{inputenc}
-\usepackage[T1,T2A]{fontenc}
+\usepackage[T2A]{fontenc}
 \usepackage[english,mongolian]{babel} % make Mongolian the main language
+\usepackage{titlesec}
 
+\usepackage{setspace}
 
 % Geometry
 \usepackage{geometry}
-\geometry{margin=2.0cm}
+\geometry{
+  a4paper,
+  left=3.0cm,
+  right=1.5cm,
+  top=2.0cm,
+  bottom=2.0cm
+}
 
 % Bibliography (biblatex + biber)
 \usepackage{csquotes}
-\usepackage[backend=biber,style=ieee,sorting=none,giveninits=true]{biblatex}
+\usepackage[backend=biber,style=authoryear,sorting=nyt,giveninits=true]{biblatex}
 \DeclareLanguageMapping{mongolian}{english}
 \addbibresource{references.bib}
 
@@ -21,6 +29,8 @@
 \usepackage{array,multirow,longtable} % longtable нэмэв
 \usepackage{xcolor,colortbl}
 \usepackage{float} % [H] байршлын тохируулга
+\usepackage{tabularx} 
+\usepackage{multicol} % 2-column layout for appendices
 
 % Mongolian captions for figures and tables — ensure babel sets them when Mongolian is active
 \renewcommand{\figurename}{Зураг}
@@ -34,6 +44,11 @@
   % select Mongolian as the document language early
   \selectlanguage{mongolian}%
 }
+
+% New thesis rule formatting (2026) alignment
+\setstretch{1.15}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{1.25cm}
 
 % Code listings
 \usepackage{listings}
@@ -123,11 +138,11 @@
 \renewcommand{\floatpagefraction}{0.66}
 
 % Preamble metadata (edit as needed)
-\newcommand{\univname}{Шинэ Монгол Технологийн Коллеж}
-\newcommand{\facname}{Мэдээлэл Технологийн Сургууль}
-\newcommand{\deptname}{Компьютерын ухааны тэнхим}
-\newcommand{\ttitle}{Egüü – Монгол бичгийн сургалтын үсгийн картын апп хөгжүүлэх}
-\newcommand{\ttitleeng}{Egüü – Developing a Mongolian Script Learning Flashcard Application}
+\newcommand{\univname}{ШИНЭ МОНГОЛ ТЕХНОЛОГИЙН КОЛЛЕЖ}
+\newcommand{\facname}{МЭДЭЭЛЭЛ ТЕХНОЛОГИЙН СУРГУУЛЬ}
+\newcommand{\deptname}{КОМПЬЮТЕРЫН УХААНЫ ТЭНХИМ}
+\newcommand{\ttitle}{ДҮРС ТАНИХ ТЕХНОЛОГИД СУУРИЛСАН МОНГОЛ БИЧГИЙН СУРГАЛТЫН АППЛИКЕЙШН}
+\newcommand{\ttitleeng}{IMAGE RECOGNITION–BASED MONGOLIAN SCRIPT LEARNING APPLICATION}
 \newcommand{\thesistype}{Төгсөлтийн судалгааны ажил}
 
 \newcommand{\authorshort}{Б.Төгөлдөр}
@@ -177,11 +192,15 @@
 
 % Include modular front-matter files (keep these files in FrontBackMatter/)
 \include{FrontBackMatter/TittlePage}
-% \include{FrontBackMatter/Plan-review}
 % \include{FrontBackMatter/declaration}
 \include{FrontBackMatter/Abstract}
-\include{FrontBackMatter/Abberaviation}
 \include{FrontBackMatter/TableOfContent}
+\include{FrontBackMatter/Abberaviation}
+
+\listoftables
+\listoffigures
+
+\include{FrontBackMatter/Plan-review}
 
 \cleardoublepage
 
@@ -206,9 +225,11 @@
 % Appendices
 \appendix
 \include{Appendices/AppendixA}
-
 % Bibliography
 \printbibliography[heading=bibintoc,title={Ном зүй}]
+\include{Appendices/AppendixB}
+\include{Appendices/AppendixC}
+
 \clearpage
 
 

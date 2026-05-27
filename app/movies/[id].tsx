@@ -1,19 +1,11 @@
 import { Flashcard, FlashcardService } from "@/services/FlashcardService";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { ArrowLeft, Award } from "lucide-react-native";
+import React, { useEffect, useState } from "react";
 import {
-  ArrowLeft,
-  Award,
-  Pause,
-  Play,
-  SkipBack,
-  SkipForward,
-} from "lucide-react-native";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  FlatList,
   Image,
-  ImageSourcePropType,
   Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -22,12 +14,6 @@ import {
   View,
 } from "react-native";
 import { useTheme } from "../../contexts/Theme";
-import { getLetterImage, splitWord } from "../../utils/mongolianLetters";
-
-const forEachCharacter = (
-  value: string,
-  callback: (char: string, index: number) => React.ReactNode,
-): React.ReactNode[] => Array.from(value).map(callback);
 
 export default function MovieDetails() {
   const { id } = useLocalSearchParams();
@@ -36,12 +22,6 @@ export default function MovieDetails() {
 
   const [card, setCard] = useState<Flashcard | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // state for step viewer
-  const [current, setCurrent] = useState<number>(0);
-  const [playing, setPlaying] = useState<boolean>(false);
-  const [showCombinedPreview, setShowCombinedPreview] = useState<boolean>(true);
-  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     const fetchCard = async () => {
@@ -55,73 +35,22 @@ export default function MovieDetails() {
     fetchCard();
   }, [id]);
 
-  const mongolianWord = React.useMemo(() => {
-    if (!card?.title) return "";
-    const matched = card.title.match(/\/([^/]+)\//);
-    return matched?.[1]?.trim() || "";
-  }, [card?.title]);
+  const parsedLabels = React.useMemo(() => {
+    const rawTitle = card?.title?.trim() || "";
+    const slashMatch = rawTitle.match(/^([^/]+)\/([^/]+)\/?$/);
 
-  const generatedSteps = React.useMemo(() => {
-    if (!mongolianWord) return [] as ImageSourcePropType[];
-
-    return splitWord(mongolianWord)
-      .map((letter) => getLetterImage(letter.char, letter.position))
-      .filter(Boolean) as ImageSourcePropType[];
-  }, [mongolianWord]);
-
-  const displaySteps = React.useMemo(() => {
-    if (card?.steps?.length) {
-      return card.steps as ImageSourcePropType[];
-    }
-    return generatedSteps;
-  }, [card?.steps, generatedSteps]);
-
-  const stepCount = displaySteps.length;
-
-  useEffect(() => {
-    setShowCombinedPreview(true);
-  }, [card?.id]);
-
-  useEffect(() => {
-    if (stepCount === 0 && current !== 0) {
-      setCurrent(0);
-      return;
+    if (slashMatch) {
+      return {
+        cyrillic: slashMatch[1].trim(),
+        mongolian: slashMatch[2].trim(),
+      };
     }
 
-    if (stepCount > 0 && current >= stepCount) {
-      setCurrent(stepCount - 1);
-    }
-  }, [current, stepCount]);
-
-  useEffect(() => {
-    if (playing) {
-      // start autoplay every 900ms
-      intervalRef.current = setInterval(() => {
-        setCurrent((prev) => {
-          const next = prev + 1;
-          if (next >= stepCount) {
-            clearInterval(intervalRef.current as any);
-            intervalRef.current = null;
-            setPlaying(false);
-            return stepCount - 1;
-          }
-          return next;
-        });
-      }, 900) as unknown as number;
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current as any);
-        intervalRef.current = null;
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current as any);
-        intervalRef.current = null;
-      }
+    return {
+      cyrillic: rawTitle,
+      mongolian: "",
     };
-  }, [playing, stepCount]);
+  }, [card?.title]);
 
   if (loading) {
     return (
@@ -153,20 +82,17 @@ export default function MovieDetails() {
     );
   }
 
-  const onPlayToggle = () => {
-    if (showCombinedPreview) {
-      setShowCombinedPreview(false);
-      setCurrent(0);
-    }
-    setPlaying((p) => !p);
-  };
-  const progressPercent = stepCount > 0 ? ((current + 1) / stepCount) * 100 : 0;
+  const cardTitle =
+    parsedLabels.cyrillic ||
+    parsedLabels.mongolian ||
+    card.english ||
+    "Flashcard";
 
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
-        { backgroundColor: isDark ? "#0f172a" : "#f8f9fa" },
+        { backgroundColor: isDark ? "#0b1120" : "#f8fafc" },
       ]}
     >
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
@@ -175,7 +101,6 @@ export default function MovieDetails() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {/* Hero Image */}
         <View style={styles.heroImageContainer}>
           <Image
             source={FlashcardService.getLocalImage(card.image)}
@@ -183,6 +108,18 @@ export default function MovieDetails() {
             resizeMode="cover"
           />
           <View style={styles.heroOverlay} />
+
+          <View style={styles.heroTextContainer}>
+            <Text
+              style={[
+                styles.heroTitle,
+                { color: isDark ? "#f8fafc" : "#111827" },
+              ]}
+            >
+              {cardTitle}
+            </Text>
+          </View>
+
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => router.back()}
@@ -190,7 +127,11 @@ export default function MovieDetails() {
             <View
               style={[
                 styles.backButtonInner,
-                { backgroundColor: isDark ? "#374151" : "#fff" },
+                {
+                  backgroundColor: isDark
+                    ? "rgba(15,23,42,0.9)"
+                    : "rgba(255,255,255,0.9)",
+                },
               ]}
             >
               <ArrowLeft size={22} color={isDark ? "#f8fafc" : "#1a1a1a"} />
@@ -198,256 +139,149 @@ export default function MovieDetails() {
           </TouchableOpacity>
         </View>
 
-        {/* Content */}
         <View
           style={[
             styles.contentContainer,
-            { backgroundColor: isDark ? "#1e293b" : "#fff" },
+            { backgroundColor: isDark ? "#0f172a" : "#ffffff" },
           ]}
         >
-          {/* Header Info */}
-          <View style={styles.headerInfo}>
-            <View style={styles.titleSection}>
+          <View style={styles.cardHeader}>
+            <View style={{ flex: 1 }}>
               <Text
                 style={[
-                  styles.title,
-                  { color: isDark ? "#f8fafc" : "#1a1a1a" },
+                  styles.cardTitle,
+                  { color: isDark ? "#f8fafc" : "#111827", marginTop: 20 },
                 ]}
               >
-                {card.title}
+                Flashcard Overview
               </Text>
-              <View style={styles.badgeContainer}>
-                <View
-                  style={[
-                    styles.badge,
-                    {
-                      backgroundColor: isDark ? "#1e40af" : "#f0f9ff",
-                      borderColor: isDark ? "#3b82f6" : "#bae6fd",
-                    },
-                  ]}
-                >
-                  <Award color="#6366f1" size={14} />
-                  <Text
-                    style={[
-                      styles.badgeText,
-                      { color: isDark ? "#93c5fd" : "#0ea5e9" },
-                    ]}
-                  >
-                    Mongolian Script
-                  </Text>
-                </View>
-              </View>
             </View>
-            <Text
-              style={[styles.desc, { color: isDark ? "#94a3b8" : "#64748b" }]}
+            <TouchableOpacity
+              style={[
+                styles.badge,
+                {
+                  backgroundColor: isDark ? "#1e3a8a" : "#eff6ff",
+                  borderColor: isDark ? "#3b82f6" : "#bfdbfe",
+                },
+              ]}
             >
-              {card.desc}
-            </Text>
+              <Award color="#6366f1" size={14} />
+              <Text
+                style={[
+                  styles.badgeText,
+                  { color: isDark ? "#93c5fd" : "#1d4ed8", marginLeft: 6 },
+                ]}
+              >
+                Flashcard
+              </Text>
+            </TouchableOpacity>
           </View>
 
-          {/* Step-by-step Section */}
-          <View style={styles.stepsSection}>
-            <View style={styles.stepHeader}>
-              <View style={styles.sectionTitleContainer}>
-                <View
-                  style={[
-                    styles.sectionIcon,
-                    { backgroundColor: isDark ? "#374151" : "#fef3c7" },
-                  ]}
-                >
-                  <Text style={styles.sectionIconText}>✍️</Text>
-                </View>
-                <Text
-                  style={[
-                    styles.stepTitle,
-                    { color: isDark ? "#f8fafc" : "#1a1a1a" },
-                  ]}
-                >
-                  {forEachCharacter("Зурах алхмууд", (char, index) => (
-                    <Text key={`step-title-char-${index}`}>{char}</Text>
-                  ))}
-                </Text>
-              </View>
-
-              {/* Controls */}
-              <View style={styles.controls}>
-                <TouchableOpacity
-                  onPress={() => {
-                    setPlaying(false);
-                    setCurrent(0);
-                    setShowCombinedPreview(true);
-                  }}
-                  style={[
-                    styles.controlButton,
-                    {
-                      backgroundColor: isDark ? "#374151" : "#fff",
-                      borderColor: isDark ? "#4b5563" : "#e2e8f0",
-                    },
-                  ]}
-                  activeOpacity={0.7}
-                >
-                  <SkipBack size={20} color="#6366f1" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={onPlayToggle}
-                  style={[styles.controlButton, styles.playButton]}
-                  activeOpacity={0.7}
-                >
-                  {playing ? (
-                    <Pause size={24} color="#fff" />
-                  ) : (
-                    <Play size={24} color="#fff" />
-                  )}
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    setPlaying(false);
-                    setCurrent(stepCount - 1);
-                    setShowCombinedPreview(false);
-                  }}
-                  style={[
-                    styles.controlButton,
-                    {
-                      backgroundColor: isDark ? "#374151" : "#fff",
-                      borderColor: isDark ? "#4b5563" : "#e2e8f0",
-                    },
-                  ]}
-                  activeOpacity={0.7}
-                >
-                  <SkipForward size={20} color="#6366f1" />
-                </TouchableOpacity>
-              </View>
+          <View style={styles.detailGrid}>
+            <View
+              style={[
+                styles.detailPill,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#f1f5f9",
+                  borderColor: isDark ? "#3b82f6" : "#93c5fd",
+                  borderLeftColor: "#3b82f6",
+                  borderLeftWidth: 4,
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.detailLabel,
+                  { color: isDark ? "#60a5fa" : "#1e40af" },
+                ]}
+              >
+                Cyrillic
+              </Text>
+              <Text
+                style={[
+                  styles.detailValue,
+                  { color: isDark ? "#f0f9ff" : "#0c1e3e" },
+                ]}
+              >
+                {parsedLabels.cyrillic || "-"}
+              </Text>
             </View>
-
-            {/* Progress Indicator */}
-            <View style={styles.progressContainer}>
+            <View
+              style={[
+                styles.detailPill,
+                {
+                  backgroundColor: isDark ? "#1e293b" : "#f1f5f9",
+                  borderColor: isDark ? "#8b5cf6" : "#c4b5fd",
+                  borderLeftColor: "#8b5cf6",
+                  borderLeftWidth: 4,
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.detailLabel,
+                  { color: isDark ? "#a78bfa" : "#6d28d9" },
+                ]}
+              >
+                Mongolian
+              </Text>
+              <Text
+                style={[
+                  styles.detailValue,
+                  { color: isDark ? "#f3e8ff" : "#0c1e3e" },
+                ]}
+              >
+                {parsedLabels.mongolian || "-"}
+              </Text>
+            </View>
+            {card.english ? (
               <View
                 style={[
-                  styles.progressBar,
-                  { backgroundColor: isDark ? "#4b5563" : "#e2e8f0" },
+                  styles.detailPill,
+                  {
+                    backgroundColor: isDark ? "#1e293b" : "#f1f5f9",
+                    borderColor: isDark ? "#10b981" : "#6ee7b7",
+                    borderLeftColor: "#10b981",
+                    borderLeftWidth: 4,
+                  },
                 ]}
               >
-                <View
+                <Text
                   style={[
-                    styles.progressFill,
-                    { width: `${progressPercent}%` },
+                    styles.detailLabel,
+                    { color: isDark ? "#6ee7b7" : "#065f46" },
                   ]}
-                />
+                >
+                  English
+                </Text>
+                <Text
+                  style={[
+                    styles.detailValue,
+                    { color: isDark ? "#ecfdf5" : "#0c1e3e" },
+                  ]}
+                >
+                  {card.english}
+                </Text>
               </View>
-              <Text
-                style={[
-                  styles.progressText,
-                  { color: isDark ? "#94a3b8" : "#64748b" },
-                ]}
-              >
-                Step {current + 1} of {stepCount}
-              </Text>
-            </View>
-
-            {/* Large step preview */}
-            <View style={styles.previewWrapper}>
-              {stepCount > 0 ? (
-                <View
-                  style={[
-                    styles.previewCard,
-                    {
-                      backgroundColor: isDark ? "#374151" : "#fff",
-                      borderColor: isDark ? "#4b5563" : "#e2e8f0",
-                    },
-                  ]}
-                >
-                  {showCombinedPreview ? (
-                    <View style={styles.combinedGrid}>
-                      {displaySteps.map((item, index) => (
-                        <Image
-                          key={`combined-step-${index}`}
-                          source={item}
-                          style={styles.combinedImage}
-                          resizeMode="cover"
-                        />
-                      ))}
-                    </View>
-                  ) : (
-                    <Image
-                      source={displaySteps[current]}
-                      style={styles.previewImage}
-                      resizeMode="contain"
-                    />
-                  )}
-                </View>
-              ) : (
-                <View
-                  style={[
-                    styles.noSteps,
-                    { backgroundColor: isDark ? "#374151" : "#f1f5f9" },
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.noStepsText,
-                      { color: isDark ? "#9ca3af" : "#94a3b8" },
-                    ]}
-                  >
-                    No step images available
-                  </Text>
-                </View>
-              )}
-            </View>
-
-            {/* Horizontal step thumbnails */}
-            <FlatList
-              data={displaySteps}
-              horizontal
-              keyExtractor={(_, idx) => String(idx)}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.thumbnailsContainer}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity
-                  onPress={() => {
-                    setPlaying(false);
-                    setCurrent(index);
-                    setShowCombinedPreview(false);
-                  }}
-                  activeOpacity={0.8}
-                  style={[
-                    styles.thumbWrap,
-                    current === index && styles.thumbWrapActive,
-                  ]}
-                >
-                  <View
-                    style={[
-                      styles.thumbInner,
-                      {
-                        backgroundColor: isDark ? "#4b5563" : "#f1f5f9",
-                        borderColor: isDark ? "#6b7280" : "#e2e8f0",
-                      },
-                      current === index && styles.thumbInnerActive,
-                    ]}
-                  >
-                    <Image
-                      source={item}
-                      style={styles.thumb}
-                      resizeMode="cover"
-                    />
-                  </View>
-                  <Text
-                    style={[
-                      styles.stepLabel,
-                      { color: isDark ? "#9ca3af" : "#94a3b8" },
-                      current === index && styles.stepLabelActive,
-                    ]}
-                  >
-                    {index + 1}
-                  </Text>
-                </TouchableOpacity>
-              )}
-            />
+            ) : null}
           </View>
 
-          <View style={{ height: 40 }} />
+          <TouchableOpacity
+            style={[
+              styles.primaryButton,
+              {
+                backgroundColor: isDark ? "#3b82f6" : "#4f46e5",
+              },
+            ]}
+            onPress={() => router.back()}
+          >
+            <Text style={styles.primaryButtonText}>← Return to Cards</Text>
+          </TouchableOpacity>
+
+          <View style={{ height: 32 }} />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -470,29 +304,51 @@ const styles = StyleSheet.create({
   },
   heroOverlay: {
     position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    inset: 0,
+    backgroundColor: "rgba(15,23,42,0.45)",
+  },
+  heroTextContainer: {
+    position: "absolute",
+    bottom: 24,
+    left: 24,
+    right: 24,
+    zIndex: 2,
+  },
+  heroTitle: {
+    fontSize: 32,
+    fontWeight: "900",
+    marginTop: 10,
+    letterSpacing: -0.5,
+  },
+  heroSubtitle: {
+    fontSize: 12,
+    fontWeight: "800",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  heroCaption: {
+    marginTop: 12,
+    fontSize: 13,
+    lineHeight: 20,
+    fontWeight: "500",
   },
   backButton: {
     position: "absolute",
-    top: Platform.OS === "ios" ? 60 : 20,
+    top: Platform.OS === "ios" ? 60 : 24,
     left: 20,
     zIndex: 10,
   },
   backButtonInner: {
-    backgroundColor: "#fff",
     width: 44,
     height: 44,
-    borderRadius: 22,
+    borderRadius: 18,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 6,
   },
   contentContainer: {
     backgroundColor: "#fff",
@@ -501,29 +357,35 @@ const styles = StyleSheet.create({
     paddingTop: 32,
     paddingHorizontal: 24,
     minHeight: "100%",
+    marginTop: -38,
     ...Platform.select({
       ios: {
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: -4 },
-        shadowOpacity: 0.05,
-        shadowRadius: 16,
+        shadowOffset: { width: 0, height: -8 },
+        shadowOpacity: 0.12,
+        shadowRadius: 32,
       },
       android: {
-        elevation: 8,
+        elevation: 12,
       },
     }),
   },
-  headerInfo: {
-    marginBottom: 32,
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 22,
   },
-  titleSection: {
-    marginBottom: 12,
+  cardTitle: {
+    fontSize: 22,
+    fontWeight: "800",
+    letterSpacing: -0.3,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: "700",
-    color: "#1a1a1a",
-    marginBottom: 8,
+  cardSubtitle: {
+    marginTop: 6,
+    fontSize: 13,
+    lineHeight: 20,
+    fontWeight: "500",
   },
   badgeContainer: {
     flexDirection: "row",
@@ -531,200 +393,100 @@ const styles = StyleSheet.create({
   badge: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    backgroundColor: "#f0f9ff",
     paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#bae6fd",
+    paddingVertical: 8,
+    borderRadius: 12,
+    borderWidth: 1.5,
   },
   badgeText: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#0ea5e9",
+    fontSize: 12,
+    fontWeight: "800",
+    letterSpacing: 0.3,
   },
   desc: {
-    color: "#64748b",
     fontSize: 16,
     lineHeight: 24,
     fontWeight: "500",
   },
-  stepsSection: {
+  sectionBlock: {
+    marginTop: 20,
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "800",
+    marginBottom: 10,
+    letterSpacing: 0.3,
+  },
+  sectionText: {
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: "500",
+  },
+  flashcardShell: {
+    borderWidth: 1,
+    borderRadius: 24,
+    padding: 16,
     marginBottom: 24,
-  },
-  stepHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  sectionTitleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-  sectionIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "#fef3c7",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sectionIconText: {
-    fontSize: 20,
-  },
-  stepTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#1a1a1a",
-  },
-  controls: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  controlButton: {
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#e2e8f0",
-    borderRadius: 12,
-    width: 44,
-    height: 44,
-    justifyContent: "center",
-    alignItems: "center",
     ...Platform.select({
       ios: {
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
-  },
-  playButton: {
-    backgroundColor: "#6366f1",
-    borderColor: "#6366f1",
-    width: 56,
-    height: 56,
-  },
-  progressContainer: {
-    marginBottom: 20,
-  },
-  progressBar: {
-    height: 6,
-    backgroundColor: "#e2e8f0",
-    borderRadius: 3,
-    overflow: "hidden",
-    marginBottom: 8,
-  },
-  progressFill: {
-    height: "100%",
-    backgroundColor: "#6366f1",
-    borderRadius: 3,
-  },
-  progressText: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#64748b",
-    textAlign: "right",
-  },
-  previewWrapper: {
-    marginBottom: 20,
-  },
-  previewCard: {
-    width: "100%",
-    height: 280,
-    borderRadius: 20,
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#e2e8f0",
-    overflow: "hidden",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.08,
+        shadowRadius: 16,
       },
       android: {
         elevation: 4,
       },
     }),
   },
-  previewImage: {
-    width: "100%",
-    height: "100%",
+  flashcardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
   },
-  combinedGrid: {
-    flex: 1,
+  detailGrid: {
     flexDirection: "column",
-    padding: 0,
-    justifyContent: "flex-start",
-    alignItems: "stretch",
   },
-  combinedImage: {
-    width: "100%",
-    height: 72,
-    borderRadius: 0,
+  detailPill: {
+    borderRadius: 18,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    borderWidth: 1.5,
+    marginBottom: 14,
   },
-  noSteps: {
+  detailLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    letterSpacing: 0.6,
+    textTransform: "uppercase",
+  },
+  detailValue: {
+    marginTop: 8,
+    fontSize: 19,
+    fontWeight: "800",
+    lineHeight: 26,
+  },
+  primaryButton: {
+    marginTop: 32,
+    borderRadius: 16,
+    paddingVertical: 16,
     justifyContent: "center",
     alignItems: "center",
-    height: 280,
-    backgroundColor: "#f1f5f9",
-    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 20,
+    elevation: 8,
   },
-  noStepsText: {
-    color: "#94a3b8",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  thumbnailsContainer: {
-    paddingVertical: 8,
-  },
-  thumbWrap: {
-    marginRight: 12,
-    alignItems: "center",
-  },
-  thumbWrapActive: {
-    transform: [{ scale: 1.05 }],
-  },
-  thumbInner: {
-    width: 72,
-    height: 72,
-    borderRadius: 16,
-    backgroundColor: "#f1f5f9",
-    borderWidth: 2,
-    borderColor: "#e2e8f0",
-    overflow: "hidden",
-    marginBottom: 8,
-  },
-  thumbInnerActive: {
-    borderColor: "#6366f1",
-    backgroundColor: "#eff6ff",
-    shadowColor: "#6366f1",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  thumb: {
-    width: "100%",
-    height: "100%",
-  },
-  stepLabel: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#94a3b8",
-  },
-  stepLabelActive: {
-    color: "#6366f1",
-    fontWeight: "700",
+  primaryButtonText: {
+    fontSize: 15,
+    fontWeight: "800",
+    color: "#ffffff",
+    letterSpacing: 0.4,
   },
   center: {
     flex: 1,

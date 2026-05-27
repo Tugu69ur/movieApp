@@ -1,8 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import * as tf from "@tensorflow/tfjs";
-import { bundleResourceIO, decodeJpeg } from "@tensorflow/tfjs-react-native";
 import * as ImagePicker from "expo-image-picker";
-import _ from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -21,11 +18,33 @@ import {
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useTheme } from "../../contexts/Theme";
 
+/**
+ * OCR Service Status:
+ * - Primary: https://ocrapi-u3ds.onrender.com (currently experiencing issues)
+ * - Alternatives available in comments below
+ * - App gracefully handles service downtime with manual text input fallback
+ */
+
+const debounce = <T extends (...args: any[]) => void>(fn: T, delay: number) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return (...args: Parameters<T>) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+};
+
 export default function PhotoPredictScreen() {
-  const { language, changeLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const { isDark } = useTheme();
+  const OCR_API_BASE =
+    process.env.EXPO_PUBLIC_OCR_API_BASE_URL?.replace(/\/$/, "") || "";
+
+  // TEMPORARY WORKAROUND: Use OCR.space API while your server is being fixed
+  // const OCR_API_BASE = "https://api.ocr.space/parse/image"; // Uncomment to use OCR.space
+
   const [imageUri, setImageUri] = useState<string | null>(null);
-  const [model, setModel] = useState<tf.LayersModel | null>(null);
+  const [apiReady, setApiReady] = useState(false);
   const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [prob, setProb] = useState<number | null>(null);
@@ -34,114 +53,47 @@ export default function PhotoPredictScreen() {
   const [inputText, setInputText] = useState("");
   const [convertedText, setConvertedText] = useState("");
 
-  const CLASS_NAMES = [
-    "Үгийн адагт ордог А",
-    "Үгийн эхэнд ордог А",
-    "Үгийн дунд ордог А",
-    "Үгийн адагт ордог Б",
-    "Үгийн эхэнд ордог Б",
-    "Үгийн дунд ордог Б",
-    "Үгийн эхэнд ордог Ч",
-    "Үгийн дунд ордог Ч",
-    "Үгийн адагт ордог Д",
-    "Үгийн эхэнд ордог Д",
-    "Үгийн дунд ордог Д",
-    "Үгийн эхэнд ордог Э",
-    "Үгийн адагт ордог Ф",
-    "Үгийн эхэнд ордог Ф",
-    "Үгийн дунд ордог Ф",
-    "Үгийн адагт ордог(эр үгийн) Г",
-    "Үгийн эхэнд ордог(эр үгийн) Г",
-    "Үгийн дунд ордог(эр үгийн) Г",
-    "Үгийн адагт ордог(эм үгийн) Г",
-    "Үгийн эхэнд ордог(эм үгийн) Г",
-    "Үгийн дунд ордог(эм үгийн) Г",
-    "Үгийн адагт ордог Х",
-    "Үгийн эхэнд ордог Х",
-    "Үгийн дунд ордог Х",
-    "Үгийн эхэнд ордог(эр үгийн) Х",
-    "Үгийн дунд ордог(эр үгийн) Х",
-    "Үгийн эхэнд ордог(эм үгийн) Х",
-    "Үгийн дунд ордог(эм үгийн) Х",
-    "Үгийн адагт ордог И",
-    "Үгийн эхэнд ордог И",
-    "Үгийн дунд ордог И",
-    "Үгийн эхэнд ордог Ж,З",
-    "Үгийн дунд ордог Ж,З",
-    "Үгийн адагт ордог К",
-    "Үгийн эхэнд ордог К",
-    "Үгийн дунд ордог К",
-    "Үгийн адагт ордог Л",
-    "Үгийн эхэнд ордог Л",
-    "Үгийн дунд ордог Л",
-    "Үгийн адагт ордог М",
-    "Үгийн эхэнд ордог М",
-    "Үгийн дунд ордог М",
-    "Үгийн адагт ордог Н",
-    "Үгийн эхэнд ордог Н",
-    "Үгийн дунд ордог Н",
-    "Үгийн адагт ордог О,У",
-    "Үгийн эхэнд ордог О",
-    "Үгийн дунд ордог О",
-    "Үгийн адагт ордог П",
-    "Үгийн эхэнд ордог П",
-    "Үгийн дунд ордог П",
-    "Үгийн адагт ордог Р",
-    "Үгийн эхэнд ордог Р",
-    "Үгийн дунд ордог Р",
-    "Үгийн адагт ордог С",
-    "Үгийн эхэнд ордог С",
-    "Үгийн дунд ордог С",
-    "Үгийн эхэнд ордог Ш",
-    "Үгийн дунд ордог Ш",
-    "Үгийн дунд ордог Т",
-    "Үгийн адагт ордог Ц",
-    "Үгийн эхэнд ордог Ц",
-    "Үгийн дунд ордог Ц",
-    "Үгийн эхэнд ордог Ү,Ө",
-    "Үгийн адагт ордог В",
-    "Үгийн дунд ордог В",
-    "Үгийн адагт ордог З",
-    "Үгийн эхэнд ордог З",
-    "Үгийн дунд ордог З",
-  ];
-
-  // ================= Load TF Model =================
+  // ================= Check API =================
   useEffect(() => {
-    const loadModel = async () => {
-      setLoading(true);
+    if (!OCR_API_BASE) {
+      console.warn("EXPO_PUBLIC_OCR_API_BASE_URL is not set.");
+      setApiReady(false);
+      return;
+    }
+
+    const checkApi = async () => {
       try {
-        await tf.ready();
-        console.log("✅ TensorFlow Ready!");
-        const modelJson = require("../../assets/model/model.json");
-        const modelWeights = [
-          require("../../assets/model/group1-shard1of2.bin"),
-          require("../../assets/model/group1-shard2of2.bin"),
-        ];
-        const loadedModel = await tf.loadLayersModel(
-          bundleResourceIO(modelJson, modelWeights),
-        );
-        setModel(loadedModel);
-        console.log("✅ Model Loaded!");
+        // Try multiple endpoints to check if service is responsive
+        const endpoints = ["/health", "/camera", "/ocr"];
+        let serviceUp = false;
+
+        for (const endpoint of endpoints) {
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            const res = await fetch(`${OCR_API_BASE}${endpoint}`, {
+              method: "HEAD", // Use HEAD to avoid downloading response body
+              signal: controller.signal,
+            });
+            clearTimeout(timeoutId);
+            if (res.ok || res.status === 405) {
+              // 405 means method not allowed but endpoint exists
+              serviceUp = true;
+              break;
+            }
+          } catch {
+            // Continue to next endpoint
+          }
+        }
+
+        setApiReady(serviceUp);
       } catch (err) {
-        console.error("❌ Model load failed:", err);
-      } finally {
-        setLoading(false);
+        console.warn("API health check failed:", err);
+        setApiReady(false);
       }
     };
-    loadModel();
-  }, []);
-
-  // ================= Image -> Tensor =================
-  const imageToTensor = async (uri: string) => {
-    const response = await fetch(uri);
-    const arrayBuffer = await response.arrayBuffer();
-    const uInt8Array = new Uint8Array(arrayBuffer);
-    const imageTensor = decodeJpeg(uInt8Array) as tf.Tensor3D;
-    const resized = tf.image.resizeBilinear(imageTensor, [64, 64]);
-    const normalized = resized.div(tf.scalar(255));
-    return normalized.expandDims(0);
-  };
+    checkApi();
+  }, [OCR_API_BASE]);
 
   // ================= Pick Image =================
   const pickImage = async () => {
@@ -161,47 +113,202 @@ export default function PhotoPredictScreen() {
 
   // ================= Predict =================
   const predict = async (uri: string) => {
-    if (!model) return;
+    if (!OCR_API_BASE) {
+      Alert.alert(
+        "OCR URL Missing",
+        "Set EXPO_PUBLIC_OCR_API_BASE_URL in .env and restart Expo.",
+      );
+      return;
+    }
+
     setLoading(true);
     try {
-      const tensor = await imageToTensor(uri);
-      const output = model.predict(tensor) as tf.Tensor;
-      const raw = output.dataSync();
-      const probs = Array.from(tf.softmax(tf.tensor1d(raw)).dataSync());
-      const topIndex = probs.indexOf(Math.max(...probs));
-      const topClass = CLASS_NAMES[topIndex];
-      const topProb = probs[topIndex] * 2500;
-      setPrediction(topClass);
-      setProb(topProb);
-      console.log("✅ Prediction:", topClass, topProb.toFixed(2) + "%");
+      const formData = new FormData();
+      formData.append("file", {
+        uri,
+        name: "image.png",
+        type: "image/png",
+      } as any);
+
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+      let response = await fetch(`${OCR_API_BASE}/camera`, {
+        method: "POST",
+        body: formData,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      // Fallback to OCR endpoint if the camera route is not available on server.
+      if (!response.ok) {
+        const fallbackController = new AbortController();
+        const fallbackTimeoutId = setTimeout(
+          () => fallbackController.abort(),
+          30000,
+        );
+
+        response = await fetch(`${OCR_API_BASE}/ocr`, {
+          method: "POST",
+          body: formData,
+          signal: fallbackController.signal,
+        });
+
+        clearTimeout(fallbackTimeoutId);
+      }
+
+      if (!response.ok) {
+        let errorMessage = "Prediction service temporarily unavailable";
+
+        switch (response.status) {
+          case 502:
+            errorMessage =
+              "Prediction service is currently down. Please try again later.";
+            break;
+          case 503:
+            errorMessage =
+              "Prediction service is overloaded. Please try again in a few minutes.";
+            break;
+          case 504:
+          case 408: // Request timeout
+            errorMessage = "Prediction service timed out. Please try again.";
+            break;
+          case 413:
+            errorMessage =
+              "Image file is too large. Please use a smaller image.";
+            break;
+          case 415:
+            errorMessage = "Unsupported image format. Please use PNG or JPG.";
+            break;
+          case 404:
+            errorMessage =
+              "Prediction endpoints not found. Service may be misconfigured.";
+            break;
+          default:
+            errorMessage = `Prediction failed (${response.status}). Please try again.`;
+        }
+
+        Alert.alert("Prediction Error", errorMessage);
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+      const resultText =
+        data?.prediction || data?.result || data?.label || "No result";
+      const confidence =
+        typeof data?.confidence === "number"
+          ? data.confidence <= 1
+            ? data.confidence * 100
+            : data.confidence
+          : null;
+
+      setPrediction(resultText);
+      setProb(confidence);
+      console.log("API Prediction:", data);
     } catch (err) {
       console.error("Prediction error:", err);
       setPrediction("Prediction failed");
+      setProb(null);
+
+      // Show user-friendly error if not already shown
+      if (
+        !(err instanceof Error) ||
+        !err.message.includes("Prediction service")
+      ) {
+        if (err instanceof Error && err.name === "AbortError") {
+          Alert.alert(
+            "Timeout Error",
+            "Request timed out. The service may be busy. Please try again.",
+          );
+        } else {
+          Alert.alert(
+            "Connection Error",
+            "Unable to connect to prediction service. Please check your internet connection and try again.",
+          );
+        }
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  const parseResponseBody = async (res: Response) => {
+    const raw = await res.text();
+    const contentType = res.headers.get("content-type") || "";
+    const looksLikeJson =
+      raw.trim().startsWith("{") || raw.trim().startsWith("[");
+
+    if (contentType.includes("application/json") || looksLikeJson) {
+      try {
+        return { json: JSON.parse(raw) as Record<string, any>, raw };
+      } catch {
+        return { json: null, raw };
+      }
+    }
+
+    return { json: null, raw };
   };
 
   // ================= Convert Text =================
   const convertText = async (text: string, from = fromLang, to = toLang) => {
     if (!text.trim()) return "";
     setLoading(true);
+
     try {
-      let direction = "";
-      if (from === "Крилл" && to === "Монгол бичиг") direction = "to-mng";
-      else if (from === "Монгол бичиг" && to === "Крилл") direction = "to-mn";
+      let result = "";
 
-      const response = await fetch("https://kimo.mngl.net/pub/convert", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, direction }),
-      });
+      // 🔹 Кирилл → Монгол бичиг (your current API)
+      if (from === "Крилл" && to === "Монгол бичиг") {
+        const res = await fetch("https://kimo.mngl.net/pub/convert", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text, direction: "to-mng" }),
+        });
 
-      const data = await response.json();
-      console.log("API Response:", data); // Metro bundler-д харагдана
-      return data.result || "";
+        const { json, raw } = await parseResponseBody(res);
+        if (!res.ok) {
+          throw new Error(
+            `KIMO convert failed (${res.status}): ${raw.slice(0, 120)}`,
+          );
+        }
+        result =
+          (typeof json?.result === "string" && json.result) ||
+          (typeof raw === "string" ? raw : "");
+      }
+
+      // 🔹 Монгол бичиг → Кирилл (NEW API)
+      else if (from === "Монгол бичиг" && to === "Крилл") {
+        const res = await fetch(
+          "https://api.xmon.mn/api/v1/ai/script-to-cyrillic",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              value: text,
+              use_traditional_numbers: false,
+              model_name: "script_to_cyrillic_v3",
+            }),
+          },
+        );
+
+        const { json, raw } = await parseResponseBody(res);
+        if (!res.ok) {
+          throw new Error(
+            `XMON convert failed (${res.status}): ${raw.slice(0, 120)}`,
+          );
+        }
+        result =
+          (typeof json?.value === "string" && json.value) ||
+          (typeof json?.data === "string" && json.data) ||
+          (typeof raw === "string" ? raw : "");
+      }
+
+      console.log("API Response:", result);
+      return result;
     } catch (err) {
-      console.error("❌ Conversion error:", err);
+      console.error("Conversion error:", err);
       return "";
     } finally {
       setLoading(false);
@@ -210,7 +317,7 @@ export default function PhotoPredictScreen() {
 
   // ================= Debounced Conversion =================
   const debouncedConvert = useRef(
-    _.debounce(async (text: string) => {
+    debounce(async (text: string) => {
       const converted = await convertText(text);
       setConvertedText(converted);
     }, 500),
@@ -241,36 +348,127 @@ export default function PhotoPredictScreen() {
     uri: string,
     endpoint: "ocr" | "camera" = "ocr",
   ) => {
-    setLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", {
-        uri,
-        name: "image.png",
-        type: "image/png",
-      } as any);
+    if (!OCR_API_BASE) {
+      Alert.alert(
+        "OCR URL Missing",
+        "Set EXPO_PUBLIC_OCR_API_BASE_URL in .env and restart Expo.",
+      );
+      return "";
+    }
 
-      const response = await fetch(
-        `https://ocrapi-production-dee1.up.railway.app/${endpoint}`,
-        {
-          //    const response = await fetch(`http://192.168.1.19:8000/${endpoint}`, {
+    setLoading(true);
+    const maxRetries = 2;
+    let lastError = null;
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const formData = new FormData();
+        formData.append("file", {
+          uri,
+          name: "image.png",
+          type: "image/png",
+        } as any);
+
+        // Create AbortController for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+        const response = await fetch(`${OCR_API_BASE}/${endpoint}`, {
           method: "POST",
           body: formData,
-          // ⚠️ Битгий Content-Type зааж өг
-          // headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
+          signal: controller.signal,
+        });
 
-      const data = await response.json(); // server JSON буцааж байгаа тул json() ашиглах
-      console.log("OCR Response:", data);
+        clearTimeout(timeoutId);
 
-      return data.result || "";
-    } catch (err) {
-      console.error("OCR error:", err);
-      return "";
-    } finally {
-      setLoading(false);
+        if (!response.ok) {
+          let errorMessage = "OCR service temporarily unavailable";
+
+          switch (response.status) {
+            case 502:
+              errorMessage =
+                "OCR service is currently down. Please try again later.";
+              break;
+            case 503:
+              errorMessage =
+                "OCR service is overloaded. Please try again in a few minutes.";
+              break;
+            case 504:
+            case 408: // Request timeout
+              if (attempt < maxRetries) {
+                console.log(
+                  `OCR attempt ${attempt + 1} timed out, retrying...`,
+                );
+                await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second before retry
+                continue;
+              }
+              errorMessage = "OCR service timed out. Please try again.";
+              break;
+            case 413:
+              errorMessage =
+                "Image file is too large. Please use a smaller image.";
+              break;
+            case 415:
+              errorMessage = "Unsupported image format. Please use PNG or JPG.";
+              break;
+            case 404:
+              errorMessage =
+                "OCR endpoint not found. Service may be misconfigured.";
+              break;
+            default:
+              errorMessage = `OCR failed (${response.status}). Please try again.`;
+          }
+
+          if (attempt === maxRetries) {
+            Alert.alert("OCR Error", errorMessage);
+          }
+          throw new Error(errorMessage);
+        }
+
+        const contentType = response.headers.get("content-type");
+        let data;
+
+        if (contentType && contentType.includes("application/json")) {
+          const text = await response.text();
+          if (!text.trim()) {
+            throw new Error("Empty response from OCR service");
+          }
+          data = JSON.parse(text);
+        } else {
+          // Handle plain text response
+          const text = await response.text();
+          data = { result: text };
+        }
+
+        console.log("OCR Response:", data);
+        return data.result || "";
+      } catch (err) {
+        lastError = err;
+        if (err instanceof Error && err.name === "AbortError") {
+          if (attempt < maxRetries) {
+            console.log(
+              `OCR attempt ${attempt + 1} aborted (timeout), retrying...`,
+            );
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            continue;
+          }
+        }
+        // For other errors, don't retry
+        break;
+      }
     }
+
+    // If we get here, all retries failed - provide fallback
+    console.error("OCR error after retries:", lastError);
+
+    // Provide a helpful fallback message
+    Alert.alert(
+      "OCR Service Unavailable",
+      "The OCR service is currently experiencing issues. You can still use the text translation feature by typing directly in the input field above.",
+      [{ text: "OK", style: "default" }],
+    );
+
+    return "";
   };
 
   const pickImage1 = async () => {
@@ -444,7 +642,7 @@ export default function PhotoPredictScreen() {
                 alignSelf: "flex-start",
               }}
             >
-              {model ? (
+              {apiReady ? (
                 <View
                   style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
                 >
@@ -467,15 +665,27 @@ export default function PhotoPredictScreen() {
                   </Text>
                 </View>
               ) : (
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "600",
-                    color: isDark ? "#f59e0b" : "#ffffff",
-                  }}
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 6 }}
                 >
-                  {t("model_loading")}
-                </Text>
+                  <View
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      backgroundColor: isDark ? "#ef4444" : "#dc2626",
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: "600",
+                      color: isDark ? "#ef4444" : "#dc2626",
+                    }}
+                  >
+                    Service Issues
+                  </Text>
+                </View>
               )}
             </View>
           </View>

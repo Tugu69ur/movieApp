@@ -1,161 +1,108 @@
-\begin{titlepage}
+\section*{Ажлын төлөвлөгөө}
+\addcontentsline{toc}{section}{Ажлын төлөвлөгөө}
+\label{sec:plan}
 
-\vspace*{0.5cm}
-Батлав. Компьютерын ухааны салбарын эрхлэгч: 
-\begin{flushright}
-\makebox[4cm]{\dotfill} /\chairname/ 
-\end{flushright}
+\noindent\textbf{Оюутны нэр:} \authorshort \hfill \textbf{Удирдагч багшийн нэр:} \supervisor
 
-Удирдагч: 
-\begin{flushright}
-\makebox[4cm]{\dotfill} /\supname/
-\end{flushright}
+\noindent\textbf{Судалгааны ажлын сэдэв:} Монгол бичгийн суралцах, таних аппликейшн хөгжүүлэлт
 
-\begin{center}
+\vspace{0.3cm}
 
-\vspace*{2cm}
-\textbf{{\large ТӨГСӨЛТИЙН АЖЛЫН \\ ТӨЛӨВЛӨГӨӨ}}\\[0.5cm]
+\begin{table}[H]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
 
-\textsc{\large Сэдэв: ''\ttitle''}\\[0.5cm]
+\begin{tabular}{|c|c|l|c|}
+\hline
+\textbf{Сар} & \textbf{Долоо хоног} & \textbf{Төлөвлөгөө} & \textbf{Гүйцэтгэл} \\
+\hline
 
-\begin{tabular}{|c|p{7cm}|c|c|}
-	%\rowcolor{gray!40}
-	\hline
-	№ & \makebox[7cm][c]{Ажлын бүлэг, хэсгийн нэр} & Эзлэх хувь & Дуусах хугацаа \\ \hline
-	1 & {Удиртгал}         &  5\% & 2024-03-11 \\ \hline
-	2 & {Онолын хэсэг}     & 25\% & 2024-03-25 \\ \hline
-	3 & {Судалгааны хэсэг} & 30\% & 2024-04-15 \\ \hline
-	4 & {ТСА хэсэг}    & 30\% & 2024-05-06 \\ \hline
-	5 & {Дүгнэлт}          & 10\% & 2024-05-13 \\ \hline
+10 сар & 1 & Сэдэв сонгох, судалгааны чиглэл тодорхойлох & $\checkmark$ \\
+\cline{2-4}
+10 сар & 2 & Судалгааны үндэслэл боловсруулах, аппликейшний хэрэгцээ ба ач холбогдлыг тодорхойлох & $\checkmark$ \\
+\cline{2-4}
+10 сар & 3 & Зорилго, зорилт, хэрэглэгчийн шаардлагыг тодорхойлох & $\checkmark$ \\
+\cline{2-4}
+10 сар & 4 & Ном зүй, эх сурвалжийн судалгаа хийх (React Native, Firebase, OCR) & $\checkmark$ \\
+\hline
+
+11 сар & 1 & Төгсөлтийн тайлан бичиж эхлэх & $\checkmark$ \\
+\cline{2-4}
+11 сар & 2 & Судалгааны аргазүйн үндэслэл боловсруулах & $\checkmark$ \\
+\cline{2-4}
+11 сар & 3 & Шаардлагын шинжилгээ хийх, хэрэглэгчийн урсгал тодорхойлох & $\checkmark$ \\
+\cline{2-4}
+11 сар & 4 & Системийн ерөнхий загвар, архитектур боловсруулах & $\checkmark$ \\
+\hline
+
+12 сар & 1 & \textcolor{red}{ТСА үзлэг 1} & $\checkmark$ \\
+\cline{2-4}
+12 сар & 2 & UI/UX дизайн боловсруулах, дэлгэцийн урсгал гаргах & $\checkmark$ \\
+\cline{2-4}
+12 сар & 3 & Технологийн орчныг сонгох (React Native, Firebase, TensorFlow.js) & $\checkmark$ \\
+\cline{2-4}
+12 сар & 4 & Хөгжүүлэлтийн орчны тохиргоо хийх & $\checkmark$ \\
+\hline
+
+1 сар & 1 & Аппликейшний үндсэн модулиудыг хөгжүүлэх (нэвтрэлт, суралцах хэсэг) & $\checkmark$ \\
+\cline{2-4}
+1 сар & 2 & Сургалтын контент, flashcard dataset боловсруулах & $\checkmark$ \\
+\cline{2-4}
+1 сар & 3 & OCR болон интерактив функцууд хөгжүүлэх & $\checkmark$ \\
+\cline{2-4}
+1 сар & 4 & Өгөгдлийн сангийн бүтэц, хэрэглэгчийн мэдээлэл хадгалалт хэрэгжүүлэх & $\checkmark$ \\
+\hline
+
+2 сар & 1 & Системийн интеграц, бүхэлд нь туршилт хийх & $\checkmark$ \\
+\cline{2-4}
+2 сар & 2 & Алдаа засах, гүйцэтгэл сайжруулах & $\checkmark$ \\
+\cline{2-4}
+2 сар & 3 & OCR танилтын нарийвчлал сайжруулж тестлэх & $\checkmark$ \\
+\cline{2-4}
+2 сар & 4 & UI/UX эцсийн тохируулга, хэрэглэгчийн туршилт & $\checkmark$ \\
+\hline
+
+3 сар & 1 & \textcolor{red}{ТСА үзлэг 2} & $\checkmark$ \\
+\cline{2-4}
+3 сар & 2 & Албан ёсны туршилт хийх & $\checkmark$ \\
+\cline{2-4}
+3 сар & 3 & Санал хүсэлт цуглуулах, сайжруулалтын жагсаалт гаргах & $\checkmark$ \\
+\cline{2-4}
+3 сар & 4 & Тайлангийн засвар, кодын тайлбар баримтжуулалт хийх & $\checkmark$ \\
+\hline
+
+4 сар & 1 & Тайланг эцэслэн цэгцлэх & $\checkmark$ \\
+\cline{2-4}
+4 сар & 2 & Презентаци болон хамгаалалтын материал бэлтгэх & $\checkmark$ \\
+\cline{2-4}
+4 сар & 3 & Урьдчилсан хамгаалалтын бэлтгэл хийх & $\checkmark$ \\
+\cline{2-4}
+4 сар & 4 & \textcolor{red}{ТСА урьдчилсан хамгаалалт} & $\square$ \\
+\hline
+
+5 сар & 1 & Урьдчилсан хамгаалалтын дараах засвар хийх & $\square$ \\
+\cline{2-4}
+5 сар & 2 & Эцсийн сайжруулалт, тайланг хэвлэлд бэлтгэх & $\square$ \\
+\cline{2-4}
+5 сар & 3 & Хамгаалалтын эцсийн бэлтгэл & $\square$ \\
+\cline{2-4}
+5 сар & 4 & \textcolor{red}{ТСА үндсэн хамгаалалт} & $\square$ \\
+\hline
+
 \end{tabular}
+\end{table}
 
-\vspace{2cm}
-Төлөвлөгөөг боловсруулсан оюутан: \makebox[3cm]{\dotfill} /\shortname/
-
-\end{center}
-
-\newpage
-
-\begin{center}
-
-\vspace*{2cm}
-\textbf{{\large ТӨГСӨЛТИЙН АЖЛЫН ЯВЦ}}\\[0.5cm]
-
-\begin{tabular}{|c|p{7cm}|c|c|}
-	%\rowcolor{gray!40}
-	\hline
-	№ & \makebox[7cm][c]{Хийж гүйцэтгэсэн ажил} & Биелсэн     & Удирдагчийн \\
-	  &                    & хугацаа    & гарын үсэг \\ \hline
-	1 & {Удиртгал}         &  5\% & 2024-03-11 \\ \hline
-	2 & {Онолын хэсэг}     & 25\% & 2024-03-25 \\ \hline
-	3 & {Судалгааны хэсэг} & 30\% & 2024-04-15 \\ \hline
-	4 & {ТСА хэсэг}    & 30\% & 2024-05-06 \\ \hline
-	5 & {Дүгнэлт}          & 10\% & 2024-05-13 \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-Ажлын товч дүгнэлт \\[0.5cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.2cm]
-\dotfill \\[0.5cm]
-Удирдагч: \makebox[3cm]{\dotfill} /\supname/ \\
-
-\vspace{2cm}
-ЗӨВШӨӨРӨЛ \\[0.5cm]
-Оюутан \shortname ийн бичсэн төгсөлтийн ажлыг УШК-д хамгаалуулахаар тодорхойлов.\\[0.5cm]
-Салбарын эрхлэгч: \makebox[3cm]{\dotfill} /\chairname/
-\end{center}
-
-\end{titlepage}
-
-\newpage
-%---------------------ГҮЙЦЭТГЭЛИЙН ХУУДСЫН ТӨГСГӨЛ ---------------------------------------------------
-
-%---------------------ШҮҮМЖИЙН ХУУДСЫН ЭХЛЭЛ ---------------------------------------------------
-\newpage
-
-\begin{titlepage}
-\begin{center}
-
-{\scshape\Large \univname\par} % Их сургуулийн нэр
-{\scshape\large \facname\par}\vspace{1cm} % Их сургуулийн нэр
-
-\textbf{{\Large ШҮҮМЖИЙН ХУУДАС}}\\[1cm]
-
-\end{center}
-
-\normalsize
-
-\deptname --н салбарын төгсөх курсийн оюутан \shortname -н ''\ttitle'' сэдэвт төгсөлтийн ажлын шүүмж.
-
-\begin{enumerate}
-\item ТСА-д дэвшүүлсэн асуудал, үүнтэй холбоотой онолын материал уншиж судалсан байдал. Энэ талаар хүмүүсийн хийсэн судалгаа, түүний үр дүнг уншиж тусгасан эсэх.
-\begin{center}
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.4cm]
-\end{center}
-\item ТСА-ийн ерөнхий агуулга. Шийдсэн зүйлүүд, хүрсэн үр дүн. Өөрийн санааг гарган, харьцуулалт хийн, дүгнэж байгаа чадвар.
-\begin{center}
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.4cm]
-\end{center}
-\item Эмх цэгцтэй, стандарт хангасан өөрөөр хэлбэл диплом бичих шаардлагуудыг биелүүлсэн эсэх. Анзаарагдсан алдаанууд, зөв бичгийн болон өгүүлбэр зүйн гэх мэт /Хуудас дугаарлагдаагүй, зураг хүснэгтийн дугаар болон тайлбар байхгүй, шрифт хольсон, хувилсан зүйл ихээр оруулсан/.
-\begin{center}
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\end{center}
-\end{enumerate}
-\end{titlepage}
-
-\newpage
-
-\begin{titlepage}
-\begin{enumerate}
-\item [4.] Орхигдуулсан болон дутуу болсон зүйлүүд. Цаашид анхаарах хэрэгтэй зүйлүүд.
-\begin{center}
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.4cm]
-\end{center}
-\item [5.] Онцолж тэмдэглэх зүйлүүд.
-\begin{center}
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.1cm]
-\dotfill \\[0.4cm]
-\end{center}
-\item [6.] Ерөнхий оноо. (30 оноо)
-\begin{center}
-\dotfill \\[1cm]
-\end{center}
-\end{enumerate}
-Шүүмж бичсэн: \makebox[3cm]{\dotfill} /\readname/ \\[0.5cm]
-Ажлын газар: \dotfill \\[0.5cm]
-Хаяг (Утас) \makebox[5cm]{\dotfill}
-\end{titlepage}
-
-%---------------------ШҮҮМЖИЙН ХУУДСЫН ТӨГСГӨЛ ---------------------------------------------------
+\vspace{6mm}
+\noindent\begin{minipage}{0.4\textwidth}
+Удирдагч багш\\
+Гүйцэтгэсэн оюутан
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+\raggedleft
+/\supervisor, \supervisortitle/\\
+/\authorcode, \authorshort/\\
+\end{minipage}
+\noindent

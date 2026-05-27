@@ -1,67 +1,90 @@
-%--- FrontBackMatter/TittlePage.tex ---
 \begin{titlepage}
 
+\raggedright
+
 \noindent\begin{minipage}{0.15\textwidth}
-\vspace{-20mm}
-\IfFileExists{Figures/logo.png}{%
-  \includegraphics[width=\linewidth]{Figures/logo}
-}{}
+\vspace{-24mm}
+\IfFileExists{Pictures/NMCT.png}{%
+  \includegraphics[width=\linewidth]{Pictures/NMCT.png}
+}{%
+  \IfFileExists{Figures/logo.png}{\includegraphics[width=\linewidth]{Figures/logo.png}}{}%
+}
 \end{minipage}
 \hfill
 \begin{minipage}{0.8\textwidth}
 \centering
-\vspace{-20mm}
-\textbf{\textsc{\large \univname}}\\
-\textbf{\textsc{\large \deptname}}\\
+\vspace{-24mm}
+\textbf{\textsc{\Large \univname}}\\[1.2mm]
+\textbf{\textsc{\Large \deptname}}\\
 \end{minipage}
 \noindent
 
-\vspace{20mm}
+\vspace{18mm}
 \raggedleft
-\text{Оюутны код: }\authorcode\\
-\text{Оюутны овог нэр: }\authorlong\\
+\text{ Оюутны код: }\authorcode\\
+\text{ Оюутны овог нэр: }\authorlong\\
 
-\vspace{40mm}
+\vspace{48mm}
 \centering
-\textbf{\large \ttitle}\\
-\textbf{\normalsize /Төгсөлтийн судалгааны ажил/}
+{\linespread{1.08}\selectfont\textbf{\Large \parbox{0.95\textwidth}{\centering \ttitle}}\\[2.5mm]}
+\normalsize /ДЭД БАКАЛАВРЫН ТӨГСӨЛТИЙН СУДАЛГААНЫ АЖИЛ/\\
 
-\vspace{10mm}
-\noindent
-\text{\textbf{Удирдагч багш:}\hspace{2cm} /\supervisor, \supervisortitle/}\\[3mm]
-\text{\textbf{Гүйцэтгэсэн оюутан:}\hspace{1.5cm} /\authorshort, \authorcode/}
-\noindent
+\vspace{20mm}
+\begin{center}
+\begin{minipage}{0.25\textwidth}
+Удирдагч багш\\[1.5mm]
+Гүйцэтгэсэн оюутан
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.3\textwidth}
+\raggedleft
+/\supervisor, \supervisortitle/\\[1.5mm]
+/\authorcode, \authorshort/
+\end{minipage}
+\end{center}
 
-\vspace{90mm}
+\vspace{75mm}
 
 \begin{center}
-Улаанбаатар хот\\
-2026 он
+ Улаанбаатар хот\\
+ 2026 он
 \end{center}
 
 \end{titlepage}
 
 \begin{titlepage}
 \begin{center}
-\vspace{-40mm}
-\textbf{\textsc{\normalsize \univname}}\\
-\textbf{\textsc{\normalsize \deptname}}\\
+\vspace{-45mm}
+\textbf{\textsc{\Large \univname}}\\[1.2mm]
+\textbf{\textsc{\Large \deptname}}\\
 
-\vspace{80mm}
+\vspace{75mm}
 
-\text{\normalsize Төгсөлтийн судалгааны ажил}\\
-\textbf{\normalsize \ttitle}\\
+\normalsize Дэд бакалаврын төгсөлтийн судалгааны ажил (061301)\\[2.5mm]
+{\linespread{1.08}\selectfont\textbf{\Large \parbox{0.95\textwidth}{\centering \ttitle}}\\}
 
 \vspace{20mm}
-\textbf{Гүйцэтгэгч: }\authorshort, \authorcode\\
-\textbf{Удирдагч: }\supervisor, \supervisortitle\\
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+Удирдагч багш\\[1.5mm]
+Гүйцэтгэсэн оюутан
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.3\textwidth}
+\raggedleft
+/\supervisor, \supervisortitle/\\[1.5mm]
+/\authorcode, \authorshort/
+\end{minipage}
+\end{center}
 
 \end{center}
 
+\vspace{60mm}
+
 \vfill
 \begin{center}
-Улаанбаатар хот\\
-2026 он\\
+ Улаанбаатар хот\\
+ 2026 он\\
 \end{center}
 
 \end{titlepage}
